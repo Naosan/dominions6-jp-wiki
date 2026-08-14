@@ -48,6 +48,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [国家ページの読み方](nations/how-to-read.md)
 - [国家Recruitデータ](data/recruitment/index.md)
 - [Unit装備・Mountの読み方](data/unit-loadouts.md)
+- [国家別Recruit装備Profile](data/equipment-usage/nations.md)
 - [Mage access早見表](data/mage-access.md)
 - [MA Ulm](nations/ma/ulm.md)
 
@@ -66,6 +67,16 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Unit装備・Mountの読み方](data/unit-loadouts.md)
 - Unit ID、基礎能力値、固定Path、Random Path、主要属性
 - Weapon、盾、胴鎧、兜、Mount側の攻撃と防具
+
+## 装備使用者逆引き
+
+- [装備使用者逆引き](data/equipment-usage/index.md)
+- [Weaponから使用国家・Recruitを探す](data/equipment-usage/weapons/index.md)
+- [Armorから使用国家・Recruitを探す](data/equipment-usage/armor/index.md)
+- [盾を持つRecruit](data/equipment-usage/profiles/shield.md)
+- [両手武器Recruit](data/equipment-usage/profiles/two-handed.md)
+- [射撃Recruit](data/equipment-usage/profiles/ranged.md)
+- [AP / AN Recruit](data/equipment-usage/profiles/ap.md)
 
 ## Spell
 
@@ -107,6 +118,8 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [戦闘ルール完全ガイド](basics/combat-rules.md)
 - [両手武器・片手武器・盾](basics/weapons-and-shields.md)
 - [Unit装備・Mountの読み方](data/unit-loadouts.md)
+- [装備使用者逆引き](data/equipment-usage/index.md)
+- [国家別装備Profile](data/equipment-usage/nations.md)
 - [命令とBattle Script](basics/orders.md)
 - [特殊能力](reference/special-abilities.md)
 - [武器データ索引](data/combat/weapons/index.md)
