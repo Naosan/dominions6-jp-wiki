@@ -1,11 +1,14 @@
 ---
-title: MA Ulm
+title: "MA Ulm"
 status: draft
-verified_version: "要確認"
+verified_version: "6.35"
 last_verified: "2026-08-14"
+nation_id: 60
+era: "MA"
+epithet: "Forges of Ulm"
 ---
 
-# MA Ulm
+# MA Ulm — Forges of Ulm
 
 ## 一言でいうと
 
