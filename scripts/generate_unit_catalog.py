@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Generate the Dominions 6 all-Unit catalog and confirmed acquisition indexes."""
+"""Generate the Dominions 6 all-Unit catalog and confirmed source indexes."""
 from __future__ import annotations
 
 import argparse
 from pathlib import Path
 
 import unit_catalog_pages
-from unit_catalog_generation_integration import load_unit_catalog
+from unit_catalog_event_integration import load_unit_catalog
+from unit_catalog_event_pages import install_event_pages
+from unit_catalog_event_quality import write_quality_report
 from unit_catalog_generation_pages import install_generation_pages
-from unit_catalog_generation_quality import write_quality_report
 from unit_catalog_roles import install_role_resolver
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +33,12 @@ def validate(stats: dict[str, int]) -> None:
         ("battle_spawn_relations", 5),
         ("generation_abilities", 5),
         ("nation_generation_abilities", 5),
+        ("event_unit_relations", 50),
+        ("event_spawn_relations", 25),
+        ("event_transform_relations", 5),
+        ("event_combat_relations", 5),
+        ("mercenary_companies", 50),
+        ("mercenary_relations", 75),
     )
     for key, minimum in checks:
         if stats.get(key, 0) < minimum:
@@ -53,6 +60,7 @@ def main() -> None:
     data = load_unit_catalog(args.refresh, args.offline)
     install_role_resolver(unit_catalog_pages, data)
     install_generation_pages(unit_catalog_pages, data)
+    install_event_pages(unit_catalog_pages, data)
     stats = unit_catalog_pages.write_unit_catalog(data, OUT)
     write_quality_report(data, OUT, stats)
     validate(stats)
@@ -63,6 +71,9 @@ def main() -> None:
     print(f"random Unit-generation references: {len(data['unit_generation_random_targets'])}")
     print(f"unresolved Unit-generation references: {len(data['unit_generation_unresolved'])}")
     print(f"unresolved nation-generation references: {len(data['nation_generation_unresolved'])}")
+    print(f"Event random-pool references: {len(data['event_random_targets'])}")
+    print(f"unresolved Event Unit references: {len(data['event_unresolved'])}")
+    print(f"unresolved Mercenary Unit references: {len(data['mercenary_unresolved'])}")
     print(f"unresolved spell summon references: {len(data['unresolved_spells'])}")
     print(f"unresolved Magic Site Unit references: {len(data['unresolved_sites'])}")
     print(f"unresolved Shape references: {len(data['unresolved_shapes'])}")
