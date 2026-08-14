@@ -6,6 +6,7 @@ import argparse
 from pathlib import Path
 
 import unit_catalog_pages
+from unit_catalog_quality import write_quality_report
 from unit_catalog_roles import install_role_resolver
 from unit_catalog_sources import load_unit_catalog
 
@@ -44,6 +45,7 @@ def main() -> None:
     data = load_unit_catalog(args.refresh, args.offline)
     install_role_resolver(unit_catalog_pages, data)
     stats = unit_catalog_pages.write_unit_catalog(data, OUT)
+    write_quality_report(data, OUT, stats)
     validate(stats)
 
     print(f"source commit: {data['commit']}")
