@@ -6,3 +6,5 @@ __pycache__/
 .cache/
 docs/data/recruitment/
 docs/data/mage-access.md
+docs/data/spells/
+docs/data/items/
