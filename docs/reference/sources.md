@@ -64,17 +64,7 @@ last_verified: "2026-08-14"
 - `gamedata/effects_spells.csv`
 - `gamedata/attributes_by_spell.csv`
 
-生成物には次を掲載します。
-
-- Spell ID
-- Research School / Level
-- 要求Magic Path
-- Combat / Ritual
-- Gem / Blood Slave cost
-- Combat Fatigue
-- Range / AoE
-- 主要Effect分類
-- National / Realm restriction
+生成物にはSpell ID、Research、要求Path、Combat / Ritual、Cost、Fatigue、Range、AoE、主要Effect、National / Realm restrictionを掲載します。
 
 Range、AoE、Fatigueは抽出上の数式を読みやすく整形したものです。複合Effect、特殊Target、Caster level依存、Battlefield条件は表だけで完全に表現できない場合があります。
 
@@ -86,23 +76,38 @@ Range、AoE、Fatigueは抽出上の数式を読みやすく整形したもの�
 - `gamedata/weapons.csv`
 - `gamedata/armors.csv`
 
-生成物には次を掲載します。
-
-- Item IDとSlot / Type
-- Construction level
-- Forge要求Path
-- Forge Bonus適用前の基礎Gem Cost
-- Magic Path Booster
-- 参照武器・防具の基本値
-- Resistance、Research、Reinvigoration、Leadership等の主要能力
-- National restriction
+生成物にはItem ID、Slot / Type、Construction、Forge要求Path、基礎Gem Cost、Booster、参照武器・防具、主要能力、National restrictionを掲載します。
 
 Gem CostはInspector本体と同じ基礎Forge Cost表とItem固有modifierを使います。実際の消費量はForge Bonus、Dwarven Hammer、国家割引などで変わります。
+
+### Weapon・Armor・Damage索引
+
+主に利用するファイル:
+
+- `gamedata/weapons.csv`
+- `gamedata/effects_weapons.csv`
+- `gamedata/effect_modifier_bits.csv`
+- `gamedata/effects_info.csv`
+- `gamedata/special_damage_types.csv`
+- `gamedata/attributes_by_weapon.csv`
+- `gamedata/armors.csv`
+- `gamedata/protections_by_armor.csv`
+- `gamedata/attributes_by_armor.csv`
+- `gamedata/attribute_keys.csv`
+
+Weapon索引では、Damage、Attack / Precision、Defence、Length / Range、攻撃回数、Strength加算、Slash / Pierce / Blunt、Elemental属性、AP / AN、MR判定、Secondary effect等を整理します。
+
+Armor索引では、Protection zoneからInspectorと同じ表示用Body Protectionを算出し、Shield Protection、Parry、Defence penalty、Encumbrance、Map movement penaltyを分離して掲載します。
+
+!!! note "Magic weaponとMagic damage"
+    Weapon modifier上の`Nonmagical`の有無と、`Magic Damage` modifierは別項目です。前者はEthereal等への命中、後者はDamage分類へ関係します。自動索引でも別々に表示します。
 
 !!! warning "自動生成データの限界"
     - Unit Costは自動計算、Mount、形態変化、特殊Recruit条件が複雑なため、Recruit索引では表示しません。
     - Spellの複合効果、特殊Range / AoE、Target制限はゲーム内詳細を優先します。
-    - Itemの武器Damage Type、発動Spell、特殊な装備条件は自動表だけでは完全に表せません。
+    - Itemの発動Spell、特殊な装備条件は自動表だけでは完全に表せません。
+    - Weapon recordだけでは装備者のStrength、Ambidextrous、Mount、Bless、Buff、Fatigueを含む最終性能は分かりません。
+    - Armor recordはUnitのNatural Protection、複数装備、Shield Hit、Buffを含みません。
     - National / Realm restriction、Event、Hero、Site限定、形態変化は追加確認が必要です。
     - Inspectorは非常に有用ですが、抽出・表示上の不具合があり得ます。最終的な数値・挙動はゲーム内表示と実機テストを優先します。
 

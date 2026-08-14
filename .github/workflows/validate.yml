@@ -29,5 +29,7 @@ jobs:
         run: python scripts/generate_recruitment_data.py
       - name: Generate spell and item data
         run: python scripts/generate_spell_item_data.py
+      - name: Generate combat equipment data
+        run: python scripts/generate_combat_data.py
       - name: Build site
         run: zensical build --clean

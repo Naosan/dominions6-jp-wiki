@@ -82,6 +82,18 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Utility Item](data/items/utility.md)
 - [Unforgeable / Artifact](data/items/unforgeable.md)
 
+## Combat data
+
+- [Combat data索引](data/combat/index.md)
+- [近接武器](data/combat/weapons/melee.md)
+- [射撃武器](data/combat/weapons/ranged.md)
+- [AP・AN武器](data/combat/weapons/ap-an.md)
+- [Elemental・Poison・Acid武器](data/combat/weapons/elemental.md)
+- [盾](data/combat/armor/shields.md)
+- [胴鎧](data/combat/armor/body-armor.md)
+- [兜](data/combat/armor/helmets.md)
+- [Weapon property・Damage type](data/combat/weapon-properties.md)
+
 !!! note "データと攻略"
     自動生成データは「何が存在し、どの条件で使えるか」という事実確認の土台です。「何を主力にするか」「いつ研究するか」「誰へ装備させるか」は攻略記事で扱います。
 
@@ -93,6 +105,9 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [両手武器・片手武器・盾](basics/weapons-and-shields.md)
 - [命令とBattle Script](basics/orders.md)
 - [特殊能力](reference/special-abilities.md)
+- [武器データ索引](data/combat/weapons/index.md)
+- [防具データ索引](data/combat/armor/index.md)
+- [特殊Damage・状態効果](data/combat/special-damage.md)
 
 ---
 

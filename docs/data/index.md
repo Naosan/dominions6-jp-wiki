@@ -42,6 +42,21 @@ last_verified: "2026-08-14"
 
 Slot別ページでは片手武器、両手武器、盾、鎧、兜、靴、Miscellaneous、Crown、BardingをConstruction順に比較できます。
 
+## Combat data
+
+- [Combat data索引](combat/index.md)
+- [近接武器](combat/weapons/melee.md)
+- [射撃武器](combat/weapons/ranged.md)
+- [AP・AN武器](combat/weapons/ap-an.md)
+- [Elemental・Poison・Acid武器](combat/weapons/elemental.md)
+- [盾](combat/armor/shields.md)
+- [胴鎧](combat/armor/body-armor.md)
+- [兜](combat/armor/helmets.md)
+- [Weapon property・Damage type](combat/weapon-properties.md)
+- [特殊Damage・状態効果](combat/special-damage.md)
+
+Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precision、Defence、Length / Range、AP / AN、Shield Protection、Parry、Encumbrance等を確認できます。
+
 ## 自動生成と攻略本文の違い
 
 ### 自動生成データ
@@ -51,11 +66,12 @@ Slot別ページでは片手武器、両手武器、盾、鎧、兜、靴、Misc
 - 固定Magic PathとRandom Path pool
 - SpellのSchool、要求Path、Gem Cost、Range、AoE
 - ItemのConstruction、要求Path、基礎Gem Cost、Booster、主要効果
+- Weapon / Armorの基礎値、Damage modifier、部位Protection
 - Capital-only、National restrictionなどのデータ属性
 
 ### 人が執筆する攻略
 
-- どの兵、Spell、Itemを主力にするか
+- どの兵、Spell、Item、Weaponを主力にするか
 - Expansion時の必要人数
 - Pretender設計
 - Research Breakpoint
@@ -72,7 +88,9 @@ Slot別ページでは片手武器、両手武器、盾、鎧、兜、靴、Misc
 - Recruit rosterとMagic Path
 - SpellのSchool、Research level、Path、Cost
 - ItemのConstruction、Path、Cost、効果
-- Unit / Spell / Item ID
+- WeaponのDamage、Length、AP / AN、modifier
+- ArmorのProtection、Parry、Encumbrance
+- Unit / Spell / Item / Weapon / Armor ID
 
 !!! warning "抽出データの限界"
-    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。複合Spell、特殊Range / AoE、Itemの発動効果、最終Forge Costはゲーム内表示と実機テストを優先します。
+    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。複合Spell、特殊Range / AoE、Itemの発動効果、WeaponのSecondary effect、最終Forge Costはゲーム内表示と実機テストを優先します。
