@@ -46,9 +46,24 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [国家攻略一覧](nations/index.md)
 - [国家選択ガイド](nations/choose-a-nation.md)
 - [国家ページの読み方](nations/how-to-read.md)
+- [国家Recruitデータ](data/recruitment/index.md)
+- [Mage access早見表](data/mage-access.md)
 - [MA Ulm](nations/ma/ulm.md)
 
 一覧にある未執筆国家は、ビルド時に公式メタデータと共通見出しを持つstubページを生成します。手書き攻略へ発展した記事は自動生成で上書きしません。
+
+---
+
+# データを調べる
+
+[データ索引](data/index.md)では、攻略評価と分離して現行vanillaデータを機械的に整理します。
+
+- [全103国家のRecruitデータ](data/recruitment/index.md)
+- [全国家Mage access早見表](data/mage-access.md)
+- Unit ID、基礎能力値、固定Path、Random Path、主要属性
+
+!!! note "データと攻略"
+    自動生成データは「何を雇えるか」という事実確認の土台です。「何を主力にするか」「いつ攻めるか」は国家攻略記事で扱います。
 
 ---
 

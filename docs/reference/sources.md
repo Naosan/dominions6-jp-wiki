@@ -39,6 +39,28 @@ last_verified: "2026-08-14"
 - Late Age: 31
 - 合計: 103
 
+### Recruit・Commander・Mage索引
+
+Recruit索引は、Dominions 6.35対応のDom6 Inspector commit
+`cfac4311bc0b58053b8dead7bffbc036ba9bd5dc` を固定データ源として生成します。
+
+主に利用するファイル:
+
+- `gamedata/BaseU.csv`
+- `gamedata/fort_troop_types_by_nation.csv`
+- `gamedata/fort_leader_types_by_nation.csv`
+- `gamedata/nonfort_troop_types_by_nation.csv`
+- `gamedata/nonfort_leader_types_by_nation.csv`
+- `gamedata/coast_troop_types_by_nation.csv`
+- `gamedata/coast_leader_types_by_nation.csv`
+
+生成物には、Unit ID、基礎能力値、固定Magic Path、Random Path、Sacred・Flying・Stealthyなどの主要タグを掲載します。
+
+!!! warning "自動生成データの限界"
+    - Costは自動計算、Mount、形態変化、特殊Recruit条件などが複雑なため、現段階の索引では表示しません。
+    - `Fort`、`Capital-only`、`Foreign / Terrain`、`Coast`は抽出データの分類に従いますが、国家固有イベントや特殊Site Recruitは別途確認が必要です。
+    - Random Pathは抽出されたchance / repeats / level / maskを読みやすい表記へ変換しています。最終確認はゲーム内Nation Overviewを優先します。
+
 !!! warning "抽出データの扱い"
     Inspectorは非常に有用ですが、抽出・表示上の不具合があり得ます。最終的な数値・挙動はゲーム内表示と実機テストを優先します。
 

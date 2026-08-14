@@ -1,6 +1,6 @@
 # Dominions 6 日本語攻略Wiki
 
-Dominions 6 - Rise of the Pantokrator の日本語攻略Wikiです。
+Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様・データWikiです。
 
 公開サイト:
 
@@ -18,6 +18,7 @@ python -m venv .venv
 .venv\Scripts\activate
 pip install zensical
 python scripts/generate_nation_catalog.py
+python scripts/generate_recruitment_data.py
 zensical serve
 ```
 
@@ -27,6 +28,7 @@ zensical serve
 source .venv/bin/activate
 pip install zensical
 python scripts/generate_nation_catalog.py
+python scripts/generate_recruitment_data.py
 zensical serve
 ```
 
@@ -34,16 +36,16 @@ zensical serve
 
 ## 公開
 
-`main` ブランチへpushするとGitHub Actionsが次を実行します。
+`main` ブランチへpushすると、GitHub Actionsが次を自動実行します。
 
-1. Zensicalをインストール
-2. `data/nations.tsv` から不足している国家ページの骨組みを生成
-3. Wikiをビルド
+1. 103国家の一覧と未執筆Stubを生成
+2. Dom6 Inspector 6.35 snapshotからRecruit / Mage access索引を生成
+3. Zensicalで静的サイトを構築
 4. GitHub Pagesへ公開
 
 ## 記事を書く
 
-記事は `docs/` 配下のMarkdownです。
+手書き記事は `docs/` 配下のMarkdownです。
 
 ```text
 docs/
@@ -52,24 +54,36 @@ docs/
   nations/ma/ulm.md
 ```
 
-## 国家カタログ
+国家の自動生成Stubは、同じPathに手書き記事が存在すると上書きされません。Front Matterの `status: stub` を `status: draft` などへ変更すると、執筆済み記事として保護されます。
 
-現行vanilla国家のメタデータは `data/nations.tsv` で管理します。
+## データ生成
+
+### 国家カタログ
 
 ```bash
 python scripts/generate_nation_catalog.py
 ```
 
-このスクリプトは以下を生成します。
+入力:
 
-- EA / MA / LAの国家一覧
-- まだ手書き記事がない国家のstubページ
+```text
+data/nations.tsv
+```
 
-`status: draft` 以上の手書き記事は上書きしません。新国家追加時は `data/nations.tsv` を更新してから再生成してください。
+### Recruit / Mage access
 
-## 記事状態
+```bash
+python scripts/generate_recruitment_data.py
+```
 
-- `stub`: 公式メタデータと見出しのみ
-- `draft`: 執筆中
-- `review`: 実戦記事あり、検証待ち
-- `verified`: 記載Versionで検証済み
+生成元はDom6 InspectorのDominions 6.35対応Commitへ固定しています。ダウンロード済みデータは `.cache/dom6inspector/` に保存されます。
+
+```bash
+# 強制的に再取得
+python scripts/generate_recruitment_data.py --refresh
+
+# Networkを使用せずCacheのみで生成
+python scripts/generate_recruitment_data.py --offline
+```
+
+生成ページは `docs/data/recruitment/` と `docs/data/mage-access.md` に出力されます。これらは攻略評価ではなく、現行データを確認するための索引です。

@@ -1,42 +1,31 @@
-name: Documentation
+name: Validate Wiki
 
 on:
+  pull_request:
   push:
-    branches:
+    branches-ignore:
       - main
-  workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  group: "validate-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/configure-pages@v6
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: "3.x"
       - name: Install Zensical
         run: pip install zensical
-      - name: Generate nation catalog
+      - name: Generate nation pages
         run: python scripts/generate_nation_catalog.py
       - name: Generate recruitment data
         run: python scripts/generate_recruitment_data.py
       - name: Build site
         run: zensical build --clean
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: site
-      - uses: actions/deploy-pages@v5
-        id: deployment

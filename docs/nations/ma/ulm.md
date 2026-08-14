@@ -1,5 +1,5 @@
 ---
-title: "MA Ulm"
+title: MA Ulm
 status: draft
 verified_version: "6.35"
 last_verified: "2026-08-14"
@@ -9,6 +9,12 @@ epithet: "Forges of Ulm"
 ---
 
 # MA Ulm — Forges of Ulm
+
+- [自動生成Recruitデータ](../../data/recruitment/ma/ulm.md)
+- [全国家Mage access早見表](../../data/mage-access.md)
+
+!!! note "記事とデータ索引の役割"
+    このページは運用・研究・編成を扱う攻略記事です。兵士・Commanderの基礎能力値と固定／Random Pathは、自動生成Recruitデータを参照してください。
 
 ## 一言でいうと
 
