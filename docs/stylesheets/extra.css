@@ -1,8 +1,102 @@
-/* Dominions 6 JP Wiki: keep wide data tables readable without over-stretching prose. */
-.md-typeset table:not([class]) {
-  font-size: 0.82rem;
+/* Dominions 6 JP Wiki — classic Japanese strategy-wiki inspired layout. */
+
+:root > * {
+  --md-primary-fg-color: #536b78;
+  --md-accent-fg-color: #356b8c;
+}
+
+.md-grid {
+  max-width: 1500px;
+}
+
+.md-header {
+  box-shadow: none;
+  border-bottom: 1px solid #c8d0d5;
+}
+
+.md-typeset {
+  font-size: 0.84rem;
+  line-height: 1.7;
 }
 
 .md-typeset h1 {
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #7d929e;
+  font-size: 1.65rem;
   font-weight: 700;
+}
+
+.md-typeset h2 {
+  margin-top: 1.7rem;
+  padding: 0.28rem 0.55rem;
+  border-left: 5px solid #758b97;
+  background: #eef2f4;
+  font-size: 1.22rem;
+  font-weight: 700;
+}
+
+.md-typeset h3 {
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid #d7dde0;
+  font-size: 1.02rem;
+}
+
+.md-nav {
+  font-size: 0.73rem;
+  line-height: 1.45;
+}
+
+.md-nav__title {
+  font-weight: 700;
+}
+
+.md-sidebar--primary {
+  width: 13.5rem;
+}
+
+.md-typeset table:not([class]) {
+  display: table;
+  width: 100%;
+  font-size: 0.75rem;
+}
+
+.md-typeset table:not([class]) th {
+  background: #e8edef;
+  font-weight: 700;
+}
+
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+  padding: 0.42em 0.6em;
+}
+
+.md-typeset a:hover {
+  text-decoration: underline;
+}
+
+.md-typeset ul,
+.md-typeset ol {
+  margin-top: 0.35em;
+  margin-bottom: 0.65em;
+}
+
+.md-typeset hr {
+  border-bottom-color: #c9d1d5;
+}
+
+/* Make dense reference pages easier to scan. */
+.wiki-menu-columns {
+  columns: 2 18rem;
+  column-gap: 2.5rem;
+}
+
+.wiki-menu-columns > ul {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 76.234375em) {
+  .wiki-menu-columns {
+    columns: 1;
+  }
 }
