@@ -13,7 +13,10 @@ last_verified: "2026-08-14"
 
 - [国家Recruitデータ](recruitment/index.md)
 - [Mage access早見表](mage-access.md)
+- [Unit装備・Mountの読み方](unit-loadouts.md)
 - [国家攻略一覧](../nations/index.md)
+
+各国家Recruitページでは、Unitの基礎能力に加えてWeapon、Armor、Mount recordを結合して表示します。
 
 ## Spellデータ
 
@@ -63,6 +66,8 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 
 - Nation IDとRecruit roster
 - Unit / Commanderの基本値
+- Unitが参照するWeapon、Armor、Mount record
+- RiderとMountの別Stats・別攻撃Profile
 - 固定Magic PathとRandom Path pool
 - SpellのSchool、要求Path、Gem Cost、Range、AoE
 - ItemのConstruction、要求Path、基礎Gem Cost、Booster、主要効果
@@ -85,7 +90,7 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 現在はDominions 6.35対応のDom6 Inspector snapshotを固定して生成します。Patchが更新された場合は生成元Commitを更新し、次を差分確認します。
 
 - 国家の追加・削除・改名
-- Recruit rosterとMagic Path
+- Recruit roster、Weapon / Armor / Mount参照、Magic Path
 - SpellのSchool、Research level、Path、Cost
 - ItemのConstruction、Path、Cost、効果
 - WeaponのDamage、Length、AP / AN、modifier
@@ -93,4 +98,4 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - Unit / Spell / Item / Weapon / Armor ID
 
 !!! warning "抽出データの限界"
-    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。複合Spell、特殊Range / AoE、Itemの発動効果、WeaponのSecondary effect、最終Forge Costはゲーム内表示と実機テストを優先します。
+    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。複合Spell、特殊Range / AoE、Itemの発動効果、WeaponのSecondary effect、Mounted combat、最終Forge Costはゲーム内表示と実機テストを優先します。
