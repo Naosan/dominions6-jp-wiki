@@ -57,8 +57,9 @@ zensical serve
 9. BaseUの全4,091 Unitページと入手経路索引を生成
 10. Hero、Pretender、Spell summon、Magic Site、Mount、Shapeの関係を生成
 11. Unit / NationのStrategic summon、Battle summon、Recruit unlock、Conversion、Reanimation、Freespawnを生成
-12. Zensicalで静的サイトを構築
-13. GitHub Pagesへ公開
+12. EventのUnit生成・変身・暗殺参加者とMercenary rosterを生成
+13. Zensicalで静的サイトを構築
+14. GitHub Pagesへ公開
 
 ## 記事を書く
 
@@ -146,6 +147,11 @@ docs/data/units/
 ├ heroes.md
 ├ spell-summons.md
 ├ magic-sites.md
+├ event-spawns.md
+├ event-transforms.md
+├ event-combat.md
+├ event-random.md
+├ mercenaries.md
 ├ strategic-spawns.md
 ├ battle-spawns.md
 ├ recruit-unlocks.md
@@ -166,6 +172,8 @@ Unit総合索引はBaseUの全4,091 recordを個別ページ化し、次の明�
 - `pretender_types_by_nation.csv`
 - Research可能Spellの固定Unit summon effect
 - `MagicSites.csv`のUnit参照
+- `events.csv`のCommander・Troop生成、変身、暗殺・随伴Unit
+- `Mercenary.csv`のCommander・Troop roster
 - `domsummon`、`makemonster`、`summon`、`autosum`
 - `batstartsum*`、`battlesum*`
 - `ownsmonrec`、`monpresentrec`
@@ -173,6 +181,10 @@ Unit総合索引はBaseUの全4,091 recordを個別ページ化し、次の明�
 - Nation attributeが明示するGuardian Spirit、Freespawn、Reanimation
 - `mountmnr`
 - BaseUのShape参照とXP / HP threshold型の形態変化
+
+Eventについては、Effectの`nation -1`をRandom enemy、`nation -2`をProvince ownerとして保持し、`tempunits 1`をTemporaryとして分離します。Eventに登場するUnitを自動的に恒久加入扱いにはしません。
+
+Mercenaryについては、Commander、Troop、初期人数、Era mask、最低入札額、XP、補充率、開始Itemを索引化します。
 
 負のMonster NumberとMontagはRandom poolとして表示し、固定Unitへは結び付けません。Reanimation結果などhard-codedな生成先を安全に対応付けられない場合も、能力Flagと品質レポートへ残します。
 
