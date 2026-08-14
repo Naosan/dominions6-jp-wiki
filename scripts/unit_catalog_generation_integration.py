@@ -8,6 +8,7 @@ from unit_catalog_generation import (
     build_nation_generation,
     build_unit_generation,
 )
+from unit_catalog_nation_generation import augment_nation_generation
 from unit_catalog_sources import load_unit_catalog as load_base_unit_catalog
 
 
@@ -28,9 +29,16 @@ def load_unit_catalog(refresh: bool = False, offline: bool = False):
 
     attribute_keys_path = source("attribute_keys.csv", refresh, offline)
     data["paths"]["attribute_keys.csv"] = attribute_keys_path
+    attribute_rows = tsv(data["paths"]["attributes_by_nation.csv"])
     nation_generation = build_nation_generation(
-        tsv(data["paths"]["attributes_by_nation.csv"]),
+        attribute_rows,
         tsv(attribute_keys_path),
+        data["nations"],
+        data["units"],
+    )
+    nation_generation = augment_nation_generation(
+        nation_generation,
+        attribute_rows,
         data["nations"],
         data["units"],
     )
