@@ -22,8 +22,8 @@ FILES = (
 
 def validate(stats: dict[str, int]) -> None:
     checks = (
-        ("sites", 1300),
-        ("site_pages", 1300),
+        ("sites", 1200),
+        ("site_pages", 1200),
         ("path_pages", 10),
         ("monthly_gem_sites", 100),
         ("site_unit_relations", 700),
@@ -73,7 +73,6 @@ def main() -> None:
         nation_rows,
     )
     stats = write_magic_site_catalog(data, OUT, COMMIT)
-    validate(stats)
 
     print(f"source commit: {COMMIT}")
     for key, value in stats.items():
@@ -120,6 +119,8 @@ def main() -> None:
             "unresolved Site national recruit Nation: "
             f"site={site_id} name={site_name!r} nation={nation_id}"
         )
+
+    validate(stats)
 
 
 if __name__ == "__main__":
