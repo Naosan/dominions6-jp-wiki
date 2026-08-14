@@ -1,0 +1,65 @@
+[project]
+site_name = "Dominions 6 日本語攻略Wiki"
+site_url = "https://naosan.github.io/dominions6-jp-wiki/"
+site_description = "Dominions 6 - Rise of the Pantokrator の日本語攻略Wiki。初心者ガイド、戦闘、魔法、国家別攻略を実戦視点で整理します。"
+site_author = "Dominions 6 日本語攻略Wiki"
+docs_dir = "docs"
+site_dir = "site"
+repo_url = "https://github.com/Naosan/dominions6-jp-wiki"
+repo_name = "Naosan/dominions6-jp-wiki"
+edit_uri = "edit/main/docs/"
+use_directory_urls = true
+extra_css = ["stylesheets/extra.css"]
+nav = [
+  { "ホーム" = "index.md" },
+  { "はじめに" = [
+    "getting-started/index.md",
+    "getting-started/first-12-turns.md",
+  ] },
+  { "戦闘の基礎" = [
+    "basics/index.md",
+    "basics/weapons-and-shields.md",
+  ] },
+  { "魔法" = [
+    "magic/index.md",
+    { "Magic Path" = [
+      "magic/paths/index.md",
+      "magic/paths/fire.md",
+      "magic/paths/air.md",
+      "magic/paths/water.md",
+      "magic/paths/earth.md",
+      "magic/paths/astral.md",
+      "magic/paths/death.md",
+      "magic/paths/nature.md",
+      "magic/paths/glamour.md",
+      "magic/paths/blood.md",
+      "magic/paths/holy.md",
+    ] },
+  ] },
+  { "国家攻略" = [
+    "nations/index.md",
+    { "Middle Age" = [
+      "nations/ma/index.md",
+      "nations/ma/ulm.md",
+    ] },
+  ] },
+  { "編集・資料" = [
+    "reference/editing-policy.md",
+    "reference/sources.md",
+    "templates/nation-template.md",
+  ] },
+]
+
+[project.theme]
+variant = "modern"
+language = "ja"
+features = [
+  "navigation.tabs",
+  "navigation.sections",
+  "navigation.indexes",
+  "navigation.path",
+  "navigation.top",
+  "toc.follow",
+  "content.action.edit",
+  "content.action.view",
+]
