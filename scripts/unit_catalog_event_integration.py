@@ -17,16 +17,22 @@ def _merge_acquisitions(base, *extra_sources):
     return merged
 
 
-def _classify_event_sentinels(events: dict[str, object]) -> None:
-    """Keep event-only negative sentinels out of the unresolved positive-ID bucket.
-
-    Vanilla events use `assassin -1` in unrelated adventure and site events.
-    Its concrete attacker is context-dependent, so it is reported as an Event
-    pool/sentinel rather than guessed as a fixed Unit or a standard negative
-    monster-number table entry.
-    """
+def _normalize_event_relations(events: dict[str, object]) -> None:
+    """Clarify event-only sentinels, ownership and lifetime semantics."""
     sentinel_relations = []
     for relation in events["relations"]:
+        kind = relation.get("kind")
+        if kind == "Event Combat":
+            relation["owner"] = "Event combat side / attacker"
+            relation["temporary"] = "Combat participant; no ownership grant"
+        elif kind == "Event Transform":
+            relation["owner"] = "Selected Event target"
+            relation["temporary"] = "Transformation result; see Event chain"
+
+        # Vanilla uses `assassin -1` in several unrelated adventure/site
+        # events. The concrete attacker is context-dependent, so raw -1 is an
+        # Event sentinel/pool, not a fixed Unit or a standard negative monster
+        # number that should be guessed from the surrounding description.
         if int(relation.get("raw_target") or 0) != -1:
             continue
         if relation.get("confidence") != "unresolved":
@@ -55,7 +61,7 @@ def load_unit_catalog(refresh: bool = False, offline: bool = False):
         data["units"],
         data["nations"],
     )
-    _classify_event_sentinels(events)
+    _normalize_event_relations(events)
 
     mercenaries = build_mercenary_relations(
         tsv(mercenaries_path),
@@ -76,7 +82,7 @@ def load_unit_catalog(refresh: bool = False, offline: bool = False):
 
     # Event combatants are included as confirmed appearance routes, not as a
     # claim that the player permanently controls them. Unit pages preserve
-    # owner and temporary-unit semantics for every Event relation.
+    # owner and lifetime semantics for every Event relation.
     data["acquisitions"] = _merge_acquisitions(
         data["acquisitions"],
         events["incoming"],
