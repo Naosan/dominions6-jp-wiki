@@ -1,7 +1,7 @@
 [project]
 site_name = "Dominions 6 日本語攻略Wiki"
 site_url = "https://naosan.github.io/dominions6-jp-wiki/"
-site_description = "Dominions 6 - Rise of the Pantokrator の日本語攻略Wiki。初心者ガイド、戦闘、魔法、国家別攻略を実戦視点で整理します。"
+site_description = "Dominions 6 - Rise of the Pantokrator の日本語攻略Wiki。旧来の日本語攻略Wikiのように、国家・魔法・戦闘ルール・ゲームシステムを辞書的に参照できる構成を目指します。"
 site_author = "Dominions 6 日本語攻略Wiki"
 docs_dir = "docs"
 site_dir = "site"
@@ -11,14 +11,12 @@ edit_uri = "edit/main/docs/"
 use_directory_urls = true
 extra_css = ["stylesheets/extra.css"]
 nav = [
-  { "ホーム" = "index.md" },
-  { "はじめに" = [
-    "getting-started/index.md",
-    "getting-started/first-12-turns.md",
-  ] },
-  { "戦闘の基礎" = [
-    "basics/index.md",
-    "basics/weapons-and-shields.md",
+  { "トップページ" = "index.md" },
+  { "国家" = [
+    "nations/index.md",
+    { "Early Age" = "nations/ea/index.md" },
+    { "Middle Age" = ["nations/ma/index.md", "nations/ma/ulm.md"] },
+    { "Late Age" = "nations/la/index.md" },
   ] },
   { "魔法" = [
     "magic/index.md",
@@ -36,13 +34,29 @@ nav = [
       "magic/paths/holy.md",
     ] },
   ] },
-  { "国家攻略" = [
-    "nations/index.md",
-    { "Middle Age" = [
-      "nations/ma/index.md",
-      "nations/ma/ulm.md",
-    ] },
+  { "アイテム" = "items/index.md" },
+  { "特殊能力" = "reference/special-abilities.md" },
+  { "チュートリアル" = [
+    "getting-started/index.md",
+    "getting-started/first-12-turns.md",
+    "getting-started/beginner-tips.md",
+    "getting-started/shortcuts.md",
   ] },
+  { "戦闘ルール" = [
+    "basics/index.md",
+    "basics/combat-rules.md",
+    "basics/weapons-and-shields.md",
+    "basics/orders.md",
+  ] },
+  { "ターン処理順" = "reference/turn-resolution.md" },
+  { "Pretender God" = "pretender/index.md" },
+  { "Province" = "systems/province.md" },
+  { "Dominion" = "systems/dominion.md" },
+  { "Forts" = "systems/forts.md" },
+  { "Throne of Ascension" = "systems/thrones.md" },
+  { "Disciple Game" = "systems/disciple-game.md" },
+  { "Dominions 5からの変更点" = "reference/dom5-to-dom6.md" },
+  { "MOD" = "mods/index.md" },
   { "編集・資料" = [
     "reference/editing-policy.md",
     "reference/sources.md",
@@ -53,13 +67,18 @@ nav = [
 [project.theme]
 variant = "modern"
 language = "ja"
+font = false
 features = [
-  "navigation.tabs",
   "navigation.sections",
   "navigation.indexes",
+  "navigation.expand",
+  "navigation.tracking",
   "navigation.path",
   "navigation.top",
   "toc.follow",
   "content.action.edit",
   "content.action.view",
 ]
+
+[project.markdown_extensions.toc]
+permalink = true
