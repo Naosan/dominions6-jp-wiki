@@ -3,6 +3,26 @@ from __future__ import annotations
 from pathlib import Path
 
 
+def _escape(value: object) -> str:
+    return str(value).replace("|", "\\|").replace("\n", " ")
+
+
+def _link_report_from_index(out: Path) -> None:
+    index = out / "index.md"
+    if not index.exists():
+        return
+    text = index.read_text(encoding="utf-8")
+    link = "- [Unit索引データ品質](data-quality.md)"
+    if link in text:
+        return
+    anchor = "- [入手経路未分類](unclassified.md)"
+    if anchor in text:
+        text = text.replace(anchor, anchor + "\n" + link, 1)
+    else:
+        text += "\n" + link + "\n"
+    index.write_text(text, encoding="utf-8")
+
+
 def write_quality_report(data, out: Path, stats: dict[str, int]) -> Path:
     lines = [
         "---",
@@ -50,7 +70,7 @@ def write_quality_report(data, out: Path, stats: dict[str, int]) -> Path:
     )
     if data["unresolved_spells"]:
         for spell_id, spell, effect, raw in data["unresolved_spells"]:
-            lines.append(f"| {spell_id} | {str(spell).replace('|', '\\|')} | {effect} | {raw} |")
+            lines.append(f"| {spell_id} | {_escape(spell)} | {effect} | {raw} |")
     else:
         lines.append("| — | 解決不能参照なし | — | — |")
 
@@ -65,7 +85,7 @@ def write_quality_report(data, out: Path, stats: dict[str, int]) -> Path:
     )
     if data["unresolved_sites"]:
         for site_id, site, field, raw in data["unresolved_sites"]:
-            lines.append(f"| {site_id} | {str(site).replace('|', '\\|')} | `{field}` | {raw} |")
+            lines.append(f"| {site_id} | {_escape(site)} | `{field}` | {raw} |")
     else:
         lines.append("| — | 解決不能参照なし | — | — |")
 
@@ -80,7 +100,7 @@ def write_quality_report(data, out: Path, stats: dict[str, int]) -> Path:
     )
     if data["unresolved_shapes"]:
         for source_id, source, field, target_id in data["unresolved_shapes"]:
-            lines.append(f"| {source_id} | {str(source).replace('|', '\\|')} | `{field}` | {target_id} |")
+            lines.append(f"| {source_id} | {_escape(source)} | `{field}` | {target_id} |")
     else:
         lines.append("| — | 解決不能参照なし | — | — |")
 
@@ -100,4 +120,5 @@ def write_quality_report(data, out: Path, stats: dict[str, int]) -> Path:
     )
     path = out / "data-quality.md"
     path.write_text("\n".join(lines), encoding="utf-8")
+    _link_report_from_index(out)
     return path
