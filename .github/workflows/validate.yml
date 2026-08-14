@@ -1,0 +1,31 @@
+name: Validate Wiki
+
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "validate-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+      - name: Install Zensical
+        run: pip install zensical
+      - name: Generate nation pages
+        run: python scripts/generate_nation_catalog.py
+      - name: Generate recruitment data
+        run: python scripts/generate_recruitment_data.py
+      - name: Build site
+        run: zensical build --clean
