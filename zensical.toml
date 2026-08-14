@@ -20,6 +20,10 @@ nav = [
   ] },
   { "魔法" = [
     "magic/index.md",
+    "magic/research.md",
+    "magic/gems.md",
+    "magic/boosting.md",
+    "magic/communions.md",
     { "Magic Path" = [
       "magic/paths/index.md",
       "magic/paths/fire.md",
@@ -34,7 +38,13 @@ nav = [
       "magic/paths/holy.md",
     ] },
   ] },
-  { "アイテム" = "items/index.md" },
+  { "アイテム" = [
+    "items/index.md",
+    "items/boosters.md",
+    "items/research-items.md",
+    "items/resistance-items.md",
+    "items/thug-equipment.md",
+  ] },
   { "特殊能力" = "reference/special-abilities.md" },
   { "チュートリアル" = [
     "getting-started/index.md",
@@ -49,7 +59,11 @@ nav = [
     "basics/orders.md",
   ] },
   { "ターン処理順" = "reference/turn-resolution.md" },
-  { "Pretender God" = "pretender/index.md" },
+  { "Pretender God" = [
+    "pretender/index.md",
+    "pretender/scales.md",
+    "pretender/bless.md",
+  ] },
   { "Province" = "systems/province.md" },
   { "Dominion" = "systems/dominion.md" },
   { "Forts" = "systems/forts.md" },
