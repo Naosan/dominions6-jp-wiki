@@ -44,11 +44,12 @@ zensical serve
 
 1. 103国家の一覧と未執筆Stubを生成
 2. Dom6 Inspector 6.35 snapshotからRecruit / Mage access索引を生成
-3. SpellのSchool / Path / National索引を生成
-4. Magic ItemのSlot / Booster / Research / Resistance索引を生成
-5. Weapon / Armor / Damage property索引を生成
-6. Zensicalで静的サイトを構築
-7. GitHub Pagesへ公開
+3. Recruit UnitへWeapon / Armor / Mount recordを結合
+4. SpellのSchool / Path / National索引を生成
+5. Magic ItemのSlot / Booster / Research / Resistance索引を生成
+6. Weapon / Armor / Damage property索引を生成
+7. Zensicalで静的サイトを構築
+8. GitHub Pagesへ公開
 
 ## 記事を書く
 
@@ -77,7 +78,7 @@ python scripts/generate_nation_catalog.py
 data/nations.tsv
 ```
 
-### Recruit / Mage access
+### Recruit / Mage access / Unit loadout
 
 ```bash
 python scripts/generate_recruitment_data.py
@@ -89,6 +90,19 @@ python scripts/generate_recruitment_data.py
 docs/data/recruitment/
 docs/data/mage-access.md
 ```
+
+国家別Recruitページでは、`BaseU.csv`の`wpn1..7`、`armor1..4`、`mountmnr`をWeapon / Armor / Mount recordへ結合します。
+
+表示する主な内容:
+
+- Unit基礎能力
+- 固定Magic PathとRandom Path
+- WeaponのDamage、Attack / Precision、Length / Range、Damage type、AP / AN
+- Shield Protection、Parry、Body / Head Protection、Encumbrance
+- Riderとは別のMount HP・Protection・攻撃・防具
+- 盾持ち、両手、射撃、Charge等の簡易Profile
+
+自動表は最終Damage、二刀流処理、Shape Change、Gold Costを完全には再構成しません。戦術評価は手書き攻略で扱います。
 
 ### Spell / Magic Item
 
