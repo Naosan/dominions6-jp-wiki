@@ -1,7 +1,7 @@
 [project]
 site_name = "Dominions 6 日本語攻略Wiki"
 site_url = "https://naosan.github.io/dominions6-jp-wiki/"
-site_description = "Dominions 6 - Rise of the Pantokrator の日本語攻略Wiki。旧来の日本語攻略Wikiのように、国家・魔法・戦闘ルール・ゲームシステムを辞書的に参照できる構成を目指します。"
+site_description = "Dominions 6 - Rise of the Pantokrator の日本語攻略Wiki。国家・魔法・戦闘ルール・ゲームシステムを辞書的に参照できる構成を目指します。"
 site_author = "Dominions 6 日本語攻略Wiki"
 docs_dir = "docs"
 site_dir = "site"
@@ -19,6 +19,11 @@ nav = [
     { "Early Age" = "nations/ea/index.md" },
     { "Middle Age" = ["nations/ma/index.md", "nations/ma/ulm.md"] },
     { "Late Age" = "nations/la/index.md" },
+  ] },
+  { "データ索引" = [
+    "data/index.md",
+    "data/recruitment/index.md",
+    "data/mage-access.md",
   ] },
   { "魔法" = [
     "magic/index.md",
