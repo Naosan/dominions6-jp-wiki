@@ -64,6 +64,39 @@ def validate(stats: dict[str, int]) -> None:
             raise ValueError(f"Unit source integrity failure: {key}={stats[key]}")
 
 
+def _insert_after(path: Path, anchor: str, additions: list[str]) -> None:
+    if not path.exists():
+        raise FileNotFoundError(f"generated index not found: {path}")
+    text = path.read_text(encoding="utf-8")
+    first = additions[0]
+    if first in text:
+        return
+    if anchor not in text:
+        raise ValueError(f"generated index anchor not found in {path}: {anchor}")
+    text = text.replace(anchor, anchor + "\n" + "\n".join(additions), 1)
+    path.write_text(text, encoding="utf-8")
+
+
+def patch_generated_indexes(stats: dict[str, int]) -> None:
+    _insert_after(
+        ROOT / "docs" / "data" / "spells" / "index.md",
+        "- [National / Realm restricted Spell](national.md)",
+        [
+            f"- [Spell Random summon pool](../units/spell-random-summons.md) — {stats['spell_random_references']} references",
+            f"- [Wish・Unique・Terrain特殊召喚](../units/special-summons.md) — {stats['special_spell_relations']} Spell relations",
+        ],
+    )
+    _insert_after(
+        ROOT / "docs" / "data" / "items" / "index.md",
+        "- [Utility Item](utility.md)",
+        [
+            f"- [Arena関連Magic Item](arena.md) — {stats['arena_items']} items",
+            f"- [Magic ItemによるUnit生成・変身](../units/item-unit-sources.md) — {stats['item_unit_relations']} relations",
+            f"- [Item Random summon・未解決Target](../units/item-random.md) — {stats['item_random_references']} random references",
+        ],
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--refresh", action="store_true")
@@ -76,6 +109,7 @@ def main() -> None:
     install_event_pages(unit_catalog_pages, data)
     install_special_pages(unit_catalog_pages, data)
     stats = unit_catalog_pages.write_unit_catalog(data, OUT)
+    patch_generated_indexes(stats)
     write_quality_report(data, OUT, stats)
     validate(stats)
 
