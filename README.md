@@ -19,6 +19,7 @@ python -m venv .venv
 pip install zensical
 python scripts/generate_nation_catalog.py
 python scripts/generate_recruitment_data.py
+python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
 zensical serve
@@ -31,6 +32,7 @@ source .venv/bin/activate
 pip install zensical
 python scripts/generate_nation_catalog.py
 python scripts/generate_recruitment_data.py
+python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
 zensical serve
@@ -45,11 +47,13 @@ zensical serve
 1. 103国家の一覧と未執筆Stubを生成
 2. Dom6 Inspector 6.35 snapshotからRecruit / Mage access索引を生成
 3. Recruit UnitへWeapon / Armor / Mount recordを結合
-4. SpellのSchool / Path / National索引を生成
-5. Magic ItemのSlot / Booster / Research / Resistance索引を生成
-6. Weapon / Armor / Damage property索引を生成
-7. Zensicalで静的サイトを構築
-8. GitHub Pagesへ公開
+4. Weapon / ArmorからRecruit・Mountを逆引きする使用者索引を生成
+5. 盾・両手・射撃・AP・AN・Charge・Mountedの横断Profileを生成
+6. SpellのSchool / Path / National索引を生成
+7. Magic ItemのSlot / Booster / Research / Resistance索引を生成
+8. Weapon / Armor / Damage property索引を生成
+9. Zensicalで静的サイトを構築
+10. GitHub Pagesへ公開
 
 ## 記事を書く
 
@@ -104,6 +108,30 @@ docs/data/mage-access.md
 
 自動表は最終Damage、二刀流処理、Shape Change、Gold Costを完全には再構成しません。戦術評価は手書き攻略で扱います。
 
+### 装備使用者逆引き
+
+```bash
+python scripts/generate_equipment_usage_data.py --offline
+```
+
+`generate_recruitment_data.py`が取得した固定スナップショットを再利用し、次を生成します。
+
+```text
+docs/data/equipment-usage/
+├ index.md
+├ nations.md
+├ weapons/
+├ armor/
+└ profiles/
+```
+
+- 全Weapon / Armor recordの個別使用者ページ
+- Recruit本体とMountの使用を分離した逆引き
+- 国家別の装備Profile比較
+- 盾、両手、射撃、AP、AN、Charge、Mountedの横断一覧
+
+Hero、Event、Freespawn、召喚、Site限定Unitは対象外です。
+
 ### Spell / Magic Item
 
 ```bash
@@ -136,11 +164,13 @@ docs/data/combat/
 ```bash
 # 強制的に再取得
 python scripts/generate_recruitment_data.py --refresh
+python scripts/generate_equipment_usage_data.py --refresh
 python scripts/generate_spell_item_data.py --refresh
 python scripts/generate_combat_data.py --refresh
 
 # Networkを使用せずCacheのみで生成
 python scripts/generate_recruitment_data.py --offline
+python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py --offline
 python scripts/generate_combat_data.py --offline
 ```

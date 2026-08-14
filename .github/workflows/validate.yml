@@ -29,6 +29,8 @@ jobs:
         run: python scripts/generate_recruitment_data.py
       - name: Validate recruit equipment references
         run: python scripts/check_recruitment_equipment_refs.py --offline
+      - name: Generate equipment usage reverse indexes
+        run: python scripts/generate_equipment_usage_data.py --offline
       - name: Generate spell and item data
         run: python scripts/generate_spell_item_data.py
       - name: Generate combat equipment data

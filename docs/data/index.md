@@ -18,6 +18,22 @@ last_verified: "2026-08-14"
 
 各国家Recruitページでは、Unitの基礎能力に加えてWeapon、Armor、Mount recordを結合して表示します。
 
+## 装備使用者逆引き
+
+- [装備使用者逆引き](equipment-usage/index.md)
+- [Weapon使用者](equipment-usage/weapons/index.md)
+- [Armor使用者](equipment-usage/armor/index.md)
+- [国家別Recruit装備Profile](equipment-usage/nations.md)
+- [盾を持つRecruit](equipment-usage/profiles/shield.md)
+- [両手武器Recruit](equipment-usage/profiles/two-handed.md)
+- [射撃Recruit](equipment-usage/profiles/ranged.md)
+- [AP武器Recruit](equipment-usage/profiles/ap.md)
+- [AN武器Recruit](equipment-usage/profiles/an.md)
+- [Charge武器Recruit](equipment-usage/profiles/charge.md)
+- [騎乗Recruit](equipment-usage/profiles/mounted.md)
+
+Weapon・Armorから使用国家とRecruitを逆引きできます。Mount側の攻撃・BardingはRider本体と分離して追跡します。
+
 ## Spellデータ
 
 - [Spellデータ索引](spells/index.md)
@@ -67,6 +83,7 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - Nation IDとRecruit roster
 - Unit / Commanderの基本値
 - Unitが参照するWeapon、Armor、Mount record
+- Weapon / Armorから見た使用国家・Recruitの逆引き
 - RiderとMountの別Stats・別攻撃Profile
 - 固定Magic PathとRandom Path pool
 - SpellのSchool、要求Path、Gem Cost、Range、AoE
@@ -91,6 +108,7 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 
 - 国家の追加・削除・改名
 - Recruit roster、Weapon / Armor / Mount参照、Magic Path
+- Equipment使用者とProfile分類
 - SpellのSchool、Research level、Path、Cost
 - ItemのConstruction、Path、Cost、効果
 - WeaponのDamage、Length、AP / AN、modifier

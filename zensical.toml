@@ -25,6 +25,22 @@ nav = [
     "data/recruitment/index.md",
     "data/mage-access.md",
     "data/unit-loadouts.md",
+    { "装備使用者逆引き" = [
+      "data/equipment-usage/index.md",
+      "data/equipment-usage/nations.md",
+      "data/equipment-usage/weapons/index.md",
+      "data/equipment-usage/armor/index.md",
+      { "Recruit Profile" = [
+        "data/equipment-usage/profiles/index.md",
+        "data/equipment-usage/profiles/shield.md",
+        "data/equipment-usage/profiles/two-handed.md",
+        "data/equipment-usage/profiles/ranged.md",
+        "data/equipment-usage/profiles/ap.md",
+        "data/equipment-usage/profiles/an.md",
+        "data/equipment-usage/profiles/charge.md",
+        "data/equipment-usage/profiles/mounted.md",
+      ] },
+    ] },
     { "Spellデータ" = [
       "data/spells/index.md",
       { "Research School" = [
