@@ -8,6 +8,7 @@ from pathlib import Path
 
 from generate_recruitment_data import CACHE, COMMIT, source, tsv
 from unit_catalog_event_integration import load_unit_catalog as load_base_unit_catalog
+from unit_catalog_special_corrections import apply_special_corrections
 from unit_catalog_special_data import (
     build_item_unit_relations,
     build_special_spell_relations,
@@ -127,4 +128,5 @@ def load_unit_catalog(refresh: bool = False, offline: bool = False):
         spell_data["candidate_incoming"],
         item_data["incoming"],
     )
+    apply_special_corrections(data)
     return data
