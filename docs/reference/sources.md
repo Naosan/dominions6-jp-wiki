@@ -10,7 +10,7 @@ last_verified: "2026-08-14"
 ## 優先順位
 
 1. Dominions 6 ゲーム内表示・実機挙動
-2. Illwinter公式Manual・Change log・Patch notes
+2. Illwinter公式Manual・Change log・Patch notes・Modding Manual
 3. ゲームデータ抽出
 4. Community Wiki・Guide
 5. Battle Replay・Test game・対戦知見
@@ -21,6 +21,8 @@ last_verified: "2026-08-14"
 - Dominions 6 Manual
 - Dominions 6 Change log / Steam公式Announcement
 - Dominions 6 Modding Manual
+
+Unit生成系Commandの意味は、公式Modding ManualのMonster Summoning、Shape Changing、Nation Reanimation節を優先します。とくに`domsummon`、`makemonsters`、`summon`、`battlesum`、`batstartsum`、`templetrainer`、`reanimator`、`autoundead`等は、CSV列名だけでTimingや確率を推測しません。
 
 ## データ索引
 
@@ -83,7 +85,7 @@ Recruitページでは`BaseU.csv`の次の参照をWeapon・Armor・Unit dataへ
 
 ### Unit総合・入手経路索引
 
-BaseUの全4,091 Unit recordを個別ページ化し、次の明示的な参照だけを取得・利用経路として結合します。
+BaseUの全4,091 Unit recordを個別ページ化し、明示的な参照を取得・利用経路として結合します。
 
 #### 通常Recruit
 
@@ -123,20 +125,106 @@ Research可能なroot Spellから`next_spell` chainを辿り、Summon、Summon c
 
 抽出列名とUnit IDを事実として掲載します。Siteの発見条件、国家制限、特殊出現処理はゲーム内Site詳細を優先します。
 
-#### Mount・Shape relation
+### Unit自身の生成・召喚・Recruit解禁
 
-- `BaseU.csv`の`mountmnr`
+`BaseU.csv`の次の固定Target参照を追跡します。
+
+#### Strategic Map
+
+- `domsummon` / `domsummon2` / `domsummon20` / `raredomsummon`
+- `templetrainer`
+- `makemonster` + `n_makemonster`
+- `summon` + `n_summon`
+- `summon5`
+- `autosum` + `n_autosum`
+- `coldsummon` / `turmoilsummon`
+- `slaver` + `slaverbonus`
+
+#### Battle
+
+- `batstartsum1..5`
+- `batstartsum1d3`
+- `batstartsum1d6..9d6`
+- `battlesum1..5`
+- `battlesum1d2` / `battlesum1d3`
+- `battlesumwarm`
+
+同系統Fieldにsuffixが付く複数Slotも抽出します。
+
+#### Recruit unlock
+
+- `ownsmonrec`
+- `monpresentrec`
+
+#### 固定変換・復活
+
+- `mummify` / `mummification`
+- `twiceborn`
+- `lich`
+- `animatemnr`
+- `raiseshape`
+
+正の値がBaseUのUnit IDへ解決できる場合だけ、生成先・変換先Unitへ逆引きします。
+
+#### Random pool
+
+公式Modding Manualが定義するNegative Monster Number（`-2`～`-26`）と、`-1000`以下のMontag参照はRandom poolです。単一Unitへは結び付けず、raw valueとpool名を別索引に残します。
+
+### Targetを直接指定しないUnit能力
+
+固定生成先を安全に確定できないため、能力Flagとして掲載します。
+
+- `reanimator` / `preanimator` / `dreanimator`
+- `raiseonkill`
+- `onisummon`
+- `ivylord` / `dragonlord` / `lamialord` / `corpselord`
+- `faysummon`
+- Elemental summon bonus
+
+Reanimation先、corpse条件、Priest level、国家固有結果を能力Flagだけから推測しません。
+
+### 国家Freespawn・Reanimation
+
+`gamedata/attributes_by_nation.csv`のAttribute番号を、`gamedata/attribute_keys.csv`に含まれる`{Ntn: #command}`表記へ接続します。
+
+対象Command:
+
+- `autoundead`
+- `guardspirit`
+- `priestreanim` / `undeadreanim`
+- `horsereanim` / `wightreanim`
+- `tombwyrmreanim` / `manikinreanim`
+- `supayareanim` / `greekreanim` / `ghostreanim`
+
+`guardspirit`が正の固定Unit IDを指す場合だけUnitへ逆引きします。負値Montagやhard-coded Reanimation結果は固定Unitとして扱いません。
+
+### Mount・Shape relation
+
+#### 直接Unit IDを持つShape
+
 - `shapechange`
 - `firstshape` / `secondshape` / `secondtmpshape`
 - `landshape` / `watershape`
 - `forestshape` / `plainshape`
-- `xpshape` / `homeshape` / `prophetshape`
-- `cleanshape` / `raiseshape`
+- `homeshape` / `foreignshape`
+- `domshape` / `notdomshape`
+- `springshape` / `summershape` / `autumnshape` / `wintershape`
+- `battleshape` / `worldshape`
+- `prophetshape`
+- `twiceborn` / `lich` / `animatemnr` / `raiseshape`
+
+#### Targetが別Field・規則で決まるShape
+
+- `xpshape` / `labxpshape`: 値はXP threshold。Targetは`xpshapemon`、未指定なら次のUnit ID
+- `growhp`: 値はHP threshold。Targetは一つ前のUnit ID
+- `shrinkhp`: 値はHP threshold。Targetは次のUnit ID
+
+以前の単純抽出のように、`xpshape`のthresholdや`cleanshape`のbooleanをUnit IDとして扱いません。
 
 MountとShapeは直接入手経路とは区別し、Unit間関係として掲載します。
 
 !!! note "未分類Unit"
-    現在の索引で入手経路を確認できないUnitを「入手不能」とは断定しません。Event、Freespawn、Random summon pool、Wish、Transformation、Battle effect、国家固有内部処理等が未索引である可能性があります。未解決参照は[Unit索引データ品質](../data/units/data-quality.md)へ残します。
+    現在の索引で入手経路を確認できないUnitを「入手不能」とは断定しません。Event、Wish、Random summon table、hard-coded Reanimation、Scenario、特殊国家内部処理等が未索引である可能性があります。未解決参照は[Unit索引データ品質](../data/units/data-quality.md)へ残します。
 
 ### Spell索引
 
@@ -181,19 +269,12 @@ Weapon索引では、Damage、Attack / Precision、Defence、Length / Range、�
 
 Armor索引では、Protection zoneからInspectorと同じ表示用Body Protectionを算出し、Shield Protection、Parry、Defence penalty、Encumbrance、Map movement penaltyを分離して掲載します。
 
-!!! note "Magic weaponとMagic damage"
-    Weapon modifier上の`Nonmagical`の有無と、`Magic Damage` modifierは別項目です。前者はEthereal等への命中、後者はDamage分類へ関係します。自動索引でも別々に表示します。
-
 !!! warning "自動生成データの限界"
     - Unit Costは自動計算、Mount、形態変化、特殊Recruit条件が複雑なため、自動Unit索引では表示しません。
     - Unit loadoutはWeapon / Armor参照を示しますが、最終Damage、二刀流Penalty、攻撃順、Conditional attackを完全には再構成しません。
-    - Mounted combatではRiderとMountのTarget選択、AoE、Dismount後の形態、Barding表示に追加処理があります。
-    - Hero・Pretender・Spell・Siteの対応は明示参照だけを採用し、名前や説明文から推測しません。
-    - Event、Freespawn、Random pool、Wish、Transformation等は未分類に残る場合があります。
+    - Hero・Pretender・Spell・Site・Unit generationの対応は明示参照だけを採用し、名前や説明文から推測しません。
+    - Event、Wish、Random table、hard-coded Reanimation等は未分類に残る場合があります。
     - Spellの複合効果、特殊Range / AoE、Target制限はゲーム内詳細を優先します。
-    - Itemの発動Spell、特殊な装備条件は自動表だけでは完全に表せません。
-    - Weapon recordだけでは装備者のStrength、Ambidextrous、Bless、Buff、Fatigueを含む最終性能は分かりません。
-    - Armor recordはUnitのNatural Protection、Shield Hit、Buffを含みません。
     - Inspectorは非常に有用ですが、抽出・表示上の不具合があり得ます。最終的な数値・挙動はゲーム内表示と実機テストを優先します。
 
 ## Community資料
