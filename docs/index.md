@@ -23,8 +23,6 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 
 # 初めて遊ぶ人
 
-次の順で読むと、操作から最初の研究・戦闘までつながります。
-
 1. [チュートリアル / 初心者ガイド](getting-started/index.md)
 2. [最初の12ターン](getting-started/first-12-turns.md)
 3. [初心者向けTips](getting-started/beginner-tips.md)
@@ -35,18 +33,28 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 
 ---
 
+# 国家を調べる
+
+現行vanilla国家のカタログを登録しています。
+
+| 時代 | 国家数 | 一覧 |
+|---|---:|---|
+| Early Age | 35 | [EA国家一覧](nations/ea/index.md) |
+| Middle Age | 37 | [MA国家一覧](nations/ma/index.md) |
+| Late Age | 31 | [LA国家一覧](nations/la/index.md) |
+
+- [国家攻略一覧](nations/index.md)
+- [国家選択ガイド](nations/choose-a-nation.md)
+- [国家ページの読み方](nations/how-to-read.md)
+- [MA Ulm](nations/ma/ulm.md)
+
+一覧にある未執筆国家は、ビルド時に公式メタデータと共通見出しを持つstubページを生成します。手書き攻略へ発展した記事は自動生成で上書きしません。
+
+---
+
 # 戦闘を調べる
 
 - [戦闘ルール完全ガイド](basics/combat-rules.md)
-  - DRN
-  - Attack / Defence
-  - Shield / Parry
-  - Damage / Protection
-  - AP / AN
-  - Repel
-  - Fatigue
-  - Morale / Rout
-  - Mounted Unit
 - [両手武器・片手武器・盾](basics/weapons-and-shields.md)
 - [命令とBattle Script](basics/orders.md)
 - [特殊能力](reference/special-abilities.md)
@@ -87,32 +95,13 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Resistance・Utility Item](items/resistance-items.md)
 - [Thug・Supercombatant装備](items/thug-equipment.md)
 
-Item名の一覧だけでなく、Constructionへの投資、Booster chain、Carrier Risk、敵Counterまで含めて評価します。
-
 ---
 
-# 国家・Pretender
-
-## 国家攻略
-
-- [国家攻略一覧](nations/index.md)
-  - [Early Age](nations/ea/index.md)
-  - [Middle Age](nations/ma/index.md)
-  - [Late Age](nations/la/index.md)
-- [MA Ulm](nations/ma/ulm.md)
-
-## Pretender
+# PretenderとStrategic Map
 
 - [Pretender God総論](pretender/index.md)
 - [Scales](pretender/scales.md)
 - [Bless](pretender/bless.md)
-
-国家ページでは、兵士一覧だけでなく、Expansion、Research Breakpoint、Army Script、Pretender、Counterまで同じ形式で整理します。
-
----
-
-# Strategic Mapと勝利条件
-
 - [Province](systems/province.md)
 - [Dominion](systems/dominion.md)
 - [Forts](systems/forts.md)
@@ -120,49 +109,16 @@ Item名の一覧だけでなく、Constructionへの投資、Booster chain、Car
 - [Disciple Game](systems/disciple-game.md)
 - [ターン処理順](reference/turn-resolution.md)
 
-領土を「面積」ではなく、Gold、Resources、Gem、Fort、Retreat route、Plane connection、Ascension Pointとして評価します。
-
 ---
 
 # このWikiの記事方針
 
-各ページでは、可能な限り次の内容を分けて書きます。
+各ページでは、可能な限り次を分けて書きます。
 
 1. **仕様** — ゲーム上の挙動・数値
 2. **攻略上の意味** — その仕様が勝敗にどう影響するか
-3. **使い方** — 実際の編成・Script・研究との組み合わせ
-4. **Counter** — 相手からどう対策されるか / どう対策するか
-5. **確認バージョン** — Patchで陳腐化した情報を識別する
-
-## 数値と評価
-
-- 数値・Research level・Path要求はゲーム内表示と現行データを優先
-- 「強い」「弱い」は対象・時期・Cost・Counterを併記
-- 旧作情報はDom6で再検証
-- Battle ReplayとTest gameで実戦確認
-
----
-
-# 現在の整備状況
-
-## 基準記事を整備中
-
-- 戦闘ルール
-- 命令・Script
-- Magic system
-- 全Magic Path
-- Magic Item運用
-- 特殊能力
-- Pretender / Scales / Bless
-- Province / Dominion / Fort / Throne
-
-## 次に整備する領域
-
-- 全国家一覧と国家ページ
-- Spell / Itemのデータ索引
-- ターン処理順の厳密なDom6版
-- Disciple Game
-- MOD
-- Dominions 5からの変更点
+3. **使い方** — 編成・Script・研究との組み合わせ
+4. **Counter** — どう対策されるか / どう対策するか
+5. **確認Version** — Patchで陳腐化した情報を識別する
 
 リンク先が概要のみのページもあります。内容を追加するときは [編集方針](reference/editing-policy.md) を参照してください。
