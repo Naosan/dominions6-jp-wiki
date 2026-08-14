@@ -67,12 +67,16 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Pretender chassis](data/units/pretenders.md)
 - [Hero](data/units/heroes.md)
 - [Spell summon](data/units/spell-summons.md)
+- [Spell Random summon pool](data/units/spell-random-summons.md)
+- [Wish・Unique・Terrain特殊召喚](data/units/special-summons.md)
 - [Magic Site Unit](data/units/magic-sites.md)
 - [Event Unit・Commander生成](data/units/event-spawns.md)
 - [Event変身・強制変身](data/units/event-transforms.md)
 - [Event暗殺・戦闘参加Unit](data/units/event-combat.md)
 - [Event Random pool・未解決Target](data/units/event-random.md)
 - [Mercenary Unit](data/units/mercenaries.md)
+- [Magic ItemによるUnit生成・変身](data/units/item-unit-sources.md)
+- [Item Random summon・未解決Target](data/units/item-random.md)
 - [Strategic summon・Freespawn](data/units/strategic-spawns.md)
 - [Battle summon](data/units/battle-spawns.md)
 - [Unit条件Recruit](data/units/recruit-unlocks.md)
@@ -84,9 +88,11 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Shape relation](data/units/shapes.md)
 - [入手経路未分類Unit](data/units/unclassified.md)
 
-各Unitページでは基本能力、Magic Path、Weapon、Armor、Mount、通常Recruit、Hero、Pretender、Spell、Magic Site、Event、Mercenary、Unit自身の召喚・変換能力、国家生成能力、Shapeの確認済み関係を一画面にまとめます。
+各Unitページでは基本能力、Magic Path、Weapon、Armor、Mount、通常Recruit、Hero、Pretender、Spell、Magic Site、Event、Mercenary、Magic Item、Unit自身の召喚・変換能力、国家生成能力、Shapeの確認済み関係を一画面にまとめます。
 
-Eventは所有者と一時Unit指定を分離して表示するため、「Eventに登場する」ことを「プレイヤーが恒久取得できる」とは扱いません。MercenaryはCommanderと兵士の構成、Era、人数、入札・補充情報まで確認できます。
+Eventは所有者と一時Unit指定を分離して表示するため、「Eventに登場する」ことを「プレイヤーが恒久取得できる」とは扱いません。MercenaryはCommanderと兵士の構成、Era、人数、入札・補充情報まで確認できます。Magic Itemの召喚・Retinue・Battle summon・変身・敵対Encounterも、固定Unit参照とRandom poolを分けて表示します。
+
+Wish、Cross Breeding、Tartarian Gate、Unique summon、Terrain-specific summonのように通常の固定Unit IDを使わないSpellは、専用pool・内部処理として分離し、説明文から特定Unitを推測しません。
 
 ## 国家・Recruit
 
@@ -113,6 +119,8 @@ Eventは所有者と一時Unit指定を分離して表示するため、「Event
 - Magic Path別Spell一覧
 - Combat / Ritual、要求Path、Gem Cost、Fatigue、Range、AoE
 - [National / Realm restricted Spell](data/spells/national.md)
+- [Spell Random summon pool](data/units/spell-random-summons.md)
+- [Wish・Unique・Terrain特殊召喚](data/units/special-summons.md)
 
 ## Magic Item
 
@@ -122,6 +130,9 @@ Eventは所有者と一時Unit指定を分離して表示するため、「Event
 - [Research Item](data/items/research.md)
 - [Resistance / MR Item](data/items/resistance.md)
 - [Utility Item](data/items/utility.md)
+- [Arena関連Magic Item](data/items/arena.md)
+- [Magic ItemによるUnit生成・変身](data/units/item-unit-sources.md)
+- [Item Random summon・未解決Target](data/units/item-random.md)
 - [Unforgeable / Artifact](data/items/unforgeable.md)
 
 ## Combat data
@@ -148,6 +159,7 @@ Eventは所有者と一時Unit指定を分離して表示するため、「Event
 - [Unit装備・Mountの読み方](data/unit-loadouts.md)
 - [Unit総合索引](data/units/index.md)
 - [Battle summon](data/units/battle-spawns.md)
+- [Magic ItemによるUnit生成・変身](data/units/item-unit-sources.md)
 - [Event暗殺・戦闘参加Unit](data/units/event-combat.md)
 - [装備使用者逆引き](data/equipment-usage/index.md)
 - [国家別装備Profile](data/equipment-usage/nations.md)
@@ -170,6 +182,8 @@ Eventは所有者と一時Unit指定を分離して表示するため、「Event
 - [Communion・Sabbath](magic/communions.md)
 - [Spellデータ索引](data/spells/index.md)
 - [Spell summon Unit](data/units/spell-summons.md)
+- [Spell Random summon pool](data/units/spell-random-summons.md)
+- [Wish・Unique・Terrain特殊召喚](data/units/special-summons.md)
 - [Reanimation・召喚Bonus](data/units/reanimation.md)
 
 ## Magic Path
@@ -196,6 +210,8 @@ Eventは所有者と一時Unit指定を分離して表示するため、「Event
 - [Research Item](items/research-items.md)
 - [Resistance・Utility Item](items/resistance-items.md)
 - [Thug・Supercombatant装備](items/thug-equipment.md)
+- [Magic ItemによるUnit生成・変身](data/units/item-unit-sources.md)
+- [Arena関連Magic Item](data/items/arena.md)
 
 ---
 
@@ -206,6 +222,7 @@ Eventは所有者と一時Unit指定を分離して表示するため、「Event
 - [Hero索引](data/units/heroes.md)
 - [Mercenary Unit索引](data/units/mercenaries.md)
 - [国家Freespawn・Reanimation](data/units/nation-generation.md)
+- [Wish・Unique・Terrain特殊召喚](data/units/special-summons.md)
 - [Scales](pretender/scales.md)
 - [Bless](pretender/bless.md)
 - [Province](systems/province.md)
