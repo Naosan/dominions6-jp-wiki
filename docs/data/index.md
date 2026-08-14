@@ -26,12 +26,21 @@ last_verified: "2026-08-14"
 - [Hero](units/heroes.md)
 - [Spell summon](units/spell-summons.md)
 - [Magic Site Unit](units/magic-sites.md)
+- [Strategic summon・Freespawn](units/strategic-spawns.md)
+- [Battle summon](units/battle-spawns.md)
+- [Unit条件Recruit](units/recruit-unlocks.md)
+- [変換・復活・Raise](units/conversions.md)
+- [Reanimation・Freespawn・召喚Bonus](units/reanimation.md)
+- [国家Freespawn・Reanimation](units/nation-generation.md)
+- [Random summon・未解決Target](units/random-summons.md)
 - [Mount](units/mounts.md)
 - [Shape relation](units/shapes.md)
 - [入手経路未分類Unit](units/unclassified.md)
 - [Unit索引データ品質](units/data-quality.md)
 
-BaseUの全4,091 Unit recordを個別ページ化し、通常Recruit、Hero、Pretender、固定Spell summon、Magic Site、Mount、Shapeの確認済み関係を結合します。未分類は「入手不能」ではなく、Event、Freespawn、Random pool、Transformation等の未索引経路を含み得ます。
+BaseUの全4,091 Unit recordを個別ページ化し、通常Recruit、Hero、Pretender、固定Spell summon、Magic Site、Unit自身の召喚・変換能力、国家Freespawn・Reanimation能力、Mount、Shapeの関係を結合します。
+
+`domsummon`、`makemonster`、`summon`、`batstartsum`、`battlesum`など、固定Unit IDを参照する生成能力は生成先Unitへ逆引きします。負のMonster NumberやMontagはRandom poolであり、特定Unitへ推測で結び付けません。
 
 ## 装備使用者逆引き
 
@@ -99,6 +108,9 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - BaseUの全Unit recordと確認済み入手経路
 - Unit / Commanderの基本値
 - Hero、Pretender、Spell summon、Magic Site、Mount、Shape関係
+- Unit自身のDominion summon、毎月召喚、Battle summon、Recruit unlock、固定変換先
+- Reanimation、Oni attraction、召喚数BonusなどTargetを直接指定しない能力
+- 国家属性が明示するFreespawn、Guardian Spirit、Reanimation能力
 - Unitが参照するWeapon、Armor、Mount record
 - Weapon / Armorから見た使用国家・Recruitの逆引き
 - RiderとMountの別Stats・別攻撃Profile
@@ -111,6 +123,7 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 ### 人が執筆する攻略
 
 - どの兵、召喚、Hero、Pretenderを主力にするか
+- Freespawnを国家経済へどう組み込むか
 - Expansion時の必要人数
 - Pretender設計
 - Research Breakpoint
@@ -126,6 +139,7 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - 国家の追加・削除・改名
 - Recruit roster、Weapon / Armor / Mount参照、Magic Path
 - Hero、Pretender、Spell summon、Magic Site、Shapeの対応
+- Unit / Nation generation fieldとRandom pool参照
 - Equipment使用者とProfile分類
 - SpellのSchool、Research level、Path、Cost
 - ItemのConstruction、Path、Cost、効果
@@ -135,4 +149,4 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - 入手経路未分類件数と未解決参照
 
 !!! warning "抽出データの限界"
-    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。Event、Freespawn、Random summon pool、Wish、Transformation、複合Spell、特殊Range / AoE、Itemの発動効果、WeaponのSecondary effect、Mounted combat、最終Forge Costはゲーム内表示と実機テストを優先します。
+    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。Event、Wish、Random summon table、hard-coded Reanimation結果、複合Spell、特殊Range / AoE、Itemの発動効果、Mounted combat、最終Forge Costはゲーム内表示と実機テストを優先します。
