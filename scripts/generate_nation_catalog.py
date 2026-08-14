@@ -25,6 +25,13 @@ ERA = {
     "3": ("LA", "la", "Late Age"),
 }
 
+STATUS_LABELS = {
+    "stub": "骨組み",
+    "draft": "下書き",
+    "review": "攻略あり",
+    "verified": "検証済み",
+}
+
 
 def slugify(name: str) -> str:
     value = unicodedata.normalize("NFKD", name)
@@ -50,11 +57,20 @@ def read_rows() -> list[dict[str, str]]:
     return rows
 
 
-def is_generated_stub(path: Path) -> bool:
+def page_path(row: dict[str, str]) -> Path:
+    return DOCS / row["era_dir"] / f'{row["slug"]}.md'
+
+
+def frontmatter_status(path: Path) -> str:
     if not path.exists():
-        return True
-    head = path.read_text(encoding="utf-8")[:500]
-    return "status: stub" in head
+        return "stub"
+    head = path.read_text(encoding="utf-8")[:1000]
+    match = re.search(r"(?m)^status:\s*[\"']?([^\"'\n]+)", head)
+    return match.group(1).strip() if match else "draft"
+
+
+def is_generated_stub(path: Path) -> bool:
+    return not path.exists() or frontmatter_status(path) == "stub"
 
 
 def stub(row: dict[str, str]) -> str:
@@ -218,10 +234,11 @@ def index(rows: list[dict[str, str]], era: str) -> str:
         "|---:|---|---|---|",
     ]
     for row in selected:
-        status = "攻略あり" if era == "2" and row["name"] == "Ulm" else "骨組み"
+        status = frontmatter_status(page_path(row))
+        label = STATUS_LABELS.get(status, status)
         out.append(
             f'| {row["id"]} | [{code} {row["name"]}]({row["slug"]}.md) | '
-            f'{row["epithet"]} | {status} |'
+            f'{row["epithet"]} | {label} |'
         )
     out.extend(
         [
@@ -247,7 +264,7 @@ def main() -> None:
     skipped = 0
 
     for row in rows:
-        path = DOCS / row["era_dir"] / f'{row["slug"]}.md'
+        path = page_path(row)
         path.parent.mkdir(parents=True, exist_ok=True)
         if is_generated_stub(path):
             path.write_text(stub(row), encoding="utf-8")
