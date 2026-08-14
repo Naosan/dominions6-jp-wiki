@@ -25,6 +25,18 @@ nav = [
     "data/recruitment/index.md",
     "data/mage-access.md",
     "data/unit-loadouts.md",
+    { "Unitデータ" = [
+      "data/units/index.md",
+      "data/units/all/index.md",
+      "data/units/pretenders.md",
+      "data/units/heroes.md",
+      "data/units/spell-summons.md",
+      "data/units/magic-sites.md",
+      "data/units/mounts.md",
+      "data/units/shapes.md",
+      "data/units/unclassified.md",
+      "data/units/data-quality.md",
+    ] },
     { "装備使用者逆引き" = [
       "data/equipment-usage/index.md",
       "data/equipment-usage/nations.md",

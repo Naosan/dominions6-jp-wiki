@@ -35,5 +35,7 @@ jobs:
         run: python scripts/generate_spell_item_data.py
       - name: Generate combat equipment data
         run: python scripts/generate_combat_data.py
+      - name: Generate Unit acquisition catalog
+        run: python scripts/generate_unit_catalog.py
       - name: Build site
         run: zensical build --clean
