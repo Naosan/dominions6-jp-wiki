@@ -81,6 +81,63 @@ Recruitページでは`BaseU.csv`の次の参照をWeapon・Armor・Unit dataへ
 !!! note "RiderとMount"
     Mountは装備品ではなく別Unit recordです。RiderとMountのHP、Protection、Defence、武器、防具を分離して表示します。Dismount後の完全なShape切替やTarget分配は自動表だけでは再構成しません。
 
+### Unit総合・入手経路索引
+
+BaseUの全4,091 Unit recordを個別ページ化し、次の明示的な参照だけを取得・利用経路として結合します。
+
+#### 通常Recruit
+
+- Fort troop / commander mapping
+- Fort不要・地形・外国Recruit mapping
+- Coastal Recruit mapping
+
+#### Hero
+
+- `gamedata/attributes_by_nation.csv`
+- Attribute 139～144: `hero1`～`hero6`
+- Attribute 145～146: `multihero1`～`multihero2`
+
+Hero属性名は`gamedata/attribute_keys.csv`で確認します。
+
+#### Pretender chassis
+
+- `gamedata/pretender_types_by_nation.csv`
+
+`monster_number`と`nation_number`を対応付け、国家ごとの選択可能Chassisを逆引きします。
+
+#### Spell summon
+
+- `gamedata/spells.csv`
+- `gamedata/effects_spells.csv`
+- `gamedata/attributes_by_spell.csv`
+
+Research可能なroot Spellから`next_spell` chainを辿り、Summon、Summon commander、Farsummon等の明示effectが正の固定Unit IDを参照するときだけ対応付けます。負値のRandom pool、内部sentinel、未解明effectは推測で補完しません。
+
+#### Magic Site Unit
+
+- `gamedata/MagicSites.csv`
+- `mon1..5` / `com1..5`
+- `hmon1..5` / `hcom1..5`
+- `sum1..4` / `n_sum1..4`
+- `natmon` / `natcom`
+
+抽出列名とUnit IDを事実として掲載します。Siteの発見条件、国家制限、特殊出現処理はゲーム内Site詳細を優先します。
+
+#### Mount・Shape relation
+
+- `BaseU.csv`の`mountmnr`
+- `shapechange`
+- `firstshape` / `secondshape` / `secondtmpshape`
+- `landshape` / `watershape`
+- `forestshape` / `plainshape`
+- `xpshape` / `homeshape` / `prophetshape`
+- `cleanshape` / `raiseshape`
+
+MountとShapeは直接入手経路とは区別し、Unit間関係として掲載します。
+
+!!! note "未分類Unit"
+    現在の索引で入手経路を確認できないUnitを「入手不能」とは断定しません。Event、Freespawn、Random summon pool、Wish、Transformation、Battle effect、国家固有内部処理等が未索引である可能性があります。未解決参照は[Unit索引データ品質](../data/units/data-quality.md)へ残します。
+
 ### Spell索引
 
 主に利用するファイル:
@@ -128,14 +185,15 @@ Armor索引では、Protection zoneからInspectorと同じ表示用Body Protect
     Weapon modifier上の`Nonmagical`の有無と、`Magic Damage` modifierは別項目です。前者はEthereal等への命中、後者はDamage分類へ関係します。自動索引でも別々に表示します。
 
 !!! warning "自動生成データの限界"
-    - Unit Costは自動計算、Mount、形態変化、特殊Recruit条件が複雑なため、Recruit索引では表示しません。
+    - Unit Costは自動計算、Mount、形態変化、特殊Recruit条件が複雑なため、自動Unit索引では表示しません。
     - Unit loadoutはWeapon / Armor参照を示しますが、最終Damage、二刀流Penalty、攻撃順、Conditional attackを完全には再構成しません。
     - Mounted combatではRiderとMountのTarget選択、AoE、Dismount後の形態、Barding表示に追加処理があります。
+    - Hero・Pretender・Spell・Siteの対応は明示参照だけを採用し、名前や説明文から推測しません。
+    - Event、Freespawn、Random pool、Wish、Transformation等は未分類に残る場合があります。
     - Spellの複合効果、特殊Range / AoE、Target制限はゲーム内詳細を優先します。
     - Itemの発動Spell、特殊な装備条件は自動表だけでは完全に表せません。
     - Weapon recordだけでは装備者のStrength、Ambidextrous、Bless、Buff、Fatigueを含む最終性能は分かりません。
     - Armor recordはUnitのNatural Protection、Shield Hit、Buffを含みません。
-    - National / Realm restriction、Event、Hero、Site限定、形態変化は追加確認が必要です。
     - Inspectorは非常に有用ですが、抽出・表示上の不具合があり得ます。最終的な数値・挙動はゲーム内表示と実機テストを優先します。
 
 ## Community資料
