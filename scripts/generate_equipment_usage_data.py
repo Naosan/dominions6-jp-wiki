@@ -42,10 +42,14 @@ def main() -> None:
 
     if stats["recruits"] < 1200:
         raise ValueError(f"recruit relation data appears incomplete: {stats['recruits']}")
-    if stats["used_weapons"] < 300:
-        raise ValueError(f"weapon usage data appears incomplete: {stats['used_weapons']}")
-    if stats["used_armors"] < 100:
-        raise ValueError(f"armor usage data appears incomplete: {stats['used_armors']}")
+    if stats["weapon_records"] < 800:
+        raise ValueError(f"weapon source data appears incomplete: {stats['weapon_records']}")
+    if stats["armor_records"] < 250:
+        raise ValueError(f"armor source data appears incomplete: {stats['armor_records']}")
+    if stats["weapon_relations"] < 1000:
+        raise ValueError(f"weapon relation data appears incomplete: {stats['weapon_relations']}")
+    if stats["armor_relations"] < 1000:
+        raise ValueError(f"armor relation data appears incomplete: {stats['armor_relations']}")
 
     print(f"source commit: {COMMIT}")
     for key, value in stats.items():
