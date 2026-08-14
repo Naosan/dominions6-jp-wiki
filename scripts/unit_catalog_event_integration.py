@@ -17,6 +17,31 @@ def _merge_acquisitions(base, *extra_sources):
     return merged
 
 
+def _classify_event_sentinels(events: dict[str, object]) -> None:
+    """Keep event-only negative sentinels out of the unresolved positive-ID bucket.
+
+    Vanilla events use `assassin -1` in unrelated adventure and site events.
+    Its concrete attacker is context-dependent, so it is reported as an Event
+    pool/sentinel rather than guessed as a fixed Unit or a standard negative
+    monster-number table entry.
+    """
+    sentinel_relations = []
+    for relation in events["relations"]:
+        if int(relation.get("raw_target") or 0) != -1:
+            continue
+        if relation.get("confidence") != "unresolved":
+            continue
+        relation["target"] = "Event-defined attacker pool / sentinel (raw -1)"
+        relation["confidence"] = "event-sentinel"
+        sentinel_relations.append(relation)
+
+    if sentinel_relations:
+        events["random_targets"].extend(sentinel_relations)
+        events["unresolved"] = [
+            entry for entry in events["unresolved"] if int(entry[3]) != -1
+        ]
+
+
 def load_unit_catalog(refresh: bool = False, offline: bool = False):
     data = load_base_unit_catalog(refresh, offline)
 
@@ -30,6 +55,8 @@ def load_unit_catalog(refresh: bool = False, offline: bool = False):
         data["units"],
         data["nations"],
     )
+    _classify_event_sentinels(events)
+
     mercenaries = build_mercenary_relations(
         tsv(mercenaries_path),
         data["units"],
