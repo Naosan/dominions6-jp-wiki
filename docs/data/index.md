@@ -59,6 +59,39 @@ Magic Itemでは`sumrit`、`sumauto`、`sumbat`、`retinue`、`batstartsum*`、`
 
 Spellについては通常の固定Unit summonに加え、Negative Monster Number、Montag、Unique summon table、Terrain-specific summon table、WishやCross Breedingのような特殊処理を分離しました。候補集合や内部処理を、もっともらしい単一Unitへ置き換えません。
 
+## Magic Site総合データ
+
+- [Magic Site総合索引](sites/index.md)
+- [全1,253 Magic Site一覧](sites/all.md)
+- Magic Path別Site一覧
+  - [Fire](sites/by-path/fire.md)
+  - [Air](sites/by-path/air.md)
+  - [Water](sites/by-path/water.md)
+  - [Earth](sites/by-path/earth.md)
+  - [Astral](sites/by-path/astral.md)
+  - [Death](sites/by-path/death.md)
+  - [Nature](sites/by-path/nature.md)
+  - [Glamour](sites/by-path/glamour.md)
+  - [Blood](sites/by-path/blood.md)
+  - [Holy](sites/by-path/holy.md)
+- [Gem income](sites/gem-income.md)
+- [Recruit Unit・Commander](sites/recruitment.md)
+- [Site summon](sites/summons.md)
+- [Research・Ritual bonus](sites/research.md)
+- [Economy・Fort・Lab](sites/economy.md)
+- [Enter・Active effect](sites/enter-effects.md)
+- [国家開始Site・Future Site](sites/national.md)
+- [Terrain・Location](sites/terrain.md)
+- [Throne](sites/thrones.md)
+- [Site Event relation](sites/events.md)
+- [Magic Site索引データ品質](sites/data-quality.md)
+
+`MagicSites.csv`の全1,253 recordを個別ページ化します。Path、Site level、raw Rarity、`loc` bitfield、毎月のGem income、Recruit、Summon、Province Defence、Gold・Resource・Supply・Unrest、Fort・Lab、Research School bonus、Ritual range、Scales、Dominion、Entering Site、Scry、Adventure、Void Gateなどを分離して表示します。
+
+現在の固定スナップショットでは、毎月Gem incomeを持つSiteが1,061件、Site–Unit relationが781件、国家Start Site relationが208件、Future Site relationが3件、Throneが74件あります。Eventとの関係は830件で、Siteを要求するrelation 678件とSiteを生成するrelation 152件を区別します。
+
+Terrainは`site_terrain_types.csv`に定義されたbitだけを展開します。`loc = 0`を「全地形に通常出現」とは扱わず、定義されていないbitは品質レポートへ残します。39種の同名Siteが存在しますが、異なるSite IDは別recordとして保持します。
+
 ## 装備使用者逆引き
 
 - [装備使用者逆引き](equipment-usage/index.md)
@@ -130,6 +163,9 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - BaseUの全Unit recordと確認済み入手・出現経路
 - Unit / Commanderの基本値
 - Hero、Pretender、Spell summon、Magic Site、Event、Mercenary、Magic Item、Mount、Shape関係
+- 全Magic Site record、Path、Level、raw Rarity、Terrain bitfield
+- SiteのGem income、Recruit、Summon、PD、Economy、Research、Ritual、Scale、Active effect
+- 国家Start Site・Future SiteとEventによるSite requirement・生成relation
 - EventのUnit所有者、Temporary指定、発生条件、Rarity
 - MercenaryのCommander、Troop、人数、Era、入札・補充情報
 - Itemの固定Unit summon、Retinue、Battle summon、Transform、Raise、敵対Encounter
@@ -151,6 +187,9 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - どの兵、召喚、Hero、Pretenderを主力にするか
 - Freespawnを国家経済へどう組み込むか
 - EventやMercenaryを戦略上どの程度期待してよいか
+- Site Searchの優先Path・Timing・探索Mageをどう選ぶか
+- SiteのGem、Recruit、研究Bonus、Adventureを戦略へどう組み込むか
+- Throneをどの戦力と時期で確保・Claimするか
 - Item召喚・Retinue・Arena報酬を実戦でどう評価するか
 - Wishや特殊召喚で何を狙うか
 - Expansion時の必要人数
@@ -168,6 +207,10 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - 国家の追加・削除・改名
 - Recruit roster、Weapon / Armor / Mount参照、Magic Path
 - Hero、Pretender、Spell summon、Magic Site、Event、Mercenary、Item、Shapeの対応
+- Magic Site ID、Path、Level、Rarity、Location bit、Gem income、効果Field
+- Site Recruit・Summon・PD Unit参照とNational recruit restriction
+- Nation Start Site / Future Site属性
+- EventのSite requirement・Site生成effect
 - Unit / Nation generation fieldとRandom pool参照
 - Event effect command、owner、Temporary指定、Requirement
 - Mercenary roster、Era mask、人数・入札・補充情報
@@ -178,8 +221,8 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - ItemのConstruction、Path、Cost、効果
 - WeaponのDamage、Length、AP / AN、modifier
 - ArmorのProtection、Parry、Encumbrance
-- Unit / Spell / Item / Weapon / Armor ID
+- Unit / Spell / Item / Site / Weapon / Armor ID
 - 入手経路未分類件数と未解決参照
 
 !!! warning "抽出データの限界"
-    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。Wishの任意入力結果、Unique pool内の実際の選択、Terrain summonの地形別結果、hard-coded Reanimation、Adventure、Scenario、複合Event chain、複合Spell、特殊Range / AoE、Itemの発動回数・持続、Mounted combat、最終Forge Costはゲーム内表示と実機テストを優先します。
+    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。Magic Siteの最終発見率、Hidden / Found状態、Capital配置、Throne claim、National recruit条件、Adventure、Void Gate、未知Location bit、Wishの任意入力結果、Unique pool内の実際の選択、Terrain summonの地形別結果、hard-coded Reanimation、Scenario、複合Event chain、複合Spell、特殊Range / AoE、Itemの発動回数・持続、Mounted combat、最終Forge Costはゲーム内表示と実機テストを優先します。

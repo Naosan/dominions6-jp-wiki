@@ -23,6 +23,7 @@ python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
 python scripts/generate_unit_catalog.py
+python scripts/generate_magic_site_data.py
 zensical serve
 ```
 
@@ -37,6 +38,7 @@ python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
 python scripts/generate_unit_catalog.py
+python scripts/generate_magic_site_data.py
 zensical serve
 ```
 
@@ -61,8 +63,9 @@ zensical serve
 13. Magic Itemの固定Unit summon、Retinue、Battle summon、変身・Raise・Encounterを生成
 14. SpellのNegative summon pool、Wish、Unique summon、Terrain-specific summon等を生成
 15. Arena関連Magic Itemを生成
-16. Zensicalで静的サイトを構築
-17. GitHub Pagesへ公開
+16. 全1,253 Magic SiteページとGem・Recruit・Summon・Event横断索引を生成
+17. Zensicalで静的サイトを構築
+18. GitHub Pagesへ公開
 
 ## 記事を書く
 
@@ -205,6 +208,50 @@ Spellについては、通常の固定Unit summonに加えて、Negative Monster
 
 負のMonster NumberとMontagはRandom poolとして表示し、固定Unitへは結び付けません。Reanimation結果などhard-codedな生成先を安全に対応付けられない場合も、能力Flagと品質レポートへ残します。
 
+### Magic Site総合索引
+
+```bash
+python scripts/generate_magic_site_data.py
+```
+
+生成先:
+
+```text
+docs/data/sites/
+├ index.md
+├ all.md
+├ by-id/              # 全1,253 Site個別ページ
+├ by-path/            # F / A / W / E / S / D / N / G / B / H
+├ gem-income.md
+├ recruitment.md
+├ summons.md
+├ research.md
+├ economy.md
+├ enter-effects.md
+├ national.md
+├ terrain.md
+├ thrones.md
+├ events.md
+└ data-quality.md
+```
+
+Magic Site索引は次の明示データを結合します。
+
+- `MagicSites.csv`の全1,253 record
+- Path、Site level、raw Rarity、`loc` bitfield
+- 毎月のGem incomeとClaim時Gemを別Fieldとして保持
+- `mon*` / `com*` / `hmon*` / `hcom*` / `natmon` / `natcom`
+- `sum1..4` / `n_sum1..4`
+- Site固有のProvince Defence追加Unit
+- Gold、Resource、Supply、Unrest、Recruitment Point、Population
+- Fort、Laboratory、Research School bonus、Ritual range
+- Scales、Dominion、Entering Site、Scry、Adventure、Void Gate
+- Nation属性が明示するStart Site / Future Site
+- Event requirementの`site` / `foundsite` / `hiddensite` / `nearbysite`
+- Event effectの`newsite`
+
+正のUnit IDはBaseUに存在する場合だけ接続し、raw Rarityを出現確率の百分率へ変換しません。`loc = 0`は「全地形へ通常出現」と断定せず、未知のLocation bitも消さずに品質レポートへ残します。同名Siteは同一視せず、異なるSite IDのrecordとして保持します。
+
 ## データ更新
 
 生成元はDom6 InspectorのDominions 6.35対応Commitへ固定しています。ダウンロード済みデータは `.cache/dom6inspector/` に保存されます。
@@ -216,6 +263,7 @@ python scripts/generate_equipment_usage_data.py --refresh
 python scripts/generate_spell_item_data.py --refresh
 python scripts/generate_combat_data.py --refresh
 python scripts/generate_unit_catalog.py --refresh
+python scripts/generate_magic_site_data.py --refresh
 
 # Networkを使用せずCacheのみで生成
 python scripts/generate_recruitment_data.py --offline
@@ -223,6 +271,7 @@ python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py --offline
 python scripts/generate_combat_data.py --offline
 python scripts/generate_unit_catalog.py --offline
+python scripts/generate_magic_site_data.py --offline
 ```
 
 自動生成ページは攻略評価ではなく、現行データを確認するための索引です。戦術、研究順、Pretender、Script、Counterは手書き記事で扱います。

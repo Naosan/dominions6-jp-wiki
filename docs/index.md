@@ -47,6 +47,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [国家選択ガイド](nations/choose-a-nation.md)
 - [国家ページの読み方](nations/how-to-read.md)
 - [国家Recruitデータ](data/recruitment/index.md)
+- [国家開始Site・Future Site](data/sites/national.md)
 - [Unit装備・Mountの読み方](data/unit-loadouts.md)
 - [国家別Recruit装備Profile](data/equipment-usage/nations.md)
 - [Mage access早見表](data/mage-access.md)
@@ -93,6 +94,26 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 Eventは所有者と一時Unit指定を分離して表示するため、「Eventに登場する」ことを「プレイヤーが恒久取得できる」とは扱いません。MercenaryはCommanderと兵士の構成、Era、人数、入札・補充情報まで確認できます。Magic Itemの召喚・Retinue・Battle summon・変身・敵対Encounterも、固定Unit参照とRandom poolを分けて表示します。
 
 Wish、Cross Breeding、Tartarian Gate、Unique summon、Terrain-specific summonのように通常の固定Unit IDを使わないSpellは、専用pool・内部処理として分離し、説明文から特定Unitを推測しません。
+
+## Magic Site総合索引
+
+- [Magic Site総合索引](data/sites/index.md)
+- [全1,253 Magic Site一覧](data/sites/all.md)
+- [Gem income](data/sites/gem-income.md)
+- [Recruit Unit・Commander](data/sites/recruitment.md)
+- [Site summon](data/sites/summons.md)
+- [Research・Ritual bonus](data/sites/research.md)
+- [Economy・Fort・Lab](data/sites/economy.md)
+- [Enter・Active effect](data/sites/enter-effects.md)
+- [国家開始Site・Future Site](data/sites/national.md)
+- [Terrain・Location](data/sites/terrain.md)
+- [Throne](data/sites/thrones.md)
+- [Site Event relation](data/sites/events.md)
+- [Magic Siteデータ品質](data/sites/data-quality.md)
+
+全1,253 Site recordを個別ページ化し、Path、Level、raw Rarity、Terrain bitfield、毎月Gem income、Recruit、Summon、Province Defence、経済・研究・Ritual・Scale・Entering Site効果をまとめます。Siteが参照する固定UnitはUnit総合索引へ接続します。
+
+国家属性からStart Site 208 relationとFuture Site 3 relationを抽出し、Event側ではSite requirement 678件とSite生成152件を分離しました。raw Rarityを直接の出現率へ換算せず、未知Location bitや同名別ID Siteも消さずに品質レポートへ保持します。
 
 ## 国家・Recruit
 
@@ -181,6 +202,9 @@ Wish、Cross Breeding、Tartarian Gate、Unique summon、Terrain-specific summon
 - [Magic Path Boosting](magic/boosting.md)
 - [Communion・Sabbath](magic/communions.md)
 - [Spellデータ索引](data/spells/index.md)
+- [Magic Site総合索引](data/sites/index.md)
+- [Magic Site Gem income](data/sites/gem-income.md)
+- [Magic Site Research・Ritual bonus](data/sites/research.md)
 - [Spell summon Unit](data/units/spell-summons.md)
 - [Spell Random summon pool](data/units/spell-random-summons.md)
 - [Wish・Unique・Terrain特殊召喚](data/units/special-summons.md)
@@ -223,6 +247,9 @@ Wish、Cross Breeding、Tartarian Gate、Unique summon、Terrain-specific summon
 - [Mercenary Unit索引](data/units/mercenaries.md)
 - [国家Freespawn・Reanimation](data/units/nation-generation.md)
 - [Wish・Unique・Terrain特殊召喚](data/units/special-summons.md)
+- [国家開始Site・Future Site](data/sites/national.md)
+- [Throne Magic Site](data/sites/thrones.md)
+- [Site Event relation](data/sites/events.md)
 - [Scales](pretender/scales.md)
 - [Bless](pretender/bless.md)
 - [Province](systems/province.md)

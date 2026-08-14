@@ -226,6 +226,52 @@ MountとShapeは直接入手経路とは区別し、Unit間関係として掲載
 !!! note "未分類Unit"
     現在の索引で入手経路を確認できないUnitを「入手不能」とは断定しません。Event、Wish、Random summon table、hard-coded Reanimation、Scenario、特殊国家内部処理等が未索引である可能性があります。未解決参照は[Unit索引データ品質](../data/units/data-quality.md)へ残します。
 
+### Magic Site総合索引
+
+主に利用するファイルと表示ロジック:
+
+- `gamedata/MagicSites.csv`
+- `gamedata/site_terrain_types.csv`
+- `gamedata/BaseU.csv`
+- `gamedata/attributes_by_nation.csv`
+- `gamedata/events.csv`
+- `scripts/DMI/MSite.js`
+
+`MagicSites.csv`の全1,253 recordを個別ページ化し、Path、Site level、raw Rarity、`loc` bitfield、Gem、Recruit、Summon、Province Defence、Economy、Research、Ritual、Scale、Dominion、Entering Site等の抽出値を掲載します。
+
+#### Terrain・Location
+
+`loc`は`site_terrain_types.csv`に明示されたbitだけを展開します。現在の定義にはPlain、Forest、Mountain、Waste、Farm、Sea、Coast、Swamp、Deep sea、Cave、Unique、Underwater Mountain、Underwater Forest、Underwater Coastalがあります。
+
+- `loc = 0`を「すべての地形へ通常出現する」とは解釈しません。
+- 定義表にないbitは名称を推測せず、raw valueとremaining bitsを品質レポートへ残します。
+- `Unique`は通常Terrainではなく配置Flagとして扱います。
+- 同名SiteでもSite IDが異なる場合は別recordとして保持します。
+
+#### Rarity・Throne
+
+Rarityはraw codeのまま表示し、直接の出現確率へ変換しません。Inspector本体と同様に、Rarity code 11以上をThrone索引へ分類します。Capital Site、Event Site、Hidden Site、Throneの配置・発見・Claim処理はraw Rarityだけでは決まりません。
+
+#### Gem・効果Field
+
+通常の毎月Gemは`F` / `A` / `W` / `E` / `S` / `D` / `N` / `G` / `B`、Claim時Gemは対応する`*2` Fieldとして分離します。Gold、Resource、Supply、Unrest、Recruitment Point、Fort、Lab、Research School bonus、Ritual range、Scale、Scry、Adventure、Void Gate等も、抽出Field名と値を保持します。
+
+#### Recruit・Summon・Province Defence
+
+- `mon1..5` / `com1..5`
+- `hmon1..5` / `hcom1..5`
+- `natmon` / `natcom`
+- `sum1..4` / `n_sum1..4`
+- `provdef1` / `provdef2` / `provdefcom`
+
+正の値がBaseUのUnit IDへ解決できる場合だけUnitページへ接続します。`n_sum*`が1より大きい場合はInspectorの表示ロジックに合わせて`1–N`とし、その範囲内の確率分布までは推測しません。`nationalrecruits`はNation IDとして別に保持します。
+
+#### 国家・Event relation
+
+`attributes_by_nation.csv`の属性25 / 52 / 100をStart Site、属性631をFuture Siteとして接続します。
+
+Eventではrequirementの`site` / `foundsite` / `hiddensite` / `nearbysite`と、effectの`newsite`を対象にします。数値Site IDを最優先し、Event説明文の`[Site Name]`から対応付けたrelationは低いConfidenceとして明示します。Event chain全体、Hidden / Found状態、所有者、発生順はこの単一relation表だけでは確定しません。
+
 ### Spell索引
 
 主に利用するファイル:
@@ -273,6 +319,7 @@ Armor索引では、Protection zoneからInspectorと同じ表示用Body Protect
     - Unit Costは自動計算、Mount、形態変化、特殊Recruit条件が複雑なため、自動Unit索引では表示しません。
     - Unit loadoutはWeapon / Armor参照を示しますが、最終Damage、二刀流Penalty、攻撃順、Conditional attackを完全には再構成しません。
     - Hero・Pretender・Spell・Site・Unit generationの対応は明示参照だけを採用し、名前や説明文から推測しません。
+    - Magic Siteのraw Rarity、Location、Gem、Recruit、Event relationだけでは、最終発見率、配置、Claim、利用条件を完全には再構成できません。
     - Event、Wish、Random table、hard-coded Reanimation等は未分類に残る場合があります。
     - Spellの複合効果、特殊Range / AoE、Target制限はゲーム内詳細を優先します。
     - Inspectorは非常に有用ですが、抽出・表示上の不具合があり得ます。最終的な数値・挙動はゲーム内表示と実機テストを優先します。
