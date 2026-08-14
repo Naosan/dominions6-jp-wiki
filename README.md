@@ -58,8 +58,11 @@ zensical serve
 10. Hero、Pretender、Spell summon、Magic Site、Mount、Shapeの関係を生成
 11. Unit / NationのStrategic summon、Battle summon、Recruit unlock、Conversion、Reanimation、Freespawnを生成
 12. EventのUnit生成・変身・暗殺参加者とMercenary rosterを生成
-13. Zensicalで静的サイトを構築
-14. GitHub Pagesへ公開
+13. Magic Itemの固定Unit summon、Retinue、Battle summon、変身・Raise・Encounterを生成
+14. SpellのNegative summon pool、Wish、Unique summon、Terrain-specific summon等を生成
+15. Arena関連Magic Itemを生成
+16. Zensicalで静的サイトを構築
+17. GitHub Pagesへ公開
 
 ## 記事を書く
 
@@ -146,12 +149,16 @@ docs/data/units/
 ├ pretenders.md
 ├ heroes.md
 ├ spell-summons.md
+├ spell-random-summons.md
+├ special-summons.md
 ├ magic-sites.md
 ├ event-spawns.md
 ├ event-transforms.md
 ├ event-combat.md
 ├ event-random.md
 ├ mercenaries.md
+├ item-unit-sources.md
+├ item-random.md
 ├ strategic-spawns.md
 ├ battle-spawns.md
 ├ recruit-unlocks.md
@@ -163,6 +170,9 @@ docs/data/units/
 ├ shapes.md
 ├ unclassified.md
 └ data-quality.md
+
+docs/data/items/
+└ arena.md
 ```
 
 Unit総合索引はBaseUの全4,091 recordを個別ページ化し、次の明示的な参照を結合します。
@@ -174,6 +184,9 @@ Unit総合索引はBaseUの全4,091 recordを個別ページ化し、次の明�
 - `MagicSites.csv`のUnit参照
 - `events.csv`のCommander・Troop生成、変身、暗殺・随伴Unit
 - `Mercenary.csv`のCommander・Troop roster
+- `BaseI.csv`の`sumrit`、`sumauto`、`sumbat`、`retinue`、`summoner1d6`、`summoner2d6`
+- `BaseI.csv`の`batstartsum2`、`batstartsum3`、`batstartsum5d6`
+- `BaseI.csv`の`transformwearer`、`raiseshape`、`defender`
 - `domsummon`、`makemonster`、`summon`、`autosum`
 - `batstartsum*`、`battlesum*`
 - `ownsmonrec`、`monpresentrec`
@@ -185,6 +198,10 @@ Unit総合索引はBaseUの全4,091 recordを個別ページ化し、次の明�
 Eventについては、Effectの`nation -1`をRandom enemy、`nation -2`をProvince ownerとして保持し、`tempunits 1`をTemporaryとして分離します。Eventに登場するUnitを自動的に恒久加入扱いにはしません。
 
 Mercenaryについては、Commander、Troop、初期人数、Era mask、最低入札額、XP、補充率、開始Itemを索引化します。
+
+Magic Itemについては、固定Unit IDへ解決できる召喚・Retinue・Battle summon・変身・Raise・敵対EncounterだけをUnitページへ接続します。Item固有の使用回数、発動条件、持続時間はゲーム内説明を優先します。
+
+Spellについては、通常の固定Unit summonに加えて、Negative Monster Number、Montag、`special_unique_summons.csv`、`terrain_specific_summons.csv`を候補集合として索引化します。Wish、Cross Breeding、Tartarian Gate等の特殊処理を、名前や説明文から単一Unitへ推測で接続しません。
 
 負のMonster NumberとMontagはRandom poolとして表示し、固定Unitへは結び付けません。Reanimation結果などhard-codedな生成先を安全に対応付けられない場合も、能力Flagと品質レポートへ残します。
 
