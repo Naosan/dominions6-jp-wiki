@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from pathlib import Path
 
 import unit_catalog_pages
@@ -18,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs" / "data" / "units"
 
 
-def validate(stats: dict[str, int]) -> None:
+def validate(stats: dict[str, int], data) -> None:
     checks = (
         ("units", 4000),
         ("unit_pages", 4000),
@@ -62,9 +63,19 @@ def validate(stats: dict[str, int]) -> None:
         raise ValueError(
             f"Unit page count mismatch: pages={stats['unit_pages']} records={stats['units']}"
         )
-    for key in ("unresolved_event_targets", "unresolved_mercenary_targets"):
+    for key in (
+        "unresolved_event_targets",
+        "unresolved_mercenary_targets",
+        "unresolved_item_targets",
+        "unresolved_special_spell_pools",
+        "unresolved_special_candidates",
+    ):
         if stats.get(key, 0) != 0:
             raise ValueError(f"Unit source integrity failure: {key}={stats[key]}")
+    if data["unresolved_spells"]:
+        raise ValueError(
+            f"Unit source integrity failure: unresolved_spells={len(data['unresolved_spells'])}"
+        )
 
 
 def _insert_after(path: Path, anchor: str, additions: list[str]) -> None:
@@ -115,11 +126,19 @@ def main() -> None:
     stats = unit_catalog_pages.write_unit_catalog(data, OUT)
     patch_generated_indexes(stats)
     write_quality_report(data, OUT, stats)
-    validate(stats)
+    validate(stats, data)
 
     print(f"source commit: {data['commit']}")
     for key, value in stats.items():
         print(f"{key}: {value}")
+    category_counts = Counter(
+        str(relation.get("category") or "—")
+        for relation in data["spell_special_relations"]
+    )
+    print(
+        "special Spell categories: "
+        + ", ".join(f"{name}={count}" for name, count in sorted(category_counts.items()))
+    )
     print(f"random Unit-generation references: {len(data['unit_generation_random_targets'])}")
     print(f"unresolved Unit-generation references: {len(data['unit_generation_unresolved'])}")
     print(f"unresolved nation-generation references: {len(data['nation_generation_unresolved'])}")
