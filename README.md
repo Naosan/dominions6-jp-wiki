@@ -20,6 +20,7 @@ pip install zensical
 python scripts/generate_nation_catalog.py
 python scripts/generate_recruitment_data.py
 python scripts/generate_spell_item_data.py
+python scripts/generate_combat_data.py
 zensical serve
 ```
 
@@ -31,6 +32,7 @@ pip install zensical
 python scripts/generate_nation_catalog.py
 python scripts/generate_recruitment_data.py
 python scripts/generate_spell_item_data.py
+python scripts/generate_combat_data.py
 zensical serve
 ```
 
@@ -44,8 +46,9 @@ zensical serve
 2. Dom6 Inspector 6.35 snapshotからRecruit / Mage access索引を生成
 3. SpellのSchool / Path / National索引を生成
 4. Magic ItemのSlot / Booster / Research / Resistance索引を生成
-5. Zensicalで静的サイトを構築
-6. GitHub Pagesへ公開
+5. Weapon / Armor / Damage property索引を生成
+6. Zensicalで静的サイトを構築
+7. GitHub Pagesへ公開
 
 ## 記事を書く
 
@@ -100,16 +103,32 @@ docs/data/spells/
 docs/data/items/
 ```
 
+### Weapon / Armor / Damage property
+
+```bash
+python scripts/generate_combat_data.py
+```
+
+生成ページ:
+
+```text
+docs/data/combat/
+```
+
+武器は近接・射撃・AP/AN・属性・特殊効果へ、防具は盾・胴鎧・兜へ分類します。Weapon modifier bitと特殊Damage bitの技術索引も生成します。
+
 生成元はDom6 InspectorのDominions 6.35対応Commitへ固定しています。ダウンロード済みデータは `.cache/dom6inspector/` に保存されます。
 
 ```bash
 # 強制的に再取得
 python scripts/generate_recruitment_data.py --refresh
 python scripts/generate_spell_item_data.py --refresh
+python scripts/generate_combat_data.py --refresh
 
 # Networkを使用せずCacheのみで生成
 python scripts/generate_recruitment_data.py --offline
 python scripts/generate_spell_item_data.py --offline
+python scripts/generate_combat_data.py --offline
 ```
 
 自動生成ページは攻略評価ではなく、現行データを確認するための索引です。戦術、研究順、Pretender、Script、Counterは手書き記事で扱います。
