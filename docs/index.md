@@ -60,7 +60,21 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 
 [データ索引](data/index.md)では、攻略評価と分離して現行vanillaデータを機械的に整理します。
 
-## 国家・Unit
+## Unit総合索引
+
+- [Unit総合索引](data/units/index.md)
+- [全4,091 Unit一覧](data/units/all/index.md)
+- [Pretender chassis](data/units/pretenders.md)
+- [Hero](data/units/heroes.md)
+- [Spell summon](data/units/spell-summons.md)
+- [Magic Site Unit](data/units/magic-sites.md)
+- [Mount](data/units/mounts.md)
+- [Shape relation](data/units/shapes.md)
+- [入手経路未分類Unit](data/units/unclassified.md)
+
+各Unitページでは基本能力、Magic Path、Weapon、Armor、Mount、通常Recruit、Hero、Pretender、Spell、Magic Site、Shapeの確認済み関係を一画面にまとめます。
+
+## 国家・Recruit
 
 - [全103国家のRecruitデータ](data/recruitment/index.md)
 - [全国家Mage access早見表](data/mage-access.md)
@@ -118,6 +132,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [戦闘ルール完全ガイド](basics/combat-rules.md)
 - [両手武器・片手武器・盾](basics/weapons-and-shields.md)
 - [Unit装備・Mountの読み方](data/unit-loadouts.md)
+- [Unit総合索引](data/units/index.md)
 - [装備使用者逆引き](data/equipment-usage/index.md)
 - [国家別装備Profile](data/equipment-usage/nations.md)
 - [命令とBattle Script](basics/orders.md)
@@ -138,6 +153,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Magic Path Boosting](magic/boosting.md)
 - [Communion・Sabbath](magic/communions.md)
 - [Spellデータ索引](data/spells/index.md)
+- [Spell summon Unit](data/units/spell-summons.md)
 
 ## Magic Path
 
@@ -169,6 +185,8 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 # PretenderとStrategic Map
 
 - [Pretender God総論](pretender/index.md)
+- [Pretender chassis索引](data/units/pretenders.md)
+- [Hero索引](data/units/heroes.md)
 - [Scales](pretender/scales.md)
 - [Bless](pretender/bless.md)
 - [Province](systems/province.md)
