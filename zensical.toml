@@ -24,6 +24,7 @@ nav = [
     "data/index.md",
     "data/recruitment/index.md",
     "data/mage-access.md",
+    "data/unit-loadouts.md",
     { "Spellデータ" = [
       "data/spells/index.md",
       { "Research School" = [
