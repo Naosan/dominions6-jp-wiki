@@ -26,11 +26,13 @@ Dominions 6の戦闘は、「兵数」やUnitの総合点だけでは決まり�
 
 1. [戦闘ルール](combat-rules.md)
 2. [両手武器・片手武器・盾](weapons-and-shields.md)
-3. [命令とBattle Script](orders.md)
+3. [Unit装備・Mountの読み方](../data/unit-loadouts.md)
+4. [命令とBattle Script](orders.md)
 
 ## 武器・防具の数値を調べる
 
 - [Combat data索引](../data/combat/index.md)
+- [国家別Recruit・Loadout](../data/recruitment/index.md)
 - [近接武器](../data/combat/weapons/melee.md)
 - [射撃武器](../data/combat/weapons/ranged.md)
 - [AP・AN武器](../data/combat/weapons/ap-an.md)
@@ -39,7 +41,7 @@ Dominions 6の戦闘は、「兵数」やUnitの総合点だけでは決まり�
 - [兜](../data/combat/armor/helmets.md)
 - [Weapon property・Damage type](../data/combat/weapon-properties.md)
 
-自動生成索引はWeapon / Armor recordの事実を示します。UnitのStrength、攻撃回数、Cost、Bless、Buff、Formationを加えた実戦評価は、この章の攻略記事で行います。
+自動生成索引はWeapon / Armor recordの事実を示します。国家別RecruitページではUnitの`wpn1..7`、`armor1..4`、`mountmnr`を結合し、実際の装備構成を確認できます。UnitのStrength、Cost、Bless、Buff、Formationを加えた評価は、この章の攻略記事で行います。
 
 ## Unitを見る順番
 

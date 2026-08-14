@@ -47,6 +47,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [国家選択ガイド](nations/choose-a-nation.md)
 - [国家ページの読み方](nations/how-to-read.md)
 - [国家Recruitデータ](data/recruitment/index.md)
+- [Unit装備・Mountの読み方](data/unit-loadouts.md)
 - [Mage access早見表](data/mage-access.md)
 - [MA Ulm](nations/ma/ulm.md)
 
@@ -62,7 +63,9 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 
 - [全103国家のRecruitデータ](data/recruitment/index.md)
 - [全国家Mage access早見表](data/mage-access.md)
+- [Unit装備・Mountの読み方](data/unit-loadouts.md)
 - Unit ID、基礎能力値、固定Path、Random Path、主要属性
+- Weapon、盾、胴鎧、兜、Mount側の攻撃と防具
 
 ## Spell
 
@@ -103,6 +106,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 
 - [戦闘ルール完全ガイド](basics/combat-rules.md)
 - [両手武器・片手武器・盾](basics/weapons-and-shields.md)
+- [Unit装備・Mountの読み方](data/unit-loadouts.md)
 - [命令とBattle Script](basics/orders.md)
 - [特殊能力](reference/special-abilities.md)
 - [武器データ索引](data/combat/weapons/index.md)

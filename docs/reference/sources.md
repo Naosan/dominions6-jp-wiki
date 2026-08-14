@@ -56,6 +56,31 @@ last_verified: "2026-08-14"
 
 生成物には、Unit ID、基礎能力値、固定Magic Path、Random Path、Sacred・Flying・Stealthyなどの主要タグを掲載します。
 
+### Unit装備・Mount結合
+
+Recruitページでは`BaseU.csv`の次の参照をWeapon・Armor・Unit dataへ結合します。
+
+- `wpn1`～`wpn7`: Weapon record
+- `armor1`～`armor4`: Armor record
+- `mountmnr`: Mount側のUnit record
+
+結合に利用する主な追加ファイル:
+
+- `gamedata/weapons.csv`
+- `gamedata/effects_weapons.csv`
+- `gamedata/effects_info.csv`
+- `gamedata/special_damage_types.csv`
+- `gamedata/attributes_by_weapon.csv`
+- `gamedata/armors.csv`
+- `gamedata/protections_by_armor.csv`
+- `gamedata/attributes_by_armor.csv`
+- `gamedata/attribute_keys.csv`
+
+生成物では、Unit基礎能力とは別に、WeaponのDamage・Attack / Precision・Length / Range・AP / AN・Secondary effect、ArmorのProtection・Parry・Encumbrance、MountのHP・Protection・攻撃・防具を表示します。
+
+!!! note "RiderとMount"
+    Mountは装備品ではなく別Unit recordです。RiderとMountのHP、Protection、Defence、武器、防具を分離して表示します。Dismount後の完全なShape切替やTarget分配は自動表だけでは再構成しません。
+
 ### Spell索引
 
 主に利用するファイル:
@@ -104,10 +129,12 @@ Armor索引では、Protection zoneからInspectorと同じ表示用Body Protect
 
 !!! warning "自動生成データの限界"
     - Unit Costは自動計算、Mount、形態変化、特殊Recruit条件が複雑なため、Recruit索引では表示しません。
+    - Unit loadoutはWeapon / Armor参照を示しますが、最終Damage、二刀流Penalty、攻撃順、Conditional attackを完全には再構成しません。
+    - Mounted combatではRiderとMountのTarget選択、AoE、Dismount後の形態、Barding表示に追加処理があります。
     - Spellの複合効果、特殊Range / AoE、Target制限はゲーム内詳細を優先します。
     - Itemの発動Spell、特殊な装備条件は自動表だけでは完全に表せません。
-    - Weapon recordだけでは装備者のStrength、Ambidextrous、Mount、Bless、Buff、Fatigueを含む最終性能は分かりません。
-    - Armor recordはUnitのNatural Protection、複数装備、Shield Hit、Buffを含みません。
+    - Weapon recordだけでは装備者のStrength、Ambidextrous、Bless、Buff、Fatigueを含む最終性能は分かりません。
+    - Armor recordはUnitのNatural Protection、Shield Hit、Buffを含みません。
     - National / Realm restriction、Event、Hero、Site限定、形態変化は追加確認が必要です。
     - Inspectorは非常に有用ですが、抽出・表示上の不具合があり得ます。最終的な数値・挙動はゲーム内表示と実機テストを優先します。
 
