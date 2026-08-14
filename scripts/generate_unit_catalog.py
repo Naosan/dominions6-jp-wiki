@@ -6,11 +6,12 @@ import argparse
 from pathlib import Path
 
 import unit_catalog_pages
-from unit_catalog_event_integration import load_unit_catalog
-from unit_catalog_event_pages import install_event_pages
-from unit_catalog_event_quality import write_quality_report
 from unit_catalog_generation_pages import install_generation_pages
+from unit_catalog_event_pages import install_event_pages
 from unit_catalog_roles import install_role_resolver
+from unit_catalog_special_integration import load_unit_catalog
+from unit_catalog_special_pages import install_special_pages
+from unit_catalog_special_quality import write_quality_report
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs" / "data" / "units"
@@ -40,6 +41,14 @@ def validate(stats: dict[str, int]) -> None:
         ("event_random_references", 25),
         ("mercenary_companies", 50),
         ("mercenary_relations", 75),
+        ("items_with_unit_relations", 5),
+        ("item_unit_relations", 5),
+        ("item_units", 5),
+        ("spell_random_references", 5),
+        ("special_spell_relations", 5),
+        ("special_unique_pool_entries", 18),
+        ("terrain_pool_entries", 3),
+        ("arena_items", 1),
     )
     for key, minimum in checks:
         if stats.get(key, 0) < minimum:
@@ -65,6 +74,7 @@ def main() -> None:
     install_role_resolver(unit_catalog_pages, data)
     install_generation_pages(unit_catalog_pages, data)
     install_event_pages(unit_catalog_pages, data)
+    install_special_pages(unit_catalog_pages, data)
     stats = unit_catalog_pages.write_unit_catalog(data, OUT)
     write_quality_report(data, OUT, stats)
     validate(stats)
@@ -88,7 +98,27 @@ def main() -> None:
             "unresolved Mercenary target: "
             f"mercenary={mercenary_id} company={company!r} role={role} raw={raw_target}"
         )
+    print(f"Item random-pool references: {len(data['item_random_targets'])}")
+    print(f"unresolved Item Unit references: {len(data['item_unresolved'])}")
+    for item_id, item_name, field, raw_target in data["item_unresolved"]:
+        print(
+            "unresolved Item target: "
+            f"item={item_id} name={item_name!r} field={field} raw={raw_target}"
+        )
+    print(f"Spell random-pool references: {len(data['spell_random_targets'])}")
+    print(f"special Spell summon relations: {len(data['spell_special_relations'])}")
+    print(f"unresolved special Spell pools: {len(data['special_spell_unresolved'])}")
+    for spell_id, spell_name, effect_number, raw_argument in data["special_spell_unresolved"]:
+        print(
+            "unresolved special Spell pool: "
+            f"spell={spell_id} name={spell_name!r} effect={effect_number} raw={raw_argument}"
+        )
     print(f"unresolved spell summon references: {len(data['unresolved_spells'])}")
+    for spell_id, spell_name, effect_number, raw_argument in data["unresolved_spells"]:
+        print(
+            "unresolved standard Spell target: "
+            f"spell={spell_id} name={spell_name!r} effect={effect_number} raw={raw_argument}"
+        )
     print(f"unresolved Magic Site Unit references: {len(data['unresolved_sites'])}")
     print(f"unresolved Shape references: {len(data['unresolved_shapes'])}")
 
