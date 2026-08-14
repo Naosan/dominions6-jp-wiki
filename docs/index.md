@@ -68,11 +68,18 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Hero](data/units/heroes.md)
 - [Spell summon](data/units/spell-summons.md)
 - [Magic Site Unit](data/units/magic-sites.md)
+- [Strategic summon・Freespawn](data/units/strategic-spawns.md)
+- [Battle summon](data/units/battle-spawns.md)
+- [Unit条件Recruit](data/units/recruit-unlocks.md)
+- [変換・復活・Raise](data/units/conversions.md)
+- [Reanimation・召喚Bonus](data/units/reanimation.md)
+- [国家Freespawn・Reanimation](data/units/nation-generation.md)
+- [Random summon・未解決Target](data/units/random-summons.md)
 - [Mount](data/units/mounts.md)
 - [Shape relation](data/units/shapes.md)
 - [入手経路未分類Unit](data/units/unclassified.md)
 
-各Unitページでは基本能力、Magic Path、Weapon、Armor、Mount、通常Recruit、Hero、Pretender、Spell、Magic Site、Shapeの確認済み関係を一画面にまとめます。
+各Unitページでは基本能力、Magic Path、Weapon、Armor、Mount、通常Recruit、Hero、Pretender、Spell、Magic Site、Unit自身の召喚・変換能力、国家生成能力、Shapeの確認済み関係を一画面にまとめます。
 
 ## 国家・Recruit
 
@@ -133,6 +140,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [両手武器・片手武器・盾](basics/weapons-and-shields.md)
 - [Unit装備・Mountの読み方](data/unit-loadouts.md)
 - [Unit総合索引](data/units/index.md)
+- [Battle summon](data/units/battle-spawns.md)
 - [装備使用者逆引き](data/equipment-usage/index.md)
 - [国家別装備Profile](data/equipment-usage/nations.md)
 - [命令とBattle Script](basics/orders.md)
@@ -154,6 +162,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Communion・Sabbath](magic/communions.md)
 - [Spellデータ索引](data/spells/index.md)
 - [Spell summon Unit](data/units/spell-summons.md)
+- [Reanimation・召喚Bonus](data/units/reanimation.md)
 
 ## Magic Path
 
@@ -187,6 +196,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Pretender God総論](pretender/index.md)
 - [Pretender chassis索引](data/units/pretenders.md)
 - [Hero索引](data/units/heroes.md)
+- [国家Freespawn・Reanimation](data/units/nation-generation.md)
 - [Scales](pretender/scales.md)
 - [Bless](pretender/bless.md)
 - [Province](systems/province.md)
