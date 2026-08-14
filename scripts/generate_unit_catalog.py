@@ -37,6 +37,7 @@ def validate(stats: dict[str, int]) -> None:
         ("event_spawn_relations", 25),
         ("event_transform_relations", 5),
         ("event_combat_relations", 5),
+        ("event_random_references", 25),
         ("mercenary_companies", 50),
         ("mercenary_relations", 75),
     )
@@ -49,6 +50,9 @@ def validate(stats: dict[str, int]) -> None:
         raise ValueError(
             f"Unit page count mismatch: pages={stats['unit_pages']} records={stats['units']}"
         )
+    for key in ("unresolved_event_targets", "unresolved_mercenary_targets"):
+        if stats.get(key, 0) != 0:
+            raise ValueError(f"Unit source integrity failure: {key}={stats[key]}")
 
 
 def main() -> None:
