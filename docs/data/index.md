@@ -26,6 +26,11 @@ last_verified: "2026-08-14"
 - [Hero](units/heroes.md)
 - [Spell summon](units/spell-summons.md)
 - [Magic Site Unit](units/magic-sites.md)
+- [Event Unit・Commander生成](units/event-spawns.md)
+- [Event変身・強制変身](units/event-transforms.md)
+- [Event暗殺・戦闘参加Unit](units/event-combat.md)
+- [Event Random pool・未解決Target](units/event-random.md)
+- [Mercenary Unit](units/mercenaries.md)
 - [Strategic summon・Freespawn](units/strategic-spawns.md)
 - [Battle summon](units/battle-spawns.md)
 - [Unit条件Recruit](units/recruit-unlocks.md)
@@ -38,9 +43,13 @@ last_verified: "2026-08-14"
 - [入手経路未分類Unit](units/unclassified.md)
 - [Unit索引データ品質](units/data-quality.md)
 
-BaseUの全4,091 Unit recordを個別ページ化し、通常Recruit、Hero、Pretender、固定Spell summon、Magic Site、Unit自身の召喚・変換能力、国家Freespawn・Reanimation能力、Mount、Shapeの関係を結合します。
+BaseUの全4,091 Unit recordを個別ページ化し、通常Recruit、Hero、Pretender、固定Spell summon、Magic Site、Event、Mercenary、Unit自身の召喚・変換能力、国家Freespawn・Reanimation能力、Mount、Shapeの関係を結合します。
 
 `domsummon`、`makemonster`、`summon`、`batstartsum`、`battlesum`など、固定Unit IDを参照する生成能力は生成先Unitへ逆引きします。負のMonster NumberやMontagはRandom poolであり、特定Unitへ推測で結び付けません。
+
+Event索引では`nation -1`をRandom enemy、`nation -2`をProvince ownerとして保持し、`tempunits 1`を一時Unitとして区別します。Event戦闘参加者を「プレイヤーが恒久取得するUnit」とは扱いません。
+
+Mercenary索引では、傭兵団のCommander、Troop、初期人数、Era mask、最低入札額、経験値、補充率、開始Itemを確認できます。
 
 ## 装備使用者逆引き
 
@@ -105,9 +114,11 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 ### 自動生成データ
 
 - Nation IDとRecruit roster
-- BaseUの全Unit recordと確認済み入手経路
+- BaseUの全Unit recordと確認済み入手・出現経路
 - Unit / Commanderの基本値
-- Hero、Pretender、Spell summon、Magic Site、Mount、Shape関係
+- Hero、Pretender、Spell summon、Magic Site、Event、Mercenary、Mount、Shape関係
+- EventのUnit所有者、Temporary指定、発生条件、Rarity
+- MercenaryのCommander、Troop、人数、Era、入札・補充情報
 - Unit自身のDominion summon、毎月召喚、Battle summon、Recruit unlock、固定変換先
 - Reanimation、Oni attraction、召喚数BonusなどTargetを直接指定しない能力
 - 国家属性が明示するFreespawn、Guardian Spirit、Reanimation能力
@@ -124,6 +135,7 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 
 - どの兵、召喚、Hero、Pretenderを主力にするか
 - Freespawnを国家経済へどう組み込むか
+- EventやMercenaryを戦略上どの程度期待してよいか
 - Expansion時の必要人数
 - Pretender設計
 - Research Breakpoint
@@ -138,8 +150,10 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 
 - 国家の追加・削除・改名
 - Recruit roster、Weapon / Armor / Mount参照、Magic Path
-- Hero、Pretender、Spell summon、Magic Site、Shapeの対応
+- Hero、Pretender、Spell summon、Magic Site、Event、Mercenary、Shapeの対応
 - Unit / Nation generation fieldとRandom pool参照
+- Event effect command、owner、Temporary指定、Requirement
+- Mercenary roster、Era mask、人数・入札・補充情報
 - Equipment使用者とProfile分類
 - SpellのSchool、Research level、Path、Cost
 - ItemのConstruction、Path、Cost、効果
@@ -149,4 +163,4 @@ Weapon / Armor recordを攻略記事から分離し、Damage、Attack / Precisio
 - 入手経路未分類件数と未解決参照
 
 !!! warning "抽出データの限界"
-    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。Event、Wish、Random summon table、hard-coded Reanimation結果、複合Spell、特殊Range / AoE、Itemの発動効果、Mounted combat、最終Forge Costはゲーム内表示と実機テストを優先します。
+    Inspectorの抽出値とゲーム内最終表示が異なる可能性があります。Wish、Random summon table、hard-coded Reanimation結果、Adventure、Scenario、複合Event chain、複合Spell、特殊Range / AoE、Itemの発動効果、Mounted combat、最終Forge Costはゲーム内表示と実機テストを優先します。
