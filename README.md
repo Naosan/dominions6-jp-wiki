@@ -56,8 +56,9 @@ zensical serve
 8. Weapon / Armor / Damage property索引を生成
 9. BaseUの全4,091 Unitページと入手経路索引を生成
 10. Hero、Pretender、Spell summon、Magic Site、Mount、Shapeの関係を生成
-11. Zensicalで静的サイトを構築
-12. GitHub Pagesへ公開
+11. Unit / NationのStrategic summon、Battle summon、Recruit unlock、Conversion、Reanimation、Freespawnを生成
+12. Zensicalで静的サイトを構築
+13. GitHub Pagesへ公開
 
 ## 記事を書く
 
@@ -80,11 +81,7 @@ docs/
 python scripts/generate_nation_catalog.py
 ```
 
-入力:
-
-```text
-data/nations.tsv
-```
+入力: `data/nations.tsv`
 
 ### Recruit / Mage access / Unit loadout
 
@@ -101,38 +98,13 @@ docs/data/mage-access.md
 
 国家別Recruitページでは、`BaseU.csv`の`wpn1..7`、`armor1..4`、`mountmnr`をWeapon / Armor / Mount recordへ結合します。
 
-表示する主な内容:
-
-- Unit基礎能力
-- 固定Magic PathとRandom Path
-- WeaponのDamage、Attack / Precision、Length / Range、Damage type、AP / AN
-- Shield Protection、Parry、Body / Head Protection、Encumbrance
-- Riderとは別のMount HP・Protection・攻撃・防具
-- 盾持ち、両手、射撃、Charge等の簡易Profile
-
-自動表は最終Damage、二刀流処理、Shape Change、Gold Costを完全には再構成しません。戦術評価は手書き攻略で扱います。
-
 ### 装備使用者逆引き
 
 ```bash
 python scripts/generate_equipment_usage_data.py --offline
 ```
 
-`generate_recruitment_data.py`が取得した固定スナップショットを再利用し、次を生成します。
-
-```text
-docs/data/equipment-usage/
-├ index.md
-├ nations.md
-├ weapons/
-├ armor/
-└ profiles/
-```
-
-- 全Weapon / Armor recordの個別使用者ページ
-- Recruit本体とMountの使用を分離した逆引き
-- 国家別の装備Profile比較
-- 盾、両手、射撃、AP、AN、Charge、Mountedの横断一覧
+生成先: `docs/data/equipment-usage/`
 
 Hero、Event、Freespawn、召喚、Site限定UnitはこのRecruit逆引きの対象外です。これらはUnit総合索引で別レイヤーとして扱います。
 
@@ -142,7 +114,7 @@ Hero、Event、Freespawn、召喚、Site限定UnitはこのRecruit逆引きの�
 python scripts/generate_spell_item_data.py
 ```
 
-生成ページ:
+生成先:
 
 ```text
 docs/data/spells/
@@ -155,23 +127,15 @@ docs/data/items/
 python scripts/generate_combat_data.py
 ```
 
-生成ページ:
-
-```text
-docs/data/combat/
-```
-
-武器は近接・射撃・AP/AN・属性・特殊効果へ、防具は盾・胴鎧・兜へ分類します。Weapon modifier bitと特殊Damage bitの技術索引も生成します。
+生成先: `docs/data/combat/`
 
 ### Unit総合索引
-
-初回はPretender、Hero、Magic Site等の追加CSVを取得するためNetworkを使用します。
 
 ```bash
 python scripts/generate_unit_catalog.py
 ```
 
-生成ページ:
+生成先:
 
 ```text
 docs/data/units/
@@ -182,6 +146,13 @@ docs/data/units/
 ├ heroes.md
 ├ spell-summons.md
 ├ magic-sites.md
+├ strategic-spawns.md
+├ battle-spawns.md
+├ recruit-unlocks.md
+├ conversions.md
+├ reanimation.md
+├ nation-generation.md
+├ random-summons.md
 ├ mounts.md
 ├ shapes.md
 ├ unclassified.md
@@ -195,10 +166,17 @@ Unit総合索引はBaseUの全4,091 recordを個別ページ化し、次の明�
 - `pretender_types_by_nation.csv`
 - Research可能Spellの固定Unit summon effect
 - `MagicSites.csv`のUnit参照
+- `domsummon`、`makemonster`、`summon`、`autosum`
+- `batstartsum*`、`battlesum*`
+- `ownsmonrec`、`monpresentrec`
+- `mummify`、`twiceborn`、`lich`、`animatemnr`、`raiseshape`
+- Nation attributeが明示するGuardian Spirit、Freespawn、Reanimation
 - `mountmnr`
-- BaseUの直接Shape参照
+- BaseUのShape参照とXP / HP threshold型の形態変化
 
-Event、Freespawn、Random summon pool、Wish、Transformation等を安全に対応付けられない場合は、推測せず`unclassified.md`と`data-quality.md`へ残します。
+負のMonster NumberとMontagはRandom poolとして表示し、固定Unitへは結び付けません。Reanimation結果などhard-codedな生成先を安全に対応付けられない場合も、能力Flagと品質レポートへ残します。
+
+## データ更新
 
 生成元はDom6 InspectorのDominions 6.35対応Commitへ固定しています。ダウンロード済みデータは `.cache/dom6inspector/` に保存されます。
 
