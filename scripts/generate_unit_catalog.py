@@ -12,6 +12,7 @@ from unit_catalog_candidate_quality import write_quality_report
 from unit_catalog_event_pages import install_event_pages
 from unit_catalog_generation_pages import install_generation_pages
 from unit_catalog_roles import install_role_resolver
+from unit_catalog_site_links import install_site_links
 from unit_catalog_special_integration import load_unit_catalog
 from unit_catalog_special_pages import install_special_pages
 
@@ -123,6 +124,7 @@ def main() -> None:
     install_event_pages(unit_catalog_pages, data)
     install_special_pages(unit_catalog_pages, data)
     install_candidate_pages(unit_catalog_pages, data)
+    install_site_links(unit_catalog_pages)
     stats = unit_catalog_pages.write_unit_catalog(data, OUT)
     patch_generated_indexes(stats)
     write_quality_report(data, OUT, stats)
@@ -160,7 +162,7 @@ def main() -> None:
     for item_id, item_name, field, raw_target in data["item_unresolved"]:
         print(
             "unresolved Item target: "
-            f"item={item_id} name={item_name!r} field={field} raw={raw_target}"
+            f"item={item_id} name={item_name!r} field={field} raw={raw_target!r}"
         )
     print(f"Spell random-pool references: {len(data['spell_random_targets'])}")
     print(f"special Spell summon relations: {len(data['spell_special_relations'])}")
