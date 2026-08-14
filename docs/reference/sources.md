@@ -28,6 +28,9 @@ last_verified: "2026-08-14"
 - Inspectorのvanilla CSV data
 - ゲーム内Unit / Spell / Item popup
 
+自動生成索引は、Dominions 6.35対応のDom6 Inspector commit
+`cfac4311bc0b58053b8dead7bffbc036ba9bd5dc` を固定データ源として生成します。
+
 ### 国家カタログ
 
 国家名、Epithet、Nation ID、Eraは、Mod Inspectorの `gamedata/nations.csv` と照合し、リポジトリ内の `data/nations.tsv` にスナップショットとして保存します。
@@ -41,9 +44,6 @@ last_verified: "2026-08-14"
 
 ### Recruit・Commander・Mage索引
 
-Recruit索引は、Dominions 6.35対応のDom6 Inspector commit
-`cfac4311bc0b58053b8dead7bffbc036ba9bd5dc` を固定データ源として生成します。
-
 主に利用するファイル:
 
 - `gamedata/BaseU.csv`
@@ -56,13 +56,55 @@ Recruit索引は、Dominions 6.35対応のDom6 Inspector commit
 
 生成物には、Unit ID、基礎能力値、固定Magic Path、Random Path、Sacred・Flying・Stealthyなどの主要タグを掲載します。
 
-!!! warning "自動生成データの限界"
-    - Costは自動計算、Mount、形態変化、特殊Recruit条件などが複雑なため、現段階の索引では表示しません。
-    - `Fort`、`Capital-only`、`Foreign / Terrain`、`Coast`は抽出データの分類に従いますが、国家固有イベントや特殊Site Recruitは別途確認が必要です。
-    - Random Pathは抽出されたchance / repeats / level / maskを読みやすい表記へ変換しています。最終確認はゲーム内Nation Overviewを優先します。
+### Spell索引
 
-!!! warning "抽出データの扱い"
-    Inspectorは非常に有用ですが、抽出・表示上の不具合があり得ます。最終的な数値・挙動はゲーム内表示と実機テストを優先します。
+主に利用するファイル:
+
+- `gamedata/spells.csv`
+- `gamedata/effects_spells.csv`
+- `gamedata/attributes_by_spell.csv`
+
+生成物には次を掲載します。
+
+- Spell ID
+- Research School / Level
+- 要求Magic Path
+- Combat / Ritual
+- Gem / Blood Slave cost
+- Combat Fatigue
+- Range / AoE
+- 主要Effect分類
+- National / Realm restriction
+
+Range、AoE、Fatigueは抽出上の数式を読みやすく整形したものです。複合Effect、特殊Target、Caster level依存、Battlefield条件は表だけで完全に表現できない場合があります。
+
+### Magic Item索引
+
+主に利用するファイル:
+
+- `gamedata/BaseI.csv`
+- `gamedata/weapons.csv`
+- `gamedata/armors.csv`
+
+生成物には次を掲載します。
+
+- Item IDとSlot / Type
+- Construction level
+- Forge要求Path
+- Forge Bonus適用前の基礎Gem Cost
+- Magic Path Booster
+- 参照武器・防具の基本値
+- Resistance、Research、Reinvigoration、Leadership等の主要能力
+- National restriction
+
+Gem CostはInspector本体と同じ基礎Forge Cost表とItem固有modifierを使います。実際の消費量はForge Bonus、Dwarven Hammer、国家割引などで変わります。
+
+!!! warning "自動生成データの限界"
+    - Unit Costは自動計算、Mount、形態変化、特殊Recruit条件が複雑なため、Recruit索引では表示しません。
+    - Spellの複合効果、特殊Range / AoE、Target制限はゲーム内詳細を優先します。
+    - Itemの武器Damage Type、発動Spell、特殊な装備条件は自動表だけでは完全に表せません。
+    - National / Realm restriction、Event、Hero、Site限定、形態変化は追加確認が必要です。
+    - Inspectorは非常に有用ですが、抽出・表示上の不具合があり得ます。最終的な数値・挙動はゲーム内表示と実機テストを優先します。
 
 ## Community資料
 
