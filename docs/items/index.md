@@ -1,24 +1,333 @@
+---
+title: Magic Item
+status: expanding
+verified_version: "6.35"
+last_verified: "2026-08-14"
+---
+
 # Magic Item
 
-Magic Itemの一覧・用途・攻略上の評価を整理します。
+Magic Itemは、Commander一体を強くする装備であると同時に、**Magic Path・Research・Gem economy・Army counterを接続する技術ツリー**です。
 
-## 分類予定
+Itemを評価するときは、効果だけでなく次を見ます。
 
-- 片手武器
-- 両手武器
-- 盾
-- Armor
-- Helm
-- Boots
-- Miscellaneous
-- Artifact
-- Magic Path Booster
-- Research Item
-- Resistance Item
-- Thug / Supercombatant向け装備
+- Construction level
+- Forge要求Path
+- Gem cost
+- Forge Bonus / discount
+- 装備Slot
+- Carrierの素Stats
+- 何Turn使えば投資を回収するか
+- Carrier死亡時の喪失Risk
+- そのItemで新しく何が可能になるか
 
-## 攻略上の見方
+---
 
-アイテムは単体性能だけでなく、**Construction到達時期、必要Path、Gem cost、Forge Bonus、装備させるCommanderの素の能力**まで含めて評価します。
+# 目的別ページ
 
-特にBoosterは「強い装備」というより、**新しいSpell・召喚・鍛造へ到達するための技術ツリー**として扱います。
+- [Magic Path Booster](boosters.md)
+- [Research Item](research-items.md)
+- [Resistance・Utility Item](resistance-items.md)
+- [Thug / Supercombatant装備](thug-equipment.md)
+
+---
+
+# 装備Slot
+
+## One-handed Weapon
+
+片手武器です。Shield、二本目のWeapon、Extra Arm装備と組み合わせられます。
+
+主な用途：
+
+- Magic Weaponの付与
+- Armor Piercing / Armor Negating
+- Life Drain
+- Fire / Frost / Shock AoE
+- Armor破壊
+- Anti-undead / Anti-demon
+- MR / Soul attack
+
+## Two-handed Weapon
+
+両手を占有します。
+
+高Damage、長武器、強力な特殊効果を得やすい代わりにShieldを失います。
+
+CarrierのStrength、Attack、素のProtectionを確認します。
+
+## Shield
+
+Parry、Shield Protection、射撃防御を与えます。
+
+重いShieldはDefence・Encumbranceへ不利を与える場合があります。
+
+## Armor
+
+Body ProtectionとEncumbranceを決めます。
+
+Mageへ重装Armorを着せるとSpellcasting Encumbranceで早く気絶する場合があります。
+
+## Helmet
+
+Head Protectionを補います。
+
+良いBody Armorだけを装備しても、Head Hitで倒される場合があります。
+
+## Boots
+
+- Path Booster
+- Strength
+- Quickness
+- Flying
+- Reinvigoration
+- Resistance
+- Strategic movement
+
+など重要Itemが競合するSlotです。
+
+## Miscellaneous
+
+Booster、Resistance、Regeneration、Reinvigoration、Luck、MR、Leadership等を持つItemが集まります。
+
+CommanderごとのMisc slot数を確認します。
+
+## Extra Slot / Mount / Special
+
+多腕、Mount、特殊Chassisは通常と異なるSlot構成を持ちます。Itemを作る前に装備可能か確認します。
+
+---
+
+# Forgeの基本
+
+## Laboratory
+
+Magic ItemはLaboratoryでForgeします。
+
+ForgeするMageは、そのTurnにResearch、Ritual、移動を行えません。
+
+## 要求Path
+
+通常、Itemが要求するPathをMageが持つ必要があります。
+
+- 素Path
+- 装備Booster
+- Empowerment
+
+は利用できますが、戦闘中だけのPath boostやGem boostはForgeへ使えません。
+
+## Gem cost
+
+ItemのPathに対応するGemを使います。
+
+複合Path Itemは複数種類のGemを要求する場合があります。
+
+## Forge Bonus
+
+国家能力、Mage能力、Dwarven Hammer等でGem costを減らせます。
+
+ただしdiscount Item自体にもGemとForge turnが必要です。何個作れば回収できるか計算します。
+
+---
+
+# Itemの四つの価値
+
+## 1. 新しいPathへ届く
+
+Boosterから高級Spell、Summon、Global、次のBoosterへ進みます。
+
+これは戦闘Itemより国家全体への影響が大きい場合があります。
+
+## 2. Researchを増やす
+
+Research BoosterはMage turnあたりの研究量を増やし、将来のBreakpointを早めます。
+
+## 3. Counterを作る
+
+Enemy Shock、Poison、Soul Slay、Ethereal、Regeneration等へ必要なItemを少数だけ作ります。
+
+## 4. Commanderへ任務を与える
+
+普通のCommanderを、
+
+- Raider
+- Anti-Thug
+- Siege breaker
+- Assassin
+- Battlefield caster
+- Gem carrier
+- Scout / Teleporter
+
+へ変えます。
+
+---
+
+# Itemを大量生産する前の質問
+
+1. 誰へ装備させるか
+2. 何に勝てるようになるか
+3. Itemなしでは何に負けるか
+4. 同じGemでBattle Spellを使う方が強くないか
+5. Carrierは何戦生き残る見込みか
+6. 敵に奪われた場合の損失は何か
+7. Slot競合はないか
+8. Constructionへ寄り道するResearch costを回収できるか
+
+---
+
+# 装備セットの考え方
+
+Thug装備は「空Slotを全部埋める」作業ではありません。
+
+次の役割を必要な分だけ揃えます。
+
+## Offense
+
+- Magic Weapon
+- 命中
+- Damage
+- AoE
+- Armor counter
+
+## Defence
+
+- Protection
+- Shield
+- Defence
+- Mistform / Luck / Ethereal
+- Elemental Resistance
+- MR
+
+## Sustain
+
+- Regeneration
+- Reinvigoration
+- Life Drain
+- Recuperation
+
+## Mobility
+
+- Flying
+- Teleport
+- Strategic movement
+- Amphibious / Water Breathing
+
+## Utility
+
+- Leadership
+- Supply
+- Patrol
+- Siege
+- Stealth
+- Scout
+
+Carrierが元から持つ役割はItemで重複させず、欠けている部分だけ補います。
+
+---
+
+# ItemとBattlefield Spellの比較
+
+## Itemが向く場合
+
+- 同じCommanderが何度も使う
+- Ritual / Forge Pathを上げる
+- 毎戦必要なResistance
+- 少数の重要Casterを守る
+- Raiderが複数Provinceを取る
+
+## Spellが向く場合
+
+- Army全体へ作用する
+- 一戦だけ必要
+- Itemを全員へ配るGemがない
+- Casterを守れる
+- Slotを空けたい
+
+例：Shock Resistance Itemを前衛100人へ配ることはできません。Army-wide Wardを使い、Casterなど少数だけItemで補います。
+
+---
+
+# Item loss
+
+Commanderが死亡・Rout・暗殺された場合、Itemは失われるか敵に奪われる可能性があります。
+
+### Riskを下げる
+
+- Rare Booster carrierを前線へ出さない
+- Itemを一人へ集中しすぎない
+- Retreat先を確保
+- Soul Slay / Magic Duel / AN対策
+- Gem carrierとThugを分ける
+- 戦闘後に不要ItemをLabへ戻す
+
+---
+
+# Artifact
+
+ArtifactはUnique Itemです。
+
+- 世界に一つだけ
+- 高いConstruction / Path要求
+- 特殊なGlobal・Summon・Commander能力
+- Enemyに奪われるRisk
+
+を持ちます。
+
+「作れるから作る」のではなく、そのArtifactがゲーム終了までに何を生むかを評価します。
+
+---
+
+# 国家攻略でのItem記述形式
+
+| 優先 | Item | 目的 | Carrier | 敵 / 戦況 | 備考 |
+|---|---|---|---|---|---|
+| S | Booster | Path access | Rare Mage | 常時 | 国家技術基盤 |
+| A | Resistance | Counter | Battle Mage | 特定Enemy | 必要数のみ |
+| B | Weapon | Raider | Commander | PD / Thug | 損失Risk |
+
+Itemを一律Tier化せず、国家・Carrier・敵との組み合わせで評価します。
+
+---
+
+# よくある失敗
+
+## Item欄を全部埋める
+
+Gem costが増え、HPの低い人間Commanderへ過剰投資します。
+
+## 武器だけ強くする
+
+Attack、MR、Resistance、Fatigue不足で一度も攻撃できず死にます。
+
+## 防具だけ重ねる
+
+AN、Poison、MR attack、Fatigueに負けます。
+
+## Boosterを戦場へ持ち出す
+
+国家唯一のPath accessとItemを同時に失います。
+
+## Research Itemを前線Fortへ置く
+
+Raidで研究者とItemをまとめて失います。
+
+## 古いItem表を使う
+
+Dom6ではConstruction level、Path、Glamour移行等が変わっています。ゲーム内表示を優先します。
+
+---
+
+## 関連ページ
+
+- [Magic Path Booster](boosters.md)
+- [Research Item](research-items.md)
+- [Resistance・Utility Item](resistance-items.md)
+- [Thug / SC装備](thug-equipment.md)
+- [Magic Path Boosting](../magic/boosting.md)
+- [Gem](../magic/gems.md)
+- [両手武器・片手武器・盾](../basics/weapons-and-shields.md)
+
+## 参照先
+
+- [Dominions 6 Manual](https://www.illwinter.com/dom6/dom6manual.pdf)
+- [Dominions 6 Mod Inspector](https://larzm42.github.io/dom6inspector/)
