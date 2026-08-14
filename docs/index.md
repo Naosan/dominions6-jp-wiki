@@ -58,12 +58,32 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 
 [データ索引](data/index.md)では、攻略評価と分離して現行vanillaデータを機械的に整理します。
 
+## 国家・Unit
+
 - [全103国家のRecruitデータ](data/recruitment/index.md)
 - [全国家Mage access早見表](data/mage-access.md)
 - Unit ID、基礎能力値、固定Path、Random Path、主要属性
 
+## Spell
+
+- [Spellデータ索引](data/spells/index.md)
+- Research School別Spell一覧
+- Magic Path別Spell一覧
+- Combat / Ritual、要求Path、Gem Cost、Fatigue、Range、AoE
+- [National / Realm restricted Spell](data/spells/national.md)
+
+## Magic Item
+
+- [Magic Itemデータ索引](data/items/index.md)
+- Slot / Type別一覧
+- [Magic Path Booster](data/items/boosters.md)
+- [Research Item](data/items/research.md)
+- [Resistance / MR Item](data/items/resistance.md)
+- [Utility Item](data/items/utility.md)
+- [Unforgeable / Artifact](data/items/unforgeable.md)
+
 !!! note "データと攻略"
-    自動生成データは「何を雇えるか」という事実確認の土台です。「何を主力にするか」「いつ攻めるか」は国家攻略記事で扱います。
+    自動生成データは「何が存在し、どの条件で使えるか」という事実確認の土台です。「何を主力にするか」「いつ研究するか」「誰へ装備させるか」は攻略記事で扱います。
 
 ---
 
@@ -85,6 +105,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [GemとBlood Slave](magic/gems.md)
 - [Magic Path Boosting](magic/boosting.md)
 - [Communion・Sabbath](magic/communions.md)
+- [Spellデータ索引](data/spells/index.md)
 
 ## Magic Path
 
@@ -105,6 +126,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 # Magic Itemを調べる
 
 - [Magic Item総論](items/index.md)
+- [Magic Itemデータ索引](data/items/index.md)
 - [Magic Path Booster](items/boosters.md)
 - [Research Item](items/research-items.md)
 - [Resistance・Utility Item](items/resistance-items.md)

@@ -103,4 +103,4 @@ Armyを「強いUnitの塊」ではなく、**複数の役割が連動する仕�
 - Friendly Fire
 - Gem消費
 
-負けた原因が分からない場合は、[戦闘ルールのReplay分析手順](combat-rules.md#battle-replayの分析手順)へ戻ってください。
+負けた原因が分からない場合は、[戦闘ルールのBattle Replay分析手順](combat-rules.md)を参照してください。
