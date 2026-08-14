@@ -22,6 +22,7 @@ python scripts/generate_recruitment_data.py
 python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
+python scripts/generate_unit_catalog.py --offline
 zensical serve
 ```
 
@@ -35,6 +36,7 @@ python scripts/generate_recruitment_data.py
 python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
+python scripts/generate_unit_catalog.py --offline
 zensical serve
 ```
 
@@ -52,8 +54,10 @@ zensical serve
 6. SpellのSchool / Path / National索引を生成
 7. Magic ItemのSlot / Booster / Research / Resistance索引を生成
 8. Weapon / Armor / Damage property索引を生成
-9. Zensicalで静的サイトを構築
-10. GitHub Pagesへ公開
+9. BaseUの全4,091 Unitページと入手経路索引を生成
+10. Hero、Pretender、Spell summon、Magic Site、Mount、Shapeの関係を生成
+11. Zensicalで静的サイトを構築
+12. GitHub Pagesへ公開
 
 ## 記事を書く
 
@@ -130,7 +134,7 @@ docs/data/equipment-usage/
 - 国家別の装備Profile比較
 - 盾、両手、射撃、AP、AN、Charge、Mountedの横断一覧
 
-Hero、Event、Freespawn、召喚、Site限定Unitは対象外です。
+Hero、Event、Freespawn、召喚、Site限定UnitはこのRecruit逆引きの対象外です。これらはUnit総合索引で別レイヤーとして扱います。
 
 ### Spell / Magic Item
 
@@ -159,6 +163,41 @@ docs/data/combat/
 
 武器は近接・射撃・AP/AN・属性・特殊効果へ、防具は盾・胴鎧・兜へ分類します。Weapon modifier bitと特殊Damage bitの技術索引も生成します。
 
+### Unit総合索引
+
+```bash
+python scripts/generate_unit_catalog.py --offline
+```
+
+生成ページ:
+
+```text
+docs/data/units/
+├ index.md
+├ all/
+├ by-id/
+├ pretenders.md
+├ heroes.md
+├ spell-summons.md
+├ magic-sites.md
+├ mounts.md
+├ shapes.md
+├ unclassified.md
+└ data-quality.md
+```
+
+Unit総合索引はBaseUの全4,091 recordを個別ページ化し、次の明示的な参照を結合します。
+
+- 国家Recruit mapping
+- `attributes_by_nation.csv`の`hero1..6` / `multihero1..2`
+- `pretender_types_by_nation.csv`
+- Research可能Spellの固定Unit summon effect
+- `MagicSites.csv`のUnit参照
+- `mountmnr`
+- BaseUの直接Shape参照
+
+Event、Freespawn、Random summon pool、Wish、Transformation等を安全に対応付けられない場合は、推測せず`unclassified.md`と`data-quality.md`へ残します。
+
 生成元はDom6 InspectorのDominions 6.35対応Commitへ固定しています。ダウンロード済みデータは `.cache/dom6inspector/` に保存されます。
 
 ```bash
@@ -167,12 +206,14 @@ python scripts/generate_recruitment_data.py --refresh
 python scripts/generate_equipment_usage_data.py --refresh
 python scripts/generate_spell_item_data.py --refresh
 python scripts/generate_combat_data.py --refresh
+python scripts/generate_unit_catalog.py --refresh
 
 # Networkを使用せずCacheのみで生成
 python scripts/generate_recruitment_data.py --offline
 python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py --offline
 python scripts/generate_combat_data.py --offline
+python scripts/generate_unit_catalog.py --offline
 ```
 
 自動生成ページは攻略評価ではなく、現行データを確認するための索引です。戦術、研究順、Pretender、Script、Counterは手書き記事で扱います。
