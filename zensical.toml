@@ -70,6 +70,26 @@ nav = [
       "data/items/utility.md",
       "data/items/unforgeable.md",
     ] },
+    { "Combat data" = [
+      "data/combat/index.md",
+      { "武器" = [
+        "data/combat/weapons/index.md",
+        "data/combat/weapons/melee.md",
+        "data/combat/weapons/ranged.md",
+        "data/combat/weapons/ap-an.md",
+        "data/combat/weapons/elemental.md",
+        "data/combat/weapons/special.md",
+      ] },
+      { "防具" = [
+        "data/combat/armor/index.md",
+        "data/combat/armor/shields.md",
+        "data/combat/armor/body-armor.md",
+        "data/combat/armor/helmets.md",
+        "data/combat/armor/misc-armor.md",
+      ] },
+      "data/combat/weapon-properties.md",
+      "data/combat/special-damage.md",
+    ] },
   ] },
   { "魔法" = [
     "magic/index.md",
