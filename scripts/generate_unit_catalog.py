@@ -6,12 +6,13 @@ import argparse
 from pathlib import Path
 
 import unit_catalog_pages
-from unit_catalog_generation_pages import install_generation_pages
+from unit_catalog_candidate_pages import install_candidate_pages
+from unit_catalog_candidate_quality import write_quality_report
 from unit_catalog_event_pages import install_event_pages
+from unit_catalog_generation_pages import install_generation_pages
 from unit_catalog_roles import install_role_resolver
 from unit_catalog_special_integration import load_unit_catalog
 from unit_catalog_special_pages import install_special_pages
-from unit_catalog_special_quality import write_quality_report
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs" / "data" / "units"
@@ -46,8 +47,10 @@ def validate(stats: dict[str, int]) -> None:
         ("item_units", 5),
         ("spell_random_references", 5),
         ("special_spell_relations", 5),
-        ("special_unique_pool_entries", 18),
+        ("special_unique_pool_entries", 20),
         ("terrain_pool_entries", 3),
+        ("spell_candidate_relations", 25),
+        ("special_candidate_units", 25),
         ("arena_items", 1),
     )
     for key, minimum in checks:
@@ -83,7 +86,7 @@ def patch_generated_indexes(stats: dict[str, int]) -> None:
         "- [National / Realm restricted Spell](national.md)",
         [
             f"- [Spell Random summon pool](../units/spell-random-summons.md) — {stats['spell_random_references']} references",
-            f"- [Wish・Unique・Terrain特殊召喚](../units/special-summons.md) — {stats['special_spell_relations']} Spell relations",
+            f"- [Wish・Unique・Terrain特殊召喚](../units/special-summons.md) — {stats['special_spell_relations']} Spell relations / {stats['spell_candidate_relations']} candidate links",
         ],
     )
     _insert_after(
@@ -108,6 +111,7 @@ def main() -> None:
     install_generation_pages(unit_catalog_pages, data)
     install_event_pages(unit_catalog_pages, data)
     install_special_pages(unit_catalog_pages, data)
+    install_candidate_pages(unit_catalog_pages, data)
     stats = unit_catalog_pages.write_unit_catalog(data, OUT)
     patch_generated_indexes(stats)
     write_quality_report(data, OUT, stats)
@@ -141,11 +145,18 @@ def main() -> None:
         )
     print(f"Spell random-pool references: {len(data['spell_random_targets'])}")
     print(f"special Spell summon relations: {len(data['spell_special_relations'])}")
+    print(f"explicit special Spell candidate relations: {len(data['spell_candidate_relations'])}")
     print(f"unresolved special Spell pools: {len(data['special_spell_unresolved'])}")
     for spell_id, spell_name, effect_number, raw_argument in data["special_spell_unresolved"]:
         print(
             "unresolved special Spell pool: "
             f"spell={spell_id} name={spell_name!r} effect={effect_number} raw={raw_argument}"
+        )
+    print(f"unresolved special Spell candidate Units: {len(data['special_candidate_unresolved'])}")
+    for spell_id, spell_name, effect_number, unit_id in data["special_candidate_unresolved"]:
+        print(
+            "unresolved special Spell candidate: "
+            f"spell={spell_id} name={spell_name!r} effect={effect_number} unit={unit_id}"
         )
     print(f"unresolved spell summon references: {len(data['unresolved_spells'])}")
     for spell_id, spell_name, effect_number, raw_argument in data["unresolved_spells"]:
