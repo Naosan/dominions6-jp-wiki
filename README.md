@@ -22,7 +22,7 @@ python scripts/generate_recruitment_data.py
 python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
-python scripts/generate_unit_catalog.py --offline
+python scripts/generate_unit_catalog.py
 zensical serve
 ```
 
@@ -36,7 +36,7 @@ python scripts/generate_recruitment_data.py
 python scripts/generate_equipment_usage_data.py --offline
 python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
-python scripts/generate_unit_catalog.py --offline
+python scripts/generate_unit_catalog.py
 zensical serve
 ```
 
@@ -165,8 +165,10 @@ docs/data/combat/
 
 ### Unit総合索引
 
+初回はPretender、Hero、Magic Site等の追加CSVを取得するためNetworkを使用します。
+
 ```bash
-python scripts/generate_unit_catalog.py --offline
+python scripts/generate_unit_catalog.py
 ```
 
 生成ページ:
