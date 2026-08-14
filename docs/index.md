@@ -68,6 +68,11 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Hero](data/units/heroes.md)
 - [Spell summon](data/units/spell-summons.md)
 - [Magic Site Unit](data/units/magic-sites.md)
+- [Event Unit・Commander生成](data/units/event-spawns.md)
+- [Event変身・強制変身](data/units/event-transforms.md)
+- [Event暗殺・戦闘参加Unit](data/units/event-combat.md)
+- [Event Random pool・未解決Target](data/units/event-random.md)
+- [Mercenary Unit](data/units/mercenaries.md)
 - [Strategic summon・Freespawn](data/units/strategic-spawns.md)
 - [Battle summon](data/units/battle-spawns.md)
 - [Unit条件Recruit](data/units/recruit-unlocks.md)
@@ -79,7 +84,9 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Shape relation](data/units/shapes.md)
 - [入手経路未分類Unit](data/units/unclassified.md)
 
-各Unitページでは基本能力、Magic Path、Weapon、Armor、Mount、通常Recruit、Hero、Pretender、Spell、Magic Site、Unit自身の召喚・変換能力、国家生成能力、Shapeの確認済み関係を一画面にまとめます。
+各Unitページでは基本能力、Magic Path、Weapon、Armor、Mount、通常Recruit、Hero、Pretender、Spell、Magic Site、Event、Mercenary、Unit自身の召喚・変換能力、国家生成能力、Shapeの確認済み関係を一画面にまとめます。
+
+Eventは所有者と一時Unit指定を分離して表示するため、「Eventに登場する」ことを「プレイヤーが恒久取得できる」とは扱いません。MercenaryはCommanderと兵士の構成、Era、人数、入札・補充情報まで確認できます。
 
 ## 国家・Recruit
 
@@ -141,6 +148,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Unit装備・Mountの読み方](data/unit-loadouts.md)
 - [Unit総合索引](data/units/index.md)
 - [Battle summon](data/units/battle-spawns.md)
+- [Event暗殺・戦闘参加Unit](data/units/event-combat.md)
 - [装備使用者逆引き](data/equipment-usage/index.md)
 - [国家別装備Profile](data/equipment-usage/nations.md)
 - [命令とBattle Script](basics/orders.md)
@@ -196,6 +204,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 - [Pretender God総論](pretender/index.md)
 - [Pretender chassis索引](data/units/pretenders.md)
 - [Hero索引](data/units/heroes.md)
+- [Mercenary Unit索引](data/units/mercenaries.md)
 - [国家Freespawn・Reanimation](data/units/nation-generation.md)
 - [Scales](pretender/scales.md)
 - [Bless](pretender/bless.md)
