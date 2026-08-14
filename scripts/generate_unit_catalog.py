@@ -5,7 +5,8 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from unit_catalog_pages import write_unit_catalog
+import unit_catalog_pages
+from unit_catalog_roles import install_role_resolver
 from unit_catalog_sources import load_unit_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,7 +42,8 @@ def main() -> None:
     args = parser.parse_args()
 
     data = load_unit_catalog(args.refresh, args.offline)
-    stats = write_unit_catalog(data, OUT)
+    install_role_resolver(unit_catalog_pages, data)
+    stats = unit_catalog_pages.write_unit_catalog(data, OUT)
     validate(stats)
 
     print(f"source commit: {data['commit']}")
