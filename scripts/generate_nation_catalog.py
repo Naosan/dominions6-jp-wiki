@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate Dominions 6 nation index pages and missing nation stubs.
 
-The source catalog is data/nations.tsv. Existing pages are never overwritten
-unless they are generated stubs containing `status: stub`.
+The source catalog is data/nations.tsv. Existing authored pages are preserved;
+only generated stubs containing `status: stub` are refreshed.
 
 Run from the repository root:
     python scripts/generate_nation_catalog.py
@@ -42,11 +42,22 @@ def read_rows() -> list[dict[str, str]]:
     with DATA.open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle, delimiter="\t"))
     for row in rows:
-        code, directory, era_name = ERA[row["era"]]
+        era_value = row["era"].strip()
+        if era_value in ERA:
+            code, directory, era_name = ERA[era_value]
+        else:
+            matches = [item for item in ERA.values() if item[0] == era_value]
+            if not matches:
+                raise ValueError(f"Unknown era value: {era_value!r}")
+            code, directory, era_name = matches[0]
         row["era_code"] = code
         row["era_dir"] = directory
         row["era_name"] = era_name
         row["slug"] = slugify(row["name"])
+    if len({int(row["id"]) for row in rows}) != len(rows):
+        raise ValueError("Duplicate nation ID")
+    if len({(row["era_code"], row["slug"]) for row in rows}) != len(rows):
+        raise ValueError("Duplicate era/slug")
     return rows
 
 
@@ -59,6 +70,7 @@ def is_generated_stub(path: Path) -> bool:
 
 def stub(row: dict[str, str]) -> str:
     title = f'{row["era_code"]} {row["name"]}'
+    data_link = f'../../data/recruitment/{row["era_dir"]}/{row["slug"]}.md'
     create_url = (
         "https://github.com/Naosan/dominions6-jp-wiki/new/main/"
         f'docs/nations/{row["era_dir"]}?filename={row["slug"]}.md'
@@ -78,7 +90,8 @@ epithet: {quote(row["epithet"])}
 !!! info "記事状態: 骨組み"
     国家名・時代・Epithet・Nation IDは現行のvanillaデータで確認済みです。兵種、Mage、Pretender、Research、対人戦評価は順次追加します。
 
-[GitHubでこの国家記事を作成する]({create_url})
+- [自動生成Recruitデータ]({data_link})
+- [GitHubでこの国家攻略を執筆する]({create_url})
 
 ## 一言でいうと
 
@@ -92,7 +105,7 @@ epithet: {quote(row["epithet"])}
 | 国家名 | {row["name"]} |
 | Epithet | {row["epithet"]} |
 | Nation ID | {row["id"]} |
-| 略称 | {row["abbreviation"]} |
+| 略称 | {row.get("abbreviation", "")} |
 | 確認バージョン | Dominions 6.35 |
 
 Nation IDはMOD・Inspector・データ照合用の識別番号であり、強さの順位ではありません。
@@ -123,9 +136,13 @@ Nation IDはMOD・Inspector・データ照合用の識別番号であり、強�
 
 ## Commander / Mage
 
+自動生成の一覧は [Recruitデータ]({data_link}) を参照してください。ここでは役割・量産優先度・Research効率を解説します。
+
 *執筆中。*
 
 ## Magic Path
+
+自動生成の固定Path・Random poolは [Mage access早見表](../../data/mage-access.md) でも比較できます。
 
 | Path | Recruit-anywhere | Capital-only | Random / 条件付き |
 |---|---:|---:|---|
@@ -194,9 +211,25 @@ Nation IDはMOD・Inspector・データ照合用の識別番号であり、強�
 """
 
 
+def article_status(row: dict[str, str]) -> str:
+    authored = DOCS / row["era_dir"] / f'{row["slug"]}.md'
+    if not authored.exists():
+        return "骨組み"
+    head = authored.read_text(encoding="utf-8")[:500]
+    if "status: verified" in head:
+        return "検証済み"
+    if "status: review" in head:
+        return "レビュー中"
+    if "status: draft" in head:
+        return "下書き"
+    if "status: stub" in head:
+        return "骨組み"
+    return "本文あり"
+
+
 def index(rows: list[dict[str, str]], era: str) -> str:
     code, _directory, era_name = ERA[era]
-    selected = [row for row in rows if row["era"] == era]
+    selected = [row for row in rows if row["era_code"] == code]
     out = [
         "---",
         f'title: "{era_name} 国家一覧"',
@@ -207,21 +240,22 @@ def index(rows: list[dict[str, str]], era: str) -> str:
         "",
         f"# {era_name}（{code}）国家一覧",
         "",
-        f"Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理しています。{era_name}には**{len(selected)}国家**あります。",
+        f"Dominions 6.35のvanilla国家を整理しています。{era_name}には**{len(selected)}国家**あります。",
         "",
         "- [国家ページの読み方](../how-to-read.md)",
         "- [国家選択ガイド](../choose-a-nation.md)",
+        "- [Mage access早見表](../../data/mage-access.md)",
         "",
         "## 国家一覧",
         "",
-        "| ID | 国家 | Epithet | 記事状態 |",
-        "|---:|---|---|---|",
+        "| ID | 国家 | Epithet | 攻略記事 | Recruitデータ |",
+        "|---:|---|---|---|---|",
     ]
     for row in selected:
-        status = "攻略あり" if era == "2" and row["name"] == "Ulm" else "骨組み"
         out.append(
             f'| {row["id"]} | [{code} {row["name"]}]({row["slug"]}.md) | '
-            f'{row["epithet"]} | {status} |'
+            f'{row["epithet"]} | {article_status(row)} | '
+            f'[表示](../../data/recruitment/{row["era_dir"]}/{row["slug"]}.md) |'
         )
     out.extend(
         [
@@ -230,8 +264,9 @@ def index(rows: list[dict[str, str]], era: str) -> str:
             "",
             "- **骨組み**: 公式名称・Epithet・Nation IDと共通見出しを登録済み。",
             "- **下書き**: 兵種・Mage・Researchなどの主要項目を執筆中。",
-            "- **攻略あり**: 実戦的な運用方針まで記述済み。Patch確認は継続する。",
-            "- **検証済み**: 記載バージョンで数値・挙動の確認を終えた記事。",
+            "- **レビュー中**: 実戦記事があり、数値・Patch確認待ち。",
+            "- **検証済み**: 記載バージョンで数値・挙動を確認済み。",
+            "- **Recruitデータ**: Inspector snapshotから自動生成した事実索引。攻略評価ではない。",
             "",
             "!!! note \"国家数とPatch\"",
             "    新国家が追加されることがあります。国家数、名称、EpithetはPatch更新時にデータと照合します。",
@@ -243,23 +278,24 @@ def index(rows: list[dict[str, str]], era: str) -> str:
 
 def main() -> None:
     rows = read_rows()
-    created = 0
-    skipped = 0
+    generated = 0
+    preserved = 0
 
     for row in rows:
         path = DOCS / row["era_dir"] / f'{row["slug"]}.md'
         path.parent.mkdir(parents=True, exist_ok=True)
         if is_generated_stub(path):
             path.write_text(stub(row), encoding="utf-8")
-            created += 1
+            generated += 1
         else:
-            skipped += 1
+            preserved += 1
 
     for era, (_code, directory, _name) in ERA.items():
         (DOCS / directory / "index.md").write_text(index(rows, era), encoding="utf-8")
 
-    print(f"generated/updated stubs: {created}")
-    print(f"preserved authored pages: {skipped}")
+    print(f"nation records: {len(rows)}")
+    print(f"generated/refreshed stubs: {generated}")
+    print(f"preserved authored pages: {preserved}")
 
 
 if __name__ == "__main__":
