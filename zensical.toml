@@ -14,6 +14,8 @@ nav = [
   { "トップページ" = "index.md" },
   { "国家" = [
     "nations/index.md",
+    "nations/choose-a-nation.md",
+    "nations/how-to-read.md",
     { "Early Age" = "nations/ea/index.md" },
     { "Middle Age" = ["nations/ma/index.md", "nations/ma/ulm.md"] },
     { "Late Age" = "nations/la/index.md" },
