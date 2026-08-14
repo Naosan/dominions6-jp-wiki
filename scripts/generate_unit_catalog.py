@@ -73,7 +73,17 @@ def main() -> None:
     print(f"unresolved nation-generation references: {len(data['nation_generation_unresolved'])}")
     print(f"Event random-pool references: {len(data['event_random_targets'])}")
     print(f"unresolved Event Unit references: {len(data['event_unresolved'])}")
+    for event_id, event_name, field, raw_target in data["event_unresolved"]:
+        print(
+            "unresolved Event target: "
+            f"event={event_id} name={event_name!r} field={field} raw={raw_target}"
+        )
     print(f"unresolved Mercenary Unit references: {len(data['mercenary_unresolved'])}")
+    for mercenary_id, company, role, raw_target in data["mercenary_unresolved"]:
+        print(
+            "unresolved Mercenary target: "
+            f"mercenary={mercenary_id} company={company!r} role={role} raw={raw_target}"
+        )
     print(f"unresolved spell summon references: {len(data['unresolved_spells'])}")
     print(f"unresolved Magic Site Unit references: {len(data['unresolved_sites'])}")
     print(f"unresolved Shape references: {len(data['unresolved_shapes'])}")
