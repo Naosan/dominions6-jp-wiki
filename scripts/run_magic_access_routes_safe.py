@@ -4,13 +4,15 @@
 Some nations, notably LA Lemuria, do not expose a normal recruitable mage
 roster through the standard nation recruitment mappings. That is a valid game
 state, not incomplete data. The runner also replaces per-path theoretical
-Random maxima with simultaneous feasible Random outcomes and keeps ordinary
-path boosters on paths the bearer already possesses.
+Random maxima with simultaneous feasible Random outcomes, keeps ordinary path
+boosters on paths the bearer already possesses, and models valid Holy boosts
+for Communion/Sabbath masters that are also mages.
 """
 from __future__ import annotations
 
 import generate_magic_access_routes as generator
 import magic_access_booster_semantics
+import magic_access_communion_semantics
 import magic_access_route_safety
 import run_magic_access_routes as runner
 
@@ -52,11 +54,20 @@ def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> 
     count_row = f"| Nation without native recruit Mage | {len(NO_NATIVE_NAMES)} |"
     random_row = "| Random crosspath feasibility | simultaneous outcome enumeration |"
     booster_row = "| Standard booster semantics | existing paths only |"
+    communion_row = "| Communion breakpoints | 2/4/8/16/32/64 slaves = +1..+6 |"
     anchor = f"| Nation profile | {len(profiles)} |"
     if count_row not in text and anchor in text:
         text = text.replace(
             anchor,
-            anchor + "\n" + count_row + "\n" + random_row + "\n" + booster_row,
+            anchor
+            + "\n"
+            + count_row
+            + "\n"
+            + random_row
+            + "\n"
+            + booster_row
+            + "\n"
+            + communion_row,
             1,
         )
 
@@ -81,6 +92,10 @@ def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> 
             "",
             "BaseIの通常Path bonusは、装備者が既に持つPathだけを上げるBoosterとして計算します。0から新Pathを作る経路には使わず、明示的なEmpower効果、召喚、Pretender、Site等を別Layerへ残します。",
             "",
+            "## Communion / Sabbathの安全策",
+            "",
+            "Masterが通常Mageでもある場合は、元から持つHolyもPath bonusへ含めます。純粋なPriestをMatrixだけでMaster化したケースはHoly boostへ数えません。64 Slaveの+6まで表示します。",
+            "",
             "",
         ]
     )
@@ -94,6 +109,7 @@ def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> 
 
 def main() -> None:
     magic_access_booster_semantics.install(generator)
+    magic_access_communion_semantics.install(generator)
     magic_access_route_safety.install(generator)
     generator.validate = safe_validate
     generator.quality_page = safe_quality_page
