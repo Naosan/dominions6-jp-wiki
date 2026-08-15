@@ -77,6 +77,65 @@ def install(generator) -> None:
             values.append(f"{magic_path}{levels[magic_path]}: {name}")
         return "; ".join(values) or "—"
 
+    def communion_page(profiles, matrix_items):
+        lines = generator.front_matter("全国家Communion・Sabbath battle reach")
+        lines.extend(
+            [
+                "# 全国家Communion・Sabbath battle reach",
+                "",
+                "通常Recruit Mageの保証S1 / B1を使い、Slave数ごとの戦闘中Path最大を計算します。HolyはMasterが通常Mageでもある場合だけ含めます。",
+                "",
+                "[国家別到達経路へ戻る](index.md)",
+                "",
+                "| Nation | Structure | Slave-capable types | 2 slaves | 4 slaves | 8 slaves | 16 slaves | 32 slaves | 64 slaves |",
+                "|---|---|---:|---|---|---|---|---|---|",
+            ]
+        )
+        for profile in profiles:
+            nation = profile["nation"]
+            for structure in (profile["communion"], profile["sabbath"]):
+                values = [
+                    generator.level_text(item["levels"])
+                    if structure["guaranteed"]
+                    else "—"
+                    for item in structure["breakpoints"]
+                ]
+                lines.append(
+                    f"| [{nation['code']} {generator.esc(nation['name'])}]"
+                    f"({nation['dir']}/{nation['slug']}.md) | "
+                    f"{structure['label']} | {len(structure['guaranteed']) or '—'} | "
+                    + " | ".join(generator.esc(value) for value in values)
+                    + " |"
+                )
+        lines.extend(
+            [
+                "",
+                "## Matrix / Communion related Item",
+                "",
+                "| Item | Type | Research | Req | Boost |",
+                "|---|---|---|---|---|",
+            ]
+        )
+        for item in matrix_items:
+            lines.append(
+                f"| {generator.esc(item['name'])} | "
+                f"{generator.esc(item['type_title'])} | "
+                f"{generator.esc(item['construction'])} | "
+                f"{generator.esc(item['requirement_text'])} | "
+                f"{generator.esc(item['boost_text'])} |"
+            )
+        if not matrix_items:
+            lines.append("| — | — | — | — | 自動Booster集合内の該当Itemなし |")
+        lines.extend(
+            [
+                "",
+                "Path reachだけの比較です。Fatigue、安全なMaster数、Self-buff共有、Matrix装備者のPath差は[Communion・Sabbath](../../magic/communions.md)で確認してください。",
+                "",
+            ]
+        )
+        return "\n".join(lines)
+
     generator.boosted_master_levels = boosted_master_levels
     generator.communion_profile = communion_profile
     generator.path_master_text = path_master_text
+    generator.communion_page = communion_page
