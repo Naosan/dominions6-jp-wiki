@@ -43,6 +43,26 @@ def safe_validate(profiles, boosters, summon_groups, stats) -> None:
     stats["nations_without_native_mages"] = len(NO_NATIVE_NAMES)
 
 
+def correct_guide_accuracy() -> bool:
+    """Keep the guide aligned with the actual Communion Holy-path rule."""
+    path = runner.ROUTE_GUIDE
+    text = path.read_text(encoding="utf-8")
+    correct = (
+        "自動Profileでは、Masterが通常MageとしてArcane Pathを少なくとも一つ持つ場合、元から持つHolyを含む既知Pathへbonusを加えます。純粋なPriestをMatrixだけでMaster化した場合はHoly boostへ数えません。"
+    )
+    if correct in text:
+        return False
+    candidates = (
+        "Masterが元から持つ各Magic Pathへbonusを加えます。Holyも、Masterが通常Mageとして非Holy Pathを持つ場合には対象へ含めます。純粋なPriestへMatrixだけを装備させたケースをHoly boostとしては計算しません。",
+        "自動Profileでは、Masterが元から持つArcane Pathだけへbonusを加えます。Holy / Priest levelはCommunion・Sabbathの自動到達値へ加算しません。Matrixを使う非Astral Masterも、装備とFatigueの別検証が必要です。",
+    )
+    for old in candidates:
+        if old in text:
+            path.write_text(text.replace(old, correct, 1), encoding="utf-8")
+            return True
+    raise ValueError("Communion Holy-path guide paragraph was not found")
+
+
 def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> str:
     text = ORIGINAL_QUALITY_PAGE(
         profiles,
@@ -113,6 +133,7 @@ def main() -> None:
     magic_access_route_safety.install(generator)
     generator.validate = safe_validate
     generator.quality_page = safe_quality_page
+    runner.patch_guide_accuracy = correct_guide_accuracy
     runner.main()
     print(f"nations_without_native_mages: {len(NO_NATIVE_NAMES)}")
     for name in NO_NATIVE_NAMES:
