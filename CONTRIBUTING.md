@@ -74,6 +74,15 @@ Wiki全体の構造Audit:
 python scripts/audit_wiki.py --report build/wiki-audit.json
 ```
 
+生成Dataの基準Revision差分と、手書き記事の検証Version:
+
+```bash
+python scripts/report_patch_impact.py \
+  --report build/patch-impact.json
+```
+
+Pull Requestでは、基準Branchに同じBuild基盤が存在するとき、Temporary worktreeで基準Revisionも生成します。生成Page数、Markdown table row数、Byte数、Page fingerprintをDataset単位で比較し、追加・削除・内容変更を区別します。また、固定Game Versionより古い`verified_version`を持つ手書き記事をWarningとして列挙します。
+
 Defaultでは次をErrorとして扱います。
 
 - 閉じられていないFront Matter
@@ -81,12 +90,13 @@ Defaultでは次をErrorとして扱います。
 - 存在しない内部Link
 - 存在しないNavigation target
 
-既存記事を段階的に整備できるよう、Status不足、Version不足、孈立PageはDefaultではWarningです。対象Sectionの整備が完了した後は、次のStrict modeを使えます。
+既存記事を段階的に整備できるよう、Status不足、Version不足、孤立Page、古い検証VersionはDefaultではWarningです。対象Sectionの整備が完了した後は、次のStrict modeを使えます。
 
 ```bash
 python scripts/audit_wiki.py \
   --strict-metadata \
   --fail-on-orphans
+python scripts/report_patch_impact.py --fail-on-stale
 ```
 
 ## 手書き記事
@@ -148,6 +158,7 @@ last_verified: "2026-08-15"
 - [ ] `python -m unittest discover -s tests -v`が成功する
 - [ ] `python scripts/build_wiki.py`が成功する
 - [ ] `python scripts/audit_wiki.py`がError 0で終了する
+- [ ] `build/patch-impact.json`のDataset差分と検証Version警告を確認した
 - [ ] 数値や挙動を変更した場合、根拠と対象Versionを記録した
 - [ ] 自動生成結果ではなくGenerator側を修正した
 
