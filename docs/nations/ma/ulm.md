@@ -288,7 +288,7 @@ Awakeを採る場合も、Pretenderだけで全Expansionを行わず、通常兵
 
 MA UlmはHeavy Bless国家ではありません。
 
-Sacred Commander、Priest、GuardianなどへBlessが作用しても、国家全体の主力は大量の通常兵とMaster Smithです。
+SacredなPriest・CommanderへBlessが作用しても、国家全体の主力である通常兵には作用しません。Guardianの対Sacred性能もHeavy Blessを必要としません。
 
 Blessを取る場合は、
 
@@ -495,7 +495,7 @@ Master SmithはMA Ulmの国家エンジンです。
 - Site Search
 - Rare RandomによるMagic diversity
 
-Master SmithはForge BonusとResource Bonusを持ちます。公式データの説明でも、Ulmの武器・Armor生産を担い、魔法資源が乏しいため少ないGemでItemを作る技術を発達させた存在として扱われています。
+Master SmithはForge BonusとResource Bonusを持ちます。ゲームデータ上の説明でも、Ulmの武器・Armor生産を担い、魔法資源が乏しいため少ないGemでItemを作る技術を発達させた存在として扱われています。
 
 ### 量産個体
 
@@ -560,10 +560,10 @@ Capital-onlyのEarth・Holy Priestです。
 主な用途:
 
 - Iron Darts / Iron Blizzard
-- Tempering the Willへの補助
 - Inquisitor / Preach
 - Undead対策
 - Throne・Dominion戦
+- Iron Cultの宗教戦
 
 安価なHoly役とBattle casterを兼ねられますが、Capital Commander Pointとの競合があります。
 
