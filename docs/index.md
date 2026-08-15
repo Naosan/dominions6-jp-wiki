@@ -1,6 +1,10 @@
 ---
 title: Dominions 6 日本語攻略Wiki
 description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様・データを整理する日本語Wikiです。
+page_type: landing
+status: reviewed
+verified_version: "6.35"
+last_verified: "2026-08-15"
 ---
 
 # Dominions 6: Rise of the Pantokrator 日本語攻略Wiki
@@ -23,13 +27,21 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 
 # 初めて遊ぶ人
 
-1. [チュートリアル / 初心者ガイド](getting-started/index.md)
-2. [最初の12ターン](getting-started/first-12-turns.md)
-3. [初心者向けTips](getting-started/beginner-tips.md)
-4. [戦闘の基礎](basics/index.md)
-5. [命令とBattle Script](basics/orders.md)
-6. [魔法の基本](magic/index.md)
-7. [Researchと研究ルート](magic/research.md)
+まず[初心者ガイド](getting-started/index.md)を入口にし、次の順で初回ゲームを進めます。
+
+1. [国家選択ガイド](nations/choose-a-nation.md)
+2. [Pretender God](pretender/index.md)
+3. [最初の12ターン](getting-started/first-12-turns.md)
+4. [序盤拡張](getting-started/expansion.md)
+5. [Researchと研究ルート](magic/research.md)
+6. [Forts](systems/forts.md)
+7. [最初の戦争](getting-started/first-war.md)
+8. [Battle Replayの読み方](getting-started/battle-replay.md)
+9. [初心者向けTips](getting-started/beginner-tips.md)
+10. [命令とBattle Script](basics/orders.md)
+11. [戦闘ルール完全ガイド](basics/combat-rules.md)
+
+最初のゲームでは、勝利よりも「偵察する→編成する→戦う→Replayを見る→一つ直す」という学習Cycleを回すことを目標にします。
 
 ---
 
