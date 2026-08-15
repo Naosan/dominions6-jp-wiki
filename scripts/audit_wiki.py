@@ -1,11 +1,26 @@
 #!/usr/bin/env python3
-"""Public Wiki audit entry point with HTML-aware Markdown link extraction."""
+"""Public Wiki audit entry point with repository-specific compatibility rules."""
 from __future__ import annotations
 
 try:
     from . import audit_wiki_core as _core
 except ImportError:  # Direct execution: ``python scripts/audit_wiki.py``
     import audit_wiki_core as _core
+
+
+# Generator output and the Wiki's pre-existing editorial state are valid inputs.
+# ``expanding`` remains accepted during the staged migration to the new status model.
+_core.ALLOWED_STATUSES.update({"generated", "expanding"})
+_core_generated = _core.generated
+
+
+def generated(relative, metadata: dict[str, str]) -> bool:
+    """Identify pages owned by generators rather than hand-written content."""
+
+    return metadata.get("status") == "generated" or _core_generated(relative, metadata)
+
+
+_core.generated = generated
 
 
 def _html_tag_end(text: str, start: int) -> int | None:
@@ -72,7 +87,7 @@ def markdown_links(text: str):
     yield from _core_markdown_links(strip_html_preserve_lines(text))
 
 
-# ``audit`` resolves this global at runtime, so patch the extraction boundary once.
+# ``audit`` resolves these globals at runtime, so patch the boundaries once.
 _core.markdown_links = markdown_links
 
 Issue = _core.Issue
