@@ -35,10 +35,16 @@ FILES = (
     "effects_spells.csv",
 )
 
-# Effect 48 is the single-Path remote Site Search effect. raw_argument is the
-# Path number used by the Inspector's PATHS table.
+# Effect 48 is used by both the ordinary single-Path remote searches and a
+# small number of special multi-Path searches. A raw_argument in PATHS is an
+# ordinary Path selector; other arguments must be resolved by the explicit
+# special-spell table instead of being guessed as Path numbers.
 SITE_SEARCH_EFFECT = 48
 SPECIAL_SEARCH_SPELLS = {
+    "Mirror of Earth's Memories": {
+        "scope": "Cave ProvinceのEarth / Fire / Water / Death Site",
+        "target": "遠隔のCave Province。Spell説明ではAgarthan Oracleが地下のMagic Siteを探す。",
+    },
     "Voice of Tiamat": {
         "scope": "Elemental Site（F/A/W/E）",
         "target": "海Province。Spell説明ではCasterが水中にいる必要がある。",
@@ -82,7 +88,8 @@ def spell_link(row: dict[str, str]) -> str:
 
 def site_link(row: dict[str, str]) -> str:
     site_id = num(row, "id")
-    return f"[{esc(row.get('name') or f'Site {site_id}')}]" f"(by-id/{site_filename(site_id)})"
+    name = esc(row.get("name") or f"Site {site_id}")
+    return f"[{name}](by-id/{site_filename(site_id)})"
 
 
 def location_text(row: dict[str, str], terrain_lookup: dict[int, str]) -> str:
@@ -121,10 +128,13 @@ def build_search_spell_rows(
         effect = effects.get(num(row, "effect_record_id"))
         if not effect or num(effect, "effect_number") != SITE_SEARCH_EFFECT:
             continue
+        name = str(row.get("name") or "")
         path_number = num(effect, "raw_argument", -1)
         if path_number not in PATHS:
+            if name in SPECIAL_SEARCH_SPELLS:
+                continue
             errors.append(
-                f"Spell {row.get('name')!r} has Site Search effect with unknown Path {path_number}"
+                f"Spell {name!r} has Site Search effect with unknown argument {path_number}"
             )
             continue
         code, path_name, _slug = PATHS[path_number]
@@ -134,7 +144,7 @@ def build_search_spell_rows(
                 "effect": effect,
                 "scope": f"{code} — {path_name} Site",
                 "target": TARGET_NOTES.get(
-                    str(row.get("name") or ""),
+                    name,
                     "単一Pathの全Site。対象制限はゲーム内targeterを優先。",
                 ),
                 "kind": "Single Path",
@@ -148,6 +158,11 @@ def build_search_spell_rows(
             errors.append(f"Special Site Search Spell missing: {name}")
             continue
         effect = effects.get(num(row, "effect_record_id"))
+        if not effect or num(effect, "effect_number") != SITE_SEARCH_EFFECT:
+            errors.append(
+                f"Special Site Search Spell has unexpected effect: {name}"
+            )
+            continue
         output.append(
             {
                 "row": row,
@@ -179,7 +194,7 @@ def search_spell_page(rows: list[dict[str, object]]) -> str:
         [
             "# Remote Site Search Spell",
             "",
-            "Research可能Spellのうち、Magic Siteを遠隔探索するSpellを抽出します。単一Path探索はSpell effect **48** とPath argumentから機械的に判定し、複数Path・全Path探索は固定スナップショット内の明示Spellを別枠で扱います。",
+            "Research可能Spellのうち、Magic Siteを遠隔探索するSpellを抽出します。単一Path探索はSpell effect **48** とPath argumentから機械的に判定し、複数Path・全Path探索は同じeffectに含まれる特殊argumentを明示Spell表で分離します。",
             "",
             "- [Site Search完全ガイド](../../magic/site-search.md)",
             "- [Site Search運用Playbook](../../magic/site-search-playbook.md)",
@@ -228,7 +243,7 @@ def search_spell_page(rows: list[dict[str, object]]) -> str:
             "",
             "- Remote Searchは対象PathについてSite Levelに依存せず発見する設計ですが、対象Province、海・陸、敵対所有、共有通知、Ritual rangeはSpell固有です。",
             "- Ritual rangeはこのCSV表だけで一貫して再構成できないため掲載していません。ゲーム内Spell詳細を優先してください。",
-            "- `Voice of Tiamat`や`Acashic Knowledge`は単一Path effect 48ではなく、特殊な複数Path探索として分離しています。",
+            "- `Mirror of Earth's Memories`、`Voice of Tiamat`、`Acashic Knowledge`は特殊argumentを使う複数Path探索として分離しています。",
             "- `Strands of Arcane Power`のようなGlobal Enchantmentによる継続探索は、この一回型Remote Search表とは別の仕組みです。",
             "",
         ]
@@ -424,7 +439,7 @@ def validate(
             "Single-Path Site Search coverage mismatch: "
             f"found={sorted(standard_paths)} expected={list(range(9))}"
         )
-    if len(special) < 2:
+    if len(special) < 3:
         raise ValueError(f"Special Site Search Spell set appears incomplete: {len(special)}")
     if max((num(row, "level") for row in sites), default=0) < 4:
         raise ValueError("Magic Site Level data appears incomplete")
