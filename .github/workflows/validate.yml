@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
@@ -30,8 +32,13 @@ jobs:
           pip install -r requirements.txt
       - name: Test Wiki tooling
         run: python -m unittest discover -s tests -v
+      - name: Verify source snapshot
+        run: |
+          python scripts/audit_sources.py \
+            --report build/source-audit.json \
+            --github-summary
       - name: Generate data and build site
-        run: python scripts/build_wiki.py
+        run: python scripts/build_wiki.py --offline
       - name: Audit Wiki structure
         run: |
           set +e
@@ -41,3 +48,10 @@ jobs:
             python scripts/report_wiki_audit.py build/wiki-audit.json --path-prefix docs
           fi
           exit "$status"
+      - name: Upload audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wiki-audits
+          path: build/*-audit.json
+          if-no-files-found: warn

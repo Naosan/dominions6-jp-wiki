@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Generate all derived Wiki pages, validate source references, and build/serve the site.
+"""Verify source inputs, generate all derived pages, and build/serve the site.
 
-This file is the canonical build pipeline used by local development and GitHub Actions.
-Keeping the command list here prevents README and workflow definitions from drifting apart.
+This file is the canonical pipeline used by local development and GitHub
+Actions.  External downloads happen only in the source-audit stage; every
+subsequent generator consumes the verified cache in offline mode.
 """
-
 from __future__ import annotations
 
 import argparse
@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
+SOURCE_REPORT = ROOT / "build" / "source-audit.json"
 
 
 @dataclass(frozen=True)
@@ -24,8 +25,6 @@ class Step:
     label: str
     command: tuple[str, ...]
     supports_offline: bool = False
-    supports_refresh: bool = False
-    default_offline: bool = False
 
 
 STEPS: tuple[Step, ...] = (
@@ -34,72 +33,56 @@ STEPS: tuple[Step, ...] = (
         "Recruit・Mage access・Unit装備",
         ("scripts/generate_recruitment_data.py",),
         supports_offline=True,
-        supports_refresh=True,
     ),
     Step(
         "Recruit装備参照の検証",
         ("scripts/check_recruitment_equipment_refs.py",),
         supports_offline=True,
-        default_offline=True,
     ),
     Step(
         "装備使用者逆引き",
         ("scripts/generate_equipment_usage_data.py",),
         supports_offline=True,
-        supports_refresh=True,
-        default_offline=True,
     ),
     Step(
         "Spell・Magic Item",
         ("scripts/generate_spell_item_data.py",),
         supports_offline=True,
-        supports_refresh=True,
     ),
     Step(
         "Weapon・Armor・Damage property",
         ("scripts/generate_combat_data.py",),
         supports_offline=True,
-        supports_refresh=True,
     ),
     Step(
         "Unit総合索引",
         ("scripts/generate_unit_catalog.py",),
         supports_offline=True,
-        supports_refresh=True,
     ),
     Step(
         "Magic Site総合索引",
         ("scripts/generate_magic_site_data.py",),
         supports_offline=True,
-        supports_refresh=True,
     ),
     Step(
         "Site Search参照",
         ("scripts/generate_site_search_data.py",),
         supports_offline=True,
-        supports_refresh=True,
-        default_offline=True,
     ),
     Step(
         "国家別Site Search能力",
         ("scripts/run_nation_site_search_data.py",),
         supports_offline=True,
-        supports_refresh=True,
-        default_offline=True,
     ),
     Step(
         "Extended Magic Access",
         ("scripts/run_extended_magic_access_data.py",),
         supports_offline=True,
-        supports_refresh=True,
-        default_offline=True,
     ),
     Step(
         "Magic Access routes",
         ("scripts/run_magic_access_routes_safe.py",),
         supports_offline=True,
-        supports_refresh=True,
-        default_offline=True,
     ),
 )
 
@@ -112,11 +95,23 @@ def run(command: Sequence[str]) -> None:
     subprocess.run(command, cwd=ROOT, check=True)
 
 
-def step_command(step: Step, *, offline: bool, refresh: bool) -> list[str]:
-    command = [sys.executable, *step.command]
-    if refresh and step.supports_refresh:
+def source_command(*, offline: bool, refresh: bool) -> list[str]:
+    command = [
+        sys.executable,
+        "scripts/audit_sources.py",
+        "--report",
+        str(SOURCE_REPORT.relative_to(ROOT)),
+    ]
+    if refresh:
         command.append("--refresh")
-    elif step.supports_offline and (offline or step.default_offline):
+    elif offline:
+        command.append("--offline")
+    return command
+
+
+def step_command(step: Step) -> list[str]:
+    command = [sys.executable, *step.command]
+    if step.supports_offline:
         command.append("--offline")
     return command
 
@@ -129,12 +124,12 @@ def parse_args() -> argparse.Namespace:
     mode.add_argument(
         "--offline",
         action="store_true",
-        help="Networkを使わず、既存Cacheだけで全生成処理を実行します。",
+        help="Networkを使わず、Manifest検証済みCacheだけで全処理を実行します。",
     )
     mode.add_argument(
         "--refresh",
         action="store_true",
-        help="対応GeneratorのCacheを再取得してから生成します。",
+        help="Manifestに固定した全Sourceを再取得・検証してから生成します。",
     )
     output = parser.add_mutually_exclusive_group()
     output.add_argument(
@@ -153,9 +148,12 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
 
+    print("\n[Source] Dom6 Inspector snapshotの取得・Checksum検証", flush=True)
+    run(source_command(offline=args.offline, refresh=args.refresh))
+
     for index, step in enumerate(STEPS, start=1):
         print(f"\n[{index}/{len(STEPS)}] {step.label}", flush=True)
-        run(step_command(step, offline=args.offline, refresh=args.refresh))
+        run(step_command(step))
 
     if args.generate_only:
         print("\n生成処理が完了しました。", flush=True)

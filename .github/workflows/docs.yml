@@ -25,6 +25,8 @@ jobs:
     steps:
       - uses: actions/configure-pages@v6
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
@@ -36,8 +38,13 @@ jobs:
           pip install -r requirements.txt
       - name: Test Wiki tooling
         run: python -m unittest discover -s tests -v
+      - name: Verify source snapshot
+        run: |
+          python scripts/audit_sources.py \
+            --report build/source-audit.json \
+            --github-summary
       - name: Generate data and build site
-        run: python scripts/build_wiki.py
+        run: python scripts/build_wiki.py --offline
       - name: Audit Wiki structure
         run: |
           set +e
