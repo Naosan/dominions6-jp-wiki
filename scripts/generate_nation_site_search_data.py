@@ -48,6 +48,10 @@ RECRUIT_OUT = ROOT / "docs" / "data" / "recruitment"
 MAGE_ACCESS = ROOT / "docs" / "data" / "mage-access.md"
 SITE_INDEX = ROOT / "docs" / "data" / "sites" / "index.md"
 SPELL_SEARCH_INDEX = ROOT / "docs" / "data" / "spells" / "site-search.md"
+CONFIG = ROOT / "zensical.toml"
+DATA_INDEX = ROOT / "docs" / "data" / "index.md"
+SITE_SEARCH_GUIDE = ROOT / "docs" / "magic" / "site-search.md"
+SITE_SEARCH_PLAYBOOK = ROOT / "docs" / "magic" / "site-search-playbook.md"
 
 FILES = (
     "BaseU.csv",
@@ -1074,6 +1078,41 @@ def _insert_after(path: Path, anchor: str, additions: list[str]) -> None:
 
 
 def patch_generated_pages(profiles: list[dict[str, object]]) -> None:
+    _insert_after(
+        CONFIG,
+        '    "data/unit-loadouts.md",',
+        [
+            '    { "Site Search能力" = [',
+            '      "data/site-search/index.md",',
+            '      "data/site-search/path-coverage.md",',
+            '      "data/site-search/broad-rovers.md",',
+            '      "data/site-search/deep-specialists.md",',
+            '      "data/site-search/remote-access.md",',
+            '      "data/site-search/data-quality.md",',
+            '    ] },',
+        ],
+    )
+    _insert_after(
+        DATA_INDEX,
+        "- [Mage access早見表](mage-access.md)",
+        [
+            "- [国家別Site Search能力](site-search/index.md)",
+            "- [Site Search Path coverage](site-search/path-coverage.md)",
+            "- [Broad Rover候補](site-search/broad-rovers.md)",
+            "- [Deep Specialist比較](site-search/deep-specialists.md)",
+            "- [Remote Site Search access](site-search/remote-access.md)",
+        ],
+    )
+    _insert_after(
+        SITE_SEARCH_GUIDE,
+        "- [Remote Site Search Spell](../data/spells/site-search.md)",
+        ["- [国家別Site Search能力](../data/site-search/index.md)"],
+    )
+    _insert_after(
+        SITE_SEARCH_PLAYBOOK,
+        "- [国家別Mage access](../data/mage-access.md)",
+        ["- [国家別Site Search能力](../data/site-search/index.md)"],
+    )
     _insert_after(
         RECRUIT_OUT / "index.md",
         "- [Mage access早見表](../mage-access.md)",
