@@ -45,6 +45,8 @@ jobs:
         run: python scripts/generate_magic_site_data.py
       - name: Generate Site Search references
         run: python scripts/generate_site_search_data.py --offline
+      - name: Generate nation Site Search capability
+        run: python scripts/run_nation_site_search_data.py --offline
       - name: Build site
         run: zensical build --clean
       - uses: actions/upload-pages-artifact@v5
