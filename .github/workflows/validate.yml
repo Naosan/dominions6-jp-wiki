@@ -45,5 +45,7 @@ jobs:
         run: python scripts/run_nation_site_search_data.py --offline
       - name: Generate extended Magic Access
         run: python scripts/run_extended_magic_access_data.py --offline
+      - name: Generate Magic Access routes
+        run: python scripts/run_magic_access_routes.py --offline
       - name: Build site
         run: zensical build --clean
