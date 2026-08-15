@@ -109,6 +109,8 @@ MageのRandomが必要な経路です。
 
 実現可能性と出現確率は別です。
 
+複数Path要求を判定するときは、Pathごとの理論最大を一体へ足しません。一つのRandom pickは候補Pathのうち一つへだけ割り当て、同時に成立できる結果だけをRouteとして採用します。
+
 ## Candidate-pool
 
 特殊召喚の候補集合に目的Mageが含まれる経路です。
@@ -136,6 +138,8 @@ Mageの固定Path
 ```
 
 同じMageがForgeを担当する**single-forger chain**です。
+
+通常のPath Boosterは、装備者が既に1以上持つPathだけを上げるものとして計算します。F0へFire Boosterを装備してF1を新規取得する、といったRouteは作りません。0からの新Pathは、Empowerment、Pretender、召喚Mage、Site Mage等の別Layerで扱います。
 
 ## Standard slot仮定
 
@@ -209,6 +213,7 @@ Native Mage
 ## Random-assisted chain
 
 - Native Mageまたは召喚MageのRandomが要求Pathへ当たる可能性を使う
+- 複数Path要求では同時成立可能なRandom配分だけを使う
 - 出現確率は計算しない
 - 国家計画の主線ではなく、条件付きOptionとして扱う
 
@@ -246,6 +251,7 @@ Communion / Sabbathは戦闘中のPath到達を計算します。
 | 8 | +3 |
 | 16 | +4 |
 | 32 | +5 |
+| 64 | +6 |
 
 自動Profileでは、通常Recruit Mageのうち、
 
@@ -254,7 +260,7 @@ Communion / Sabbathは戦闘中のPath到達を計算します。
 
 をMaster / Slave候補として扱います。
 
-Masterが元から持つArcane Pathだけにbonusを加えます。HolyはCommunion bonus対象として計算しません。
+Masterが元から持つ各Magic Pathへbonusを加えます。Holyも、Masterが通常Mageとして非Holy Pathを持つ場合には対象へ含めます。純粋なPriestへMatrixだけを装備させたケースをHoly boostとしては計算しません。
 
 ## 表が示さないもの
 
@@ -351,6 +357,10 @@ Empowermentが必要か：
 ## Boosterを装備できる前提で考える
 
 Hand、Head、Misc、Body、Bootsの競合があります。
+
+## Boosterで0から新Pathを作る
+
+通常のPath Boosterは既に持つPathを上げるためのものです。新Pathは別経路が必要です。
 
 ## CommunionをRitualへ使う
 
