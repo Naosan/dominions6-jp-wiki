@@ -38,6 +38,24 @@ class LinkTests(unittest.TestCase):
 """
         self.assertEqual(list(markdown_links(text)), [(1, "guide.md")])
 
+    def test_ignores_markdown_like_text_inside_html_attributes(self) -> None:
+        text = """<img src="preview.png" alt="[previous](前の記事)" />
+[real](guide.md)
+"""
+        self.assertEqual(list(markdown_links(text)), [(2, "guide.md")])
+
+    def test_ignores_multiline_html_and_comments(self) -> None:
+        text = """<video
+  poster="data:image/svg+xml,[fake](missing.md)"
+></video>
+<!-- [commented](also-missing.md) -->
+[real](guide.md)
+"""
+        self.assertEqual(list(markdown_links(text)), [(5, "guide.md")])
+
+    def test_keeps_angle_bracket_markdown_destination(self) -> None:
+        self.assertEqual(list(markdown_links("[real](<guide.md>)\n")), [(1, "guide.md")])
+
     def test_resolves_directory_index(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             docs = Path(temp) / "docs"

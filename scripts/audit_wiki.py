@@ -24,6 +24,69 @@ FENCE_RE = re.compile(r"^\s*(```+|~~~+)")
 INLINE_CODE_RE = re.compile(r"`[^`]*`")
 
 
+def _html_tag_end(text: str, start: int) -> int | None:
+    """Return the inclusive end of a raw HTML tag/comment, if one starts here.
+
+    Markdown angle destinations such as ``[Guide](<guide.md>)`` and autolinks
+    such as ``<https://example.com>`` are deliberately not treated as HTML.
+    """
+
+    if text.startswith("<!--", start):
+        end = text.find("-->", start + 4)
+        return len(text) - 1 if end < 0 else end + 2
+
+    if start + 1 >= len(text):
+        return None
+
+    cursor = start + 1
+    if text[cursor] == "/":
+        cursor += 1
+    elif text[cursor] in "!?":
+        cursor += 1
+
+    name_start = cursor
+    while cursor < len(text) and (text[cursor].isalnum() or text[cursor] in "_-"):
+        cursor += 1
+
+    if cursor == name_start:
+        return None
+    if cursor < len(text) and not (text[cursor].isspace() or text[cursor] in "/>"):
+        return None
+
+    quote = ""
+    while cursor < len(text):
+        char = text[cursor]
+        if quote:
+            if char == quote:
+                quote = ""
+        elif char in {'"', "'"}:
+            quote = char
+        elif char == ">":
+            return cursor
+        cursor += 1
+    return len(text) - 1
+
+
+def strip_html_preserve_lines(text: str) -> str:
+    """Replace raw HTML tags/comments with spaces while retaining line numbers."""
+
+    output = list(text)
+    cursor = 0
+    while cursor < len(text):
+        if text[cursor] != "<":
+            cursor += 1
+            continue
+        end = _html_tag_end(text, cursor)
+        if end is None:
+            cursor += 1
+            continue
+        for index in range(cursor, end + 1):
+            if output[index] not in "\r\n":
+                output[index] = " "
+        cursor = end + 1
+    return "".join(output)
+
+
 @dataclass(frozen=True)
 class Issue:
     severity: str
@@ -57,6 +120,7 @@ def front_matter(text: str) -> tuple[bool, dict[str, str], str | None]:
 
 
 def markdown_links(text: str):
+    text = strip_html_preserve_lines(text)
     in_fence = False
     fence_char = ""
     for number, line in enumerate(text.splitlines(), 1):
@@ -184,7 +248,10 @@ def audit(docs: Path, config: Path, strict: bool = False, fail_orphans: bool = F
         present, metadata, parse_error = front_matter(text)
         front_count += int(present)
         metadata_by_file[path] = metadata
-        statuses[metadata.get("status", "").strip() or "unspecified"] += 1
+        status = metadata.get("status", "").strip()
+        if not status and generated(relative, metadata):
+            status = "generated"
+        statuses[status or "unspecified"] += 1
         add_metadata_issues(issues, relative, present, metadata, parse_error, strict)
 
         for line, target in markdown_links(text):
@@ -206,72 +273,7 @@ def audit(docs: Path, config: Path, strict: bool = False, fail_orphans: bool = F
             issues.append(Issue("error", "nav-target-missing", config.name, f"target does not exist: {target}"))
         else:
             nav_files.add(path)
-            incoming[path] += 1
-
-    orphans: list[str] = []
-    orphan_severity = "error" if fail_orphans else "warning"
-    for path in files:
-        relative = path.relative_to(docs)
-        if generated(relative, metadata_by_file[path]):
-            continue
-        if relative.name == "index.md" or relative.parts[0] == "templates":
-            continue
-        if path in nav_files or incoming[path]:
-            continue
-        orphans.append(relative.as_posix())
-        issues.append(Issue(orphan_severity, "page-orphan", relative.as_posix(), "page has no incoming link or navigation entry"))
-
-    return {
-        "files": len(files),
-        "front_matter_files": front_count,
-        "statuses": dict(sorted(statuses.items())),
-        "local_links": local_link_count,
-        "navigation_targets": len(nav),
-        "orphan_pages": orphans,
-        "issues": issues,
-    }
-
-
-def print_result(result) -> None:
-    errors = [issue for issue in result["issues"] if issue.severity == "error"]
-    warnings = [issue for issue in result["issues"] if issue.severity == "warning"]
-    print("Wiki audit")
-    print(f"  Markdown files: {result['files']}")
-    print(f"  Front matter: {result['front_matter_files']}")
-    print(f"  Local links: {result['local_links']}")
-    print(f"  Navigation targets: {result['navigation_targets']}")
-    print(f"  Orphan pages: {len(result['orphan_pages'])}")
-    print(f"  Errors: {len(errors)}")
-    print(f"  Warnings: {len(warnings)}")
-    print("  Status: " + ", ".join(f"{key}={value}" for key, value in result["statuses"].items()))
-    for issue in sorted(result["issues"], key=lambda item: (item.severity != "error", item.path, item.line or 0, item.code)):
-        where = issue.path + (f":{issue.line}" if issue.line else "")
-        print(f"{issue.severity.upper()}: {where}: [{issue.code}] {issue.message}")
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Wikiã®æ§‹é€ ã¨è¨˜äº‹Metadataã‚’æ¤œæŸ»ã—ã¾ã™ã€‚")
-    parser.add_argument("--docs-dir", type=Path, default=ROOT / "docs")
-    parser.add_argument("--config", type=Path, default=ROOT / "zensical.toml")
-    parser.add_argument("--report", type=Path)
-    parser.add_argument("--strict-metadata", action="store_true")
-    parser.add_argument("--fail-on-orphans", action="store_true")
-    args = parser.parse_args()
-    try:
-        result = audit(args.docs_dir, args.config, args.strict_metadata, args.fail_on_orphans)
-    except (OSError, tomllib.TOMLDecodeError) as exc:
-        print(f"ERROR: audit could not start: {exc}", file=sys.stderr)
-        return 2
-
-    print_result(result)
-    if args.report:
-        args.report.parent.mkdir(parents=True, exist_ok=True)
-        serializable = dict(result)
-        serializable["issues"] = [asdict(issue) for issue in result["issues"]]
-        args.report.write_text(json.dumps(serializable, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        print(f"JSON report: {args.report}")
-    return int(any(issue.severity == "error" for issue in result["issues"]))
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+            incoming[]H
+ÏHB‚ˆÜœ[œÎˆ\İÜİ—HH×BˆÜœ[—ÜÙ]™\š]HH™\œ›ÜˆˆYˆ˜Z[ÛÜœ[œÈ[ÙHØ\›š[™È‚ˆ›Üˆ][ˆš[\Î‚ˆ™[]]™HH]œ™[]]™WİÊØÜÊBˆYˆÙ[™\˜]Y
+™[]]™KY]Y]WØWÙš[VÜ]JN‚ˆÛÛ[YBˆYˆ™[]]™K›˜[YHOHš[™^›YˆÜˆ™[]]™Kœ\ÖÌHOH[\]\È‚ˆÛÛ[YBˆYˆ][ˆ˜]—Ùš[\ÈÜˆ[˜ÛÛZ[™ÖÆF…Ó ¢6öçF–çVP¢÷'†ç2æVæB‡&VÆF—fRæ5÷÷6—‚‚’¢—77VW2æVæB„—77VR†÷'†å÷6WfW&—G’Â'vRÖ÷'†â"Â&VÆF—fRæ5÷÷6—‚‚’Â'vR†2æò–æ6öÖ–ærÆ–æ²÷"æf–vF–öâVçG'’"’ ¢&WGW&â°¢&f–ÆW2#¢ÆVâ†f–ÆW2’À¢&g&öçEöÖGFW%öf–ÆW2#¢g&öçEö6÷VçBÀ¢'7FGW6W2#¢F–7B‡6÷'FVB‡7FGW6W2æ—FV×2‚’’’À¢&Æö6ÅöÆ–æ·2#¢Æö6ÅöÆ–æµö6÷VçBÀ¢&æf–vF–öå÷F&vWG2#¢ÆVâ†æb’À¢&÷'†å÷vW2#¢÷'†ç2À¢&—77VW2#¢—77VW2À¢Ğ  ¦FVb&–çE÷&W7VÇB‡&W7VÇB’ÓâæöæS ¢W'&÷'2Ò¶—77VRf÷"—77VR–â&W7VÇE²&—77VW2%Ò–b—77VRç6WfW&—G’ÓÒ&W'&÷"%Ğ¢v&æ–æw2Ò¶—77VRf÷"—77VR–â&W7VÇE²&—77VW2%Ò–b—77VRç6WfW&—G’ÓÒ'v&æ–ær%Ğ¢&–çB‚%v–¶’VF—B"¢&–çB†b"Ö&¶F÷vâf–ÆW3¢·&W7VÇE²vf–ÆW2u×Ò"¢&–çB†b"g&öçBÖGFW#¢·&W7VÇE²vg&öçEöÖGFW%öf–ÆW2u×Ò"¢&–çB†b"Æö6ÂÆ–æ·3¢·&W7VÇE²vÆö6ÅöÆ–æ·2u×Ò"¢&–çB†b"æf–vF–öâF&vWG3¢·&W7VÇE²væf–vF–öå÷F&vWG2u×Ò"¢&–çB†b"÷'†âvW3¢¶ÆVâ‡&W7VÇE²v÷'†å÷vW2uÒ—Ò"¢&–çB†b"W'&÷'3¢¶ÆVâ†W'&÷'2—Ò"¢&–çB†b"v&æ–æw3¢¶ÆVâ‡v&æ–æw2—Ò"¢&–çB‚"7FGW3¢"²"Â"æ¦ö–â†b'¶¶W—Ó×·fÇVWÒ"f÷"¶W’ÂfÇVR–â&W7VÇE²'7FGW6W2%Òæ—FV×2‚’’¢f÷"—77VR–â6÷'FVB‡&W7VÇE²&—77VW2%ÒÂ¶W“ÖÆÖ&F—FVÓ¢†—FVÒç6WfW&—G’Ò&W'&÷""Â—FVÒçF‚Â—FVÒæÆ–æR÷"Â—FVÒæ6öFR’“ ¢v†W&RÒ—77VRçF‚²†b#§¶—77VRæÆ–æWÒ"–b—77VRæÆ–æRVÇ6R""¢&–çB†b'¶—77VRç6WfW&—G’çWW"‚—Ó¢·v†W&WÓ¢·¶—77VRæ6öFWÕÒ¶—77VRæÖW76vWÒ"  ¦FVbÖ–â‚’Óâ–çC ¢'6W"Ò&w'6Rä&wVÖVçE'6W"†FW67&—F–öãÒ%v–¶8îjx¾˜
+8Š‰K¨´ÖWFFF8).jIÎiû¾8~8î88""¢'6W"æFEö&wVÖVçB‚"ÒÖFö72ÖF—""ÂG—SÕF‚ÂFVfVÇCÕ$ôõBò&Fö72"¢'6W"æFEö&wVÖVçB‚"ÒÖ6öæf–r"ÂG—SÕF‚ÂFVfVÇCÕ$ôõBò'¦Vç6–6ÂçFöÖÂ"¢'6W"æFEö&wVÖVçB‚"Ò×&W÷'B"ÂG—SÕF‚¢'6W"æFEö&wVÖVçB‚"Ò×7G&–7BÖÖWFFF"Â7F–öãÒ'7F÷&U÷G'VR"¢'6W"æFEö&wVÖVçB‚"ÒÖf–ÂÖöâÖ÷'†ç2"Â7F–öãÒ'7F÷&U÷G'VR"¢&w2Ò'6W"ç'6Uö&w2‚¢G'“ ¢&W7VÇBÒVF—B†&w2æFö75öF—"Â&w2æ6öæf–rÂ&w2ç7G&–7EöÖWFFFÂ&w2æf–Åööåö÷'†ç2¢W†6WB„õ4W'&÷"ÂFöÖÆÆ–"åDôÔÄFV6öFTW'&÷"’2W†3 ¢&–çB†b$U%$õ#¢VF—B6÷VÆBæ÷B7F'C¢¶W†7Ò"Âf–ÆS×7—2ç7FFW'"¢&WGW&â  ¢&–çE÷&W7VÇB‡&W7VÇB¢–b&w2ç&W÷'C ¢&w2ç&W÷'Bç&VçBæÖ¶F—"‡&VçG3ÕG'VRÂW†—7Eöö³ÕG'VR¢6W&–Æ—¦&ÆRÒF–7B‡&W7VÇB¢6W&–Æ—¦&ÆU²&—77VW2%ÒÒ¶6F–7B†—77VR’f÷"—77VR–â&W7VÇE²&—77VW2%ÕĞ¢&w2ç&W÷'Bçw&—FU÷FW‡B†§6öâæGV×2‡6W&–Æ—¦&ÆRÂVç7W&Uö66–“ÔfÇ6RÂ–æFVçCÓ"’²%Æâ"ÂVæ6öF–æsÒ'WFbÓ‚"¢&–çB†b$¥4ôâ&W÷'C¢¶&w2ç&W÷'GÒ"¢&WGW&â–çB†ç’†—77VRç6WfW&—G’ÓÒ&W'&÷""f÷"—77VR–â&W7VÇE²&—77VW2%Ò’  ¦–bõöæÖUõòÓÒ%õöÖ–åõò# ¢&—6R7—7FVÔW†—B†Ö–â‚’
