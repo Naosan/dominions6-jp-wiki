@@ -4,12 +4,13 @@
 Some nations, notably LA Lemuria, do not expose a normal recruitable mage
 roster through the standard nation recruitment mappings. That is a valid game
 state, not incomplete data. The runner also replaces per-path theoretical
-Random maxima with simultaneous feasible Random outcomes whenever a crosspath
-Forge or summon requirement is checked.
+Random maxima with simultaneous feasible Random outcomes and keeps ordinary
+path boosters on paths the bearer already possesses.
 """
 from __future__ import annotations
 
 import generate_magic_access_routes as generator
+import magic_access_booster_semantics
 import magic_access_route_safety
 import run_magic_access_routes as runner
 
@@ -50,9 +51,14 @@ def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> 
     )
     count_row = f"| Nation without native recruit Mage | {len(NO_NATIVE_NAMES)} |"
     random_row = "| Random crosspath feasibility | simultaneous outcome enumeration |"
+    booster_row = "| Standard booster semantics | existing paths only |"
     anchor = f"| Nation profile | {len(profiles)} |"
     if count_row not in text and anchor in text:
-        text = text.replace(anchor, anchor + "\n" + count_row + "\n" + random_row, 1)
+        text = text.replace(
+            anchor,
+            anchor + "\n" + count_row + "\n" + random_row + "\n" + booster_row,
+            1,
+        )
 
     section = [
         "## 通常Recruit Mageが0件の国家",
@@ -71,6 +77,10 @@ def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> 
             "",
             "Pathごとの理論最大を一体のMageへ合成しません。Booster Forgeと再帰召喚の複合Path要求は、各Random pickを一つのPathへ割り当てた同時成立可能な結果だけで判定します。",
             "",
+            "## Boosterの安全策",
+            "",
+            "BaseIの通常Path bonusは、装備者が既に持つPathだけを上げるBoosterとして計算します。0から新Pathを作る経路には使わず、明示的なEmpower効果、召喚、Pretender、Site等を別Layerへ残します。",
+            "",
             "",
         ]
     )
@@ -83,6 +93,7 @@ def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> 
 
 
 def main() -> None:
+    magic_access_booster_semantics.install(generator)
     magic_access_route_safety.install(generator)
     generator.validate = safe_validate
     generator.quality_page = safe_quality_page
