@@ -33,4 +33,11 @@ jobs:
       - name: Generate data and build site
         run: python scripts/build_wiki.py
       - name: Audit Wiki structure
-        run: python scripts/audit_wiki.py --report build/wiki-audit.json
+        run: |
+          set +e
+          python scripts/audit_wiki.py --report build/wiki-audit.json
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            python scripts/report_wiki_audit.py build/wiki-audit.json
+          fi
+          exit "$status"
