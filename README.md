@@ -24,6 +24,7 @@ python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
 python scripts/generate_unit_catalog.py
 python scripts/generate_magic_site_data.py
+python scripts/generate_site_search_data.py --offline
 zensical serve
 ```
 
@@ -39,6 +40,7 @@ python scripts/generate_spell_item_data.py
 python scripts/generate_combat_data.py
 python scripts/generate_unit_catalog.py
 python scripts/generate_magic_site_data.py
+python scripts/generate_site_search_data.py --offline
 zensical serve
 ```
 
@@ -64,8 +66,9 @@ zensical serve
 14. SpellのNegative summon pool、Wish、Unique summon、Terrain-specific summon等を生成
 15. Arena関連Magic Itemを生成
 16. 全1,253 Magic SiteページとGem・Recruit・Summon・Event横断索引を生成
-17. Zensicalで静的サイトを構築
-18. GitHub Pagesへ公開
+17. Site Level分布とRemote Site Search Spell索引を生成
+18. Zensicalで静的サイトを構築
+19. GitHub Pagesへ公開
 
 ## 記事を書く
 
@@ -74,6 +77,8 @@ zensical serve
 ```text
 docs/
   basics/weapons-and-shields.md
+  magic/site-search.md
+  magic/site-search-playbook.md
   magic/paths/earth.md
   nations/ma/ulm.md
 ```
@@ -252,6 +257,38 @@ Magic Site索引は次の明示データを結合します。
 
 正のUnit IDはBaseUに存在する場合だけ接続し、raw Rarityを出現確率の百分率へ変換しません。`loc = 0`は「全地形へ通常出現」と断定せず、未知のLocation bitも消さずに品質レポートへ残します。同名Siteは同一視せず、異なるSite IDのrecordとして保持します。
 
+### Site Search参照
+
+```bash
+python scripts/generate_site_search_data.py --offline
+```
+
+生成先:
+
+```text
+docs/data/sites/search-levels.md
+docs/data/spells/site-search.md
+```
+
+Site Search参照は次を生成します。
+
+- Path別のSearch Level分布
+- raw Rarity 0–2 SiteのL1 / L2 / L3 / L4累積record数
+- Level 4以上の通常・特殊Site一覧
+- effect 48とPath argumentによる九Pathの単一Path Remote Search抽出
+- `Mirror of Earth's Memories`、`Voice of Tiamat`、`Acashic Knowledge`の特殊Search分離
+- Research、要求Path、Gem / Blood Slave Cost、Search scope
+- Holy専用Remote Searchが現行Researchable setにないことの整合性確認
+
+手書き攻略は次です。
+
+```text
+docs/magic/site-search.md
+docs/magic/site-search-playbook.md
+```
+
+生成データはSite recordとSpellの事実、手書き記事はManual / Remoteの選択、Searcherの機会費用、Search Route、戦争前の中止条件を扱います。
+
 ## データ更新
 
 生成元はDom6 InspectorのDominions 6.35対応Commitへ固定しています。ダウンロード済みデータは `.cache/dom6inspector/` に保存されます。
@@ -264,6 +301,7 @@ python scripts/generate_spell_item_data.py --refresh
 python scripts/generate_combat_data.py --refresh
 python scripts/generate_unit_catalog.py --refresh
 python scripts/generate_magic_site_data.py --refresh
+python scripts/generate_site_search_data.py --refresh
 
 # Networkを使用せずCacheのみで生成
 python scripts/generate_recruitment_data.py --offline
@@ -272,6 +310,7 @@ python scripts/generate_spell_item_data.py --offline
 python scripts/generate_combat_data.py --offline
 python scripts/generate_unit_catalog.py --offline
 python scripts/generate_magic_site_data.py --offline
+python scripts/generate_site_search_data.py --offline
 ```
 
 自動生成ページは攻略評価ではなく、現行データを確認するための索引です。戦術、研究順、Pretender、Script、Counterは手書き記事で扱います。
