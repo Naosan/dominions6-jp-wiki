@@ -199,6 +199,9 @@ nav = [
   { "チュートリアル" = [
     "getting-started/index.md",
     "getting-started/first-12-turns.md",
+    "getting-started/expansion.md",
+    "getting-started/first-war.md",
+    "getting-started/battle-replay.md",
     "getting-started/beginner-tips.md",
     "getting-started/shortcuts.md",
   ] },
