@@ -48,7 +48,7 @@ jobs:
       - name: Generate nation Site Search capability
         run: python scripts/run_nation_site_search_data.py --offline
       - name: Generate extended Magic Access
-        run: python scripts/generate_extended_magic_access_data.py --offline
+        run: python scripts/run_extended_magic_access_data.py --offline
       - name: Build site
         run: zensical build --clean
       - uses: actions/upload-pages-artifact@v5
