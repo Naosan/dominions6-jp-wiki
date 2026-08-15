@@ -1,486 +1,1352 @@
 ---
 title: 戦闘ルール
-status: expanding
+page_type: reference
+status: reviewed
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-16"
 ---
 
 # 戦闘ルール
 
-Dominions 6の戦闘を、**命中・防御・Damage・Fatigue・Morale・配置**の順に整理します。
+Dominions 6の戦闘を、**配置とTiming → 命中 → Shield → Damage軽減 → 状態異常 → Fatigue → Moraleと退却**の順で整理します。
 
-Dominionsの戦闘は、単純な「攻撃力－防御力」ではありません。攻撃を受ける側には複数の防御層があり、それぞれを突破する手段が異なります。
+このページの目的は、個々のUnitを「強い・弱い」で覚えることではありません。
 
-| 防御層 | 主な能力 | 主な突破方法 |
-|---|---|---|
-| 攻撃させない | Awe、Fear、Repel、足止め | Morale、長武器、射撃、魔法 |
-| 命中させない | Defence、Mirror Image、Displacement | Attack、手数、必中・範囲攻撃、拘束 |
-| 盾で受ける | Shield Parry | 高Attack、盾無視、Flail系、範囲攻撃 |
-| Damageを軽減 | Protection、Resistance | 高Damage、AP、AN、対応外のDamage type |
-| 致命傷を防ぐ | HP、Luck、Regeneration | Burst damage、持続Damage、即死・MR攻撃 |
-| 戦闘継続 | Morale、Fatigue管理 | Fear、損害、Fatigue damage、長期戦 |
+> **どの防御層が機能し、どの層が突破され、次の戦闘で何を一つ変えるべきか**
 
-攻略上は、相手の全防御を正面から上回る必要はありません。**最も薄い層を攻撃する**のが基本です。
+を自分で判断できるようにすることです。
+
+!!! note "このページの精度範囲"
+    ここではDominions 6.35のManual、公式変更点、ゲーム内表示、固定データから確認できる主要ルールを、実戦で使える順に整理します。内部処理にはSpell・Weapon・能力固有の例外があります。数式は理解用の概念式として読み、特定効果の最終判定はゲーム内Tooltipと現行データも確認してください。
 
 ---
 
-## Dominions Random Number（DRN）
+## 最初に覚える三つ
 
-Dominionsの多くの判定では、能力値に **DRN** を加えて比較します。
+### 1. 戦闘は防御層の競争
 
-DRNは概念的には「開放型2D6」です。各ダイスで6が出た場合、その6を5として扱い、さらに振り足します。振り足しでも6が出れば続きます。
+高ProtectionでもShockやPoisonには弱いことがあります。高DefenceでもAoE、拘束、多数の攻撃には崩されます。高MRでも通常武器には意味がありません。
 
-このため、能力値差が大きくても絶対に安全とは限りません。
+相手の全能力を上回るのではなく、**最も薄い層へ攻撃を通す**のが基本です。
 
-### 攻略上の意味
+### 2. 戦闘はTimingの競争
 
-- 能力値1点の差は、毎回の判定へ継続して効く
-- しかし極端な出目で番狂わせが起こる
-- 一回だけの決闘より、数十・数百回判定される集団戦の方が能力値差は安定して表れる
-- 「勝率が高い」と「絶対に勝つ」は別
+同じSpellでも、接敵前に入ればArmy Buff、接敵後なら手遅れです。同じ両手武器兵でも、盾兵の後から入ればDamage役、最初に射撃を受ければ高価な損失になります。
 
-高価なCommander一体へ勝敗を依存させる構成では、低確率事故も無視できません。
+### 3. 一回のReplayは証明ではない
 
----
-
-## 戦場、Square、Size
-
-戦場はSquareの集合として処理されます。一つのSquareに入れるUnit数はSizeによって変わり、密集度は次の要素へ影響します。
-
-- 一度に接敵できる人数
-- 範囲攻撃一発で巻き込まれるHP・Unit数
-- 巨大Unitによる押し出しやTrample
-- 後列のUnitが前へ出るまでの時間
-- 狭い場所や障害物での詰まり方
-
-### 小型Unit
-
-同じSquareへ多く入れるため、前線の手数を増やしやすい一方、AoE攻撃や雲・毒・爆発にまとめて巻き込まれやすくなります。
-
-### 大型Unit
-
-一体あたりのHPとDamageが高い傾向がありますが、前線へ並べる数が少なく、包囲・射撃・MR攻撃を集中されやすい場合があります。
-
-### Dom6固有の注意
-
-Dominions 6では戦場にBush、RockなどのObstacleが生成されます。大型Creatureが障害物を破壊できる場合もあり、同じArmy同士でも戦場によって接敵速度や陣形維持が変わります。
+多くの判定にDRNが使われるため、同じ編成でも結果は揺れます。一戦の勝敗だけでなく、接敵位置、命中、Damage type、Fatigue、Routの順序を見ます。
 
 ---
 
-## Formation
+# 戦闘の全体像
 
-Formationは「見た目」ではなく、**前線幅、密集度、Morale、移動効率、AoE耐性**を調整する機能です。
-
-### Box
-
-部隊をまとまりとして扱いやすく、正面突破やCommander護衛に向きます。ただし後列が接敵するまで時間がかかり、範囲攻撃へ密集しやすくなります。
-
-### Line
-
-前線幅を広く取り、多くのUnitを同時に戦わせやすいFormationです。近接兵の基本候補ですが、戦場の端・障害物・異なるCombat Speedによって崩れることがあります。
-
-### Double Line
-
-Lineより奥行きを残しながら前線を広げます。非常に薄いLineで突破されるのを避けたい場合や、第一列が倒れた後も接敵人数を保ちたい場合に使います。
-
-### Sparse / Loose系
-
-Unit間隔を広げ、射撃・AoE・雲への被害を分散します。一方、同じ前線幅での密度が下がり、突破されやすくなる場合があります。
-
-### Skirmish
-
-広く散開します。射撃や大AoEへの被害分散には役立ちますが、Morale面や部隊統制に不利があります。Undisciplined Unitは命令・Formationに制約を受けます。
-
-### 実戦の基準
-
-- 通常近接兵：LineまたはDouble Lineから試す
-- 射撃・AoEが怖い：Sparse / Skirmishを検討
-- 高価な少数兵：過度に散らして各個撃破されないよう注意
-- Bodyguard：Commanderへ近いBox
-- 速度が違う兵種：別Squadに分ける
-
----
-
-## 接近戦の命中判定
-
-基本的な近接命中は、次の比較です。
+以下は理解用の流れです。ゲーム内部の厳密な全サブフェーズ順を表すものではありません。
 
 ```text
-攻撃側：Attack Skill + 武器補正 + 各種補正 + DRN
-防御側：Defence Skill + 各種補正 + DRN
+戦闘前効果・初期配置
+        ↓
+移動・標的選択・接敵
+        ↓
+Awe / Repel / 回避 / Shieldなどの防御
+        ↓
+Damage / Protection / Resistance / MR
+        ↓
+状態異常・Fatigue・Affliction
+        ↓
+Morale check・Rout・Retreat
+        ↓
+次Roundまたは戦闘終了
 ```
 
-攻撃側が防御側を上回ると、通常は命中します。同値は防御側有利です。
+プレイヤーが直接操作できるのは主に戦闘前です。
 
-### Attack Skill
+- CommanderとSquadの位置
+- Squad分割
+- Formation
+- Attack / Fire order
+- Hold回数
+- Mage Script
+- Gem
+- Bodyguard
+- Retreat route
 
-Attackは「当たった後の威力」ではなく、**攻撃を命中させる能力**です。高Damageの両手武器でも、Attackが低ければ高Defenceの敵へ空振りします。
+したがって、戦闘中の強さは、
 
-Attackを上げる価値が高いUnitは次です。
+> **Unit性能 × 配置 × 命令 × Research × Gem × 情報**
 
-- 一撃が重い
-- 強力なOn-hit効果を持つ
+で決まります。
+
+詳しい命令は[命令とBattle Script](orders.md)を参照してください。
+
+---
+
+# 防御層
+
+| 層 | 主な要素 | 代表的な突破方法 | Replayで見ること |
+|---|---|---|---|
+| 接敵させない | 距離、Screen、Obstacle、移動速度 | Flying、射撃、Teleport、機動 | 誰が最初に接敵したか |
+| 攻撃させない | Awe、Fear、Repel、拘束 | Morale、長武器、射撃、Mindless、AoE | 攻撃動作が中止されていないか |
+| 命中させない | Defence、Displacement、Mirror Image | Attack、多段、Harassment、必中、AoE、拘束 | Missが多いか |
+| Shieldで受ける | Parry、Shield Protection | 高Attack、盾対策、AoE、AP・AN | Shield Hitが多いか |
+| Damageを軽減 | Protection、Elemental Resistance、Physical Resistance | 高Damage、AP、AN、別Damage type | 当たるがHPが減らないか |
+| 致命傷を防ぐ | HP、Luck、Regeneration、Damage reversal系 | Burst、持続Damage、即死、回復阻害 | 一撃死か長期消耗か |
+| 戦闘を続ける | Fatigue、Morale、Leadership、退路 | Fear、Fatigue、Commander kill、包囲 | 死亡より先にRoutしたか |
+
+同じ「前衛が崩れた」という結果でも、原因が違えばCounterも違います。
+
+---
+
+# Dominions Random Number（DRN）
+
+Dominionsの多くの対抗判定では、能力値に**DRN**を加えて比較します。
+
+DRNは概念的には開放型2D6です。6が出たダイスは5として数え、さらに振り足します。振り足しでも6が出れば続きます。
+
+この仕組みにより、能力値差は重要ですが、絶対保証にはなりません。
+
+## 実戦上の意味
+
+- 能力値1点の差は、繰り返される全判定へ効く
+- 大差でも低確率事故は残る
+- 攻撃回数が増えると、低確率の成功もいずれ発生する
+- 高価な一体へ勝敗を集中すると、事故の損失が大きい
+- 一回のReplayより複数回のTest battleが信頼できる
+
+### 例
+
+Attack 13がDefence 11へ有利でも、毎回命中するわけではありません。逆にAttack 10でも、十分な攻撃回数があれば高Defenceへ命中が発生します。
+
+> **能力値差は確率を傾ける。攻撃回数はその確率を試す回数を増やす。**
+
+この二つを分けて考えます。
+
+---
+
+# 戦場、Square、Size、Obstacle
+
+戦場はSquareの集合として処理されます。Square内へ入れるUnit数、同時に攻撃できる数、AoEで巻き込まれる数はUnitのSizeと密集度に左右されます。
+
+## 小型Unit
+
+同じ前線幅へ多く並び、攻撃回数を増やしやすい一方、
+
+- AoE
+- Poison cloud
+- Fire cloud
+- Trample
+- Battlefield-wide damage
+
+へまとめて巻き込まれやすくなります。
+
+## 大型Unit
+
+一体ごとのHP・Strength・Damageが高い傾向がありますが、
+
+- 前線へ並ぶ数が少ない
+- 射撃の標的になりやすい
+- MR攻撃を集中されやすい
+- Surroundされやすい
+- 一体の行動不能が戦力低下へ直結する
+
+という交換条件があります。
+
+## Effective front width
+
+Armyの人数ではなく、**同時に敵へ届いている攻撃数**を見ます。
+
+100人いても狭い通路で20人しか戦っていなければ、残りは待機しています。逆に少数のFormation Fighterや小型Unitが広い前線で同時攻撃すると、表示人数以上の圧力を出します。
+
+## Battlefield Obstacle
+
+Dominions 6ではBush、Rock、TreeなどのObstacleが戦場へ生成されます。
+
+- 移動経路が曲がる
+- Lineが分断される
+- Fast Squadだけ先行する
+- Rear attackの経路が変わる
+- 大型Creatureが障害物を破壊する
+- AoEでObstacleごと周辺へ影響する
+
+同じ配置でも、戦場ごとに接敵Timingが変わります。Replayでは最初に戦場全体を見ます。
+
+---
+
+# Formation
+
+Formationは見た目ではなく、**前線幅、密集度、接敵Timing、AoE耐性、統制**を変える機能です。
+
+| Formationの方向 | 得るもの | 失いやすいもの |
+|---|---|---|
+| 深く密集 | 戦線の厚み、Commander周辺の防衛 | 前線参加人数、AoE耐性 |
+| 広いLine | 同時攻撃数、包囲 | 障害物への弱さ、薄い箇所の突破耐性 |
+| Sparse / Loose | AoE・射撃・Cloudの分散 | 局所密度、相互支援 |
+| Skirmish | 最大限の分散 | Morale・統制・集中戦闘力 |
+
+## Box
+
+Commander護衛、少数精鋭、突破されにくい塊を作りたい場合に向きます。後列が接敵するまで時間がかかり、AoEへ密集します。
+
+## Line
+
+通常近接兵の出発点です。多くのUnitを同時に戦わせやすい一方、ObstacleやCombat Speed差で線が曲がります。
+
+## Double Line
+
+前線幅と厚みを両立しやすいFormationです。第一列が倒れたあとも接敵人数を維持したい場合に使います。
+
+## Sparse / Loose
+
+大AoE、Cloud、射撃、Trample被害を分散します。敵の局所突破へ弱くなるため、高価な少数兵を過度に散らさないようにします。
+
+## Formationを選ぶ手順
+
+1. 敵の主Damageが単体かAoEかを見る
+2. 自軍は同時攻撃数と耐久のどちらを必要とするか決める
+3. 速度が違う兵種を別Squadへ分ける
+4. ReplayでLineが維持されたか確認する
+
+Formation名を正解として覚えず、**実際の接敵形状**で評価します。
+
+---
+
+# 配置、命令、接敵Timing
+
+戦闘の多くは、最初の近接攻撃より前に決まります。
+
+## ScreenとDamage役を分ける
+
+```text
+前方：盾兵・Chaff・耐久兵
+後方または側面：両手武器・Sacred・専門Counter
+後方：Mage・Archer・重要Commander
+左右後方：Attack Rear対策
+```
+
+Damage役を前へ置くと、
+
+- 最初の射撃
+- Lance Charge
+- Repel
+- Enemy debuff
+
+を受けて仕事前に失います。
+
+## HoldはTimingを交換する命令
+
+Hold and Attackは安全命令ではありません。
+
+得るもの:
+
+- Buffの完成
+- 敵を引き込む
+- 速度の違うSquadを同期する
+
+失うもの:
+
+- 射撃を受けるRound
+- Enemy Spellが進む時間
+- Battlefield effectの蓄積時間
+
+## Combat Speed差
+
+同じ位置・同じ命令でも、Fast Unitは先に接敵します。
+
+- Cavalryだけ前へ飛び出す
+- Heavy Infantryが遅れる
+- Summonが本隊から分離する
+- BodyguardがCommanderへ追従できない
+
+という問題が起こります。速度が役割を壊すならSquadを分けます。
+
+---
+
+# 攻撃を開始できるか：Awe、Fear、Repel、拘束
+
+命中判定の前に、攻撃そのものが止められる場合があります。
+
+## Awe
+
+Aweを持つ相手へ近接攻撃するUnitは、攻撃を実行するためのMorale系判定を要求される場合があります。
+
+### Aweへの回答
+
+- 高Morale
+- Berserk
+- Mindlessなどの例外特性
+- 多数の攻撃機会
+- 射撃
+- Spell
+- Awe持ちを拘束・疲労させる
+
+Awe相手へ低Morale Chaffだけを当てると、人数が多くても攻撃回数が生まれません。
+
+## Fear
+
+FearはDamageを直接与えなくても、Morale低下とRoutを通じて戦線を崩します。
+
+### Fearへの回答
+
+- 高Morale
+- Leadership
+- Sermon / Morale Buff
+- Fear sourceの集中排除
+- Undead・Mindless等の性質確認
+- Squadを分けて崩壊を局所化
+
+## Repel
+
+より長い武器を持つ防御側は、接近して攻撃する敵をRepelできる場合があります。
+
+Repelは、
+
+1. 武器長
+2. Repel側の攻撃判定
+3. Repel攻撃の有効性
+4. 攻撃側のMorale
+
+を段階的に処理し、失敗した攻撃側の攻撃を中止させます。
+
+### Repelが強い状況
+
+- Pike / Great Spearなど長Weapon
+- 高Attack
+- 敵のWeaponが短い
+- 敵Moraleが低い
+- 敵の一撃が重く、攻撃回数が少ない
+
+### Repelへの回答
+
+- 同等以上のWeapon Length
+- 高Morale
+- 射撃・Spell
+- 多段攻撃
+- 拘束
+- Repel側をHarassmentで疲れさせる
+
+Repelの目的は必ずしもDamageではありません。**敵の攻撃回数を消し、後衛が働くRoundを増やす**ことです。
+
+## Entangle、Earth Meld、Paralyze、Stun
+
+拘束・麻痺・気絶は、敵のDamageを減らし、Defenceを機能しにくくし、集中攻撃を可能にします。
+
+高HP・高Protectionの敵を正面から削るより、行動不能にしてから倒す方が効率的な場合があります。
+
+---
+
+# 近接命中：AttackとDefence
+
+基本的な近接命中は、概念的に次の比較です。
+
+```text
+攻撃側：Attack Skill + 武器補正 + 状態補正 + DRN
+防御側：Defence Skill + 状態補正 + DRN
+```
+
+攻撃側が上回れば通常は命中し、同値は防御側に有利です。
+
+## Attack Skill
+
+Attackは威力ではなく、**一撃を命中させる能力**です。
+
+Attackの価値が高いUnit:
+
 - 攻撃回数が少ない
-- 敵CommanderやThugを狙う
-- Repelを活用する長武器兵
+- 一撃のDamageが大きい
+- On-hit効果が重要
+- Commander・Thugを狙う
+- Repelを使う
 
-### Defence Skill
+## Defence Skill
 
-Defenceは近接攻撃を避ける能力です。Protectionとは別物で、射撃に対して通常のDefenceは主要防御になりません。
+Defenceは近接攻撃を回避する能力です。Protectionとは別です。
 
-Defenceは次によって下がります。
+Defenceを下げる主な要因:
 
-- ArmorやShieldのEncumbrance・Defence penalty
+- Armor・Shield・WeaponのDefence penalty
 - Fatigue
 - Harassment
-- 拘束・麻痺・気絶
+- Stun / Paralyze / Entangleなど
 - 一部のDebuff
 
-高Defence兵でも、多数の攻撃を短時間に受けるとHarassmentで回避力が低下します。したがって、**手数と包囲は高Defenceへの現実的なCounter**です。
+## Harassment
 
----
+同じRoundに多数の攻撃を受けるUnitは、後続攻撃を避けにくくなります。
 
-## ShieldとParry
+高Defence Unitへの代表的な回答は、Attackを数点上げることだけではありません。
 
-盾は単純にProtectionを常時加える装備ではありません。
+- 小型Unitで囲む
+- 多段攻撃
+- Summonを重ねる
+- Mirror Imageを剥がす
+- 拘束してDefenceを落とす
 
-近接攻撃では、Defenceだけなら避けられなかったものの、Shield Parryを含めれば防げた場合に**Shield Hit**になります。Shield Hitでは盾のProtectionがDamage計算へ加わります。
+という形で、**判定回数とDefence低下を同時に作る**方法があります。
 
-つまり結果は三段階です。
+## 多段攻撃
 
-1. 攻撃側がDefence＋Parryを上回る：Clean Hit
-2. Defenceは上回るがDefence＋Parryを上回れない：Shield Hit
-3. Defenceも上回れない：Miss
+多段攻撃は、
 
-### 射撃に対する盾
+- 高Defence
+- Mirror Image
+- Chaff
+- On-hit効果
 
-射撃では通常のDefenceより、Size、射手のPrecision、距離、Shield Parryなどが重要になります。大盾は接近戦だけでなく、弓・Crossbowへの前衛として価値があります。
-
-### 盾の交換条件
-
-盾はParryとProtectionを提供しますが、重量によってDefenceやEncumbranceへ不利を与える場合があります。
-
-- 小盾：軽く、機動性を保ちやすい
-- 大盾・Tower Shield：射撃・盾受けに強いが重い
-- 盾なし両手武器：Damageと武器長を得やすいが、射撃と通常攻撃への生存性を失う
-
-詳しくは [両手武器・片手武器・盾](weapons-and-shields.md) を参照してください。
-
----
-
-## DamageとProtection
-
-攻撃が命中すると、概念的には次のようにDamageとProtectionの双方へDRNを加えて比較します。
+へ強い一方、各攻撃のDamageが低ければ高Protectionへ通りません。
 
 ```text
-最終Damage ≒ 攻撃側のDamage + DRN -（対象Protection + DRN）
+高Defence・低Protection
+→ Attack / 多段 / 拘束
+
+低Defence・高Protection
+→ 高Damage / AP / AN / Armor破壊
 ```
 
-0以下なら通常はHP Damageを与えません。
-
-### 近接Damage
-
-多くの近接武器では、表示Damageは次の要素で決まります。
-
-- UnitのStrength
-- 武器固有Damage
-- 両手武器によるStrength寄与
-- Charge bonus
-- Bless、Spell、Item、Afflictionなどの補正
-
-高Strength Unitほど両手武器の価値が上がりやすくなります。
-
-### Protection
-
-Protectionは命中後のDamageを軽減します。
-
-- Natural Protection
-- Armor Protection
-- Shield Protection（Shield Hit時）
-- Spell・Bless・Itemによる補正
-
-Natural ProtectionとArmor Protectionは単純加算ではなく、組み合わせると逓減があります。Shield ProtectionはShield Hit時に別枠で加わります。
-
-### HeadとBody
-
-通常の攻撃ではHeadまたはBodyへ命中します。Helmetが弱いUnitは低確率のHead Hitで大Damageを受けることがあります。AoE攻撃ではキャラクター画面の平均Protectionが参照される場合があります。
-
-### Armor-defeating hit
-
-Protection側の出目が極端に悪いと、Protectionが一部低下するArmor-defeating hitが起こります。Fatigueが高いUnit、気絶・拘束されたUnitはこの危険が増えます。
-
-このためProtection 30でも、Fatigue 100で眠ったまま殴られ続ければ安全ではありません。
+と分けます。
 
 ---
 
-## Armor PiercingとArmor Negating
+# ShieldとParry
 
-### Armor Piercing（AP）
+盾はProtectionを常時そのまま足す装備ではありません。
 
-対象Protectionの一部だけを計算へ使います。高Protectionへ有効ですが、Protectionが完全に消えるわけではありません。
+近接攻撃では、結果を理解用に三段階へ分けられます。
 
-### Armor Negating（AN）
+1. **Miss**：通常Defenceで回避
+2. **Shield Hit**：Defenceだけでは避けられないがParry込みで受ける
+3. **Clean Hit**：Parryも突破され、BodyまたはHeadへ通る
 
-Protectionを無視します。代表的にはShock系に多く、Earth Buffや重装甲へ非常に強力です。
+Shield HitではShield ProtectionがDamage軽減へ参加します。
 
-### 重要な区別
+## 射撃とShield
 
-- **Magic Weapon**：Etherealや一部の魔法防御へ対応する性質
-- **Armor Piercing**：Protectionを部分的に無視
-- **Armor Negating**：Protectionを完全に無視
-
-「魔法攻撃だから鎧を無視する」とは限りません。Spell説明のDamage属性を確認してください。
-
----
-
-## Slash、Pierce、Blunt、Untyped
-
-物理Damage typeにも役割があります。
-
-### Slashing
-
-Protection計算後のDamageを増やしやすく、肉体へ通ったときの殺傷力が高いDamage typeです。盾を傷める能力にも優れます。
-
-### Piercing
-
-対象Protectionの一部を減らして計算します。Armor Piercingと組み合わさるCrossbowなどは、高Protectionへの一般兵Counterになります。
-
-### Blunt
-
-Head Hitで威力が上がり、盾を傷める用途もあります。Skeleton、Constructなど相手側のPhysical Resistanceとの相性も確認します。
-
-### Untyped
-
-固有ボーナスはありませんが、Slash / Pierce / Blunt Resistanceの対象になりません。
-
-### Physical Resistance
-
-Slash、Pierce、BluntへのResistanceは、対応するDamageをProtection計算後に軽減します。したがって、高Protection＋Physical Resistance＋Regenerationの組み合わせは、通常物理へ極めて強くなります。
-
----
-
-## Weapon LengthとRepel
-
-より長い武器を持つ防御側は、攻撃してくる相手をRepelできる場合があります。
-
-Repelは単なる先制攻撃ではなく、概ね次の段階を通ります。
-
-1. 武器長を比較する
-2. 防御側がAttack系判定でRepelを試みる
-3. 攻撃側がMorale判定に失敗すると攻撃を中止する
-
-Repelが成立した場合、攻撃そのものを防ぎ、相手へHarassmentを蓄積できます。
-
-### Repelが向く状況
-
-- 敵武器が短い
-- 敵Moraleが低い
-- 自軍のAttackが高い
-- PikeやHalberdを多数並べる
-- 高Damageだが攻撃回数の少ない敵を止める
-
-### Repelが弱い状況
-
-- 相手も長武器
-- 高Morale・Mindless
-- 射撃やSpell
-- 武器長を問わない特殊攻撃
-- 多数の小攻撃でRepel側がHarassmentを受ける
-
-Repelだけで敵を倒すのではなく、**敵の攻撃回数を減らして後衛火力が働く時間を作る**と考えます。
-
----
-
-## 射撃戦
-
-射撃の命中には主に次が関わります。
+射撃では通常のDefence Skillより、
 
 - 射手のPrecision
-- 武器のPrecision補正
 - 距離
 - 対象Size
 - Shield
-- Storm、Wind、Darknessなどの戦場効果
-- 発射物・Spell固有のAoE
+- Air Shieldなどの効果
+- Storm・Wind・Darkness
 
-射撃は敵前衛だけでなく、外れた弾が近くのSquareへ飛ぶため、Friendly Fireが発生します。
+が重要です。
 
-### 一般的な使い分け
+大盾は射撃Screenとして非常に有効ですが、重量によってDefence・Encumbranceへ不利を持つ場合があります。
 
-- Bow：軽装・大量Chaffへ
-- Crossbow / Arbalest：高Protectionへ。ただし射撃間隔とFriendly Fireに注意
-- Sling：安価な面制圧。高Protectionには弱くなりやすい
-- Javelin：接敵前の一斉射撃とStrengthの活用
-- AoE Spell：密集Squareへ。自軍前衛を巻き込む可能性あり
+## Shieldの交換条件
 
-射撃部隊は「Fire Closest」だけでなく、Large Monster、Cavalry、Archersなどの優先目標を敵構成に応じて設定します。
+| 装備 | 得るもの | 失いやすいもの |
+|---|---|---|
+| 小盾 | 軽いParry、機動性 | 高いShield Protection |
+| 大盾 | 射撃防御、Shield Hit耐久 | Defence、Fatigue効率 |
+| 盾なし両手武器 | Damage、Length | Parry、射撃耐性 |
+| 複数武器 | 攻撃回数 | 盾、二刀Penalty |
+
+詳しくは[両手武器・片手武器・盾](weapons-and-shields.md)を参照してください。
 
 ---
 
-## Elemental Resistance
+# Damage処理の流れ
+
+攻撃が命中したあと、概念的には次を処理します。
+
+```text
+攻撃の基礎Damageを決める
+        ↓
+Hit location・Shield Hitを決める
+        ↓
+AP / AN / Damage typeを適用する
+        ↓
+Protection・Resistanceで軽減する
+        ↓
+HP Damage・Fatigue Damage・状態効果を適用する
+        ↓
+Affliction・死亡・Regeneration等を処理する
+```
+
+## 概念式
+
+通常Damageは理解用に次のように考えられます。
+
+```text
+最終HP Damage ≒ Damage側の値 + DRN - Protection側の値 - DRN
+```
+
+0以下なら通常はHP Damageになりません。ただしSpell、Poison、Fatigue、MR効果などは別の処理を持ちます。
+
+## 近接Damageの材料
+
+- UnitのStrength
+- Weapon固有Damage
+- 片手 / 両手のStrength利用
+- Charge
+- Bless
+- Spell
+- Item
+- Affliction・状態補正
+
+表示Damageだけでなく、**命中率と攻撃回数を掛けた実効Damage**を見ます。
+
+---
+
+# Protection
+
+Protectionは命中後のDamageを軽減します。
+
+主な構成要素:
+
+- Natural Protection
+- Body Armor
+- Helmet
+- Shield Protection（Shield Hit時）
+- Spell・Bless・Item
+
+Natural ProtectionとArmor Protectionは、常に単純加算されるわけではなく、組み合わせに逓減があります。
+
+## HeadとBody
+
+攻撃はHeadまたはBodyへ命中します。
+
+- Body Armorは高いがHelmetが弱い
+- Helmetは強いが胴体が薄い
+- Shield HitならShield Protectionが加わる
+
+という違いがあります。
+
+表示上の平均Protectionだけでなく、装備内訳を確認します。
+
+## Protectionが強い相手
+
+Protectionは低～中Damageの多数攻撃へ特に強くなります。
+
+- Militiaの短剣
+- 低Strengthの多段攻撃
+- 低Damage Bow
+- 弱いSummon
+
+は命中してもHPを減らせない場合があります。
+
+## Protectionへの回答
+
+- 高Strength・高Damage
+- 両手武器
+- Piercing
+- Armor Piercing
+- Armor Negating
+- Armor破壊
+- Poison
+- MR攻撃
+- Fatigueで眠らせる
+
+---
+
+# Armor Piercing、Armor Negating、Magic Weapon
+
+この三つを混同しないことが重要です。
+
+## Armor Piercing（AP）
+
+Protectionの一部だけを計算へ使います。高Protectionへ有効ですが、鎧が完全に消えるわけではありません。
+
+## Armor Negating（AN）
+
+通常のProtectionを無視します。Shock系など、重装備の価値を大きく迂回する攻撃に見られます。
+
+## Magic Weapon
+
+Magic Weaponは、Etherealなど魔法武器を要求する防御や一部の特殊対象へ対応する性質です。
+
+> **MagicだからAP・ANとは限らず、AP・ANだからMagic Weaponとは限りません。**
+
+Weapon・Spellの属性を個別に確認します。
+
+---
+
+# Slash、Pierce、Blunt、Untyped
+
+物理Damage typeは、Protection計算や対応Resistanceとの相性を変えます。
+
+## Slashing
+
+Protectionを抜いた後の殺傷力が高くなりやすいDamage typeです。肉体へDamageが通る相手に向きます。
+
+## Piercing
+
+Armorに対してProtectionを一部減らす性質を持ちます。CrossbowなどのAPと組み合わさると、高Protectionへの一般兵Counterになります。
+
+## Blunt
+
+Head Hitや盾への圧力で価値が出るDamage typeです。Skeleton、Statue、PlantなどはPhysical Resistanceが異なるため、対象の能力を確認します。
+
+## Untyped
+
+Slash / Pierce / Blunt固有の補正を持たない代わりに、それら専用Resistanceの対象外になります。
+
+## Physical Resistance
+
+Slash、Pierce、Blunt Resistanceは、対応する物理Damageをさらに軽減します。
+
+高Protectionだけを見て武器を選ぶと、対応Resistanceで止められることがあります。
+
+---
+
+# Ethereal、Mirror Image、Displacement
+
+これらはすべて「避ける防御」ですが、同じではありません。
+
+## Ethereal
+
+通常武器の攻撃を高確率で無効化する防御です。Magic WeaponやSpellが基本的な回答になります。
+
+## Mirror Image
+
+攻撃を受けることで像が消費されるタイプの防御です。多段攻撃、射撃、低Cost攻撃で像を剥がしてから本命を当てます。
+
+## Displacement系
+
+命中そのものをずらす・失敗させる防御です。Attack、必中、AoE、拘束などで回答します。
+
+### 共通の誤解
+
+高Damage一撃が強くても、命中段階で無効化されればDamage判定へ進みません。
+
+> **Damageを上げる前に、攻撃がDamage段階へ到達しているかを見る。**
+
+---
+
+# Elemental Resistance
 
 Fire、Cold、Shock、Poison、Acidなどには対応するResistanceがあります。
 
-Dom6ではResistanceは、一定値をDamageから差し引くだけでなく、残ったDamageも割合軽減します。このためResistanceは低～中Damageの多段攻撃に特に強く、十分に高いResistanceはほぼ無効化に近づきます。
+Dominions 6ではResistanceは、一定量の軽減に加えて、残ったDamageの割合も軽減します。そのため低～中Damageの多段攻撃へ特に強く、十分なResistanceは実質的な無効化に近づきます。
 
-### 攻略上の基準
+## Resistanceを評価する手順
 
-- 敵の主力Damage typeを一つ確認する
-- 自軍全体へResistanceを付与できるか調べる
-- Resistanceを用意して、敵味方へ作用するBattlefield Spellを使う
-- 相手がResistanceを積んだら、別Damage typeへ切り替える
+1. 敵の主Damage typeを特定する
+2. 単体ItemかArmy-wide Spellかを選ぶ
+3. Buffが接敵前に入るか確認する
+4. 敵が別Damage typeへ切り替えられるか考える
+5. ReplayでResistance後のDamageを確認する
 
-一種類のElemental Damageだけに依存するArmyは、Ward系Spellで急に機能しなくなることがあります。
+## Resistanceへの回答
 
----
+- 別Element
+- 通常物理
+- AP / AN
+- MR攻撃
+- Poison以外の持続Damage
+- Buff Casterの排除
 
-## Magic Resistance（MR）
-
-MRはProtectionとは別の防御能力です。
-
-Soul Slay、Paralyze、Charm、Enslave、各種Mind effectなど、MR判定を要求する効果に使われます。Spellごとに「MR Negates」「MR Negates Easily」などの表示を確認します。
-
-### Penetration
-
-Caster側のPath、Spell、Item、Scale、各種Bonusによって、MRを突破しやすさが変わります。
-
-### 攻略上の見方
-
-- 高Protection・低MR：Astral、Death、Glamour系のMR攻撃候補
-- 低Protection・高MR：通常DamageやElemental Damage候補
-- Mindless：Mind effectに強いが、Leadershipや特殊Counterを持つ
-- Antimagicが見えた：MR攻撃一本からAP・AN・Poison等へ分散する
+一種類のElemental Damageだけに依存するArmyは、Ward系Spell一つで機能を失う場合があります。
 
 ---
 
-## Fatigue
+# HP、Regeneration、Luck、Affliction
 
-FatigueはDominions戦闘の中心的な資源です。
+Protectionを抜いたあとも、Unitは同じ耐久ではありません。
 
-Unitは攻撃、移動、Spell、Auraや環境効果などでFatigueを得ます。通常、毎Round一定量を回復しますが、Encumbranceが高いUnitは戦い続けると蓄積します。
+## HP
 
-### Fatigueの主要な影響
+高HPは、
 
-- Defenceが低下する
-- Attackも不利になる
+- 大きな一撃
+- AoE
+- AN Damage
+- MRを通った非即死Damage
+
+への最後の余裕になります。ただしHPが高いだけでは、Fatigue、Soul effect、Control、Diseaseを防げません。
+
+## Regeneration
+
+RegenerationはRoundをまたいでHPを回復します。
+
+強い状況:
+
+- 小Damageを繰り返し受ける
+- 戦闘が長い
+- Protection・Resistanceも高い
+
+弱い状況:
+
+- 一撃死
+- 回復量を超える集中Damage
+- 即死・Control
+- Disease・Decayなどの長期的問題
+
+## Luck
+
+Luckは致命的なDamageを無効化する機会を作りますが、永続的な無敵ではありません。攻撃回数を増やし、判定を繰り返すことで突破されます。
+
+## Affliction
+
+生存しても、
+
+- Limp
+- Lost eye
+- Chest wound
+- Feebleminded
+- Disease
+
+などのAfflictionが残れば、戦略的には大きな損失です。
+
+高価なCommander、Pretender、Thugは勝敗だけでなく、**戦後に継続使用できるか**を評価します。
+
+---
+
+# Poison、Fatigue Damage、状態異常
+
+HPを直接削る通常Damageだけが勝利手段ではありません。
+
+| 効果 | 主に攻撃する層 | 防御・回答 |
+|---|---|---|
+| Poison | Protectionの外側、時間 | Poison Resistance、短期決着、回復 |
+| Fatigue Damage | 行動継続 | Reinvigoration、Relief、Caster排除 |
+| Stun / Paralyze | 行動・Defence | MR・Resistance・分散・解除 |
+| Entangle / Earth Meld | 移動・Defence | Strength、解放、射撃、別Target |
+| Fear | Morale | Morale Buff、Leadership、Source排除 |
+| Decay / Disease | 長期耐久 | Resistance・治療・短期運用 |
+| Charm / Enslave | MR・Control | MR、Penetration対策、Mindless、Caster排除 |
+
+## Poison
+
+Poisonは遅れてDamageが現れるため、接敵直後に強く見えたArmyが戦闘後半で崩れることがあります。
+
+Replayでは、
+
+- Poisonが入ったRound
+- 蓄積量
+- Poison Resistance
+- 戦闘が長引いた原因
+
+を見ます。
+
+## Fatigue Damage
+
+Fatigue Damageは高Protectionへも有効です。敵を即死させなくても、100以上へ追い込み気絶させれば、通常攻撃で処理しやすくなります。
+
+## Stun / Paralyze
+
+行動を奪う効果は、敵のDamageを0へ近づける防御でもあります。高価な少数精鋭ほど、一体の行動不能が大きな割合の戦力を失わせます。
+
+---
+
+# 射撃戦
+
+射撃の命中・被害には主に次が関わります。
+
+- Precision
+- WeaponのPrecision補正
+- 距離
+- 対象Size
+- Shield
+- Air Shield
+- Storm、Wind、Darkness
+- Target order
+- AoE
+- 味方と敵の接触位置
+
+## 射撃の役割
+
+| 射撃 | 向く相手 | 注意 |
+|---|---|---|
+| Bow | 軽装、Chaff、接敵前の削り | 高Protection、盾 |
+| Crossbow / Arbalest | 高Protection | 発射間隔、Friendly Fire |
+| Sling | 安価な面制圧 | 重装相手のDamage不足 |
+| Javelin | 接敵前の一斉射撃、Strength活用 | 射程、弾数 |
+| AoE Spell / Weapon | 密集Square | 味方巻き込み、Resistance |
+
+## Friendly Fire
+
+射撃は外れたときに近隣Squareへ飛び、接敵後は味方へ当たる可能性があります。
+
+Replayでは敵Kill数だけでなく、
+
+- 自軍へ当たった弾
+- Damage役が射線を塞いだRound
+- Fire orderが適切だったか
+- 接敵後も射撃を続ける価値があったか
+
+を確認します。
+
+## 射撃への回答
+
+- Shield
+- Sparse Formation
+- Air Shield / Arrow protection
+- Fast attack / Flying
+- Storm
+- Battlefield obstacle
+- 射手Commanderの排除
+- 接敵Timingの短縮
+
+---
+
+# Area of Effectと密集度
+
+AoEは単体Damageの大きさだけでなく、**一発で何HP・何Unitへ判定を作るか**で評価します。
+
+小型Unitが密集しているSquareは、AoE一発の価値が高くなります。
+
+## AoEに強くする方法
+
+- Sparse / Loose Formation
+- Squadを分ける
+- 高価なUnitを一箇所へ集中しすぎない
+- Resistanceを事前に入れる
+- Casterへ早く圧力をかける
+- Battlefield-wide SpellのCasterを狙う
+
+## AoEの交換条件
+
+- Friendly Fire
+- Precision
+- Range
+- Gem
+- Caster Fatigue
+- Resistanceで無効化されるRisk
+
+「AoEが大きいから強い」ではなく、敵の密集度と味方の巻き込みを含めて判断します。
+
+---
+
+# Magic Resistance（MR）
+
+MRはProtectionとは別の防御です。
+
+Soul、Mind、Control、Paralyzeなど、Spellや能力に`MR Negates`等が付く場合に使われます。
+
+## MR判定を読む
+
+確認するもの:
+
+- MR Negatesか
+- MR Negates Easilyなどの差
+- CasterのPenetration
+- TargetのMR
+- Antimagic等のBuff
+- Mindless・Magic Being等の対象条件
+- AoEと試行回数
+
+## Penetration
+
+PenetrationはMRを突破しやすくします。
+
+- Caster能力
+- Path
+- Item
+- Spell固有補正
+- Scale・Battlefield effect
+
+などが関わります。
+
+## MR攻撃の向く相手
+
+- 高Protection・低MR
+- Giant・Monsterで一体の価値が高い
+- RegenerationやPhysical Resistanceが厚い
+- 通常武器で時間がかかる
+
+## MR攻撃への回答
+
+- MR Buff
+- Antimagic
+- Mindless等の性質
+- Caster assassination
+- 分散
+- 安価なTargetを前へ出す
+- Protectionを狙う通常Damageへ敵を切り替えさせる
+
+MR攻撃一本に依存すると、Antimagicや対象免疫でArmy全体が止まります。
+
+---
+
+# Spellcasting、Gem、Battlefield Enchantment
+
+MageはPathを満たすだけでは戦力になりません。
+
+```text
+Research
+＋ Path
+＋ Gem
+＋ Range
+＋ Target
+＋ Cast time
+＋ Fatigue
+＋ 生存時間
+```
+
+が揃って初めて予定Spellが働きます。
+
+## Scriptが不発になる主な理由
+
+- Research不足
+- Path不足
+- Gem不足
+- Target不在
+- Range外
+- Casterが接敵・Stun・Silence・死亡
+- Fatigue過多
+- AIが条件に合う別Spellを選ぶ
+- Battlefield条件が変化
+
+## Gem
+
+Gemは、
+
+- 必須Cost
+- 一時的Path boost
+- Fatigue軽減
+- AIのSpell選択
+
+へ影響します。
+
+多く持たせるほど安全とは限りません。不要なSpellへ消費したり、死亡・Retreatで失うRiskがあります。
+
+## Battlefield Enchantment
+
+戦場全体へ作用するSpellの一部は、Casterが死亡・退場すると解除されます。
+
+Casterには、
+
+- 後方中央配置
+- Bodyguard
+- Arrow対策
+- Flying / Attack Rear対策
+- Retreat route
+- 予備Caster
+
+を用意します。
+
+相手の勝利条件が一人のCasterに依存するなら、そのCasterを倒すことが最短Counterです。
+
+---
+
+# Fatigue
+
+Fatigueは戦闘の時間資源です。
+
+## 主な発生源
+
+- 移動
+- 近接攻撃
+- Armor Encumbrance
+- Spellcasting
+- Heat / Cold環境
+- Aura
+- Fatigue Damage
+- Communion / Sabbath
+- 一部の特殊能力
+
+## Fatigueの影響
+
+Fatigueが増えると、
+
+- Attackが不利になる
+- Defenceが不利になる
+- Repelが機能しにくくなる
 - Armor-defeating hitを受けやすくなる
-- 100以上で気絶し、行動できない
-- 極端なFatigueはHP Damageへ転換される
+- 行動頻度が落ちる
+- 100以上で気絶する
+- 極端な蓄積はHP損失へつながる
 
-### 重装兵の弱点
+Protection 30でも、眠ったまま囲まれれば安全ではありません。
 
-重装兵は通常攻撃に強くても、長時間戦うと疲れます。Chaff、Skeleton、召喚、Fatigue Spellで戦闘を引き延ばすこと自体がCounterになります。
+## 重装兵
 
-### MageのFatigue
+重装兵は短期の通常物理戦へ強く、長期戦で弱点が出ます。
 
-SpellのFatigueは、要求Pathより高いPathを持つほど減ります。一方、Armor Encumbranceは別に加算されるため、重装MageはSpellを数回使っただけで気絶することがあります。
+- Chaff
+- Skeleton
+- Summon
+- Fatigue Spell
+- Heat
+- Fearと長期拘束
 
-Reinvigoration、Gemの追加消費、Communion、Relief、Summon Earthpowerなどで管理します。
+で戦闘を延長すること自体がCounterになります。
+
+## Mage
+
+Spell Fatigueは、要求Pathより高いPath、Gem、Reinvigoration等で管理できます。一方、Armor Encumbranceは別の負担になります。
+
+Mage一人の価値は、Pathの高さだけでなく、
+
+> **予定Spellを何回使い、何Roundまで生存したか**
+
+で評価します。
+
+## Fatigueへの回答
+
+- Reinvigoration
+- Relief
+- Summon Earthpower等
+- 軽装化
+- Caster数を増やし役割分担
+- 戦闘を短くする
+- Chaff処理を用意する
+- Enemy Fatigue sourceを倒す
 
 ---
 
-## Morale、Rout、Retreat
+# Morale、Leadership、Rout
 
 UnitはHPが0になるまで戦うとは限りません。
 
-Morale判定は次のような状況で発生します。
+Moraleは、
 
-- Squadが大きな損害を受ける
-- Fearや恐慌効果を受ける
-- CommanderやLeadershipを失う
-- Army全体のHPが大きく減る
-- 特殊なTurn Rout条件へ到達する
+- Squadの損害
+- Army全体の損害
+- Fear
+- Commander死亡
+- Leadership
+- Fatigue
+- 特殊効果
 
-### Routは敗北と同じではない
+などによって試されます。
 
-戦場から離脱できたUnitは隣接ProvinceやFortへ退却を試みます。しかし、敵Provinceへ逃げたUnitや退路を失ったUnitは死亡します。
+## Squadを分ける意味
 
-### 攻略上の意味
+一つの巨大Squadは管理しやすい一方、一度のMorale崩壊が大人数へ波及します。
 
-- FearはHPを削らずに戦線を崩せる
-- Moraleの低い大量Chaffは、少数損害から連鎖崩壊する場合がある
-- Rear attackでCommanderを倒すと、Leadership不足による崩壊を起こせる
-- 退路を塞いだ戦闘ではRoutが大量死へ直結する
-- 勝った側でも逃げた部隊はProvinceから消える
+小さく分けると崩壊を局所化できますが、
 
-Battle Replayでは「殺された数」だけでなく、「いつRout判定が始まり、何が引き金だったか」を確認します。
+- Leadership
+- Commander数
+- Squad bonus
+- 操作量
+
+が必要です。
+
+## Commander死亡
+
+Commanderを失うと、
+
+- Leadership
+- Battle Script
+- Battlefield Enchantment
+- Retreat制御
+- ArmyのMorale
+
+を同時に失う場合があります。
+
+前衛のHPだけでなく、後方のCommander防御もArmy耐久の一部です。
+
+## Berserk、Mindless、Undead
+
+通常のMorale挙動と異なるUnitがあります。
+
+- Berserk後は逃げにくいが、制御も失う
+- Mindlessは精神効果へ強い一方、Leadership条件が特殊
+- Undead・Demonは指揮とBanishment等のCounterが異なる
+
+Unitの属性を確認し、通常人間兵と同じMorale対策を当てないようにします。
 
 ---
 
-## Mounted Unit
+# RoutとRetreat route
+
+Routは即死亡ではありません。戦場から離脱したUnitは退却を試みます。
+
+しかし、
+
+- 退却可能な隣接自領がない
+- 敵領の奥へ侵入した
+- Plane・地形・移動条件が合わない
+- Retreat先が敵に取られた
+
+場合、Routが大量死へ変わります。
+
+## 戦闘前の確認
+
+```text
+負けた場合、どこへ逃げるか
+Commanderと兵士は同じ場所へ逃げられるか
+退却先は今Turnも自領か
+Fortへ戻れるか
+別Planeへ閉じ込められないか
+```
+
+Battle Scriptの一部としてStrategic Map上の退路を設計します。
+
+---
+
+# Mounted Unit
 
 Dominions 6ではRiderとMountが別のStats・HPを持ちます。
 
 - RiderだけがDamageを受ける
 - MountだけがDamageを受ける
 - AoEで双方がDamageを受ける
-- Mountが倒れ、Riderが徒歩で戦闘継続する
+- Mountが死亡し、Riderが徒歩で戦闘を続ける
+- Mount側のWeapon・Armor・能力が使われる
 
-といった状況があります。
+という状況があります。
 
-### 攻略上の注意
+## Mounted Unitを読む手順
 
-- 騎兵の表示HPだけで総耐久を判断しない
-- Mountが大型ならAoE・射撃の標的になりやすい
-- Lance Chargeを使い切った後の武器とStatsを見る
-- Mountを失った後のCombat Speed・Defence・装備を確認する
-- Magic BardingやMount用能力をRider装備と混同しない
+1. RiderのHP・Defence・Weaponを見る
+2. MountのHP・Size・Attackを見る
+3. Bardingを確認する
+4. Lance Charge後の継続武器を見る
+5. Dismount後のStatsとCombat Speedを見る
 
----
+表示HP一つだけで総耐久を判断しません。
 
-## Battlefield EnchantmentとCaster死亡
+## Mounted UnitへのCounter
 
-戦場全体へ作用するSpellの一部は、Casterが死亡すると解除されます。
-
-そのためBattlefield Spellを使うMageには、単にPathを満たすだけでなく、
-
-- 中央後方へ配置
-- Bodyguardを付ける
-- Arrow Fend等の防御を準備
-- Flying / Attack Rear対策を置く
-- Spell発動後も生存させる
-
-必要があります。
-
-逆に相手のArmy-wide効果が一人のCasterに依存しているなら、そのCasterを倒すことが最短のCounterです。
+- Pike / 長Weapon
+- 射撃
+- Earth Meld等の拘束
+- MountとRiderを巻き込むAoE
+- Fatigue
+- LanceをScreenへ使わせる
+- Magic Bardingに対応するDamage type
 
 ---
 
-## Battle Replayの分析手順
+# TrampleとSize差
 
-負けた戦闘を次の順に見ます。
+Trampleは通常の武器交換と異なる、移動を伴う特殊攻撃です。大きなUnitが小さなUnitのSquareへ進み、Damageと陣形破壊を発生させます。
 
-1. **最初の接敵位置**：想定したSquadが敵を受けたか
-2. **最初に崩れた防御層**：命中、Protection、Resistance、MR、Moraleのどれか
-3. **Damage表示**：Slash / Pierce / Shock / Poison等、何で死んだか
-4. **Mage Script**：予定SpellがCastされたか、対象がいたか
-5. **Fatigue**：Mageと前衛が何Roundで100へ達したか
-6. **Commander**：Rear attackや射撃で落ちていないか
-7. **Rout**：純粋な死亡より先にMoraleが崩れていないか
-8. **Gem**：必要数を持ち、AIが想定どおり使ったか
+## Trampleが強い状況
 
-原因を一つに決めつけず、次の戦闘では**一つだけ変更して差を見る**と学習しやすくなります。
+- 小型Unitが密集
+- 前線が薄い
+- Moraleが低い
+- Tramplerが高HP・高Protection
+- 後衛へ到達すると価値が高い
+
+## Trampleへの回答
+
+- 同等以上のSize
+- Sparse Formation
+- 高Defence
+- Pike・高Damage
+- 射撃
+- 拘束
+- Fatigue
+- TramplerのMoraleを崩す
+
+Protectionが高い小型兵でも、Trampleでは通常の正面戦と異なる損失が出ます。
+
+---
+
+# 戦闘例：防御層で考える
+
+## 例1：盾重装兵がCrossbowで減る
+
+症状:
+
+- Bowには耐える
+- Crossbowで少しずつ死ぬ
+- 接敵後は自軍が勝つ
+
+診断:
+
+- ShieldとProtectionは機能している
+- しかしPiercing / APと高Damageが一部を突破している
+- 接敵までのRoundが長い
+
+変更候補:
+
+- 前方配置
+- Sparse
+- Fast flank
+- Air Shield
+- 射手を狙う命令
+
+「もっとProtectionを上げる」だけが回答ではありません。
+
+## 例2：高Defence Sacredへ攻撃が当たらない
+
+症状:
+
+- 自軍のDamageは十分
+- Hitしたときは倒せる
+- 大半がMiss
+
+診断:
+
+- 問題はDamage層ではなく命中層
+
+変更候補:
+
+- Attack Buff
+- 多段攻撃
+- ChaffでHarassment
+- Entangle / Earth Meld
+- AoE
+- Mirror Imageを剥がす射撃
+
+## 例3：高Protection ArmyがPoisonで崩れる
+
+症状:
+
+- 接敵直後はほぼ無傷
+- 戦闘後半で連続死亡
+- Armorを増やしても改善しない
+
+診断:
+
+- Protection層は機能している
+- Poisonが別経路で蓄積
+- 戦闘が長すぎる
+
+変更候補:
+
+- Poison Resistance
+- Short battle
+- Caster kill
+- Chaff処理
+- Nature access
+
+## 例4：Mageが多いのにBuff前に負ける
+
+症状:
+
+- 予定Spellは研究済み
+- MageもGemも存在
+- 前衛がRound 2で接敵
+- Army BuffはRound 3以降
+
+診断:
+
+- Spell性能ではなくTimingの失敗
+
+変更候補:
+
+- 前衛を後ろへ下げる
+- Screenを追加
+- Self Buffを減らす
+- Mageを役割分担
+- Holdを調整
+
+---
+
+# 症状からCounterを選ぶ
+
+| 症状 | 破られた層 | 最初に試す変更 |
+|---|---|---|
+| 攻撃動作が出ない | Awe / Repel / Fear | Morale、長Weapon、射撃、Spell |
+| 攻撃が当たらない | Defence / Image | Attack、多段、拘束、AoE |
+| Shield Hitばかり | Shield | 高Attack、盾対策、AoE、AP・AN |
+| 当たるがHPが減らない | Protection / Resistance | 高Damage、AP・AN、別Damage type |
+| 序盤は耐えるが後半崩れる | Fatigue / Poison / Morale | Reinvigoration、Resistance、短期決着 |
+| 少数精鋭が雑兵に止められる | 攻撃回数 / Fatigue | AoE、援護、Reinvigoration |
+| Mageが予定Spellを使わない | Script条件 | Research、Path、Gem、Range、Target確認 |
+| Battlefield Spellが消える | Caster生存 | Bodyguard、配置、予備Caster |
+| 死亡前に全軍が逃げる | Morale / Leadership | Morale、Commander保護、Squad再編 |
+| Rout後に大量消失 | Retreat route | 戦略移動と退却先を修正 |
+| 騎兵が接敵後急に弱い | Charge後 / Mount損失 | 継続武器、Dismount、撤退Timing確認 |
+| 小型前衛が一気に崩れる | Trample / AoE | Size、Sparse、拘束、射撃 |
+
+---
+
+# Battle Replayの分析手順
+
+詳細は[Battle Replayの読み方](../getting-started/battle-replay.md)を参照してください。戦闘ルールを確認するときは、最低限次を見ます。
+
+1. **戦闘前の仮説**：誰が受け、何が倒す予定だったか
+2. **接敵形状**：FormationとObstacleでどう変わったか
+3. **攻撃機会**：Awe・Repel・拘束で攻撃が止まったか
+4. **命中**：Miss、Shield Hit、Clean Hitのどこで止まったか
+5. **Damage type**：Slash / Pierce / Blunt / Fire / Shock / Poison / MR等
+6. **Fatigue**：前衛とMageがいつ100へ達したか
+7. **Caster**：予定Spell、Gem、Range、死亡Round
+8. **Morale**：最初のRoutと引き金
+9. **退路**：逃げたUnitが生存できたか
+10. **次の変更**：一つだけ変えて再Testする
+
+## 一つだけ変える理由
+
+配置、兵種、Spell、Gemを全部同時に変えると、何が改善したか分かりません。
+
+```text
+Test 1：配置だけ変更
+Test 2：Resistanceだけ追加
+Test 3：Target orderだけ変更
+```
+
+のように差を見ます。
+
+---
+
+# よくある誤解
+
+## 「Protectionが高ければ硬い」
+
+通常物理には硬くても、AN、Poison、MR、Fatigue、Controlには別の防御が必要です。
+
+## 「Magic attackはArmorを無視する」
+
+Magic Weapon、AP、ANは別属性です。
+
+## 「Damageが高ければ勝てる」
+
+命中しない、Shieldで受けられる、攻撃前にRepelされるならDamage段階へ到達しません。
+
+## 「多段攻撃は高Protectionにも強い」
+
+各攻撃のDamageが低ければ全て弾かれます。
+
+## 「Defenceが高ければ射撃も避ける」
+
+射撃ではPrecision、距離、Size、Shield、戦場効果が重要です。
+
+## 「勝ったReplayは見る必要がない」
+
+敵Script不発やDRNに助けられただけかもしれません。再現可能な部分と偶然を分けます。
+
+## 「CasterがSpellを発動したら仕事は終わり」
+
+一部のBattlefield EnchantmentはCaster生存へ依存します。
+
+## 「Routしただけなら損失は少ない」
+
+退路がなければRoutが全滅へ変わります。
+
+---
+
+# 記事の検証範囲と今後の分離
+
+この総合ページは、戦闘全体を一度に理解するための基準記事です。
+
+次の項目は、個別の厳密記事へ分離する価値があります。
+
+- DRNと対抗判定の確率表
+- Shield Hitと射撃Shield
+- Natural ProtectionとArmorの合成
+- AP・AN・物理Damage type
+- Repelの全判定
+- Fatigue閾値と回復
+- Morale・Army Rout・Retreat
+- MountedとTrample
+- Elemental Resistanceの正確な軽減
+
+個別記事が追加されても、このページは全体像と実戦診断の入口として残します。
 
 ---
 
 ## 関連ページ
 
-- [両手武器・片手武器・盾](weapons-and-shields.md)
 - [命令とBattle Script](orders.md)
+- [両手武器・片手武器・盾](weapons-and-shields.md)
+- [Battle Replayの読み方](../getting-started/battle-replay.md)
+- [初心者向けTips](../getting-started/beginner-tips.md)
 - [魔法の基本](../magic/index.md)
-- [Combat Gem](../magic/gems.md)
-- [Communion](../magic/communions.md)
+- [GemとCombat Gem](../magic/gems.md)
+- [Communion・Sabbath](../magic/communions.md)
+- [Combat data索引](../data/combat/index.md)
+- [武器データ](../data/combat/weapons/index.md)
+- [防具データ](../data/combat/armor/index.md)
+- [Weapon property・Damage type](../data/combat/weapon-properties.md)
+- [特殊Damage・状態効果](../data/combat/special-damage.md)
 
-## 主な参照先
+## 主な情報源
 
 - [Dominions 6 Manual](https://www.illwinter.com/dom6/dom6manual.pdf)
 - [Dominions 6公式変更点](https://www.illwinter.com/dom6/changes.html)
-- [illwiki: Dominions Random Number](https://illwiki.com/dom5/dom6/drn)
-- [illwiki: Attack Skill](https://illwiki.com/dom5/dom6/attack-skill)
-- [illwiki: Protection](https://illwiki.com/dom5/dom6/protection)
-- [illwiki: Repel](https://illwiki.com/dom5/dom6/repel)
-- [illwiki: Rout](https://illwiki.com/dom5/dom6/rout)
-- [illwiki: Mounted Units](https://illwiki.com/dom5/dom6/mounted)
+- Dominions 6.35ゲーム内Tooltip・Battle Replay
+- このWikiの6.35固定Weapon・Armor・Spellデータ
 
-!!! note "数式の扱い"
-    このページでは実戦で使える概念を優先しています。個別の例外や内部処理はPatchで変わる可能性があるため、厳密な検証記事は今後、能力ごとの独立ページへ分離します。
+!!! note "記事状態"
+    本文の構造、主要防御層、Dominions 6固有のObstacle・Mount・Resistance変更、主要な実戦診断は6.35を対象にレビューしています。すべての特殊Weapon・Spell・Unit能力の内部例外を実験で証明した状態ではないため、記事Statusは`reviewed`としています。
