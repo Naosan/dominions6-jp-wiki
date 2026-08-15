@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""Run Magic Access route generation with zero-native-mage support.
+"""Run Magic Access route generation with conservative safety patches.
 
 Some nations, notably LA Lemuria, do not expose a normal recruitable mage
 roster through the standard nation recruitment mappings. That is a valid game
-state, not incomplete data. This wrapper keeps the strict global integrity
-checks while allowing such nations to receive an explicit empty-native profile.
+state, not incomplete data. The runner also replaces per-path theoretical
+Random maxima with simultaneous feasible Random outcomes whenever a crosspath
+Forge or summon requirement is checked.
 """
 from __future__ import annotations
 
 import generate_magic_access_routes as generator
+import magic_access_route_safety
 import run_magic_access_routes as runner
 
 
@@ -47,9 +49,10 @@ def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> 
         stats,
     )
     count_row = f"| Nation without native recruit Mage | {len(NO_NATIVE_NAMES)} |"
+    random_row = "| Random crosspath feasibility | simultaneous outcome enumeration |"
     anchor = f"| Nation profile | {len(profiles)} |"
     if count_row not in text and anchor in text:
-        text = text.replace(anchor, anchor + "\n" + count_row, 1)
+        text = text.replace(anchor, anchor + "\n" + count_row + "\n" + random_row, 1)
 
     section = [
         "## 通常Recruit Mageが0件の国家",
@@ -61,7 +64,16 @@ def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> 
         section.extend(f"- {name}" for name in NO_NATIVE_NAMES)
     else:
         section.append("- 該当なし")
-    section.extend(["", ""])
+    section.extend(
+        [
+            "",
+            "## Random crosspathの安全策",
+            "",
+            "Pathごとの理論最大を一体のMageへ合成しません。Booster Forgeと再帰召喚の複合Path要求は、各Random pickを一つのPathへ割り当てた同時成立可能な結果だけで判定します。",
+            "",
+            "",
+        ]
+    )
 
     marker = "## 安全上の境界"
     block = "\n".join(section)
@@ -71,6 +83,7 @@ def safe_quality_page(profiles, boosters, unforgeable, summon_groups, stats) -> 
 
 
 def main() -> None:
+    magic_access_route_safety.install(generator)
     generator.validate = safe_validate
     generator.quality_page = safe_quality_page
     runner.main()
