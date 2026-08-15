@@ -1,4 +1,5 @@
 site/
+build/
 .venv/
 __pycache__/
 *.pyc
@@ -12,3 +13,6 @@ docs/data/combat/
 docs/data/equipment-usage/
 docs/data/units/
 docs/data/sites/
+docs/data/site-search/
+docs/data/extended-magic-access/
+docs/data/magic-access-routes/

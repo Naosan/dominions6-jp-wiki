@@ -1,0 +1,199 @@
+schema = 1
+
+[source]
+name = "dom6inspector"
+repository = "larzm42/dom6inspector"
+commit = "cfac4311bc0b58053b8dead7bffbc036ba9bd5dc"
+tree = "0bb61cbce906b218dc0b8bbf37ff452b747e838d"
+game_version = "6.35"
+cache = ".cache/dom6inspector/{commit}"
+base_url = "https://raw.githubusercontent.com/{repository}/{commit}"
+user_agent = "dominions6-jp-wiki/1.0"
+
+[compatibility]
+commit_modules = [
+  "scripts/generate_recruitment_data.py",
+  "scripts/generate_spell_item_data.py",
+  "scripts/combat_data_common.py",
+  "scripts/generate_equipment_usage_data.py",
+]
+
+[[files]]
+path = "gamedata/BaseI.csv"
+cache = "BaseI.csv"
+blob = "e05d8c3bdd10a1119f38430a7fdb83ec52dc2963"
+groups = ["items", "units", "magic-access"]
+
+[[files]]
+path = "gamedata/BaseU.csv"
+cache = "BaseU.csv"
+blob = "6f48285afde0e97a5bad74b0d793a0b4112a7a0e"
+groups = ["recruitment", "units", "sites", "magic-access"]
+
+[[files]]
+path = "gamedata/MagicSites.csv"
+cache = "MagicSites.csv"
+blob = "6ba0d5e837aeab439d0f17f6dd37453ed1a10be5"
+groups = ["sites", "units", "magic-access"]
+
+[[files]]
+path = "gamedata/Mercenary.csv"
+cache = "Mercenary.csv"
+blob = "e89fea4c0be15dcdc6cf46967fbd77abd94e7dd5"
+groups = ["units"]
+
+[[files]]
+path = "gamedata/armors.csv"
+cache = "armors.csv"
+blob = "6569898e019f42393b7a9f32a891c471d3606f21"
+groups = ["recruitment", "combat", "items"]
+
+[[files]]
+path = "gamedata/attribute_keys.csv"
+cache = "attribute_keys.csv"
+blob = "221bb3a27d304bbd7c9b6da78aa8481b7a4c310d"
+groups = ["recruitment", "combat", "units"]
+
+[[files]]
+path = "gamedata/attributes_by_armor.csv"
+cache = "attributes_by_armor.csv"
+blob = "024d31c404c12aa4af8a246814e9da3228a16ff1"
+groups = ["recruitment", "combat"]
+
+[[files]]
+path = "gamedata/attributes_by_nation.csv"
+cache = "attributes_by_nation.csv"
+blob = "374e2bd272f2cd7288418a7c911a3e5ede58933d"
+groups = ["units", "sites", "magic-access"]
+
+[[files]]
+path = "gamedata/attributes_by_spell.csv"
+cache = "attributes_by_spell.csv"
+blob = "cefc7bb3e99afce1d579cb20e74082eeeb96c085"
+groups = ["spells", "units", "magic-access"]
+
+[[files]]
+path = "gamedata/attributes_by_weapon.csv"
+cache = "attributes_by_weapon.csv"
+blob = "82e82a7c76e018b5e0c34b6f8720ddd375049b8b"
+groups = ["recruitment", "combat"]
+
+[[files]]
+path = "gamedata/coast_leader_types_by_nation.csv"
+cache = "coast_leader_types_by_nation.csv"
+blob = "51a819132a21a94bc5de7d05c611506c1fb52539"
+groups = ["recruitment", "units", "magic-access"]
+
+[[files]]
+path = "gamedata/coast_troop_types_by_nation.csv"
+cache = "coast_troop_types_by_nation.csv"
+blob = "8942ce10dfda71f5d1c9b8d01418e27f2d9510cc"
+groups = ["recruitment", "units"]
+
+[[files]]
+path = "gamedata/effect_modifier_bits.csv"
+cache = "effect_modifier_bits.csv"
+blob = "606a0b6f8b469e1ae0837afe74f75ac9c5d1b88c"
+groups = ["combat"]
+
+[[files]]
+path = "gamedata/effects_info.csv"
+cache = "effects_info.csv"
+blob = "c3a9ac8168cc9a29faa4de2a83a1d765ed7958e1"
+groups = ["recruitment", "combat"]
+
+[[files]]
+path = "gamedata/effects_spells.csv"
+cache = "effects_spells.csv"
+blob = "2d7727d816ad51e2ce19081555f04e55407c2eb4"
+groups = ["spells", "units", "sites", "magic-access"]
+
+[[files]]
+path = "gamedata/effects_weapons.csv"
+cache = "effects_weapons.csv"
+blob = "dc8b39d5e2a00f6388f9f8fef34132fab3721d1b"
+groups = ["recruitment", "combat"]
+
+[[files]]
+path = "gamedata/events.csv"
+cache = "events.csv"
+blob = "6227a6d6180489503af87b5082ee50dc3144d1af"
+groups = ["units", "sites"]
+
+[[files]]
+path = "gamedata/fort_leader_types_by_nation.csv"
+cache = "fort_leader_types_by_nation.csv"
+blob = "bdefa9608bf75f122ada4dc7d44936ca4f745133"
+groups = ["recruitment", "units", "magic-access"]
+
+[[files]]
+path = "gamedata/fort_troop_types_by_nation.csv"
+cache = "fort_troop_types_by_nation.csv"
+blob = "4bae4387505d4581bfcefb66f9668b0efe64a0ee"
+groups = ["recruitment", "units"]
+
+[[files]]
+path = "gamedata/nonfort_leader_types_by_nation.csv"
+cache = "nonfort_leader_types_by_nation.csv"
+blob = "d94ce59d488747aecc9687f134058d20ef1d6f25"
+groups = ["recruitment", "units", "magic-access"]
+
+[[files]]
+path = "gamedata/nonfort_troop_types_by_nation.csv"
+cache = "nonfort_troop_types_by_nation.csv"
+blob = "493322657d46468abd5ee6232d7a9f2252488c32"
+groups = ["recruitment", "units"]
+
+[[files]]
+path = "gamedata/pretender_types_by_nation.csv"
+cache = "pretender_types_by_nation.csv"
+blob = "cfea4949461e0baa6f50da4f3d6e983f84fd15ba"
+groups = ["units", "magic-access"]
+
+[[files]]
+path = "gamedata/protections_by_armor.csv"
+cache = "protections_by_armor.csv"
+blob = "8d38b2a6014f8344a075d41fdc344a40d4d91809"
+groups = ["recruitment", "combat"]
+
+[[files]]
+path = "gamedata/site_terrain_types.csv"
+cache = "site_terrain_types.csv"
+blob = "118de95dd578c1e56e2b99284ed8fe7861c4d956"
+groups = ["sites"]
+
+[[files]]
+path = "gamedata/special_damage_types.csv"
+cache = "special_damage_types.csv"
+blob = "c891b7258bf4b566ac7202b1cd7f47afc0476808"
+groups = ["recruitment", "combat"]
+
+[[files]]
+path = "gamedata/special_unique_summons.csv"
+cache = "special_unique_summons.csv"
+blob = "528fceaefe3869d313db0922d62488892eaf775a"
+groups = ["units", "magic-access"]
+
+[[files]]
+path = "gamedata/spells.csv"
+cache = "spells.csv"
+blob = "1af46ed0a35bfc3549328af56f0e739a0e17f528"
+groups = ["spells", "units", "sites", "magic-access"]
+
+[[files]]
+path = "gamedata/terrain_specific_summons.csv"
+cache = "terrain_specific_summons.csv"
+blob = "4cd32c782f461db3ce7fcc3abbbc7df44cbbb948"
+groups = ["units", "magic-access"]
+
+[[files]]
+path = "gamedata/weapons.csv"
+cache = "weapons.csv"
+blob = "01467c70a1d5c42050bc7c321f5f4da56dcf2e29"
+groups = ["recruitment", "combat", "items"]
+
+[[files]]
+path = "scripts/DMI/SpellTables.js"
+cache = "scripts__DMI__SpellTables.js"
+blob = "f4bdd8c2588fbd3ea088810ca085ec1db08c7313"
+groups = ["units", "magic-access"]

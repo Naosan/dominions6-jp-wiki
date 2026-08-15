@@ -21,38 +21,39 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/configure-pages@v6
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.x"
-      - name: Install Zensical
-        run: pip install zensical
-      - name: Generate nation catalog
-        run: python scripts/generate_nation_catalog.py
-      - name: Generate recruit, mage, and unit loadout data
-        run: python scripts/generate_recruitment_data.py
-      - name: Generate equipment usage reverse indexes
-        run: python scripts/generate_equipment_usage_data.py --offline
-      - name: Generate spell and item data
-        run: python scripts/generate_spell_item_data.py
-      - name: Generate combat equipment data
-        run: python scripts/generate_combat_data.py
-      - name: Generate Unit acquisition catalog
-        run: python scripts/generate_unit_catalog.py
-      - name: Generate Magic Site catalog
-        run: python scripts/generate_magic_site_data.py
-      - name: Generate Site Search references
-        run: python scripts/generate_site_search_data.py --offline
-      - name: Generate nation Site Search capability
-        run: python scripts/run_nation_site_search_data.py --offline
-      - name: Generate extended Magic Access
-        run: python scripts/run_extended_magic_access_data.py --offline
-      - name: Generate Magic Access routes
-        run: python scripts/run_magic_access_routes_safe.py --offline
-      - name: Build site
-        run: zensical build --clean
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Test Wiki tooling
+        run: python -m unittest discover -s tests -v
+      - name: Verify source snapshot
+        run: |
+          python scripts/audit_sources.py \
+            --report build/source-audit.json \
+            --github-summary
+      - name: Generate data and build site
+        run: python scripts/build_wiki.py --offline
+      - name: Audit Wiki structure
+        run: |
+          set +e
+          python scripts/audit_wiki.py --report build/wiki-audit.json
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            python scripts/report_wiki_audit.py build/wiki-audit.json --path-prefix docs
+          fi
+          exit "$status"
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site
