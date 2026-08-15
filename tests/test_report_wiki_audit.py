@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from scripts.report_wiki_audit import annotation, append_summary
+from scripts.report_wiki_audit import annotation, append_summary, repository_path
 
 
 class AnnotationTests(unittest.TestCase):
@@ -29,14 +29,20 @@ class AnnotationTests(unittest.TestCase):
             {
                 "severity": "warning",
                 "code": "page-orphan",
-                "path": "docs/guide.md",
+                "path": "guide.md",
                 "message": "no incoming link",
-            }
+            },
+            "docs",
         )
         self.assertEqual(
             command,
             "::warning file=docs/guide.md,title=Wiki audit%3A page-orphan::no incoming link",
         )
+
+    def test_repository_path_keeps_repository_level_config(self) -> None:
+        self.assertEqual(repository_path("zensical.toml", "docs"), "zensical.toml")
+        self.assertEqual(repository_path("basics/orders.md", "docs"), "docs/basics/orders.md")
+        self.assertEqual(repository_path("docs/basics/orders.md", "docs"), "docs/basics/orders.md")
 
 
 class SummaryTests(unittest.TestCase):

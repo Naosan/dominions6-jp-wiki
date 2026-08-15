@@ -20,12 +20,21 @@ def escape_property(value: object) -> str:
     return escape_message(value).replace(":", "%3A").replace(",", "%2C")
 
 
-def annotation(issue: dict[str, object]) -> str:
+def repository_path(path: str, prefix: str = "") -> str:
+    """Turn a docs-relative audit path into a repository-relative annotation path."""
+
+    prefix = prefix.strip("/")
+    if not prefix or path == "zensical.toml" or path.startswith((".github/", prefix + "/")):
+        return path
+    return f"{prefix}/{path.lstrip('/')}"
+
+
+def annotation(issue: dict[str, object], path_prefix: str = "") -> str:
     """Convert one audit issue into a GitHub Actions workflow command."""
 
     severity = str(issue.get("severity", "warning"))
     level = "error" if severity == "error" else "warning"
-    path = str(issue.get("path", ".github"))
+    path = repository_path(str(issue.get("path", ".github")), path_prefix)
     code = str(issue.get("code", "wiki-audit"))
     message = str(issue.get("message", "Wiki audit issue"))
 
@@ -71,6 +80,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Wiki audit JSONをGitHub Actions Annotationへ変換します。")
     parser.add_argument("report", type=Path)
     parser.add_argument("--limit", type=int, default=50)
+    parser.add_argument("--path-prefix", default="")
     args = parser.parse_args()
 
     report = json.loads(args.report.read_text(encoding="utf-8"))
@@ -83,7 +93,7 @@ def main() -> int:
 
     selected = errors[: max(args.limit, 0)]
     for issue in selected:
-        print(annotation(issue))
+        print(annotation(issue, args.path_prefix))
     if len(errors) > len(selected):
         print(f"::notice title=Wiki audit::Only the first {len(selected)} of {len(errors)} errors were annotated.")
 

@@ -8,10 +8,13 @@ except ImportError:  # Direct execution: ``python scripts/audit_wiki.py``
     import audit_wiki_core as _core
 
 
-# Generator output and the Wiki's pre-existing editorial state are valid inputs.
-# ``expanding`` remains accepted during the staged migration to the new status model.
-_core.ALLOWED_STATUSES.update({"generated", "expanding"})
+# Generator output is a first-class state. The remaining values come from the
+# Wiki's older metadata model and stay non-blocking until pages are migrated to
+# ``page_type`` plus the new editorial maturity statuses.
+LEGACY_STATUSES = {"expanding", "guide", "catalog", "template"}
+_core.ALLOWED_STATUSES.update({"generated", *LEGACY_STATUSES})
 _core_generated = _core.generated
+_core_add_metadata_issues = _core.add_metadata_issues
 
 
 def generated(relative, metadata: dict[str, str]) -> bool:
@@ -20,7 +23,31 @@ def generated(relative, metadata: dict[str, str]) -> bool:
     return metadata.get("status") == "generated" or _core_generated(relative, metadata)
 
 
+def add_metadata_issues(
+    issues,
+    relative,
+    present: bool,
+    metadata: dict[str, str],
+    parse_error: str | None,
+    strict: bool,
+) -> None:
+    """Run core checks and expose legacy states as migration warnings."""
+
+    _core_add_metadata_issues(issues, relative, present, metadata, parse_error, strict)
+    status = metadata.get("status", "").strip()
+    if present and parse_error is None and status in LEGACY_STATUSES:
+        issues.append(
+            _core.Issue(
+                "warning",
+                "status-legacy",
+                relative.as_posix(),
+                f"legacy status should migrate to page_type plus an editorial status: {status}",
+            )
+        )
+
+
 _core.generated = generated
+_core.add_metadata_issues = add_metadata_issues
 
 
 def _html_tag_end(text: str, start: int) -> int | None:

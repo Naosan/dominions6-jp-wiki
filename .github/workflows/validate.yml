@@ -38,6 +38,6 @@ jobs:
           python scripts/audit_wiki.py --report build/wiki-audit.json
           status=$?
           if [ "$status" -ne 0 ]; then
-            python scripts/report_wiki_audit.py build/wiki-audit.json
+            python scripts/report_wiki_audit.py build/wiki-audit.json --path-prefix docs
           fi
           exit "$status"
