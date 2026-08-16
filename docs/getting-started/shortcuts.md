@@ -26,15 +26,19 @@ Dominions 6は、画面上のButtonだけでも遊べます。しかし、Strate
 
 数Province先へ移動するたびに、毎Turn隣接Provinceを指定し直す必要はありません。
 
-Options / Preferencesで **Multi-turn movement** を有効にすると、通常の移動操作で遠方Provinceを最終目的地として指定できます。Gameが経路を作り、Commanderと同行Armyは複数Turnかけて目的地へ向かいます。
+Options / Preferencesで **Multi-turn movement** を有効にすると、遠方Provinceを最終目的地として指定し、複数Turn分の移動経路を予約できます。
+
+標準的なMap操作では、次のように指定します。
 
 ```text
 Options / Preferencesを開く
 → Multi-turn movementを有効化
 → Commanderを選択
-→ 数Province先の目的地を指定
-→ Map上の経路・Arrow・最終目的地を確認
+→ `Alt`を押しながら遠方の目的地ProvinceをClick
+→ Map上の連続Arrow・経路・最終目的地を確認
 ```
+
+Map画面のShortcut Helpでは、この操作が **set multi move destination** と表示されます。`Right Click to Move`などの設定によってMouse Buttonの役割が異なる場合があるため、反応しないときはMap画面で`?`を押し、現行Bindingを確認してください。
 
 これは一Turnで瞬間移動する機能ではありません。実際に一Turnで進める距離は、Commanderと同行UnitのMap Move、Terrain、Road、River、Water、Flyingなどの移動条件で決まります。
 
@@ -43,6 +47,9 @@ Options / Preferencesを開く
 
 !!! warning "戦争中は自動操縦にしない"
     敵Army、Province所有者、包囲、Terrain、Plane接続、途中のBattleによって計画が崩れることがあります。Multi-turn routeを設定していても、各Turnに経路と現在Orderを確認してください。新しい命令を出すと、以前の経路は置き換えられます。
+
+!!! note "`Alt`＋Clickは対象によって意味が変わる"
+    Commander tokenを`Alt`＋Clickすると同種Commanderの選択、Map上の目的地Provinceを`Alt`＋ClickするとMulti-turn destinationの指定になります。何をClickしているかを区別してください。
 
 ## 複数Commanderを同じ場所へまとめて動かす
 
@@ -53,7 +60,8 @@ Options / Preferencesを開く
 → `Ctrl`＋Clickで個別に追加・除外
   または`Shift`＋Clickで範囲選択
 → Modifier keyを離す
-→ 目的地Provinceを指定
+→ 通常移動なら目的地をClick
+  Multi-turn destinationなら`Alt`＋目的地Click
 → 全CommanderのArrowとOrderを確認
 ```
 
@@ -70,7 +78,7 @@ Options / Preferencesを開く
 同時到着が重要な場合は、前線の一歩手前を集合地点にし、到着後に`Y`で編成を確認してから最終移動を出します。
 
 !!! warning "Stealthy Commander"
-    Stealthy Commanderでは、Provinceを`Ctrl`＋ClickするとSneakではなく通常移動を指定する場面があります。複数選択に`Ctrl`を使った後は一度Keyを離し、目的地を通常Clickしてください。意図した移動種別になっているかOrder表示を確認します。
+    Stealthy Commanderでは、Provinceを`Ctrl`＋ClickするとSneakではなく通常移動を指定する場面があります。複数選択に`Ctrl`を使った後は一度Keyを離し、意図した移動種別になっているかOrder表示を確認します。
 
 ## Map Move Costを表示する
 
@@ -100,7 +108,7 @@ Commanderを選択して目的地を指定した
 
 | 設定 | 初心者向けの意味 |
 |---|---|
-| Multi-turn movement | 遠方の最終目的地を一度で指定する |
+| Multi-turn movement | `Alt`＋目的地Clickで遠方の最終目的地を予約できるようにする |
 | Warn on End Turn | Idle Commanderなどの見落としを警告する |
 | Give Orders to new commanders automatically | 新規Mageなどを自動でResearch等へ割り当て、放置を減らす |
 | Magic Path and Map Move tokens for commanders | Commander一覧からPathと移動能力を読みやすくする |
@@ -110,7 +118,7 @@ Commanderを選択して目的地を指定した
 
 ---
 
-# 最初に覚える九つ
+# 最初に覚える操作
 
 | 操作 | Key / Mouse | 何ができるか |
 |---|---|---|
@@ -120,7 +128,9 @@ Commanderを選択して目的地を指定した
 | Recruit | `R` | 選択ProvinceのRecruit画面を開く |
 | Army Setup | `T` | 選択Provinceに現在いるArmyを編成する |
 | 複数Commander選択 | `Ctrl`＋Click / `Shift`＋Click | 個別追加・除外、または範囲選択を行う |
+| Multi-turn destination | `Alt`＋目的地Click | 遠方の最終目的地と複数Turn経路を指定する |
 | Commander命令 | `Space` | 選択Commanderの命令Menuを開く |
+| Map Move Cost | `Ctrl`＋`M` | Provinceごとの移動Costを表示する |
 | Research | `F5` | Research画面を開く |
 | End Turn | `E` | Turnを提出し、次の処理へ進む |
 
@@ -169,6 +179,8 @@ Unit、Commander、Spell、Magic Itemなどは、名前やIconを右Clickする�
 | `?` | 現在のCommander選択Shortcutを確認 |
 
 Mageだけ、Scoutだけ、同じArmyのCommanderだけをまとめて選び、同じ目的地やOrderを出すと操作量を減らせます。
+
+選択したCommander間でUnitを移し替える場合は、Map画面の`Ctrl`＋`T`を使える場面があります。到着予定Army同士の編成は`Y`を使います。
 
 ## Army SetupでUnitをまとめて選ぶ
 
@@ -227,6 +239,8 @@ Provinceを選択し、`R`でRecruit画面を開きます。
 
 兵士とCommanderのQueueを分け、Gold、Resources、Recruitment Points、Commander Points、Recruit limitのどれが不足しているかを見ます。
 
+同じRecruit queueを次Turn以降も続けたい場合は **Repeat Recruitment** を有効にします。これはMageの継続雇用や定型兵の生産に便利ですが、将来のGoldを予約する機能ではありません。Fort建設資金や緊急Recruitを確保したいTurnでは、QueueとRepeat設定を見直します。
+
 Recruit画面ではArrow Keyや`Ctrl`＋Arrow KeyでFort・Recruit可能Provinceを順番に切り替えられる場合があります。正確な対象と方向は、その画面で`?`を押して確認してください。
 
 ## 4. Researchを設定する
@@ -284,7 +298,7 @@ Multi-turn movementを使っている場合は、最終目的地だけでなく�
 ```text
 Messageを読んだ
 Battle Replayを確認した
-Recruitを設定した
+RecruitとRepeat Recruitmentを確認した
 Research目標を確認した
 全Commanderの移動・仕事を確認した
 Multi-turn routeと目的地を確認した
@@ -305,12 +319,14 @@ End TurnはTurn提出・Host処理へ進む操作です。誤って押した場�
 | `M` | Messageを読む |
 | `R` | Recruit画面を開く |
 | `T` | 現在のProvinceのArmy Setup |
+| `Ctrl`＋`T` | 選択Commander間のTransfer Units |
 | `Y` | 選択Provinceへ到着予定のArmy Setup |
 | `B` | Mercenary画面 |
 | `I` | Province Chronicle / Province情報 |
 | `D` | Province DefenceのRecruit |
 | `F` | Fort情報 |
 | `O` | Temple・Dominion関連画面 |
+| `Alt`＋目的地Click | Multi-turn destinationを設定 |
 | `Ctrl`＋`M` | Map Move Costを表示 |
 | `E` | End Turn |
 | `H` | Map上のInterface表示を切り替える |
@@ -410,6 +426,21 @@ Recruitでは、購入可能であることと、今Turnに生産可能である
 
 Commander、Mage、PriestはCommander Pointsを使います。兵士Queueに余裕があっても、Commander Point不足ではMageを追加できません。
 
+## Repeat Recruitment
+
+Queueを設定した後にRepeat Recruitmentを有効にすると、同じRecruit内容を次Turn以降も繰り返します。
+
+向いている用途は、
+
+- 毎Turn雇うMage
+- Capital-only Sacred
+- 定型的なExpansion補充
+- Scoutや安価なCommanderの継続生産
+
+です。
+
+ただし、Gold、Resources、Commander Points等が足りなければ予定どおり生産されません。また、Fort建設や緊急RecruitのためにGoldを貯めたいときは、Repeatを停止・縮小します。
+
 ## 右Clickで購入前に確認する
 
 - Gold / Resource Cost
@@ -456,7 +487,7 @@ Battle Replayでは、勝敗だけでなく「Scriptがどこで崩れたか」�
 
 ## 遠いProvinceをClickしても移動できない
 
-Multi-turn movementが無効、未探索で接続が分からない、通過不能Terrain、移動能力不足などを確認します。Options / PreferencesとMap画面の`?`を開きます。
+Multi-turn movementが無効、`Alt`を使わず通常移動を指定している、未探索で接続が分からない、通過不能Terrain、移動能力不足などを確認します。Options / PreferencesとMap画面の`?`を開き、**set multi move destination** のBindingを確認してください。
 
 ## 遠方へ指定したのに一Turnで着かない
 
@@ -470,9 +501,17 @@ Commanderと同行UnitのMap MoveやTerrain適性が異なると、経路・到�
 
 `G`や`#`はMap表示位置を移す操作です。Commanderの移動Orderには、選択状態、目的地指定、Arrow表示が必要です。
 
+## `Alt`＋ClickしたらCommander選択が変わった
+
+Commander tokenを`Alt`＋Clickすると、同種Commanderを選択する操作になります。Multi-turn destinationは、Commanderを選択した状態で**Map上の目的地Province**を`Alt`＋Clickします。
+
 ## `R`のつもりで`E`を押す
 
 RecruitとEnd Turnが近いため、慣れるまでは特に注意します。Warn on End TurnとTurn終了前Checkを使います。
+
+## Repeat RecruitmentでGoldが消え続ける
+
+Repeatは便利ですが、毎TurnのQueueを自動で再設定します。FortやLabの建設資金を貯める前に、全Recruit拠点のRepeat設定を確認します。
 
 ## `T`と`Y`を混同する
 
@@ -508,12 +547,13 @@ Stealthy Commanderは通常の移動指定でSneakになる場合があります
 
 DominionsのShortcutは画面依存です。
 
-1. Popupを閉じる
-2. 対象ProvinceまたはCommanderを選択する
-3. `?`を押す
-4. 表示された現行Shortcutを使う
+1. `Alt`、`Ctrl`、`Shift`が押しっぱなしになっていないか確認する
+2. Popupを閉じる
+3. 対象ProvinceまたはCommanderを選択する
+4. `?`を押す
+5. 表示された現行Shortcutを使う
 
-の順で確認します。
+の順で確認します。Alt＋Tab後にModifier keyの状態が残ったように見える場合は、該当Keyを一度押して離します。
 
 ---
 
@@ -522,17 +562,18 @@ DominionsのShortcutは画面依存です。
 最初の数Turnは、次だけで十分です。
 
 ```text
-?          画面別Help
-右Click     詳細確認
-M          Message
-R          Recruit
-F5         Research
-T          Army Setup
-Space      Commander order
-Ctrl+Click 複数Commanderの個別選択
-Shift+Click 複数Commanderの範囲選択
-Ctrl+M     Map Move Cost
-E          End Turn
+?               画面別Help
+右Click          詳細確認
+M               Message
+R               Recruit
+F5              Research
+T               Army Setup
+Space           Commander order
+Ctrl+Click      複数Commanderの個別選択
+Shift+Click     複数Commanderの範囲選択
+Alt+目的地Click Multi-turn destination
+Ctrl+M          Map Move Cost
+E               End Turn
 ```
 
 長距離移動を始める前に、Options / PreferencesでMulti-turn movementを有効にします。Shortcutをすべて暗記する必要はありません。**同じ操作を何度もする場面で、一つずつ置き換える**方が覚えやすくなります。
