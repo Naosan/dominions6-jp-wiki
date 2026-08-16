@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{#
+  Unit and Magic Site by-id pages are generated in the thousands. Rendering the
+  complete global navigation and page table of contents into every record adds
+  hundreds of megabytes of duplicate HTML. The records already provide local
+  links back to their indexes, while the header search remains available.
+#}
+{% block site_nav %}{% endblock %}

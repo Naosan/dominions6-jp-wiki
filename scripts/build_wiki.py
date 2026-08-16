@@ -8,6 +8,7 @@ subsequent generator consumes the verified cache in offline mode.
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -16,6 +17,7 @@ from typing import Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_REPORT = ROOT / "build" / "source-audit.json"
+SITE_REPORT = ROOT / "build" / "site-audit.json"
 
 
 @dataclass(frozen=True)
@@ -84,6 +86,10 @@ STEPS: tuple[Step, ...] = (
         ("scripts/run_magic_access_routes_safe.py",),
         supports_offline=True,
     ),
+    Step(
+        "個別Data recordの軽量Template",
+        ("scripts/apply_data_record_templates.py",),
+    ),
 )
 
 
@@ -113,6 +119,18 @@ def step_command(step: Step) -> list[str]:
     command = [sys.executable, *step.command]
     if step.supports_offline:
         command.append("--offline")
+    return command
+
+
+def site_audit_command() -> list[str]:
+    command = [
+        sys.executable,
+        "scripts/audit_site.py",
+        "--report",
+        str(SITE_REPORT.relative_to(ROOT)),
+    ]
+    if os.environ.get("GITHUB_STEP_SUMMARY"):
+        command.append("--github-summary")
     return command
 
 
@@ -163,6 +181,7 @@ def main() -> int:
         run(("zensical", "serve"))
     else:
         run(("zensical", "build", "--clean"))
+        run(site_audit_command())
 
     return 0
 
