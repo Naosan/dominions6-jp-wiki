@@ -3,7 +3,7 @@ title: 初心者向けTips
 page_type: guide
 status: reviewed
 verified_version: "6.35"
-last_verified: "2026-08-15"
+last_verified: "2026-08-16"
 ---
 
 # 初心者向けTips
@@ -11,6 +11,32 @@ last_verified: "2026-08-15"
 Dominions 6で最初に必要なのは、全ルールの暗記ではなく、毎Turnの判断を整理する少数の原則です。
 
 ここでは、国家が変わっても使える考え方をまとめます。
+
+---
+
+## まず操作で迷わないために
+
+Dominions 6は、Map、Recruit、Army Setup、Research、Battle Replayで使える操作が変わります。最初から全Shortcutを暗記する必要はありません。
+
+最優先で覚えるのは、**分からない画面で`?`を押すこと**です。その画面で利用できるShortcut一覧が表示されます。Keyboard配列によっては`Shift`＋`/`で`?`を入力します。
+
+| 操作 | Key / Mouse | 用途 |
+|---|---|---|
+| 画面別Help | `?` | 現在の画面で使えるShortcutを確認する |
+| 詳細確認 | 右Click | Unit、Commander、Spell、Itemなどの詳細を見る |
+| Message | `M` | 前Turnの戦闘、Event、建設結果を読む |
+| Recruit | `R` | 選択Provinceで兵士・Commanderを雇う |
+| Army Setup | `T` | UnitをCommanderへ配属し、FormationとScriptを設定する |
+| Commander命令 | `Space` | Research、Site Search、Forgeなどの命令Menuを開く |
+| Research | `F5` | Research Schoolと進行状況を確認する |
+| End Turn | `E` | Turnを提出する。最後に使う |
+
+Army Setupでは、Double Clickで同種Unitをまとめて選び、`Shift`＋Clickで範囲選択できます。Recruitした兵士は自動でSquadへ入らないため、次TurnにArmy Setup上部の未配属PoolからCommanderへ割り当てます。
+
+!!! warning "RecruitとEnd Turnの誤操作"
+    `R`と`E`は近くにあります。慣れるまでは、End Turn前Checkを終えてから`E`を使ってください。
+
+Mouse操作、一Turnの操作順、Recruit、Army Setup、Script複製、Battle Replay操作は[操作方法・ショートカット](shortcuts.md)にまとめています。
 
 ---
 
@@ -391,6 +417,7 @@ Expansion損失は兵数不足ではなく、Damage役が盾兵より先に接�
 ## 関連ページ
 
 - [初心者ガイド](index.md)
+- [操作方法・ショートカット](shortcuts.md)
 - [最初の12ターン](first-12-turns.md)
 - [序盤拡張](expansion.md)
 - [最初の戦争](first-war.md)

@@ -3,7 +3,7 @@ title: 初心者ガイド
 page_type: guide
 status: reviewed
 verified_version: "6.35"
-last_verified: "2026-08-15"
+last_verified: "2026-08-16"
 ---
 
 # 初心者ガイド
@@ -35,18 +35,19 @@ Dominions 6は、最初から全Unit・全Spell・全ルールを覚えて遊ぶ
 
 ## 学習ルート
 
-次の順に読むと、国家選択から最初の戦争と敗戦分析まで一続きになります。
+次の順に読むと、基本操作から国家選択、最初の戦争、敗戦分析まで一続きになります。
 
 | 段階 | 読むページ | 解決する問い |
 |---|---|---|
-| 1 | [国家選択ガイド](../nations/choose-a-nation.md) | どの国家なら何を学びやすいか |
-| 2 | [Pretender God](../pretender/index.md) | 国家に足りない役割をどう補うか |
-| 3 | [最初の12ターン](first-12-turns.md) | 毎Turn何を確認し、何を準備するか |
-| 4 | [序盤拡張](expansion.md) | Independent Provinceを低損失で取るにはどうするか |
-| 5 | [Researchと研究ルート](../magic/research.md) | 最初の戦争へ何を研究するか |
-| 6 | [Forts](../systems/forts.md) | 第二生産拠点をいつ、どこへ作るか |
-| 7 | [最初の戦争](first-war.md) | 敵領へ入る前に何を揃えるか |
-| 8 | [Battle Replayの読み方](battle-replay.md) | 勝敗を次の編成へどう変換するか |
+| 1 | [操作方法・ショートカット](shortcuts.md) | どの画面を開き、どう選択・編成・命令するか |
+| 2 | [国家選択ガイド](../nations/choose-a-nation.md) | どの国家なら何を学びやすいか |
+| 3 | [Pretender God](../pretender/index.md) | 国家に足りない役割をどう補うか |
+| 4 | [最初の12ターン](first-12-turns.md) | 毎Turn何を確認し、何を準備するか |
+| 5 | [序盤拡張](expansion.md) | Independent Provinceを低損失で取るにはどうするか |
+| 6 | [Researchと研究ルート](../magic/research.md) | 最初の戦争へ何を研究するか |
+| 7 | [Forts](../systems/forts.md) | 第二生産拠点をいつ、どこへ作るか |
+| 8 | [最初の戦争](first-war.md) | 敵領へ入る前に何を揃えるか |
+| 9 | [Battle Replayの読み方](battle-replay.md) | 勝敗を次の編成へどう変換するか |
 
 補助として、[初心者向けTips](beginner-tips.md)、[命令とBattle Script](../basics/orders.md)、[戦闘ルール](../basics/combat-rules.md)を使います。
 
@@ -55,6 +56,8 @@ Dominions 6は、最初から全Unit・全Spell・全ルールを覚えて遊ぶ
 ## 一Turnの基本手順
 
 Dominionsでは、Turn終了前に全てを完璧にする必要はありません。代わりに、毎Turn同じ順で確認すると見落としが減ります。
+
+操作に迷った画面では`?`を押すと、その画面で使えるShortcut一覧を確認できます。Mouse操作、Recruit、Army Setup、Battle Replayの具体的な使い方は[操作方法・ショートカット](shortcuts.md)を参照してください。
 
 ### 1. Messageを読む
 
@@ -142,6 +145,8 @@ Research、Preach、Site Search、Build、Forge、Patrol、Scout、Army移動な
 
 初回プレイでは、勝利だけを成功条件にしません。次のうち複数を達成できれば、Wikiを使って自力で改善できる段階へ進んでいます。
 
+- `?`で画面別Shortcutを確認できた
+- RecruitしたUnitをCommanderのSquadへ配属できた
 - 二つ目のExpansion Armyを作った
 - 第二Fortを建設し、Mage生産を増やした
 - 最初のResearch Breakpointを目的付きで選んだ
@@ -157,6 +162,7 @@ Research、Preach、Site Search、Build、Forge、Patrol、Scout、Army移動な
 
 最初から次を網羅する必要はありません。
 
+- 全Shortcut
 - 全Spell名とResearch Level
 - 全Pretender Chassis
 - 全Item Recipe
@@ -164,7 +170,7 @@ Research、Preach、Site Search、Build、Forge、Patrol、Scout、Army移動な
 - 全国家のMatchup
 - Late-game Globalの細部
 
-必要になったときにWikiで調べます。Dominionsの上達は暗記量だけでなく、**問題を正しい索引へ分解する能力**です。
+Shortcutは暗記するのではなく、同じ操作を繰り返す場面で一つずつ覚えます。必要になったときにWikiとGame内Helpで調べます。Dominionsの上達は暗記量だけでなく、**問題を正しい索引へ分解する能力**です。
 
 ---
 
@@ -172,6 +178,7 @@ Research、Preach、Site Search、Build、Forge、Patrol、Scout、Army移動な
 
 | 症状 | 最初に確認するページ |
 |---|---|
+| どのButton・Keyで操作するか分からない | [操作方法・ショートカット](shortcuts.md) |
 | Independentに毎回大損する | [序盤拡張](expansion.md) |
 | 何をResearchすべきか分からない | [Researchと研究ルート](../magic/research.md) |
 | Mageが予定したSpellを使わない | [命令とBattle Script](../basics/orders.md) |
@@ -185,7 +192,7 @@ Research、Preach、Site Search、Build、Forge、Patrol、Scout、Army移動な
 
 ## 次に読む
 
-まず[最初の12ターン](first-12-turns.md)を開き、実際のゲームと並べて使ってください。
+まず[操作方法・ショートカット](shortcuts.md)を横に開いてGame画面を一度触り、その後[最初の12ターン](first-12-turns.md)を実際のGameと並べて使ってください。
 
 ## 主な参照先
 
