@@ -20,7 +20,12 @@ Dominions 6は、最初から全Unit・全Spell・全ルールを覚えて遊ぶ
     ここで示すのは、陸上の一般的な国家を使った初回プレイ向けの標準手順です。Awake Expander、Blood、Underwater、Undead、極端なSacred国家などは一部の優先順位が変わります。国家固有記事がある場合は、そちらを優先してください。
 
 !!! tip "疑問から探したい場合"
-    順番に読むより「今困っていること」から調べたい場合は、[初心者Q&A](faq.md)を開いてください。操作、Recruit、Expansion、Research、Battle、Dominion、Throneまで、初心者が実際に抱きやすい質問から専門記事へ移動できます。
+    順番に読むより「今困っていること」から調べたい場合は、まず[初心者Q&A](faq.md)を開いてください。
+
+    - Gold、Supply、Unrest、Gem配布、Monthly orderは[初心者Q&A：内政・補給・自動化](logistics-faq.md)
+    - Border、NAP、Raid、迎撃、Siege、Storm、停戦は[初心者Q&A：最初の戦争・外交・Raid・迎撃](war-faq.md)
+
+    から、詳しい基準記事へ移動できます。
 
 ## 最初のゲーム設定
 
@@ -33,6 +38,17 @@ Dominions 6は、最初から全Unit・全Spell・全ルールを覚えて遊ぶ
 - 勝敗より、最初の戦争までの流れを一度経験する
 
 最初からMultiplayerを遊んでも構いませんが、その場合は外交、時間制限、予測不能なCounterが加わります。まずSingle PlayerでArmy Setup、Research、Fort建設、Battle Replayを触っておくと理解しやすくなります。
+
+---
+
+## 疑問別の入口
+
+| 今困っていること | 最初に開くページ |
+|---|---|
+| 何が分からないのか整理できない | [初心者Q&A](faq.md) |
+| Goldが消える、Starving、Unrest、Gem配布、自動Order | [初心者Q&A：内政・補給・自動化](logistics-faq.md) |
+| Border、NAP、Raid、敵を捕まえられない、Fortを取れない | [初心者Q&A：最初の戦争・外交・Raid・迎撃](war-faq.md) |
+| Button、Key、移動、Army Setup | [操作方法・ショートカット](shortcuts.md) |
 
 ---
 
@@ -53,7 +69,7 @@ Dominions 6は、最初から全Unit・全Spell・全ルールを覚えて遊ぶ
 | 9 | [最初の戦争](first-war.md) | 敵領へ入る前に何を揃えるか |
 | 10 | [Battle Replayの読み方](battle-replay.md) | 勝敗を次の編成へどう変換するか |
 
-補助として、[初心者向けTips](beginner-tips.md)、[命令とBattle Script](../basics/orders.md)、[戦闘ルール](../basics/combat-rules.md)を使います。
+補助として、[初心者向けTips](beginner-tips.md)、[初心者Q&A：内政・補給・自動化](logistics-faq.md)、[初心者Q&A：最初の戦争・外交・Raid・迎撃](war-faq.md)、[命令とBattle Script](../basics/orders.md)、[戦闘ルール](../basics/combat-rules.md)を使います。
 
 ---
 
@@ -184,6 +200,8 @@ Shortcutは暗記するのではなく、同じ操作を繰り返す場面で一
 | 症状 | 最初に確認するページ |
 |---|---|
 | 何が分からないのか自体を整理したい | [初心者Q&A](faq.md) |
+| Gold、Supply、Unrest、Gem、Monthly orderで止まった | [初心者Q&A：内政・補給・自動化](logistics-faq.md) |
+| NAP、Border、Raid、迎撃、Siege、Stormで困った | [初心者Q&A：最初の戦争・外交・Raid・迎撃](war-faq.md) |
 | どのButton・Keyで操作するか分からない | [操作方法・ショートカット](shortcuts.md) |
 | Independentに毎回大損する | [序盤拡張](expansion.md) |
 | 何をResearchすべきか分からない | [Researchと研究ルート](../magic/research.md) |
@@ -199,6 +217,8 @@ Shortcutは暗記するのではなく、同じ操作を繰り返す場面で一
 ## 次に読む
 
 まず[初心者Q&A](faq.md)で現在の疑問を整理し、[操作方法・ショートカット](shortcuts.md)を横に開いてGame画面を一度触ってください。その後、[最初の12ターン](first-12-turns.md)を実際のGameと並べて使います。
+
+Expansion後の国家運用で止まったら[初心者Q&A：内政・補給・自動化](logistics-faq.md)、最初の対Player戦へ入ったら[初心者Q&A：最初の戦争・外交・Raid・迎撃](war-faq.md)を使います。
 
 ## 主な参照先
 
