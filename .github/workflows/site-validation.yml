@@ -40,7 +40,7 @@ jobs:
       - name: Test Wiki tooling
         run: python -m unittest discover -s tests -v
       - name: Generate, build, and audit the site
-        run: python scripts/build_wiki.py --offline
+        run: python scripts/build_wiki.py
       - name: Audit Wiki structure
         run: |
           set +e
