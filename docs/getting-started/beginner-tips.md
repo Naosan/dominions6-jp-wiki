@@ -27,16 +27,35 @@ Dominions 6は、Map、Recruit、Army Setup、Research、Battle Replayで使え�
 | Message | `M` | 前Turnの戦闘、Event、建設結果を読む |
 | Recruit | `R` | 選択Provinceで兵士・Commanderを雇う |
 | Army Setup | `T` | UnitをCommanderへ配属し、FormationとScriptを設定する |
+| Commander複数選択 | `Ctrl`＋Click / `Shift`＋Click | 一人ずつ追加・除外、または範囲選択する |
+| Multi-turn destination | `Alt`＋目的地Click | 遠方の最終目的地と複数Turn経路を指定する |
 | Commander命令 | `Space` | Research、Site Search、Forgeなどの命令Menuを開く |
+| Map Move Cost | `Ctrl`＋`M` | Provinceごとの移動CostをMap上へ表示する |
 | Research | `F5` | Research Schoolと進行状況を確認する |
 | End Turn | `E` | Turnを提出する。最後に使う |
 
 Army Setupでは、Double Clickで同種Unitをまとめて選び、`Shift`＋Clickで範囲選択できます。Recruitした兵士は自動でSquadへ入らないため、次TurnにArmy Setup上部の未配属PoolからCommanderへ割り当てます。
 
+### 遠い目的地は毎Turn指定し直さなくてよい
+
+Options / Preferencesで **Multi-turn movement** を有効にし、Commanderを選択して目的地Provinceを`Alt`＋Clickすると、数Province先を最終目的地として一度に指定できます。Commanderと同行Armyは、通常のMap Moveに従って複数Turnかけてその場所へ向かいます。
+
+Map画面の`?`では、この操作を **set multi move destination** として確認できます。`Right Click to Move`などの設定によってMouse Buttonの役割が違う場合は、現行Helpを優先してください。
+
+複数Commanderへ同じ移動命令を出す場合は、`Ctrl`＋Clickで個別に追加・除外するか、`Shift`＋Clickで範囲選択してから、目的地Provinceを`Alt`＋Clickします。
+
+ただし、同じ目的地を指定しても、Commanderと同行Unitの移動能力が違えば経路や到着Turnがずれることがあります。同時到着が重要なら、中継Provinceで集合させ、`Y`で到着予定Armyを確認してから最終移動を出します。
+
+!!! warning "Multi-turn movementは瞬間移動ではない"
+    一Turnの移動距離を増やす機能ではなく、複数Turn分の経路を予約する機能です。戦争中は敵Armyや途中のBattleで計画が崩れるため、各TurnにArrow、経路、現在Orderを確認してください。
+
+!!! tip "Repeat Recruitmentも確認する"
+    Recruit画面のRepeat Recruitmentを使うと、同じQueueを次Turn以降も継続できます。Mageや定型兵の生産に便利ですが、Fort建設資金を貯めるTurnには停止・縮小を忘れないようにします。
+
 !!! warning "RecruitとEnd Turnの誤操作"
     `R`と`E`は近くにあります。慣れるまでは、End Turn前Checkを終えてから`E`を使ってください。
 
-Mouse操作、一Turnの操作順、Recruit、Army Setup、Script複製、Battle Replay操作は[操作方法・ショートカット](shortcuts.md)にまとめています。
+Mouse操作、Multi-turn movement、複数Commanderへの一括命令、一Turnの操作順、Recruit、Army Setup、Script複製、Battle Replay操作は[操作方法・ショートカット](shortcuts.md)にまとめています。
 
 ---
 
@@ -384,9 +403,10 @@ Dominionsは判断量が多いため、完璧なTurnを作ろうとすると進�
 次を確認したらTurnを進めます。
 
 - 重要MessageとReplayを見た
-- Recruitを設定した
+- RecruitとRepeat Recruitmentを確認した
 - Research目標がある
 - 全Commanderに意図した命令がある
+- Multi-turn routeと目的地を確認した
 - 大きなGold・Gemの使い忘れがない
 - Retreat routeを確認した
 
