@@ -235,6 +235,7 @@ nav = [
 variant = "modern"
 language = "ja"
 font = false
+custom_dir = "overrides"
 features = [
   "navigation.sections",
   "navigation.indexes",
