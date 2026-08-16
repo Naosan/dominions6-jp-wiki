@@ -19,6 +19,9 @@ Dominions 6は、最初から全Unit・全Spell・全ルールを覚えて遊ぶ
 !!! note "このガイドの範囲"
     ここで示すのは、陸上の一般的な国家を使った初回プレイ向けの標準手順です。Awake Expander、Blood、Underwater、Undead、極端なSacred国家などは一部の優先順位が変わります。国家固有記事がある場合は、そちらを優先してください。
 
+!!! tip "疑問から探したい場合"
+    順番に読むより「今困っていること」から調べたい場合は、[初心者Q&A](faq.md)を開いてください。操作、Recruit、Expansion、Research、Battle、Dominion、Throneまで、初心者が実際に抱きやすい質問から専門記事へ移動できます。
+
 ## 最初のゲーム設定
 
 学習を目的にするなら、最初の一戦は複雑さを減らします。
@@ -35,19 +38,20 @@ Dominions 6は、最初から全Unit・全Spell・全ルールを覚えて遊ぶ
 
 ## 学習ルート
 
-次の順に読むと、基本操作から国家選択、最初の戦争、敗戦分析まで一続きになります。
+次の順に読むと、疑問の整理と基本操作から、国家選択、最初の戦争、敗戦分析まで一続きになります。
 
 | 段階 | 読むページ | 解決する問い |
 |---|---|---|
-| 1 | [操作方法・ショートカット](shortcuts.md) | どの画面を開き、どう選択・編成・命令するか |
-| 2 | [国家選択ガイド](../nations/choose-a-nation.md) | どの国家なら何を学びやすいか |
-| 3 | [Pretender God](../pretender/index.md) | 国家に足りない役割をどう補うか |
-| 4 | [最初の12ターン](first-12-turns.md) | 毎Turn何を確認し、何を準備するか |
-| 5 | [序盤拡張](expansion.md) | Independent Provinceを低損失で取るにはどうするか |
-| 6 | [Researchと研究ルート](../magic/research.md) | 最初の戦争へ何を研究するか |
-| 7 | [Forts](../systems/forts.md) | 第二生産拠点をいつ、どこへ作るか |
-| 8 | [最初の戦争](first-war.md) | 敵領へ入る前に何を揃えるか |
-| 9 | [Battle Replayの読み方](battle-replay.md) | 勝敗を次の編成へどう変換するか |
+| 1 | [初心者Q&A](faq.md) | 今困っていることは、どの仕組み・記事で解決できるか |
+| 2 | [操作方法・ショートカット](shortcuts.md) | どの画面を開き、どう選択・編成・命令するか |
+| 3 | [国家選択ガイド](../nations/choose-a-nation.md) | どの国家なら何を学びやすいか |
+| 4 | [Pretender God](../pretender/index.md) | 国家に足りない役割をどう補うか |
+| 5 | [最初の12ターン](first-12-turns.md) | 毎Turn何を確認し、何を準備するか |
+| 6 | [序盤拡張](expansion.md) | Independent Provinceを低損失で取るにはどうするか |
+| 7 | [Researchと研究ルート](../magic/research.md) | 最初の戦争へ何を研究するか |
+| 8 | [Forts](../systems/forts.md) | 第二生産拠点をいつ、どこへ作るか |
+| 9 | [最初の戦争](first-war.md) | 敵領へ入る前に何を揃えるか |
+| 10 | [Battle Replayの読み方](battle-replay.md) | 勝敗を次の編成へどう変換するか |
 
 補助として、[初心者向けTips](beginner-tips.md)、[命令とBattle Script](../basics/orders.md)、[戦闘ルール](../basics/combat-rules.md)を使います。
 
@@ -57,7 +61,7 @@ Dominions 6は、最初から全Unit・全Spell・全ルールを覚えて遊ぶ
 
 Dominionsでは、Turn終了前に全てを完璧にする必要はありません。代わりに、毎Turn同じ順で確認すると見落としが減ります。
 
-操作に迷った画面では`?`を押すと、その画面で使えるShortcut一覧を確認できます。Mouse操作、Recruit、Army Setup、Battle Replayの具体的な使い方は[操作方法・ショートカット](shortcuts.md)を参照してください。
+操作に迷った画面では`?`を押すと、その画面で使えるShortcut一覧を確認できます。Mouse操作、Recruit、Army Setup、Battle Replayの具体的な使い方は[操作方法・ショートカット](shortcuts.md)を参照してください。操作以外の疑問は[初心者Q&A](faq.md)から症状に近い質問を探せます。
 
 ### 1. Messageを読む
 
@@ -145,6 +149,7 @@ Research、Preach、Site Search、Build、Forge、Patrol、Scout、Army移動な
 
 初回プレイでは、勝利だけを成功条件にしません。次のうち複数を達成できれば、Wikiを使って自力で改善できる段階へ進んでいます。
 
+- Q&Aから疑問に対応する専門記事を見つけられた
 - `?`で画面別Shortcutを確認できた
 - RecruitしたUnitをCommanderのSquadへ配属できた
 - 二つ目のExpansion Armyを作った
@@ -178,6 +183,7 @@ Shortcutは暗記するのではなく、同じ操作を繰り返す場面で一
 
 | 症状 | 最初に確認するページ |
 |---|---|
+| 何が分からないのか自体を整理したい | [初心者Q&A](faq.md) |
 | どのButton・Keyで操作するか分からない | [操作方法・ショートカット](shortcuts.md) |
 | Independentに毎回大損する | [序盤拡張](expansion.md) |
 | 何をResearchすべきか分からない | [Researchと研究ルート](../magic/research.md) |
@@ -192,7 +198,7 @@ Shortcutは暗記するのではなく、同じ操作を繰り返す場面で一
 
 ## 次に読む
 
-まず[操作方法・ショートカット](shortcuts.md)を横に開いてGame画面を一度触り、その後[最初の12ターン](first-12-turns.md)を実際のGameと並べて使ってください。
+まず[初心者Q&A](faq.md)で現在の疑問を整理し、[操作方法・ショートカット](shortcuts.md)を横に開いてGame画面を一度触ってください。その後、[最初の12ターン](first-12-turns.md)を実際のGameと並べて使います。
 
 ## 主な参照先
 

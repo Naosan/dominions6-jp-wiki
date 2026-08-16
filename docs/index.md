@@ -4,7 +4,7 @@ description: Dominions 6 - Rise of the Pantokrator の日本語攻略・仕様�
 page_type: landing
 status: reviewed
 verified_version: "6.35"
-last_verified: "2026-08-15"
+last_verified: "2026-08-16"
 ---
 
 # Dominions 6: Rise of the Pantokrator 日本語攻略Wiki
@@ -27,19 +27,21 @@ last_verified: "2026-08-15"
 
 # 初めて遊ぶ人
 
-まず[初心者ガイド](getting-started/index.md)を入口にし、次の順で初回ゲームを進めます。
+まず[初心者Q&A](getting-started/faq.md)で現在の疑問を探すか、[初心者ガイド](getting-started/index.md)を入口にして、次の順で初回ゲームを進めます。
 
-1. [国家選択ガイド](nations/choose-a-nation.md)
-2. [Pretender God](pretender/index.md)
-3. [最初の12ターン](getting-started/first-12-turns.md)
-4. [序盤拡張](getting-started/expansion.md)
-5. [Researchと研究ルート](magic/research.md)
-6. [Forts](systems/forts.md)
-7. [最初の戦争](getting-started/first-war.md)
-8. [Battle Replayの読み方](getting-started/battle-replay.md)
-9. [初心者向けTips](getting-started/beginner-tips.md)
-10. [命令とBattle Script](basics/orders.md)
-11. [戦闘ルール完全ガイド](basics/combat-rules.md)
+1. [初心者Q&A](getting-started/faq.md)
+2. [操作方法・ショートカット](getting-started/shortcuts.md)
+3. [国家選択ガイド](nations/choose-a-nation.md)
+4. [Pretender God](pretender/index.md)
+5. [最初の12ターン](getting-started/first-12-turns.md)
+6. [序盤拡張](getting-started/expansion.md)
+7. [Researchと研究ルート](magic/research.md)
+8. [Forts](systems/forts.md)
+9. [最初の戦争](getting-started/first-war.md)
+10. [Battle Replayの読み方](getting-started/battle-replay.md)
+11. [初心者向けTips](getting-started/beginner-tips.md)
+12. [命令とBattle Script](basics/orders.md)
+13. [戦闘ルール完全ガイド](basics/combat-rules.md)
 
 最初のゲームでは、勝利よりも「偵察する→編成する→戦う→Replayを見る→一つ直す」という学習Cycleを回すことを目標にします。
 
