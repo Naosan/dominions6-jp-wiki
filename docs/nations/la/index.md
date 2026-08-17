@@ -2,7 +2,7 @@
 title: "Late Age 国家一覧"
 status: catalog
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-17"
 ---
 
 # Late Age（LA）国家一覧
@@ -11,6 +11,12 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 
 - [国家ページの読み方](../how-to-read.md)
 - [国家選択ガイド](../choose-a-nation.md)
+
+## 手書き攻略の基準記事
+
+- [LA Man — Towers of Chelms](man.md) — Longbow・Crossbow、Drain研究、Mason、Fort network、Random Mageを扱う基準記事
+
+LA Manは選択肢が多く、単純な初心者国家ではありません。兵種を役割で分け、研究者・Fort・射撃を一つの国家エンジンとして読むための学習記事です。
 
 ## 国家一覧
 
@@ -21,7 +27,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 | 97 | [LA Pangaea](pangaea.md) | New Era | 骨組み |
 | 98 | [LA Pythium](pythium.md) | Serpent Cult | 骨組み |
 | 99 | [LA Lemuria](lemuria.md) | Soul Gates | 骨組み |
-| 100 | [LA Man](man.md) | Towers of Chelms | 骨組み |
+| 100 | [LA Man](man.md) | Towers of Chelms | **攻略あり** |
 | 101 | [LA Ulm](ulm.md) | Black Forest | 骨組み |
 | 102 | [LA Agartha](agartha.md) | Ktonian Dead | 骨組み |
 | 103 | [LA Marignon](marignon.md) | Conquerors of the Sea | 骨組み |
