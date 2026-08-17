@@ -15,8 +15,9 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 ## 手書き攻略の基準記事
 
 - [LA Man — Towers of Chelms](man.md) — Longbow・Crossbow、Drain研究、Mason、Fort network、Random Mageを扱う基準記事
+- [LA Bogarus — Age of Heroes](bogarus.md) — 多Path Mage、Research、Communion・Sabbath、召喚・Global・遠隔Ritualを扱う基準記事
 
-LA Manは選択肢が多く、単純な初心者国家ではありません。兵種を役割で分け、研究者・Fort・射撃を一つの国家エンジンとして読むための学習記事です。
+LA ManはCombined ArmsとFort運営、LA BogarusはResearch優位を戦略魔法へ変換する学習記事です。どちらも選択肢が多いため、役割とResearch Timingを先に決めます。
 
 ## 国家一覧
 
@@ -42,7 +43,7 @@ LA Manは選択肢が多く、単純な初心者国家ではありません。�
 | 112 | [LA Xibalba](xibalba.md) | Return of the Zotz | 骨組み |
 | 113 | [LA C'tis](ctis.md) | Desert Tombs | 骨組み |
 | 115 | [LA Midgård](midgard.md) | Age of Men | 骨組み |
-| 116 | [LA Bogarus](bogarus.md) | Age of Heroes | 骨組み |
+| 116 | [LA Bogarus](bogarus.md) | Age of Heroes | **攻略あり** |
 | 117 | [LA Utgård](utgard.md) | Well of Urd | 骨組み |
 | 118 | [LA Vaettiheim](vaettiheim.md) | Wolf Kin Jarldom | 骨組み |
 | 119 | [LA Feminie](feminie.md) | Sage-Queens | 骨組み |

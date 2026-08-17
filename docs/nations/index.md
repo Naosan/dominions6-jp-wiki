@@ -32,11 +32,14 @@ Dominions 6のvanilla国家を、**Early Age 35・Middle Age 37・Late Age 31、
 | Heavy Sacred・Fire | [EA Abysia — Children of Flame](ea/abysia.md) | 重装兵、Burning One、Fire環境、Blood Sacrifice、Fire以外の第二案 |
 | Giant・Cold | [EA Niefelheim — Sons of Winter](ea/niefelheim.md) | 少数精鋭、Cold、Skratti、Blood、Shock・Fatigue・MR対策 |
 | Blood economy・宗教Network | [EA Mictlan — Reign of Blood](ea/mictlan.md) | Restricted Dominion、Blood Hunt、Blood Sacrifice、Slave輸送、Sabbath |
+| Glamour・Stealth・Sailing | [EA Vanheim — Age of Vanir](ea/vanheim.md) | Glamoured兵、Stealth Raider、Vanherse・Vanjarl、Dwarven Smith、情報戦 |
 | Undead・Popkill | [MA Ermor — Ashen Empire](ma/ermor.md) | Population消滅、Freespawn、Reanimation、Death Gem、Undead Leadership |
 | 重装生産・Earth | [MA Ulm — Forges of Ulm](ma/ulm.md) | Blacksteel、Resource経済、Earth Mage、Forge economy、対Armor戦 |
 | Communion | [MA Pythium — Emerald Empire](ma/pythium.md) | Legion、Master / Slave、Astral、Communion Fatigue、Missing Path |
+| Flying・Storm・Air機動 | [MA Caelum — Reign of the Seraphim](ma/caelum.md) | Flying集中、Storm、Air・Water、Ice装備、Mammoth |
 | Underwater・Landfall | [MA Atlantis — Kings of the Deep](ma/atlantis.md) | Amphibious、Coral兵、Water Magic、海中Fort、海陸移行 |
 | 射撃Combined Arms | [LA Man — Towers of Chelms](la/man.md) | Longbow・Crossbow、Drain研究、Random Mage、Mason、Fort network |
+| Research・戦略魔法 | [LA Bogarus — Age of Heroes](la/bogarus.md) | 多Path Mage、Communion・Sabbath、召喚、Global、Remote Ritual |
 
 これらは「最強国家の推薦」ではありません。
 
@@ -48,8 +51,11 @@ MA Ulm       ：生産と重装Army
 MA Pythium   ：Mage量産とCommunion設計
 MA Ermor      ：PopkillとUndead国家経済
 EA Mictlan    ：Blood economyと宗教Network
+EA Vanheim    ：Glamour・Stealth・Sailingによる情報戦
+MA Caelum     ：Flying集中とStormによる戦場制御
 MA Atlantis   ：UnderwaterからLandfall
 LA Man        ：Combined Armsと研究・Fort管理
+LA Bogarus    ：Research優位から召喚・Global・遠隔Ritualへ移行
 ```
 
 という異なる国家エンジンを、同じ記事構造で比較するための基準です。
@@ -65,8 +71,11 @@ LA Man        ：Combined Armsと研究・Fort管理
 | Communionを安全に使いたい | MA Pythium | Communion、命令とBattle Script |
 | Popkill国家の経済を理解したい | MA Ermor | Undead・Reanimation・Popkill |
 | Blood Huntから前線投入までつなげたい | EA Mictlan | Blood Economy・Blood Sacrifice |
+| Glamour・Stealthで情報差を作りたい | EA Vanheim | Stealth・Glamour・特殊作戦 |
+| Flying ArmyとStormを使い分けたい | MA Caelum | Flying・Storm・Air機動戦 |
 | 海から陸へ勝利条件を伸ばしたい | MA Atlantis | 海・Underwater・Amphibious攻略 |
 | 射撃・前衛・Mageを統合したい | LA Man | EA Ulm、MA Pythium |
+| Researchを召喚・Global・遠隔攻撃へ変換したい | LA Bogarus | 召喚・Global・遠隔Ritual |
 
 > **初心者向け度と、学習価値は同じではありません。**
 
@@ -79,6 +88,9 @@ LA Man        ：Combined Armsと研究・Fort管理
 - [Undead・Reanimation・Popkill](../systems/undead-popkill.md) — Undead分類、Freespawn、Reanimation、Popkill経済、Counter
 - [Blood Economy・Blood Hunt・Blood Sacrifice](../magic/blood-economy.md) — Hunter、Population、Unrest、Patrol、Slave輸送、Sabbath、宗教Network
 - [海・Underwater・Amphibious攻略](../systems/underwater.md) — Aquatic、Amphibious、Water Breathing、海中戦、Landfall、Retreat
+- [Stealth・Glamour・特殊作戦](../systems/stealth-glamour.md) — Sneak、Raider、Patrol、Assassination、Sailing、情報戦
+- [Flying・Storm・Air機動戦](../systems/flying-storm.md) — Strategic Flying、Attack Rear、Storm、Air Magic、迎撃
+- [召喚・Global・遠隔Ritual](../magic/strategic-rituals.md) — Summon Mage、Access chain、Global、Dispel、Remote attack、Monthly order
 
 国家記事は具体例、共通記事は他国家にも使える正本として運用します。
 
@@ -145,13 +157,13 @@ LA Man        ：Combined Armsと研究・Fort管理
 
 ## 次に増やす国家類型
 
-第3陣でUndead・Popkill、Blood economy、Underwaterを追加しました。次は、既存九記事でまだ基準化できていない次の類型を優先します。
+第4陣でGlamour・Stealth、Flying・Storm、Late-game戦略魔法を追加しました。次は、既存十二記事でまだ基準化できていない次の類型を優先します。
 
-- Glamour・Stealthへ強く依存する国家
-- Flying・Sailing・Magic Phase機動国家
 - Nature・Poison・Regeneration中心国家
-- Late-game召喚・Global中心国家
+- Assassination・Seduction・特殊作戦へ強く依存する国家
+- Magic Phase・Sailingを主戦略にする国家
 - Disciple Gameで役割分担が明確な国家Pair
+- Legendary Spell・複数Planeを勝利条件へ使う国家
 
 ## データ更新
 

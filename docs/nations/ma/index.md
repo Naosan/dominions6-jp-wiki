@@ -16,6 +16,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 
 - [MA Ermor — Ashen Empire](ermor.md) — Popkill、Freespawn、Reanimation、Undead Leadership、Death Gem economyを扱う基準記事
 - [MA Pythium — Emerald Empire](pythium.md) — Legion、Communion、Astral、Mage量産、Slave Fatigue、Missing Pathを扱う基準記事
+- [MA Caelum — Reign of the Seraphim](caelum.md) — Flying、Storm、Air・Water、Ice装備、広域集中を扱う基準記事
 - [MA Ulm — Forges of Ulm](ulm.md) — Blacksteel、Resource経済、Earth Mage、Forge economy、対Armor戦を扱う基準記事
 - [MA Atlantis — Kings of the Deep](atlantis.md) — Underwater、Amphibious、Coral兵、Water Magic、Landfallを扱う基準記事
 
@@ -46,7 +47,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 | 68 | [MA Bandar Log](bandar-log.md) | Land of the Apes | 骨組み |
 | 69 | [MA T'ien Ch'i](tien-chi.md) | Imperial Bureaucracy | 骨組み |
 | 70 | [MA Shinuyama](shinuyama.md) | Land of the Bakemono | 骨組み |
-| 71 | [MA Caelum](caelum.md) | Reign of the Seraphim | 骨組み |
+| 71 | [MA Caelum](caelum.md) | Reign of the Seraphim | **攻略あり** |
 | 72 | [MA Nazca](nazca.md) | Kingdom of the Sun | 骨組み |
 | 73 | [MA Mictlan](mictlan.md) | Reign of the Lawgiver | 骨組み |
 | 74 | [MA Xibalba](xibalba.md) | Flooded Caves | 骨組み |

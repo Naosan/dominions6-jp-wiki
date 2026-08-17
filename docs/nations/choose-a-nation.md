@@ -97,6 +97,8 @@ Hunter選定、Population、Unrest、Patrol、Slave輸送、Sabbath、Blood Sacr
 - Magic Phase movement
 - Province Defenceを抜く小部隊
 
+Glamour・Stealth・Sailingを国家Engineとして学ぶ基準は[EA Vanheim](ea/vanheim.md)、共通仕様は[Stealth・Glamour・特殊作戦](../systems/stealth-glamour.md)です。Flying集中とStormは[MA Caelum](ma/caelum.md)と[Flying・Storm・Air機動戦](../systems/flying-storm.md)を参照してください。
+
 ### 7. Underwater国家を選ぶか
 
 Underwater国家は地上侵攻、Amphibious性能、装備制限、海陸両方のFort生産を学ぶ必要があります。独自性は高いですが、最初のゲームでは陸上国家より判断項目が増えます。
@@ -115,13 +117,15 @@ Underwater国家は地上侵攻、Amphibious性能、装備制限、海陸両方
 | 高性能一般兵・Stealth | 兵種分業、Raid、Random Magic、Forge | 射撃、MR、個体管理 | [EA Ulm](ea/ulm.md) |
 | Undead・Popkill | Reanimation、Freespawn、Death Gem economy、消耗戦 | Priest、Holy damage、Population消滅 | [MA Ermor](ma/ermor.md) |
 | Nature持久戦 | Regeneration、Poison、Relief | Burst、Poison Resistance | 今後整備 |
-| Glamour / Stealth | 情報戦、Raid、Illusion | True Sight、Mindless | 今後整備 |
+| Glamour / Stealth | 情報戦、Raid、Illusion、Sailing | True Sight、Mindless、AoE、Patrol | [EA Vanheim](ea/vanheim.md) |
+| Flying / Storm | 広域集中、Attack Rear、Storm、Air Magic | 射撃、AoE、Stormの両刃、過伸展 | [MA Caelum](ma/caelum.md) |
+| Strategic Magic | Research、Summon Mage、Global、Remote Ritual | 早期Rush、Gem不足、Caster喪失 | [LA Bogarus](la/bogarus.md) |
 | Blood中心 | Blood Hunt、Demon、Sabbath、宗教Network | Micro、Unrest、人口、輸送 | [EA Mictlan](ea/mictlan.md) |
 | Underwater | 海陸移行、Amphibious、独自Recruit、Landfall | 地上展開、Retreat、装備差 | [MA Atlantis](ma/atlantis.md) |
 
 ## 現在の学習用基準記事
 
-国家の難易度を一つの数字で決めず、何を学びたいかで次の九記事を使い分けます。
+国家の難易度を一つの数字で決めず、何を学びたいかで次の十二記事を使い分けます。
 
 | 国家 | 向いている学習テーマ | 最初に注意すること |
 |---|---|---|
@@ -130,10 +134,13 @@ Underwater国家は地上侵攻、Amphibious性能、装備制限、海陸両方
 | [EA Niefelheim](ea/niefelheim.md) | Giant、Cold、少数精鋭、Skratti、Blood | Shock、Fatigue、MR attack、損失の補充費 |
 | [MA Ulm](ma/ulm.md) | Blacksteel、Resource経済、Earth Buff、重装Army、鍛造 | AP・AN・Poison、遅い部隊、Magic diversity |
 | [MA Pythium](ma/pythium.md) | Legion、Communion、Astral、Mage量産、Fort scaling | Slave過労死、Magic Duel、Missing Path、操作量 |
+| [MA Caelum](ma/caelum.md) | Flying集中、Storm、Air・Water、Ice兵、Mammoth | 低HP、射撃、Fire、Stormの両刃、High Seraph供給 |
 | [MA Ermor](ma/ermor.md) | Popkill、Freespawn、Reanimation、Death Gem economy | Bootstrap、Commander不足、Banishment、外交圧力 |
 | [EA Mictlan](ea/mictlan.md) | Blood Hunt、Blood Sacrifice、Sacred、首都Crosspath | Unrest、Population、Slave輸送、首都Queue |
+| [EA Vanheim](ea/vanheim.md) | Glamour、Stealth、Sailing、Vanir、Dwarven Smith | AoE、Fatigue、True Sight、高価な損失、Role競合 |
 | [MA Atlantis](ma/atlantis.md) | Underwater、Coral兵、Water Magic、Coastal Recruit、Landfall | 陸上展開、Missing Path、Retreat、環境差 |
 | [LA Man](la/man.md) | Longbow・Crossbow、Friendly Fire、Drain研究、Mason、Fort network | 兵種選択の多さ、Mage個体差、Nature・Water不足 |
+| [LA Bogarus](la/bogarus.md) | 多Path Mage、Research、Communion・Sabbath、戦略Ritual | 弱い序盤、Mage防護、Gold、操作量、Missing Path |
 
 ### 一番単純な一般兵の入口
 
@@ -208,6 +215,47 @@ MA Atlantisでは、海中で勝つこととGameに勝つことを分けます�
 
 を一つの作戦として設計します。
 
+### Glamour・Stealth・Sailingを学ぶ
+
+EA Vanheimでは、見えないArmyを増やすこと自体ではなく、正面Armyで敵を固定し、Stealth RaiderとSailingで守備先を増やします。
+
+```text
+Scout
+→ 潜入
+→ Raid / Assassination
+→ 敵Reserveを移動
+→ Main ArmyがFortを取る
+```
+
+高DefenceはAoE・Fatigue・True Sightへ崩れるため、通常兵・Item・Air・Bloodへ切り替える第二案も学びます。
+
+### Flying・Stormを学ぶ
+
+MA Caelumでは、Flyingを移動距離ではなく局地的集中として扱います。Stormは敵Flying・Archerを止める一方、自軍Flying・射撃も壊し得ます。
+
+```text
+No Storm plan
+vs
+Storm plan
+```
+
+を敵ごとに切り替える教材です。
+
+### ResearchからStrategic Magicへ進む
+
+LA Bogarusでは、早いResearchをFirst warへ使った後、Summon Mage、Global、Remote attackへPivotします。
+
+```text
+Research
+→ Caster
+→ Booster
+→ Gem budget
+→ Ritual
+→ 次のAccess
+```
+
+まで接続し、研究量だけが高い国家で終わらないことを学びます。
+
 ### Stealthと多様な兵を学ぶ
 
 EA Ulmは、正面ArmyとStealth Armyを使い分ける練習に向きます。国家兵は強い一方、射撃とMR攻撃への対策が必要です。
@@ -271,5 +319,6 @@ Pretenderが補うもの：
 - 敵のProtection / MR / Resistanceに合わせてCounterを変える
 - Giant・Sacred・Communionの交換条件を一つ説明できる
 - Popkill・Blood・Underwaterのどの資源が通常国家と違うか説明できる
+- Glamour・Flying・Strategic Ritualで、情報・Timing・Accessのどれを買っているか説明できる
 
 国家を決めたら、[国家ページの読み方](how-to-read.md)を使ってRosterとMagic Accessを確認してください。その後、[Pretender設計サンプル](../pretender/samples.md)から国家の不足に近い設計骨格を二つ選び、同じ条件のTest gameで比較します。
