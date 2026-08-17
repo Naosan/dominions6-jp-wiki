@@ -2,7 +2,7 @@
 title: "国家選択ガイド"
 status: guide
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-17"
 ---
 
 # 国家選択ガイド
@@ -35,6 +35,8 @@ Sacred国家ではPretender設計が軍事力に直結します。
 - Incarnate Bless依存
 - Anti-Sacred兵への耐性
 - 中盤以降の補充速度
+
+Light Bless、Heavy Bless、Scalesとの交換、Incarnate Blessの登場時期は[Pretender設計サンプル](../pretender/samples.md)で比較できます。
 
 ### 3. GiantやMonsterを使いたいか
 
@@ -125,4 +127,4 @@ Underwater国家は地上侵攻、Amphibious性能、装備制限、海陸両方
 - Battle Replayから敗因を特定する
 - 敵のProtection / MR / Resistanceに合わせてCounterを変える
 
-国家を決めたら、[国家ページの読み方](how-to-read.md)を使ってRosterとMagic Accessを確認してください。
+国家を決めたら、[国家ページの読み方](how-to-read.md)を使ってRosterとMagic Accessを確認してください。その後、[Pretender設計サンプル](../pretender/samples.md)から国家の不足に近い設計骨格を二つ選び、同じ条件のTest gameで比較します。
