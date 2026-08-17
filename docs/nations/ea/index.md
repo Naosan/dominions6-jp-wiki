@@ -2,7 +2,7 @@
 title: "Early Age 国家一覧"
 status: catalog
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-17"
 ---
 
 # Early Age（EA）国家一覧
@@ -11,6 +11,12 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 
 - [国家ページの読み方](../how-to-read.md)
 - [国家選択ガイド](../choose-a-nation.md)
+
+## 手書き攻略の基準記事
+
+- [EA Ulm — Enigma of Steel](ulm.md) — 一般兵、Stealth、地形Recruit、Forge Bonus、広いRandom Magicを扱う基準記事
+
+自動生成の骨組み記事は、公式メタデータと共通見出しを提供します。手書き攻略では、Expansion、Pretender、Research、Army、Counter、Multiplayerまで実戦方針を追加します。
 
 ## 国家一覧
 
@@ -24,7 +30,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 | 10 | [EA Fomoria](fomoria.md) | The Cursed Ones | 骨組み |
 | 11 | [EA Tir na n'Og](tir-na-nog.md) | Land of the Ever Young | 骨組み |
 | 12 | [EA Marverni](marverni.md) | Time of Druids | 骨組み |
-| 13 | [EA Ulm](ulm.md) | Enigma of Steel | 骨組み |
+| 13 | [EA Ulm](ulm.md) | Enigma of Steel | **攻略あり** |
 | 14 | [EA Pyrène](pyrene.md) | Kingdom of the Bekrydes | 骨組み |
 | 15 | [EA Agartha](agartha.md) | Pale Ones | 骨組み |
 | 16 | [EA Abysia](abysia.md) | Children of Flame | 骨組み |
