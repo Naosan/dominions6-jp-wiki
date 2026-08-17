@@ -24,23 +24,44 @@ Dominions 6のvanilla国家を、**Early Age 35・Middle Age 37・Late Age 31、
 
 ## 手書き攻略の基準記事
 
-最初の第1陣として、各Ageに一つずつ異なる学習テーマを持つ基準記事を用意しています。
+現在は、国家の強さ順ではなく、**異なる国家エンジンを学ぶための基準記事**を優先して整備しています。
 
-| Age | 国家 | 主に学べること |
+| 類型 | 国家 | 主に学べること |
 |---|---|---|
-| EA | [EA Ulm — Enigma of Steel](ea/ulm.md) | 高性能一般兵、複数攻撃、Stealth、地形Recruit、鍛造、広いRandom Magic |
-| MA | [MA Ulm — Forges of Ulm](ma/ulm.md) | Blacksteel重装、Resource経済、Earth Mage、Forge economy、対Armor戦 |
-| LA | [LA Man — Towers of Chelms](la/man.md) | Longbow・Crossbow、Drain研究、Random Mage、Mason、Fort network、Friendly Fire |
+| 高性能一般兵・Stealth | [EA Ulm — Enigma of Steel](ea/ulm.md) | 複数攻撃、Shield役、Stealth、地形Recruit、鍛造、Random Magic |
+| Heavy Sacred・Fire | [EA Abysia — Children of Flame](ea/abysia.md) | 重装兵、Burning One、Fire環境、Blood Sacrifice、Fire以外の第二案 |
+| Giant・Cold | [EA Niefelheim — Sons of Winter](ea/niefelheim.md) | 少数精鋭、Cold、Skratti、Blood、Shock・Fatigue・MR対策 |
+| 重装生産・Earth | [MA Ulm — Forges of Ulm](ma/ulm.md) | Blacksteel、Resource経済、Earth Mage、Forge economy、対Armor戦 |
+| Communion | [MA Pythium — Emerald Empire](ma/pythium.md) | Legion、Master / Slave、Astral、Communion Fatigue、Missing Path |
+| 射撃Combined Arms | [LA Man — Towers of Chelms](la/man.md) | Longbow・Crossbow、Drain研究、Random Mage、Mason、Fort network |
 
-三記事は「最強国家の推薦」ではありません。
+これらは「最強国家の推薦」ではありません。
 
 ```text
-EA Ulm：兵質とMap Control
-MA Ulm：生産と重装Army
-LA Man：Combined Armsと研究・Fort管理
+EA Ulm       ：兵質とMap Control
+EA Abysia    ：Heavy SacredとFire環境
+EA Niefelheim：Giantの交換効率とCounter管理
+MA Ulm       ：生産と重装Army
+MA Pythium   ：Mage量産とCommunion設計
+LA Man       ：Combined Armsと研究・Fort管理
 ```
 
 という異なる国家エンジンを、同じ記事構造で比較するための基準です。
+
+## 学習テーマから選ぶ
+
+| 学びたいこと | 最初の候補 | 次に比較する記事 |
+|---|---|---|
+| Shield役とDamage役を分けたい | EA Ulm | MA Ulm、EA Abysia |
+| SacredとPretenderを接続したい | EA Abysia | EA Niefelheim、Pretender設計サンプル |
+| Giantの長所と弱点を知りたい | EA Niefelheim | MA Ulm、戦闘ルール |
+| ResourceとFort生産を学びたい | MA Ulm | EA Abysia、LA Man |
+| Communionを安全に使いたい | MA Pythium | Communion、命令とBattle Script |
+| 射撃・前衛・Mageを統合したい | LA Man | EA Ulm、MA Pythium |
+
+> **初心者向け度と、学習価値は同じではありません。**
+
+複雑な国家でも、何を学ぶ記事なのかが明確なら、Test gameの教材として使えます。
 
 ## 国家攻略で重視するもの
 
@@ -77,6 +98,19 @@ LA Man：Combined Armsと研究・Fort管理
 
 数値は自動生成データとゲーム内表示を正本とし、手書き記事は判断と運用を扱います。
 
+## 基準記事を使う順番
+
+```text
+1. 国家選択ガイドで類型を選ぶ
+2. 手書き国家記事で勝ち筋と制約を読む
+3. 自動生成Recruit・Magic Accessで数値を確認
+4. Pretender設計サンプルから二案を選ぶ
+5. Test gameでExpansion・Fort・Researchを比較
+6. Battle Replayから記事の仮説を修正する
+```
+
+国家記事は完成Buildをコピーするためではなく、**何を観察し、何を比較するかを決める道具**です。
+
 ## 記事状態
 
 | 状態 | 意味 |
@@ -92,14 +126,14 @@ LA Man：Combined Armsと研究・Fort管理
 
 ## 次に増やす国家類型
 
-第1陣の次は、国家記事を書く過程で共通システムの不足も検出できるよう、次の類型を優先します。
+第2陣でGiant・Heavy Sacred・Communionを追加しました。次は、国家記事を書く過程で共通システムの不足も検出できるよう、次の類型を優先します。
 
-- Giant国家
-- Sacred・Heavy Bless国家
-- Communion国家
 - Undead・Popkill国家
-- Blood国家
+- Blood economyへ全面依存する国家
 - Underwater国家
+- Glamour・Stealthへ強く依存する国家
+- Flying・Sailing・Magic Phase機動国家
+- Late-game召喚・Global中心国家
 
 ## データ更新
 
