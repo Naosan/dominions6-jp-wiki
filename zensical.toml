@@ -217,6 +217,7 @@ nav = [
   { "ターン処理順" = "reference/turn-resolution.md" },
   { "Pretender God" = [
     "pretender/index.md",
+    "pretender/samples.md",
     "pretender/scales.md",
     "pretender/bless.md",
   ] },
