@@ -15,6 +15,8 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 ## 手書き攻略の基準記事
 
 - [EA Ulm — Enigma of Steel](ulm.md) — 一般兵、Stealth、地形Recruit、Forge Bonus、広いRandom Magicを扱う基準記事
+- [EA Abysia — Children of Flame](abysia.md) — 重装兵、Heavy Sacred、Fire環境、Blood Sacrifice、Fire以外の第二案を扱う基準記事
+- [EA Niefelheim — Sons of Winter](niefelheim.md) — Giant、Cold、少数精鋭、Skratti、Blood、Shock・Fatigue対策を扱う基準記事
 
 自動生成の骨組み記事は、公式メタデータと共通見出しを提供します。手書き攻略では、Expansion、Pretender、Research、Army、Counter、Multiplayerまで実戦方針を追加します。
 
@@ -33,7 +35,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 | 13 | [EA Ulm](ulm.md) | Enigma of Steel | **攻略あり** |
 | 14 | [EA Pyrène](pyrene.md) | Kingdom of the Bekrydes | 骨組み |
 | 15 | [EA Agartha](agartha.md) | Pale Ones | 骨組み |
-| 16 | [EA Abysia](abysia.md) | Children of Flame | 骨組み |
+| 16 | [EA Abysia](abysia.md) | Children of Flame | **攻略あり** |
 | 17 | [EA Hinnom](hinnom.md) | Sons of the Fallen | 骨組み |
 | 18 | [EA Ubar](ubar.md) | Kingdom of the Unseen | 骨組み |
 | 19 | [EA Ur](ur.md) | The First City | 骨組み |
@@ -50,7 +52,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 | 30 | [EA Vanheim](vanheim.md) | Age of Vanir | 骨組み |
 | 31 | [EA Helheim](helheim.md) | Dusk and Death | 骨組み |
 | 32 | [EA Rus](rus.md) | Sons of Heaven | 骨組み |
-| 33 | [EA Niefelheim](niefelheim.md) | Sons of Winter | 骨組み |
+| 33 | [EA Niefelheim](niefelheim.md) | Sons of Winter | **攻略あり** |
 | 34 | [EA Muspelheim](muspelheim.md) | Sons of Fire | 骨組み |
 | 40 | [EA Pelagia](pelagia.md) | Pearl Kings | 骨組み |
 | 41 | [EA Oceania](oceania.md) | Coming of the Capricorns | 骨組み |
