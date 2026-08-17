@@ -102,6 +102,32 @@ Underwater国家は地上侵攻、Amphibious性能、装備制限、海陸両方
 | Blood | Blood economy、Demon、Sabbath | Micro、Unrest、人口 |
 | Underwater | 海陸移行、Amphibious、独自Recruit | 地上展開の遅れ |
 
+## 現在の学習用基準記事
+
+国家の難易度を一つの数字で決めず、何を学びたいかで次の三記事を使い分けます。
+
+| 国家 | 向いている学習テーマ | 最初に注意すること |
+|---|---|---|
+| [EA Ulm](ea/ulm.md) | 強い一般兵、複数攻撃、Shield役、Stealth Raid、Forge Bonus | 盾なし主力の射撃被害、低めのMR、Random Mage |
+| [MA Ulm](ma/ulm.md) | Blacksteel、Resource経済、Earth Buff、重装Army、鍛造 | AP・AN・Poison、遅い部隊、Magic diversity |
+| [LA Man](la/man.md) | Longbow・Crossbow、Friendly Fire、Drain研究、Mason、Fort network | 兵種選択の多さ、Mage個体差、Nature・Water不足 |
+
+### 一番単純な入口を求める場合
+
+一般兵の役割とResource経済を明確に学びたいなら、まずMA Ulmが読みやすい基準です。
+
+### Stealthと多様な兵を学びたい場合
+
+EA Ulmは、正面ArmyとStealth Armyを使い分ける練習に向きます。国家兵は強い一方、射撃とMR攻撃への対策が必要です。
+
+### Combined Armsと国家運営を学びたい場合
+
+LA Manは選択肢が多く、最初から簡単ではありません。しかし、射撃・前衛・Knight・Researcher・Fortを一つの国家エンジンとして組む練習になります。
+
+> **「初心者向け」と「学習価値が高い」は同じ意味ではありません。**
+
+操作や判断が多い国家でも、記事とTest gameを使えば特定テーマの教材になります。
+
 ## 初心者向け度は一つの数字ではない
 
 「初心者向け」は、次の複数軸で分けるべきです。
@@ -115,6 +141,26 @@ Underwater国家は地上侵攻、Amphibious性能、装備制限、海陸両方
 - 操作量
 
 ある国家がSingle Playerでは扱いやすくても、Multiplayerでは研究Timingや外交が難しい場合があります。
+
+## 国家を選ぶ比較表
+
+候補を二～三国に絞ったら、次を同じ形式で比較します。
+
+```text
+Nation / Age：
+Expansionの主力：
+Screen：
+Damage source：
+Recruit-anywhere Mage：
+Capital-only依存：
+第一Research Breakpoint：
+第二Fortの価値：
+Pretenderが補うもの：
+最も危険なCounter：
+毎Turnの操作量：
+```
+
+国家名やTierだけで決めず、最初の12TurnとFirst warを想像します。
 
 ## 最初のゲームでの目標
 
