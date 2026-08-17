@@ -1,0 +1,38 @@
+name: Apply Wave 4 Documentation
+
+on:
+  push:
+    branches:
+      - agent/glamour-flying-strategic-magic-guides
+    paths:
+      - scripts/apply_wave4_docs.py
+      - .github/workflows/apply-wave4.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/glamour-flying-strategic-magic-guides
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Apply navigation and catalog updates
+        run: python scripts/apply_wave4_docs.py
+      - name: Commit documentation changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs zensical.toml
+          if git diff --cached --quiet; then
+            echo "No documentation changes to commit."
+            exit 0
+          fi
+          git commit -m "Connect Glamour, Flying, and strategic magic guides"
+          git push origin HEAD:agent/glamour-flying-strategic-magic-guides
