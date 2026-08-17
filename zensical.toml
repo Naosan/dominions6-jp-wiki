@@ -16,9 +16,9 @@ nav = [
     "nations/index.md",
     "nations/choose-a-nation.md",
     "nations/how-to-read.md",
-    { "Early Age" = "nations/ea/index.md" },
+    { "Early Age" = ["nations/ea/index.md", "nations/ea/ulm.md"] },
     { "Middle Age" = ["nations/ma/index.md", "nations/ma/ulm.md"] },
-    { "Late Age" = "nations/la/index.md" },
+    { "Late Age" = ["nations/la/index.md", "nations/la/man.md"] },
   ] },
   { "データ索引" = [
     "data/index.md",
