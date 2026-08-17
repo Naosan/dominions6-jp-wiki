@@ -81,7 +81,9 @@ Bloodは独立した経済圏です。強い一方、Blood Hunter、Unrest、Pop
 
 最初の一戦でゲーム全体を学びたい場合、Blood依存が低い国家の方が操作は軽くなります。
 
-Bloodを補助Engineとして使う例はEA NiefelheimとEA Abysiaです。Bloodを国家の中心にする国家は、さらに操作量が増えます。
+Bloodを補助Engineとして使う例はEA NiefelheimとEA Abysiaです。Bloodを国家の中心にする具体例は[EA Mictlan](ea/mictlan.md)です。
+
+Hunter選定、Population、Unrest、Patrol、Slave輸送、Sabbath、Blood Sacrificeの共通手順は[Blood Economy・Blood Hunt・Blood Sacrifice](../magic/blood-economy.md)を参照してください。
 
 ### 6. Stealth・Raid・機動戦をしたいか
 
@@ -99,6 +101,8 @@ Bloodを補助Engineとして使う例はEA NiefelheimとEA Abysiaです。Blood
 
 Underwater国家は地上侵攻、Amphibious性能、装備制限、海陸両方のFort生産を学ぶ必要があります。独自性は高いですが、最初のゲームでは陸上国家より判断項目が増えます。
 
+海中ExpansionからLandfallまでを一続きで学ぶ基準は[MA Atlantis](ma/atlantis.md)、共通仕様は[海・Underwater・Amphibious攻略](../systems/underwater.md)です。
+
 ## プレイスタイル別の国家類型
 
 | 類型 | 主に学べること | 主な落とし穴 | 基準記事 |
@@ -109,15 +113,15 @@ Underwater国家は地上侵攻、Amphibious性能、装備制限、海陸両方
 | Heavy Sacred | Pretender、Bless、Holy Point、Fire環境 | 補充、Anti-Sacred、Scales損失 | [EA Abysia](ea/abysia.md) |
 | Communion | Mage量産、Script、Path boost、Slave管理 | Slave過労死、Magic Duel、操作量 | [MA Pythium](ma/pythium.md) |
 | 高性能一般兵・Stealth | 兵種分業、Raid、Random Magic、Forge | 射撃、MR、個体管理 | [EA Ulm](ea/ulm.md) |
-| Undead | Reanimation、Darkness、消耗戦 | Priest、Holy damage | 今後整備 |
+| Undead・Popkill | Reanimation、Freespawn、Death Gem economy、消耗戦 | Priest、Holy damage、Population消滅 | [MA Ermor](ma/ermor.md) |
 | Nature持久戦 | Regeneration、Poison、Relief | Burst、Poison Resistance | 今後整備 |
 | Glamour / Stealth | 情報戦、Raid、Illusion | True Sight、Mindless | 今後整備 |
-| Blood中心 | Blood economy、Demon、Sabbath | Micro、Unrest、人口 | 今後整備 |
-| Underwater | 海陸移行、Amphibious、独自Recruit | 地上展開の遅れ | 今後整備 |
+| Blood中心 | Blood Hunt、Demon、Sabbath、宗教Network | Micro、Unrest、人口、輸送 | [EA Mictlan](ea/mictlan.md) |
+| Underwater | 海陸移行、Amphibious、独自Recruit、Landfall | 地上展開、Retreat、装備差 | [MA Atlantis](ma/atlantis.md) |
 
 ## 現在の学習用基準記事
 
-国家の難易度を一つの数字で決めず、何を学びたいかで次の六記事を使い分けます。
+国家の難易度を一つの数字で決めず、何を学びたいかで次の九記事を使い分けます。
 
 | 国家 | 向いている学習テーマ | 最初に注意すること |
 |---|---|---|
@@ -126,6 +130,9 @@ Underwater国家は地上侵攻、Amphibious性能、装備制限、海陸両方
 | [EA Niefelheim](ea/niefelheim.md) | Giant、Cold、少数精鋭、Skratti、Blood | Shock、Fatigue、MR attack、損失の補充費 |
 | [MA Ulm](ma/ulm.md) | Blacksteel、Resource経済、Earth Buff、重装Army、鍛造 | AP・AN・Poison、遅い部隊、Magic diversity |
 | [MA Pythium](ma/pythium.md) | Legion、Communion、Astral、Mage量産、Fort scaling | Slave過労死、Magic Duel、Missing Path、操作量 |
+| [MA Ermor](ma/ermor.md) | Popkill、Freespawn、Reanimation、Death Gem economy | Bootstrap、Commander不足、Banishment、外交圧力 |
+| [EA Mictlan](ea/mictlan.md) | Blood Hunt、Blood Sacrifice、Sacred、首都Crosspath | Unrest、Population、Slave輸送、首都Queue |
+| [MA Atlantis](ma/atlantis.md) | Underwater、Coral兵、Water Magic、Coastal Recruit、Landfall | 陸上展開、Missing Path、Retreat、環境差 |
 | [LA Man](la/man.md) | Longbow・Crossbow、Friendly Fire、Drain研究、Mason、Fort network | 兵種選択の多さ、Mage個体差、Nature・Water不足 |
 
 ### 一番単純な一般兵の入口
@@ -161,6 +168,45 @@ MA Pythiumでは、単にSlave数を増やすのではなく、
 ```
 
 の順に設計します。
+
+### Undead・Popkillを学ぶ
+
+MA Ermorでは、Populationと通常Recruitを失う代わりに、Dominion、Freespawn、Priest turn、Death Gemで国家を動かします。
+
+```text
+Gold economy
+→ Temple・Lab・Fort・Mercenary
+
+Death Gem economy
+→ Priest・Mage・Commander・Summon
+```
+
+という資源変換を学ぶ教材です。
+
+### Blood economyを学ぶ
+
+EA Mictlanでは、Blood Slaveだけでなく、Hunter turn、Population、Unrest、Patrol、輸送、Templeを一つのNetworkとして管理します。
+
+```text
+Blood Hunt
+→ Slave集約
+→ Blood Sacrifice / Ritual / Sabbath
+```
+
+までつながって初めて国家Engineになります。
+
+### UnderwaterとLandfallを学ぶ
+
+MA Atlantisでは、海中で勝つこととGameに勝つことを分けます。
+
+```text
+海中Expansion
+→ Coast確保
+→ Landfall
+→ 陸上Fort・Mage・Retreat route
+```
+
+を一つの作戦として設計します。
 
 ### Stealthと多様な兵を学ぶ
 
@@ -224,5 +270,6 @@ Pretenderが補うもの：
 - Battle Replayから敗因を特定する
 - 敵のProtection / MR / Resistanceに合わせてCounterを変える
 - Giant・Sacred・Communionの交換条件を一つ説明できる
+- Popkill・Blood・Underwaterのどの資源が通常国家と違うか説明できる
 
 国家を決めたら、[国家ページの読み方](how-to-read.md)を使ってRosterとMagic Accessを確認してください。その後、[Pretender設計サンプル](../pretender/samples.md)から国家の不足に近い設計骨格を二つ選び、同じ条件のTest gameで比較します。

@@ -17,6 +17,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 - [EA Ulm — Enigma of Steel](ulm.md) — 一般兵、Stealth、地形Recruit、Forge Bonus、広いRandom Magicを扱う基準記事
 - [EA Abysia — Children of Flame](abysia.md) — 重装兵、Heavy Sacred、Fire環境、Blood Sacrifice、Fire以外の第二案を扱う基準記事
 - [EA Niefelheim — Sons of Winter](niefelheim.md) — Giant、Cold、少数精鋭、Skratti、Blood、Shock・Fatigue対策を扱う基準記事
+- [EA Mictlan — Reign of Blood](mictlan.md) — Restricted Dominion、Blood Hunt、Blood Sacrifice、Sacred、首都Priest、Sabbathを扱う基準記事
 
 自動生成の骨組み記事は、公式メタデータと共通見出しを提供します。手書き攻略では、Expansion、Pretender、Research、Army、Counter、Multiplayerまで実戦方針を追加します。
 
@@ -44,7 +45,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 | 22 | [EA T'ien Ch'i](tien-chi.md) | Spring and Autumn | 骨組み |
 | 23 | [EA Yomi](yomi.md) | Oni Kings | 骨組み |
 | 24 | [EA Caelum](caelum.md) | Eagle Kings | 骨組み |
-| 25 | [EA Mictlan](mictlan.md) | Reign of Blood | 骨組み |
+| 25 | [EA Mictlan](mictlan.md) | Reign of Blood | **攻略あり** |
 | 26 | [EA Xibalba](xibalba.md) | Vigil of the Sun | 骨組み |
 | 27 | [EA C'tis](ctis.md) | Lizard Kings | 骨組み |
 | 28 | [EA Machaka](machaka.md) | Lion Kings | 骨組み |

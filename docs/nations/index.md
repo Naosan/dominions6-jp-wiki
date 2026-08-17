@@ -31,8 +31,11 @@ Dominions 6のvanilla国家を、**Early Age 35・Middle Age 37・Late Age 31、
 | 高性能一般兵・Stealth | [EA Ulm — Enigma of Steel](ea/ulm.md) | 複数攻撃、Shield役、Stealth、地形Recruit、鍛造、Random Magic |
 | Heavy Sacred・Fire | [EA Abysia — Children of Flame](ea/abysia.md) | 重装兵、Burning One、Fire環境、Blood Sacrifice、Fire以外の第二案 |
 | Giant・Cold | [EA Niefelheim — Sons of Winter](ea/niefelheim.md) | 少数精鋭、Cold、Skratti、Blood、Shock・Fatigue・MR対策 |
+| Blood economy・宗教Network | [EA Mictlan — Reign of Blood](ea/mictlan.md) | Restricted Dominion、Blood Hunt、Blood Sacrifice、Slave輸送、Sabbath |
+| Undead・Popkill | [MA Ermor — Ashen Empire](ma/ermor.md) | Population消滅、Freespawn、Reanimation、Death Gem、Undead Leadership |
 | 重装生産・Earth | [MA Ulm — Forges of Ulm](ma/ulm.md) | Blacksteel、Resource経済、Earth Mage、Forge economy、対Armor戦 |
 | Communion | [MA Pythium — Emerald Empire](ma/pythium.md) | Legion、Master / Slave、Astral、Communion Fatigue、Missing Path |
+| Underwater・Landfall | [MA Atlantis — Kings of the Deep](ma/atlantis.md) | Amphibious、Coral兵、Water Magic、海中Fort、海陸移行 |
 | 射撃Combined Arms | [LA Man — Towers of Chelms](la/man.md) | Longbow・Crossbow、Drain研究、Random Mage、Mason、Fort network |
 
 これらは「最強国家の推薦」ではありません。
@@ -43,7 +46,10 @@ EA Abysia    ：Heavy SacredとFire環境
 EA Niefelheim：Giantの交換効率とCounter管理
 MA Ulm       ：生産と重装Army
 MA Pythium   ：Mage量産とCommunion設計
-LA Man       ：Combined Armsと研究・Fort管理
+MA Ermor      ：PopkillとUndead国家経済
+EA Mictlan    ：Blood economyと宗教Network
+MA Atlantis   ：UnderwaterからLandfall
+LA Man        ：Combined Armsと研究・Fort管理
 ```
 
 という異なる国家エンジンを、同じ記事構造で比較するための基準です。
@@ -57,11 +63,24 @@ LA Man       ：Combined Armsと研究・Fort管理
 | Giantの長所と弱点を知りたい | EA Niefelheim | MA Ulm、戦闘ルール |
 | ResourceとFort生産を学びたい | MA Ulm | EA Abysia、LA Man |
 | Communionを安全に使いたい | MA Pythium | Communion、命令とBattle Script |
+| Popkill国家の経済を理解したい | MA Ermor | Undead・Reanimation・Popkill |
+| Blood Huntから前線投入までつなげたい | EA Mictlan | Blood Economy・Blood Sacrifice |
+| 海から陸へ勝利条件を伸ばしたい | MA Atlantis | 海・Underwater・Amphibious攻略 |
 | 射撃・前衛・Mageを統合したい | LA Man | EA Ulm、MA Pythium |
 
 > **初心者向け度と、学習価値は同じではありません。**
 
 複雑な国家でも、何を学ぶ記事なのかが明確なら、Test gameの教材として使えます。
+
+## 共通システムの正本
+
+第3陣では、国家記事で発見した共通問題を独立記事へ切り出しました。
+
+- [Undead・Reanimation・Popkill](../systems/undead-popkill.md) — Undead分類、Freespawn、Reanimation、Popkill経済、Counter
+- [Blood Economy・Blood Hunt・Blood Sacrifice](../magic/blood-economy.md) — Hunter、Population、Unrest、Patrol、Slave輸送、Sabbath、宗教Network
+- [海・Underwater・Amphibious攻略](../systems/underwater.md) — Aquatic、Amphibious、Water Breathing、海中戦、Landfall、Retreat
+
+国家記事は具体例、共通記事は他国家にも使える正本として運用します。
 
 ## 国家攻略で重視するもの
 
@@ -126,14 +145,13 @@ LA Man       ：Combined Armsと研究・Fort管理
 
 ## 次に増やす国家類型
 
-第2陣でGiant・Heavy Sacred・Communionを追加しました。次は、国家記事を書く過程で共通システムの不足も検出できるよう、次の類型を優先します。
+第3陣でUndead・Popkill、Blood economy、Underwaterを追加しました。次は、既存九記事でまだ基準化できていない次の類型を優先します。
 
-- Undead・Popkill国家
-- Blood economyへ全面依存する国家
-- Underwater国家
 - Glamour・Stealthへ強く依存する国家
 - Flying・Sailing・Magic Phase機動国家
+- Nature・Poison・Regeneration中心国家
 - Late-game召喚・Global中心国家
+- Disciple Gameで役割分担が明確な国家Pair
 
 ## データ更新
 

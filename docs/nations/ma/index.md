@@ -14,8 +14,10 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 
 ## 手書き攻略の基準記事
 
-- [MA Ulm — Forges of Ulm](ulm.md) — Blacksteel、Resource経済、Earth Mage、Forge economy、対Armor戦を扱う基準記事
+- [MA Ermor — Ashen Empire](ermor.md) — Popkill、Freespawn、Reanimation、Undead Leadership、Death Gem economyを扱う基準記事
 - [MA Pythium — Emerald Empire](pythium.md) — Legion、Communion、Astral、Mage量産、Slave Fatigue、Missing Pathを扱う基準記事
+- [MA Ulm — Forges of Ulm](ulm.md) — Blacksteel、Resource経済、Earth Mage、Forge economy、対Armor戦を扱う基準記事
+- [MA Atlantis — Kings of the Deep](atlantis.md) — Underwater、Amphibious、Coral兵、Water Magic、Landfallを扱う基準記事
 
 自動生成の骨組み記事は、公式メタデータと共通見出しを提供します。手書き攻略では、Expansion、Pretender、Research、Army、Counter、Multiplayerまで実戦方針を追加します。
 
@@ -27,7 +29,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 | 51 | [MA Phlegra](phlegra.md) | Deformed Giants | 骨組み |
 | 52 | [MA Pangaea](pangaea.md) | Age of Bronze | 骨組み |
 | 53 | [MA Asphodel](asphodel.md) | Carrion Woods | 骨組み |
-| 54 | [MA Ermor](ermor.md) | Ashen Empire | 骨組み |
+| 54 | [MA Ermor](ermor.md) | Ashen Empire | **攻略あり** |
 | 55 | [MA Sceleria](sceleria.md) | The Reformed Empire | 骨組み |
 | 56 | [MA Pythium](pythium.md) | Emerald Empire | **攻略あり** |
 | 57 | [MA Man](man.md) | Tower of Avalon | 骨組み |
@@ -58,7 +60,7 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 | 85 | [MA Ys](ys.md) | Morgen Queens | 骨組み |
 | 86 | [MA Pelagia](pelagia.md) | Triton Kings | 骨組み |
 | 87 | [MA Oceania](oceania.md) | Mermidons | 骨組み |
-| 88 | [MA Atlantis](atlantis.md) | Kings of the Deep | 骨組み |
+| 88 | [MA Atlantis](atlantis.md) | Kings of the Deep | **攻略あり** |
 | 89 | [MA R'lyeh](rlyeh.md) | Fallen Star | 骨組み |
 
 ## 記事状態について
