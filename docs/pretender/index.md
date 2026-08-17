@@ -2,7 +2,7 @@
 title: Pretender God
 status: expanding
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-17"
 ---
 
 # Pretender God
@@ -22,6 +22,9 @@ Pretender設計は、「最も強い神を作る」作業ではありません�
 - Global / Late game
 
 へ配分し、**国家が不足している役割を補う**作業です。
+
+!!! tip "設計例から候補を絞る"
+    Awake Expander、Imprisoned Scales、Light / Heavy Bless、Rainbow、Global caster、Late-game Titan、Disciple Teamなどの再利用可能な型は[Pretender設計サンプル](samples.md)にまとめています。固定Buildではなく、国家の不足・代償・Test方法から二案を比較するためのページです。
 
 ---
 
@@ -414,6 +417,8 @@ Sacred cavalryでExpansionし、Astral Communionへ移行する
 - Rainbow
 - Global
 
+候補を絞るときは[Pretender設計サンプル](samples.md)の選択表とFlowを使います。
+
 ## Step 4：第二役割を追加
 
 例：
@@ -529,6 +534,8 @@ First war Turn：
 
 Design画像だけでなく、**何のためのPoint配分か**を書きます。
 
+[Pretender設計サンプル](samples.md)には、より詳しい比較表、Test game手順、国家記事へ記載する形式があります。
+
 ---
 
 # よくある失敗
@@ -569,6 +576,7 @@ Indie構成・Fatigue・PoisonでPretenderを失います。
 
 ## 関連ページ
 
+- [Pretender設計サンプル](samples.md)
 - [Scales](scales.md)
 - [Bless](bless.md)
 - [Dominion](../systems/dominion.md)
