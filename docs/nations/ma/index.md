@@ -2,7 +2,7 @@
 title: "Middle Age 国家一覧"
 status: catalog
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-17"
 ---
 
 # Middle Age（MA）国家一覧
@@ -11,6 +11,13 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 
 - [国家ページの読み方](../how-to-read.md)
 - [国家選択ガイド](../choose-a-nation.md)
+
+## 手書き攻略の基準記事
+
+- [MA Ulm — Forges of Ulm](ulm.md) — Blacksteel、Resource経済、Earth Mage、Forge economy、対Armor戦を扱う基準記事
+- [MA Pythium — Emerald Empire](pythium.md) — Legion、Communion、Astral、Mage量産、Slave Fatigue、Missing Pathを扱う基準記事
+
+自動生成の骨組み記事は、公式メタデータと共通見出しを提供します。手書き攻略では、Expansion、Pretender、Research、Army、Counter、Multiplayerまで実戦方針を追加します。
 
 ## 国家一覧
 
@@ -22,11 +29,11 @@ Dominions 6.35のvanilla国家を、現行のnation dataに基づいて整理し
 | 53 | [MA Asphodel](asphodel.md) | Carrion Woods | 骨組み |
 | 54 | [MA Ermor](ermor.md) | Ashen Empire | 骨組み |
 | 55 | [MA Sceleria](sceleria.md) | The Reformed Empire | 骨組み |
-| 56 | [MA Pythium](pythium.md) | Emerald Empire | 骨組み |
+| 56 | [MA Pythium](pythium.md) | Emerald Empire | **攻略あり** |
 | 57 | [MA Man](man.md) | Tower of Avalon | 骨組み |
 | 58 | [MA Eriu](eriu.md) | Last of the Tuatha | 骨組み |
 | 59 | [MA Agartha](agartha.md) | Golem Cult | 骨組み |
-| 60 | [MA Ulm](ulm.md) | Forges of Ulm | 攻略あり |
+| 60 | [MA Ulm](ulm.md) | Forges of Ulm | **攻略あり** |
 | 61 | [MA Marignon](marignon.md) | Fiery Justice | 骨組み |
 | 62 | [MA Pyrène](pyrene.md) | Time of the Akelarre | 骨組み |
 | 63 | [MA Abysia](abysia.md) | Blood and Fire | 骨組み |
