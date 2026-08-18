@@ -3,7 +3,7 @@ title: MA Caelum
 page_type: nation-guide
 status: reviewed
 verified_version: "6.35"
-last_verified: "2026-08-17"
+last_verified: "2026-08-19"
 nation_id: 71
 era: "MA"
 epithet: "Reign of the Seraphim"
@@ -17,7 +17,7 @@ MA Caelumは、**Flying Unitを広い範囲から集中し、Air・Water・Storm
 
 > **多くのFlying兵**
 > ＋ **Ice weapon・Ice armor**
-> ＋ **A3W2まで保証されるHigh Seraph**
+> ＋ **A3W2H2まで保証されるHigh Seraph**
 > ＋ **Archer・Lance・Heavy Ice Infantry・MammothのCombined Arms**
 > ＋ **StormとAir Magicによる戦場再設定**
 
@@ -97,7 +97,7 @@ FlyingはTargetとTimingを設計して初めて強くなります。
 | Epithet | Reign of the Seraphim |
 | Preferred Temperature | Cold寄り |
 | 軍事の中心 | Flying infantry、Archer、Storm Guard、Iceclad、Mammoth |
-| 保証Magic | A3、W2、H1 |
+| 保証Magic | A3、W2、H2 |
 | Random Magic | High SeraphのA/W/S/D、SeraphineのFire |
 | Mage | Spire Horn Seraph、Ice Crafter、Caelian Seraph、Seraphine、High Seraph |
 | 戦略能力 | Flying、高Map Move、Mountain network、Air・Water Magic |
@@ -113,7 +113,7 @@ Spire Horn Seraph  A1
 Ice Crafter        W1
 Caelian Seraph     A2 W1
 Seraphine          H1 + 20% F1
-High Seraph        A3 W2 + A/W/S/D Random
+High Seraph        A3 W2 H2 + A/W/S/D Random
 ```
 
 High SeraphはSlow to recruitです。
@@ -179,14 +179,15 @@ Fort・Throneを取り、次の集中拠点を増やす
 
 へ使えます。
 
-## 2. A3W2 High Seraph
+## 2. A3W2H2 High Seraph
 
-High Seraphは保証A3W2を持ち、さらにA/W/S/D Randomがあります。
+High Seraphは保証A3W2H2を持ち、さらにA/W/S/D Randomがあります。
 
 一体で、
 
 - Air battlefield
 - Water support
+- Priest・Holy support
 - Elemental
 - Storm
 - Site Search
@@ -502,7 +503,7 @@ F1個体を通常Priestとして失わないでください。
 
 # High Seraph
 
-A3W2＋A/W/S/D Randomです。
+A3W2H2＋A/W/S/D Randomです。
 
 ## 分類
 
@@ -521,6 +522,7 @@ Double Random
 - Storm caster
 - Lightning
 - Water battlefield
+- Priest・Holy support
 - Booster
 - Summon
 - Site Search
@@ -867,7 +869,7 @@ High Seraph Random、Antimagic、Caster attackを使います。
 
 - A3
 - W2
-- H1
+- H2
 
 ## Random
 
