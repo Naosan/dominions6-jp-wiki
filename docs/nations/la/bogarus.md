@@ -3,7 +3,7 @@ title: LA Bogarus
 page_type: nation-guide
 status: reviewed
 verified_version: "6.35"
-last_verified: "2026-08-17"
+last_verified: "2026-08-19"
 nation_id: 116
 era: "LA"
 epithet: "Age of Heroes"
@@ -30,7 +30,7 @@ BogarusはSpell一覧を見ると万能に見えます。しかし、
 - Mageが脆い
 - 多数のMage typeを分類する必要がある
 - Gold・Commander Pointが不足
-- Water・Nature・Glamourが自然には不足
+- Water・NatureはStarets Random依存、Glamourは自然には不足
 - Communion・Blood・Ritualが同じMage turnを奪う
 
 という制約があります。
@@ -101,7 +101,7 @@ Research
 | Any-fort Magic | F1、A2、E1、S2、D1、B2、H2 |
 | Start Site | Starets、Eparch |
 | Magicの軸 | Astral Communion、Air、Fire、Earth、Death、Blood、Holy |
-| 主な不足 | Water、Nature、Glamour |
+| 主な不足 | Glamour。Water・NatureはStarets Random依存 |
 | 戦略能力 | Fast research、Communion、Sabbath、召喚、遠隔、Hero |
 | 操作量 | 非常に高い。Mage分類、Script、Gem、Blood、Ritual、Fort |
 | 主な弱点 | 弱い通常兵、Mage assassination、Gold、Raid、Magic Duel、早期Rush |
@@ -123,7 +123,7 @@ Alchemist       F1 E1 S1
 
 ```text
 Eparch   H3
-Starets  F2 A1 S2 B1 + A/S/D/B Random
+Starets  F2 E1 S1 D2 + 100% A/W/E/S/N/D Random + 10% second Random
 ```
 
 Start Site recruitは供給拠点とCommander Pointを確認します。
@@ -260,9 +260,11 @@ Voi・PeshtsiはLAの魔法戦に対し、そのままでは弱いです。
 
 Mage種類が多く、すべて雇いたくなりますが、Fortごとに一人しか選べない場合があります。
 
-## 5. Water・Nature・Glamour不足
+## 5. Water・Natureの供給とGlamour不足
 
-Resistance、Regeneration、Poison、Water battlefield、Glamour utilityが不足します。
+Water・NatureはStaretsのRandomで得られますが、Start Site供給とRandom rollに依存します。
+
+安定して必要数を揃えたい場合や高Pathへ伸ばしたい場合は、Pretender・Summon・Site・Boosterで別Routeを用意します。Glamourは自然には不足します。
 
 ## 6. 操作量
 
@@ -523,24 +525,24 @@ F1E1S1です。
 
 # Starets
 
-F2A1S2B1＋A/S/D/B Randomです。
+F2E1S1D2＋100% A/W/E/S/N/D Random＋10% A/W/E/S/N/D second Randomです。
 
 Bogarusの戦略Magic中核です。
 
 - Fire
-- Air
+- Earth
+- Death
 - Astral
-- Blood
-- Death Random
+- Air / Water / Nature Random
+- 追加Earth / Astral / Death Random
 - Communion
-- Sabbath
 - Summon
 - Global
 - Booster
 
 へつながります。
 
-Start Site供給なので、失うと補充が難しい場合があります。
+Start Site供給なので、失うと補充が難しい場合があります。Water・Nature個体や高Path化するRandom個体は、通常のBattle Mageとして使い潰さず役割を分けます。
 
 ---
 
@@ -682,15 +684,13 @@ ResearcherとFortを増やします。
 
 国家兵だけでExpansionできるMap向けです。
 
-## 3. Water・Nature bridge
+## 3. Water・Natureの安定化 / Glamour bridge
 
-Missing Pathを補います。
+StaretsのRandomだけへ依存したくないPathや、自然には不足するGlamourを補います。
 
-- Poison Resistance
-- Regeneration
-- Healing
-- Water battle
-- Summon chain
+- Water battlefield・Summon chain
+- NatureのPoison Resistance・Regeneration・Healing
+- Glamour utility
 
 へ入ります。
 
@@ -890,7 +890,7 @@ Researchが早くても、Gem・Caster・Overcastが必要です。
 
 ## Hero
 
-HeroはWater・Nature・高Death等を開く場合がありますが、保証ではありません。
+HeroはWater・Natureの追加Accessや高Death等を開く場合がありますが、保証ではありません。
 
 [召喚・Global・遠隔Ritual](../../magic/strategic-rituals.md)を参照してください。
 
