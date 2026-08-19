@@ -7,27 +7,30 @@ last_verified: "2026-08-19"
 
 # Artifact・Unique Item攻略
 
-Artifactは「高級Magic Item」の別名ではありません。
+Dominions 6のArtifactを理解するときは、まず**Forge可能なConstruction 9 Artifact**と、**通常ForgeできないItem class**を分けます。
 
-Dominions 6では、**Construction 9でForgeするItemがArtifactで、同じArtifactは世界に一つしか存在できません。**
+公式Main Manualでは、Construction / research level 9でForgeできるItemをArtifactと呼び、同じArtifactは世界に一つだけ存在できます。
 
-したがってArtifactは、
+一方、Modding Manualの`constlevel`には、
 
-```text
-Construction 9へ到達する
-→ 必要Pathへ届く
-→ Gemを確保する
-→ まだ存在していないArtifactをForgeする
-→ Carrierを守る
-```
+- 11 — unforgeable item
+- 13 — unforgeable unique artifact
+- 15 — unforgeable unique per nation artifact
 
-という**先着競争**です。
+という別の取得classもあります。
 
-さらにArtifactには`yearning`があり、ゲーム進行によってForge Costが半額になることがあります。
+したがってこのWikiでは、曖昧な「Artifact」という一語だけで分類せず、
 
-正確な6.35の要求Path・通常Cost・Slot・効果は、
+> **Forgeable Artifact（C9）**
+>
+> **Unforgeable Item（constlevel 11 / 13 / 15）**
 
-- [Artifact一覧 — Construction 9](../data/items/artifacts.md)
+として取得経路を明示します。
+
+正確な6.35データは、
+
+- [Forgeable Artifact一覧 — Construction 9](../data/items/artifacts.md)
+- [Unforgeable Item一覧](../data/items/unforgeable.md)
 - [Magic Item Weapon profile](../data/items/weapon-profiles.md)
 - [Magic Item Armor profile](../data/items/armor-profiles.md)
 - [Item Spell・自動効果](../data/items/active-effects.md)
@@ -35,456 +38,449 @@ Construction 9へ到達する
 - [Item副作用・装備制限](../data/items/risk-restrictions.md)
 - [Dominions 6 Mod Inspector](https://larzm42.github.io/dom6inspector/)
 
-を使います。
+で確認します。
 
 ---
 
-# ArtifactとUnforgeable Itemは別
+# Forgeable Artifact — Construction 9
 
-ここは用語上かなり重要です。
+Main Manualが通常のArtifactとして説明しているのがConstruction 9 Itemです。
 
-## Artifact
+特徴は、
 
-Dominions 6 Manualでは、**research / Construction level 9のforgeable Item**をArtifactと呼びます。
-
-- Forgeできる
 - Construction 9が必要
+- Forge要求Pathが必要
+- Gem / Blood Slaveが必要
 - unique
 - 同じArtifactが既に存在している間はForgeできない
-- yearning対象になる
+- yearningによるCost軽減がある
 
-という性質があります。
+ことです。
 
-## Unforgeable Item
+通常Itemのように「後でGemが貯まったら作ればよい」とは限りません。
 
-通常の`Forge Item`では作れないItemです。
+```text
+C9へ到達
+→ Forge Pathを完成
+→ Gemを準備
+→ Enemyより先に確保
+→ Carrierを守る
+```
 
-入手経路はItemごとに異なり、
+という**Artifact race**になります。
+
+---
+
+# Unforgeable Item — constlevel 11 / 13 / 15
+
+こちらは通常の`Forge Item` orderでは作れません。
+
+6.35の固定データでは、Modding Manualのclassに合わせて、
+
+| constlevel | Wiki表示 | 意味 |
+|---:|---|---|
+| 11 | Unforgeable | 通常Forge不可 |
+| 13 | Unforgeable unique artifact | Forge不可・unique |
+| 15 | Unforgeable unique per nation artifact | Forge不可・国家単位unique |
+
+として索引化します。
+
+重要なのは、**Construction 9を研究しても取得できない**ことです。
+
+入手経路はItemごとに、
 
 - Event
 - Arena
-- 特殊生成
 - 国家固有
-- その他のゲーム内入手手段
+- 特殊生成
+- その他のゲーム内取得
 
 を確認します。
 
-[Unforgeable Item一覧](../data/items/unforgeable.md)と[Arena関連Magic Item](../data/items/arena.md)を参照してください。
+[Arena関連Magic Item](../data/items/arena.md)や[Magic ItemによるUnit生成・変身](../data/units/item-unit-sources.md)も併用してください。
 
-> **Artifact = Unforgeableではありません。**
+---
 
-ArtifactはC9でForgeするunique Itemです。
+# 「Artifact」と「Unforgeable」を混ぜない
+
+`unforgeable unique artifact`という技術用語があるため、
+
+> Artifact = 必ずForge可能
+
+とも、
+
+> Artifact = Unforgeable
+
+とも言い切れません。
+
+攻略上は**取得方法**で分けるのが安全です。
+
+```text
+C9でForgeする？
+├─ Yes → Forgeable Artifact / Artifact race / Yearning
+└─ No  → Unforgeable class / 入手イベントや特殊条件を調べる
+```
 
 ---
 
 # Uniqueとは何か
 
-Artifactは世界に同じものが同時に一つしか存在できません。
+Forgeable C9 Artifactは同じものが同時に世界に一つしか存在できません。
 
-つまり、自分が必要PathとGemを持っていても、他Playerが既にそのArtifactを所有していれば作れません。
+そのため、
 
-このため通常Itemとは価値計算が変わります。
+- 自分がC9へ到達した
+- 要求Pathがある
+- Gemもある
 
-通常Itemなら、
+だけでは不十分です。
 
-```text
-欲しい
-→ Gemを貯める
-→ 後から作る
-```
+既に他国がそのArtifactを所有しているならForgeできません。
 
-でよいことが多いですが、Artifactでは、
-
-```text
-欲しい
-→ Enemyも欲しいか
-→ C9到達Timing
-→ Forge可能Mage
-→ Gem在庫
-→ 先に作れるか
-```
-
-まで考えます。
+通常Itemとの最大の違いは、**研究と資源だけでなく先着権が価値になる**ことです。
 
 ---
 
-# Artifact race
+# Artifact raceの六つの条件
 
-Artifact争いはResearch競争だけではありません。
-
-必要なのは、
+Forgeable Artifactを確保するには、少なくとも次が必要です。
 
 1. Construction 9
-2. Forge Path
-3. Booster
-4. Gem
-5. Forge Mageの一Turn
-6. Artifactがまだ存在していないこと
+2. Forge要求Path
+3. Booster / Summon / Pretender等のPath route
+4. 必要Gem
+5. Forge担当Mageの一Turn
+6. Artifactがまだ世界に存在していないこと
 
-です。
-
-一つでも欠けると先着できません。
+C9完成後に1～5を準備し始めると遅い場合があります。
 
 ---
 
-# C9へ到達するだけでは足りない
+# C9より先にBooster chainを作る
 
-よくある失敗は、Construction 9を研究してからForge準備を始めることです。
-
-例えば欲しいArtifactが高い複合Pathを要求するなら、C9完成前に、
+欲しいArtifactが高Path・複合Pathなら、研究完成前にForge Mageを作ります。
 
 ```text
 Native Mage
 → Booster 1
 → Booster 2
 → Summoned Mage / Pretender
-→ 最終Forge Path
+→ Artifact要求Path
 ```
 
-を作っておきます。
+C9完成Turnに`Forge Item`を選べる状態が理想です。
 
-C9完成TurnにForge orderを出せる状態が理想です。
+- [Magic Path Booster](boosters.md)
+- [Magic Path Boosting](../magic/boosting.md)
+- [Magic Access Route](../magic/magic-access-routes.md)
 
-[Magic Path Booster](boosters.md)と[Magic Access Route](../magic/magic-access-routes.md)を使います。
+を使って事前計画します。
 
 ---
 
 # Yearning
 
-Artifactには`yearning`という特殊なForge Cost軽減があります。
+Forgeable Artifactには`yearning`があります。
 
-公式Manualでは、yearning状態になったArtifactは**通常Costの半額でForge**できます。
+Main Manualでは、**yearning状態のArtifactは通常Costの半額でForge**できます。
 
-ただしyearningは静的なItem能力ではなく、ゲーム進行中に発生する状態です。
+これはBaseIに固定されたItem能力ではなく、進行中のゲーム状態です。
 
-そのため自動生成Item表のGem欄には反映されません。
+そのため、
 
-最終Costは必ずゲーム内Forge画面で確認します。
+- Wikiのgenerated Gem欄
+- 固定6.35 BaseI
+
+にはyearning後の価格を入れません。
+
+**現在のForge Costはゲーム内Forge画面をsource of truth**とします。
 
 ---
 
 # Yearningが始まり得る条件
 
-公式Manualでは、少なくとも次のいずれかが発生するとArtifactがyearningを開始する可能性が生じます。
+Main Manualは、少なくとも次のイベントのどれかが起きるとArtifactがyearningし始める可能性が生じると説明しています。
 
 - 少なくとも一国がConstruction 9を研究した
 - Global Enchantment `Forge of the Ancients` が発動した
 - `Throne of Creation` がClaimされた
 - `Throne of the Artificer` がClaimされた
 
-各条件はyearning rateを50%ずつ増加させます。
+各イベントはyearning rateを50%増加させます。
 
-Manualの例では、条件が一つだけ成立している場合、Artifactがyearningを開始する確率は**毎月50%**です。
+Manualの例では、一条件だけ成立している場合は**毎月50%**でArtifactがyearningを開始します。
 
 ---
 
-# Yearningをどう使うか
+# Yearningは「半額だから待つ」だけではない
 
-Yearningを待つとGemを大きく節約できます。
+Yearningを待つ利点は大きなGem節約です。
 
-一方で待っている間にEnemyが先にForgeするRiskがあります。
+しかし待機中にEnemyがForgeすれば、そのArtifact自体を失います。
 
-したがって判断は、
+判断は、
 
 ```text
-今すぐ通常Costで確保する価値
+通常Costで今すぐ確保する価値
 vs
-Yearningを待って節約する価値
+Yearningで節約する価値
 vs
-Enemyに取られるRisk
+Enemyに先着されるRisk
 ```
 
 です。
 
 ---
 
-# すぐForgeするArtifact
+# すぐForgeしやすい状況
 
-次のような場合はyearning待ちより先着を優先しやすくなります。
-
-- 勝ち筋の中心になる
-- Enemyが同じPathを持つ
+- Artifactが勝ち筋の中心
+- 代替Itemがない
+- Enemyも同じForge Pathへ届く
 - EnemyもC9へ近い
-- Artifactで次のGlobal / Army / SCが完成する
-- Throne戦が数Turn以内
-- Gem在庫に余裕がある
+- Throne決戦が近い
+- ArtifactでGlobal / Army / SCが即完成する
+- 現在Gemで支払っても戦争資源が残る
 
-重要なのは「高性能だから」ではなく、**失うと代替がないか**です。
+こういう場合、半額待ちより**確保**が優先されます。
 
 ---
 
-# Yearningを待ちやすいArtifact
+# Yearningを待ちやすい状況
 
-逆に、
-
-- 今すぐ使うCarrierがいない
+- 今すぐCarrierがいない
 - Enemyが要求Pathへ届きにくい
-- Gemが戦争用に必要
-- 複数Artifactを連続Forgeしたい
-- まだC9到達国が少ない
+- Gemを目先の戦争に使う必要がある
+- 複数Artifactを計画している
+- そのArtifactに通常Itemで代替がある
 
-なら待つ価値があります。
+ただしMultiplayerではEnemyのResearchやBooster chainは完全には見えません。
 
-ただし完全な情報は得られません。
-
-MultiplayerではEnemyのResearch・Pretender・Booster chainを推測します。
+待つこと自体がRiskです。
 
 ---
 
-# Artifact優先順位を固定Tierにしない
+# Artifactを固定Tierにしない
 
-Artifactは一律Tier化しにくいItemです。
+同じArtifactでも価値はNation・Map・Enemy・Timingで変わります。
 
-同じArtifactでも、
-
-- Nation
-- Pretender
-- Native magic
-- Gem income
-- Carrier
-- Enemy composition
-- Map
-- Throne状況
-- 残りTurn
-
-で価値が変わります。
-
-評価軸を使います。
-
-| 軸 | 質問 |
+| 評価軸 | 質問 |
 |---|---|
 | Access | 新しいPath / Spell / Ritualを開くか |
 | Army | 一人ではなくArmy全体へ影響するか |
 | Economy | Gem / Gold / Research / Unit生成を生むか |
-| Mobility | Raid / Teleport / Sailing等を変えるか |
+| Mobility | Raid / Teleport / Strategic moveを変えるか |
 | Combat | SC / Thug / Anti-SC能力を作るか |
-| Unique | 他Itemで代替できるか |
-| Timing | 今の戦争に間に合うか |
-| Risk | Carrier死亡時の損失が大きいか |
+| Unique | 通常Itemで代替できるか |
+| Timing | 今の戦争・Throne raceに間に合うか |
+| Carrier | 誰に持たせ、失ってよいか |
+
+「有名ArtifactだからForge」ではなく、この表で評価します。
 
 ---
 
-# ArtifactをPath accessとして見る
+# Magic accessとしてのArtifact
 
-Artifactの中には、単なる戦闘装備ではなくMagic economyを変えるものがあります。
-
-その場合、
+Path Booster系Artifactは一人のStats強化ではなく国家のMagic ceilingを変えます。
 
 ```text
 Artifact
-→ Path access
+→ 新しいPath
 → Forge / Ritual
-→ Summon Mage
+→ Summoned Mage
 → 次のMagic diversity
 ```
 
-という連鎖を評価します。
-
-一戦で何Damage増えるかより、国家全体のMagic ceilingが変わる方が重要なことがあります。
+へ繋がるなら、戦闘Item以上の価値があります。
 
 ---
 
-# ArtifactをArmy effectとして見る
+# Battlefield effectとしてのArtifact
 
-Start battle effect、Battlefield condition、Summon、Leadership等を持つArtifactはCarrier一人のStatsだけでは評価できません。
+Start battle spell、Auto combat、Summon等を持つItemはCarrier一人のStatsだけでは評価できません。
 
 [Item固有効果・Weapon proc・副作用](effects-and-procs.md)で、
 
 - Item本体
 - Weapon / Armor
+- Secondary
 - Start battle
 - Auto combat
 - Summon
-- 副作用
+- Risk / restriction
 
-を分解して確認します。
+を分解してください。
 
 ---
 
-# ArtifactをSC装備として見る
+# SC装備としてのArtifact
 
-ArtifactをSCへ全部積めば強い、とは限りません。
+ArtifactをSCへ積めば強いとは限りません。
 
-Artifactはuniqueなので、Carrier死亡時の機会損失が通常Itemより大きくなります。
+unique Itemを一人に集中すると、
 
-SCへ渡す前に、
+- Carrier死亡
+- MR attack
+- Assassination
+- Retreat不能
 
-```text
-このArtifactでしか解決できない弱点か？
-```
+で国家全体の資産をまとめて失います。
 
-を確認します。
-
-通常C5/C7 Itemで任務を満たせるなら、Artifactを後方Casterや別Commanderへ残せる場合があります。
+通常C5/C7 Itemで任務を達成できるなら、Artifactを別のCasterや戦略用途へ残す方がよい場合があります。
 
 ---
 
 # Carrier Risk
 
-Artifactを持つCommanderはEnemyから見ても高価値Targetです。
+Artifact carrierは高価値Targetです。
 
 警戒するもの：
 
 - Assassination
 - Remote attack
+- Magic phase interception
 - Magic Duel
-- Soul Slay / Control
+- Soul Slay / Charm / Control
 - AN burst
 - Fatigue kill
 - Retreat blocking
-- Teleport interception
-- Horror / special effect
 
-Artifactそのものだけでなく、Carrierの価値も計算します。
+Item価格だけでなく、Rare Mage・Hero・Pretender本人の価値も含めます。
 
 ---
 
-# Artifactを後方Mageへ持たせる場合
+# 後方Artifact carrier
 
-Forge / Ritual / Global用Artifactなら、前線に出す必要がないことがあります。
+Forge / Ritual / Global用途なら前線へ出す必要がありません。
 
-- Capital後方
 - Safe Fort
 - Lab
 - Patrol
-- Anti-assassin Bodyguard
+- Bodyguard
 - Retreat route
 
 を用意します。
 
-F8のMagic item overviewで所在を定期確認します。
+F8のMagic item overviewで所在を確認し、前線Mageへ付けっぱなしにしません。
 
 ---
 
-# Artifactを前線へ持たせる場合
+# 前線Artifact carrier
 
 戦闘効果が目的ならRiskを受け入れます。
 
-その代わり、
+その代わり、Artifact以外で、
 
 - MR
 - Elemental Resistance
+- Reinvigoration
 - Bodyguard
-- Gem
 - Retreat
-- Scout情報
 
-をArtifact以外の安価な手段で補います。
+を補います。
 
-「Artifactが強いから裸Carrierでも強い」と考えないことが重要です。
+Artifact一個でCarrierの全弱点が消えるわけではありません。
 
 ---
 
-# 敵がArtifactを持ったとき
+# Counter：敵のArtifactを分解する
 
-Counterは同じArtifactを作ることではありません。
+同じArtifactが既に存在するなら、自分は同じものをForgeして対抗できません。
 
-すでに存在しているなら同じArtifactをForgeできないため、**別Counterを作る必要があります。**
-
-まず効果を分解します。
+まず敵Artifactの価値の発生源を見ます。
 
 ```text
-Weaponが強い？
-Start battleが強い？
-Path Boosterが強い？
-Summon economyが強い？
-Mobilityが強い？
-SC sustainが強い？
+Weapon性能？
+Secondary？
+Start battle？
+Path Booster？
+Summon economy？
+Mobility？
+SC sustain？
 ```
 
-その発生源を狙います。
+そして別軸からCounterします。
 
 ---
 
-# Counter：Carrierを殺す
+# Counter：Carrierを狙う
 
-Artifactの効果が一人のCarrierへ集中しているなら、Army全体を正面から倒す必要はありません。
+効果がCarrierへ集中するならArmy全体を倒す必要はありません。
 
 - Assassin
+- Commander snipe
 - Remote
-- Magic phase interception
-- Precision / Commander snipe
 - MR attack
 - Anti-SC specialist
 
-でCarrier本人を狙います。
+でCarrierを狙います。
 
-ただしArtifactのStart battle effectなど、戦闘開始時点で既に価値を発揮するものは「戦闘中に殺せば止まる」とは限りません。
+ただしStart battle effectのように、戦闘開始時点で既に価値を発揮する効果は、戦闘中にCarrierを倒しても「発動前へ巻き戻る」わけではありません。
 
 ---
 
-# Counter：Slotを攻める
+# Counter：Slotを狙う
 
-ArtifactもSlotを使います。
+Artifactも装備Slotを使います。
 
-Enemyが強力なArtifactを装備することで、
+EnemyがArtifactを装備した結果、
 
 - MR
-- Resistance
+- Elemental Resistance
 - Reinvigoration
-- Mobility
 - Shield
+- Mobility
 
-のどれかを諦めている場合があります。
+のどれかが不足している場合があります。
 
-Artifact名ではなく**空いた弱点**を探します。
+Artifactそのものを正面突破するより、**そのItemのために空いた弱点**を攻めます。
 
 ---
 
-# Counter：C9前に戦う
+# Counter：C9完成前に戦う
 
-Artifact raceへの最も単純なCounterは、相手がC9へ投資している間に戦争を始めることです。
+C9研究は大きなResearch投資です。
 
-Construction 9へのResearchは、同じ期間に、
+相手がConstructionへ深く進んだということは、同じResearchをBattle magicへ使っていない可能性があります。
 
-- Alteration
-- Enchantment
-- Evocation
-- Thaumaturgy
-- Conjuration
-
-へ行かなかったことを意味します。
-
-相手の現時点のBattlefield breakpointが低いなら、Artifact完成前がTiming windowです。
+Artifact完成前のTiming windowを狙います。
 
 ---
 
 # Counter：Gem economyを攻撃する
 
-C9へ到達してもGemがなければArtifactは作れません。
+C9・PathがあってもGemがなければForgeできません。
 
 - Gem Site Raid
-- Capital / Lab pressure
-- Global dispel
-- Gem-burning war
+- Forge hub attack
 - Booster carrier assassination
+- BattleでGemを吐かせる
+- Globalへの圧力
 
-でForge準備を遅らせます。
+でArtifact準備を遅らせます。
 
 ---
 
 # ArtifactとDiplomacy
 
-MultiplayerではArtifactの存在が外交情報になります。
+Multiplayerでは次の情報がArtifact raceの手掛かりになります。
 
-例えば、
+- C9到達が見える動き
+- Forge of the Ancients
+- Throne of Creation / Artificer
+- 高Path Pretender
+- Boosterを積んだMage
+- Battle Replayで確認したArtifact
 
-- 特定Artifactを誰が持っているか
-- C9到達国がいるか
-- Forge of the Ancientsが出たか
-- 関連ThroneがClaimされたか
-
-は、他国のResearch・Magic access・勝ち筋を推測する材料です。
-
-Artifact forgeそのものが見えなくても、Battle ReplayやScoutで装備を確認できます。
+これらからEnemyのResearch・Forge routeを推測します。
 
 ---
 
-# C9へ行く前のチェック
+# C9研究前チェック
 
 ```text
-欲しいArtifact：
-そのArtifactで何が変わる：
+欲しいForgeable Artifact：
+何が勝ち筋になる：
 要求Path：
 Forge可能Mage：
 必要Booster：
@@ -498,98 +494,71 @@ Carrier防御：
 C9研究で遅れるBattle Spell：
 ```
 
-これを埋められないなら、「Artifactが強そうだからC9」は危険です。
+これを埋められないなら、C9を「強いItemがあるから」で研究するのは危険です。
 
 ---
 
-# Forge開始Turnの準備
+# Forge開始Turnを準備する
 
-理想はC9完成後に考えるのではなく、その前Turnまでに、
+C9完成前に、
 
 - BoosterをTreasuryへ置く
 - Forge MageをLabへ戻す
-- Gemを移送する
-- Carrierを準備する
-- Monthly Forgeを止める
-- F8で必要Itemの所在を確認する
+- Gemを集める
+- Carrierを決める
+- 不要なMonthly Forgeを止める
+- F8でItem所在を確認する
 
-ところまで終えることです。
+ところまで済ませます。
 
----
-
-# Yearning確認
-
-Yearningは自動生成データだけでは判断できません。
-
-Forge画面で実際のCostを確認します。
-
-通常Costと比べて大きく安くなっていれば、現在のゲーム状態が価格へ反映されています。
-
-WikiのGem欄は静的な6.35基礎データとして使い、**現在ゲームの価格はゲームUIをsource of truth**とします。
+C9完成後に準備を始める一TurnがArtifact raceでは大きな差になります。
 
 ---
 
-# Unforgeable Itemの考え方
+# Unforgeable Itemの評価
 
-Unforgeable ItemはC9 raceとは別です。
-
-「Constructionを研究すれば取れる」という前提を持たず、入手経路から考えます。
+UnforgeableはResearch raceではなく**入手経路**から評価します。
 
 ```text
 Item
-→ どこから出るか
+→ 何から入手するか
 → 再現可能か
-→ Uniqueか
+→ unique classか
 → Carrierを選べるか
-→ 入手Timingを操作できるか
+→ Timingを操作できるか
 ```
 
-を確認します。
+偶然Eventで得るItemを国家標準buildの前提にしないことも重要です。
 
 ---
 
 # Arena Item
 
-Arena報酬等で得るItemは、Forge economyではなくArena参加Riskとの交換です。
-
-評価は、
+Arena報酬はForge economyとは違います。
 
 ```text
 参加Commanderを失うRisk
 vs
-勝利報酬Item
+勝利報酬
 vs
-Championを前線から外すTurn
+Championを他任務から外すTurn
 ```
 
-になります。
+で判断します。
 
-[Arena関連Magic Item](../data/items/arena.md)を参照します。
-
----
-
-# Event / Special acquisition
-
-Eventや特殊生成Itemは、通常Forgeとは供給の再現性が違います。
-
-偶然得た強力Itemを国家標準buildの前提にしないようにします。
-
-一方、入手した後はF8で管理し、通常Itemと同じように、
-
-- Carrier
-- Slot
-- Counter
-- loss risk
-
-を評価します。
+[Arena関連Magic Item](../data/items/arena.md)を参照してください。
 
 ---
 
 # よくある失敗
 
-## ArtifactとUnforgeableを同じ意味で使う
+## C9 ArtifactとUnforgeableを同じ一覧にする
 
-C9 ArtifactはForge可能なunique Itemです。
+取得方法が違うため、戦略判断を誤ります。
+
+## constlevel 11 / 13 / 15をConstruction研究で解禁すると考える
+
+これらは通常Forge不可classです。
 
 ## C9へ着いてからBoosterを作る
 
@@ -597,41 +566,37 @@ Enemyに先着されます。
 
 ## Yearningを必ず待つ
 
-半額を待っている間にArtifact自体を失います。
+Gemを節約してもArtifactそのものをEnemyに取られれば失敗です。
 
 ## Yearningを一切待たない
 
-Enemyが狙えないArtifactへ毎回通常Costを払ってGem economyを消耗します。
+競争が薄いArtifactへ毎回通常Costを払い、戦争Gemを失う場合があります。
 
-## Artifactを全部SCへ積む
+## Artifactを一人へ集中する
 
-国家全体のMagic accessやArmy supportを一人へ集中します。
+一回のCounterで国家全体のunique資産を失います。
 
-## CarrierのMRを見ない
+## generated Gem欄を現在価格だと思う
 
-高額Itemを一回のControl / Soul attackで失います。
-
-## C9をResearchの終点と思う
-
-Artifactを作るだけで勝つわけではありません。作ったItemをどの勝ち筋へ変換するかが必要です。
+Yearningはgame stateなので、最終価格はForge画面を確認します。
 
 ---
 
 # Test Game
 
-ArtifactをPretender設計へ組み込む場合はTest Gameで、
+PretenderやBooster chainをArtifact前提で設計する場合は、Test Gameで、
 
-- Booster chainが本当に成立するか
 - C9到達Timing
+- Booster chain
+- Forge Path
 - Gem income
-- Forge MageのPath
-- Yearning前後のForge画面
 - Carrier Slot
-- Battle script
+- Forge画面
+- Yearning前後の価格
 
 を確認します。
 
-特に複合Path Artifactは、Pathの一段不足で計画全体が止まります。
+複合Path Artifactは一段不足するだけで計画全体が止まります。
 
 ---
 
@@ -649,4 +614,5 @@ ArtifactをPretender設計へ組み込む場合はTest Gameで、
 ## 参照先
 
 - [Dominions 6 Manual](https://www.illwinter.com/dom6/dom6manual.pdf)
+- [Dominions 6 Modding Manual](https://www.illwinter.com/dom6/dom6modman.pdf)
 - [Dominions 6 Mod Inspector](https://larzm42.github.io/dom6inspector/)
