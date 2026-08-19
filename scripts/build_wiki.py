@@ -52,6 +52,11 @@ STEPS: tuple[Step, ...] = (
         supports_offline=True,
     ),
     Step(
+        "Magic Item目的別・Construction索引",
+        ("scripts/generate_item_purpose_data.py",),
+        supports_offline=True,
+    ),
+    Step(
         "Weapon・Armor・Damage property",
         ("scripts/generate_combat_data.py",),
         supports_offline=True,
