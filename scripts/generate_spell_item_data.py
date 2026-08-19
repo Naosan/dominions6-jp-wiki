@@ -71,7 +71,7 @@ ITEM_TYPES = {
     "crown": ("Crown", "crowns"),
     "barding": ("Barding", "barding"),
 }
-FORGE_COST = {1: 5, 2: 10, 3: 15, 4: 25, 5: 40, 6: 60, 7: 80, 8: 100, 9: 120}
+FORGE_COST = {1: 5, 2: 10, 3: 15, 4: 20, 5: 30, 6: 40, 7: 55, 8: 70}
 EFFECT_NAMES = {
     1: "Summon",
     2: "Damage",

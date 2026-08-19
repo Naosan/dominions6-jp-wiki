@@ -2,16 +2,19 @@
 title: Research Item
 status: expanding
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-19"
 ---
 
 # Research Item
 
-Research Itemは、Mage一人の毎Turn Researchを増やす装備です。
+Research Itemは、装備中のCommanderへResearch bonusを与えるMagic Itemです。
 
-Owl Quill、Skull Mentor、Lightless Lantern等が代表例ですが、Construction level、要求Path、Research bonus、副作用は現行ゲームデータを確認してください。
+重要なのは「Research bonusが大きいか」だけではありません。
 
-重要なのは「Research bonusが大きいか」ではなく、**作成に使った研究・Gem・Forge turnを何Turnで回収できるか**です。
+> **Construction研究 + Gem + Forge turn + Carrier + Slot**
+> を先払いして、将来のResearchを買う投資です。
+
+現行6.35の全Research Itemと正確な要求Path・Construction・効果は[自動生成Research Item一覧](../data/items/research.md)と[Dom6 Mod Inspector](https://larzm42.github.io/dom6inspector/)で確認してください。このページでは、いつ作るか、どのItemを選ぶか、どこで投資を止めるかを扱います。
 
 ---
 
@@ -26,94 +29,163 @@ Gem + Forge turn
 → 戦争Timing・Global先着・Legendary Spell
 ```
 
-作った瞬間にはArmyが強くなりません。将来の研究到達Turnを早めます。
+作った瞬間にはArmyが強くなりません。価値が出るのは、そのItemが将来の重要な研究到達を実際に早めたときです。
+
+例えば研究到達が1Turn早まった結果、
+
+- 最初の大規模Battle Spellを先に使える
+- Counter spellが開戦前に間に合う
+- Globalへ先着する
+- Constructionの次段階へ早く届く
+- Summonから新しいMagic accessを得る
+
+なら、単純なRP以上の価値があります。
+
+---
+
+# まず6.35の代表Itemを区別する
+
+Research Itemは同じ「RP増加Item」ではありません。要求Path、解禁Construction、追加効果、制約が異なります。
+
+| Item | Construction | Forge Req | Research | 重要な追加条件・性質 |
+|---|---:|---|---:|---|
+| Owl Quill | 3 | A1 | +6 | 早期に作りやすい基本型 |
+| Imp Familiar | 3 | B1 | +3 | Cursed、Tainted、No Forge Bonus、Retinueあり |
+| Skull Mentor | 5 | D2 | +14 | Research特化。6.35データ上、Curse / Disease / Taintedを持たない |
+| Homunculus | 5 | N2 | +11 | Cursed、Retinueあり |
+| Dreamstone | 5 | G1 | +9 | MR -2、Glamour Mage限定、non-sleeper不可 |
+| Lightless Lantern | 7 | F1 | +12 | Darkvision 100、Tainted |
+
+この表は代表的なGeneric Itemです。国家限定ItemやArtifactにもResearch bonusを持つものがあります。正確な全件は生成一覧を使ってください。
+
+!!! warning "古い攻略の副作用を引き継がない"
+    `Skull Mentor`を「Horror / Disease / Curse持ち」と説明する古い知識を6.35へそのまま持ち込まないでください。固定Dom6 InspectorデータではResearch +14のItemで、これらのFlagはありません。一方、`Lightless Lantern`はTainted、`Dreamstone`はMR低下と装備者制限を持ちます。Itemごとに確認します。
 
 ---
 
 # 回収Turn
 
-概念的には次で考えます。
+最初に見るのは**ForgeしたMageの一Turn**です。
+
+概念的には、
 
 ```text
-回収Turn
-≈
-（Item解禁までの追加研究 + ForgeしたMageが失う研究 + Gem価値）
-÷ Itemの毎Turn Research bonus
+Forge-turn回収
+≈ ForgeしたMageがそのTurn失ったResearch
+  ÷ ItemのResearch bonus
 ```
 
-厳密な共通換算はありませんが、比較には使えます。
+です。
 
-## 例
+例えばResearch 10のMageがOwl QuillをForgeすると、そのTurnに失った10 RPだけならResearch +6で約2Turn分です。
 
-- Research +6 Item
-- ForgeしたMageのResearch 10
-- Forgeに一Turn
+しかし本当の投資にはさらに、
 
-なら、まず失った10 Researchを約2Turnで回収します。
+- Item解禁のためConstructionへ振ったResearch
+- Gem
+- Forge Bonusを用意した投資
+- Item slot
+- Carrierを研究へ固定する機会費用
+- 戦争用Gemを使わない機会費用
 
-しかし実際には、Item解禁へ寄り道したSchool、Gem、Carrier死亡Riskもあります。
+があります。
 
----
-
-# 作るべき時期
-
-## 作りやすい状況
-
-- 国境が安定している
-- 最初の軍事Breakpointへ到達済み
-- Forge Bonusがある
-- 対応Gem incomeが多い
-- Cheap researcherが多い
-- ゲームが長く続く
-- 次の大研究目標まで距離がある
-
-## 作りにくい状況
-
-- 数Turn以内に戦争
-- Battle Spellが不足
-- Gemを戦争で使う
-- 前線Fortしかない
-- Researcherが少ない
-- Game終了が近い
-
-「研究加速Itemを作れば研究が速い」は正しいですが、**作るために戦争Spellが遅れて敗北する**なら失敗です。
+そのため、単純に「+14は+6より強い」ではなく、**今あるPathとConstructionから何Turnで量産を開始できるか**で比較します。
 
 ---
 
-# 代表的なResearch Itemの役割
+# Construction breakpointで考える
 
-!!! note
-    以下は役割の分類です。数値・Construction level・Pathはゲーム内またはMod Inspectorで確認してください。
+## Construction 3
 
-## Owl Quill型
+Owl Quillのような早期Research Itemへ入れます。
 
-- 低～中Construction
-- Air access
-- 比較的早く作れる
-- 一個あたりのResearch bonusは中程度
+向いているのは、
 
-Air Gemが余り、A1 Forge accessがある国家でResearch economyを始めやすくなります。
+- A1等の安いForge accessが既にある
+- 対応Gemが余る
+- 最初の軍事Researchを壊さずC3へ寄れる
+- まだゲーム残りTurnが長い
 
-## Skull Mentor型
+場合です。
 
-- Death access
-- 高いResearch bonus
-- Horror / Disease / Curse等の副作用を持つ場合がある
+C3は「研究経済を今から作るか」を決める早い分岐です。
 
-Carrier選びと使用期間を考えます。Old Age Mageへ副作用Itemを集中させると研究者を失います。
+## Construction 5
 
-## Lightless Lantern型
+Research Itemの選択肢が増えます。Skull Mentor、Homunculus、DreamstoneのようにPath別に性格が変わります。
 
-- Fire access
-- 高いResearch bonus
-- Horror関連Risk
-- 中～高Construction
+ここでは、
 
-Fire Mageを量産でき、Forge Bonusを持つ国家で大量生産しやすい一方、解禁が遅い場合があります。
+```text
+高Bonusを一個作る
+vs
+安いItemを多数作る
+vs
+Booster / Thug装備 / ResistanceへGemを残す
+```
 
-## Artifact / Unique Research Item
+を比較します。
 
-非常に高いResearchや特殊能力を持ちますが、一つしか存在せず、Carrier死亡Riskが高いです。
+特にSkull MentorはResearch +14なので強力ですが、D2 casterのForge turnとDeath Gemを使います。Death GemがSummonや戦争Ritualのボトルネックなら、Research bonusだけでは決まりません。
+
+## Construction 7
+
+Lightless LanternがResearch +12を提供しますが、C7まで来る時点ではゲーム時間が進んでいます。
+
+したがって問題は「強いResearch Itemか」ではなく、
+
+> **これから何Turn研究を続けるか**
+
+です。
+
+C7到達後すぐ大戦争へ入りMageを前線へ出すなら、大量生産してもCarrierが研究しません。
+
+---
+
+# Item別の実戦判断
+
+## Owl Quill
+
+A1・Construction 3・Research +6という早い入口です。
+
+強みは絶対値より**早く量産サイクルへ入れること**です。Air Gemを戦闘で大量消費する予定が薄く、A1 Mageが後方に余るなら研究経済へ変換しやすくなります。
+
+Counterは自分の研究計画そのものです。数Turn後にAir系Battle SpellやAir BoosterへGemが必要なら、Quillを作りすぎないようにします。
+
+## Skull Mentor
+
+D2・Construction 5・Research +14。
+
+Research bonusが大きく、6.35ではSkull Mentor自体にCurse / Disease / Taintedはありません。したがって「危険な研究ItemだからOld Age Mageに押し付ける」という判断は不要です。
+
+本当のCostはDeath GemとD2 Forge turnです。Death GemをSummon、Booster、Remote attackへ回す戦略なら、その競合を評価します。
+
+## Homunculus
+
+N2・Construction 5・Research +11で、CursedかつRetinueを伴います。
+
+単純なRP効率だけでなく、Nature GemをPoison対策、Regeneration、Nature summonへ使う予定との競合を見ます。
+
+## Dreamstone
+
+G1・Construction 5・Research +9。
+
+MR -2に加え、Glamour Mageであること、non-sleeperではないことという装備条件があります。安いGlamour researcherへ自然に載る国家では便利ですが、貴重なGlamour casterしかいない国家ではForge / Ritual / battlefield dutyと競合します。
+
+## Lightless Lantern
+
+F1・Construction 7・Research +12で、Taintedです。
+
+高Construction到達後なので、**残り研究期間**が特に重要です。Fire Gemを戦闘魔法やElemental、Artifact競争へ使う予定も確認します。
+
+Taintedの実際のリスクはゲーム内Item詳細で確認し、単に「Horror / Disease / Curse全部がある」と一括りにしません。
+
+## Imp Familiar
+
+B1・Construction 3・Research +3。
+
+Research bonusは小さい一方、Cursed、Tainted、No Forge Bonus、Retinueという複数の性質があります。Blood SlaveはGemとは経済構造が違うため、Blood economyが既に回っている国家とそうでない国家で価値が大きく変わります。
 
 ---
 
@@ -121,29 +193,27 @@ Fire Mageを量産でき、Forge Bonusを持つ国家で大量生産しやすい
 
 ## Cheap Researcher
 
-基本候補です。Itemを持つことで、Gold / Commander PointあたりのResearchが増えます。
-
-## Mundane Researcher
-
-Magic / Drainの影響やItem相性が国家固有で異なります。研究値計算を確認します。
+基本候補です。Itemを持つことで、Gold / Commander PointあたりのResearchを増やせます。
 
 ## Rare Path Mage
 
-Research Itemを持たせるよりForge / Ritualへ使う方が価値が高い場合があります。
+Research Itemを持たせても、そのMageがForge / Ritual / Site Searchへ出続けるならItemのRPは発生しません。
+
+「装備できるMage」ではなく、**実際にResearch orderを長期間続けるMage**へ渡します。
 
 ## Old Age Mage
 
-副作用Item、Disease、Horror、老齢を重ねると損失が増えます。
+Old Age自体と、Item固有のCursed / Tainted / MR penalty等を混同しないようにします。Skull Mentorのように副作用を持たないResearch Itemまで危険物扱いしないことが重要です。
 
 ## 前線Battle Mage
 
 研究Itemを装備したまま前線へ出すと、
 
-- Itemを失う
-- Resistance Slotが足りない
-- Battle Scriptに不要
+- そのTurnはResearch bonusを使わない
+- 戦闘用Slotが一つ埋まる
+- Carrier死亡時にItemを失う可能性がある
 
-となります。Labへ戻すか後方研究者へ渡します。
+ため、出征前にF8のMagic item overview等で装備を確認し、後方研究者へ回せるものは回します。
 
 ---
 
@@ -151,35 +221,41 @@ Research Itemを持たせるよりForge / Ritualへ使う方が価値が高い�
 
 ## Forge Bonus
 
-Item一個あたりのGem costを下げ、回収Turnを短くします。
+Item一個あたりの実コストを下げ、回収を早めます。
+
+ただし生成データの`Gem`欄はForge Bonus・国家割引を入れる前の基礎Costです。最終コストはゲーム内Forge画面を優先してください。
 
 ## Forge discount Item
 
-Dwarven Hammer等のdiscount Itemを何個作るか計算します。
+Dwarven Hammer等を先に用意する場合、そのHammer自身のGemとForge turnも投資です。
 
-Research Itemを20個作る計画なら価値が高く、3個だけならHammer作成Costを回収できない場合があります。
+Research Itemを大量生産するなら回収しやすく、数個しか作らないなら先行投資が重くなることがあります。
 
-## Gem Site
+## Gem / Slave income
 
-対応Gem incomeが少ない場合、Research Itemを作りすぎるとBattle Magic、Booster、Summonが止まります。
+対応資源をResearchへ変換しすぎると、
 
-## Safe Fort
+- Battlefield spell
+- Booster
+- Summon
+- Resistance Item
+- Thug / SC装備
 
-研究Itemは前線から離れたFortへ集めます。
+が止まります。
 
-- Fort
-- Lab
-- 防衛Army
-- Raid警戒
-- Retreat route
+Research Item予算を独立して決めます。
 
-を用意します。
+## Safe research hub
+
+研究Itemは前線から離れたLabへ集めるのが基本です。ただし一箇所へ過度に集中するとRaidやRemote attack一回の損失が大きくなります。
 
 ---
 
 # Research ItemとFort
 
-Fortを一つ増やすと、
+Research Itemを増やしても、装備してResearchするCommanderがいなければ意味がありません。
+
+Fortを増やすと、
 
 - Mage recruitment
 - Commander Point
@@ -189,15 +265,15 @@ Fortを一つ増やすと、
 
 が増えます。
 
-Research Itemだけ増やしてResearcherが足りない場合、先にFortを増やす方がよいことがあります。
+したがってResearch economyは、
 
----
+```text
+Researcher生産能力
+× 一人あたりResearch
+× 実際に研究するTurn数
+```
 
-# Research ItemとScales
-
-Magic / Drain、Order / Turmoil、Gold income、Growth等がResearcher数と効率へ影響します。
-
-Research ItemはScalesの代替ではなく、国家経済の上に積む追加投資です。
+で考えます。
 
 ---
 
@@ -205,57 +281,71 @@ Research ItemはScalesの代替ではなく、国家経済の上に積む追加�
 
 ## Early game
 
-低級Research Itemがすぐ解禁でき、最初の戦争を遅らせないなら有効です。
+C3 Research Itemをすぐ解禁でき、最初の戦争を遅らせないなら価値があります。
+
+ただし軍事Breakpointを一つ落としてまでConstructionへ寄ると、研究加速Itemを作る前に戦争で損をします。
 
 ## Mid game
 
-最初のBreakpoint後、Constructionへ進み、中盤～終盤研究を加速する代表時期です。
+最初の軍事Breakpoint後にC5へ進み、Research ItemとBooster・Resistance・Thug装備を同時に選ぶ時期です。
+
+ここでは「研究をさらに加速するか」「今の研究成果をItemで戦力化するか」が中心判断になります。
 
 ## Late game
 
-Legendary Spell、Global、High summon競争に価値があります。
+Legendary SpellやGlobal競争へ向けて価値が残る場合があります。
 
-ただし残りTurnが少ない場合、Itemより即時Battle Spell・SummonへGemを使います。
+一方、ゲーム終了が近いならResearch Itemの回収期間がありません。即時にArmyを強くするItem、Summon、Battle Gemへ資源を戻します。
 
 ---
 
-# 研究加速の代替
+# Counter：敵のResearch Item経済を見る
 
-Research Itemだけが方法ではありません。
+敵が大量のResearch Itemを作っているなら、それは「研究が速い」だけでなく、
 
-- Fortを増やす
-- Cheap Mageを追加
-- Research bonus Site
-- Magic Scale
-- National ability
-- Summoned researcher
-- Enemy research Fortの奪取
-- Battle Mageを研究へ戻す
-- 不要なForge / Ritualを止める
+- Forge turnを後方へ使っている
+- 特定Gem / Slaveを研究へ変換している
+- Item carrierがLabへ集中している
+- Constructionへ研究を振っている
 
-最も安い方法を選びます。
+という情報です。
+
+そのため、
+
+- 早い戦争Timingを作る
+- Research hubをRaidする
+- Remote attack / Assassinで高価なCarrierへ圧力をかける
+- 相手がResearchへ使ったGemと競合するPathで戦争を強制する
+
+といったCounterが成立します。
+
+Research Item経済は時間を味方につける投資なので、**相手へ時間を与えないこと**が最も直接的なCounterです。
 
 ---
 
 # よくある失敗
 
-## Constructionへ直行
+## Constructionへ直行する
 
 Item解禁前に最初の戦争へ負けます。
 
-## 全Gemを研究へ変換
+## BonusだけでItemを順位付けする
 
-Battlefield spell、Resistance、Boosterが不足します。
++14が+6より常に優れるわけではありません。解禁時期、要求Path、資源、Forge turnが違います。
 
-## 前線へItemを置く
+## 古い副作用情報を使う
 
-Raid一回で研究経済を失います。
+Skull Mentor、Lightless Lantern等の性質を旧作や古いWikiから流用せず、6.35 Inspectorを確認します。
 
-## Carrier副作用を見ない
+## 全資源をResearchへ変換する
 
-Horror、Disease、Curse、Aging等で研究者が死亡します。
+研究は進んでも、その研究成果を使うGem・Slaveが残りません。
 
-## Late gameに大量生産
+## 前線へResearch Itemを持ち出す
+
+研究していないTurnにはResearch bonusを使いません。戦闘用Slotも失います。
+
+## Late gameに大量生産する
 
 回収前にゲームが終わります。
 
@@ -268,17 +358,20 @@ ForgeしたMageはそのTurn研究していません。
 # 生産計画テンプレート
 
 ```text
-研究目標：
-必要Research：
+次の研究目標：
+そのBreakpointの価値：
 現在の毎Turn Research：
-Item解禁まで：
-Item一個のBonus：
-一個のGem cost：
-Forge Bonus：
+Item解禁までのResearch：
+候補Item：
+Item一個のResearch bonus：
+要求Path：
+基礎Cost：
+実際のForge Cost：
+Forge担当MageのResearch：
 月産数：
-Battle用Gem予算：
+Battle / Summon用の資源予算：
 安全なCarrier数：
-回収予定Turn：
+Itemを使う予定Turn数：
 ```
 
 ---
@@ -286,9 +379,11 @@ Battle用Gem予算：
 ## 関連ページ
 
 - [Magic Item](index.md)
+- [Forge計画とConstruction breakpoint](forge-planning.md)
 - [Research](../magic/research.md)
 - [Gem](../magic/gems.md)
 - [Booster](boosters.md)
+- [自動生成Research Item一覧](../data/items/research.md)
 
 ## 参照先
 
