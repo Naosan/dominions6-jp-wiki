@@ -67,6 +67,11 @@ STEPS: tuple[Step, ...] = (
         supports_offline=True,
     ),
     Step(
+        "Artifact・Unforgeable Item分類",
+        ("-m", "scripts.generate_artifact_item_data"),
+        supports_offline=True,
+    ),
+    Step(
         "Unit総合索引",
         ("scripts/generate_unit_catalog.py",),
         supports_offline=True,
