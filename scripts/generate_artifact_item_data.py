@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Separate forgeable Construction 9 artifacts from unforgeable Item records.
 
-Dominions 6 calls research-level / Construction 9 forgeable items artifacts.
-They are unique while unforgeable Item records are a separate acquisition class.
-This supplemental generator runs after the normal Item/effect generators so it
-can normalize the generated terminology without duplicating the core item parser.
+Dominions 6 calls Construction 9 forgeable items artifacts. The modding data
+also has separate unforgeable classes at constlevel 11, 13, and 15. This
+supplemental generator runs after the normal Item/effect generators so the
+rendered Wiki uses the correct acquisition terminology without duplicating the
+core item parser.
 """
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 
@@ -19,7 +21,11 @@ if str(SCRIPT_DIR) not in sys.path:
 import generate_spell_item_data as core
 
 ARTIFACT_CONST = 9
-UNFORGEABLE_CONST = 12
+UNFORGEABLE_LEVELS = {
+    11: "Unforgeable",
+    13: "Unforgeable unique artifact",
+    15: "Unforgeable unique per nation artifact",
+}
 START = "<!-- artifact-item-index:start -->"
 END = "<!-- artifact-item-index:end -->"
 
@@ -36,7 +42,15 @@ def artifact_items(items: list[dict[str, object]]) -> list[dict[str, object]]:
 
 
 def unforgeable_items(items: list[dict[str, object]]) -> list[dict[str, object]]:
-    return [item for item in items if int(item["const"]) == UNFORGEABLE_CONST]
+    return [item for item in items if int(item["const"]) in UNFORGEABLE_LEVELS]
+
+
+def normalized_unforgeable_item(item: dict[str, object]) -> dict[str, object]:
+    copy = dict(item)
+    level = int(copy["const"])
+    copy["construction"] = UNFORGEABLE_LEVELS[level]
+    copy["cost"] = "—"
+    return copy
 
 
 def artifact_page(items: list[dict[str, object]]) -> str:
@@ -44,15 +58,15 @@ def artifact_page(items: list[dict[str, object]]) -> str:
     return "\n".join(
         [
             "---",
-            'title: "Artifact一覧 — Construction 9"',
+            'title: "Forgeable Artifact一覧 — Construction 9"',
             "status: generated",
             'verified_version: "6.35"',
             f'generated_from: "dom6inspector {core.COMMIT}"',
             "---",
             "",
-            "# Artifact一覧 — Construction 9",
+            "# Forgeable Artifact一覧 — Construction 9",
             "",
-            f"Construction 9のforgeable Artifactは**{len(selected)}**件です。Dominions 6ではArtifactはuniqueで、同じArtifactが既に存在する間は再Forgeできません。",
+            f"Construction 9のforgeable Artifactは**{len(selected)}**件です。Dominions 6 ManualではC9 Artifactはuniqueで、同じArtifactが既に存在する間は再Forgeできません。",
             "",
             "このページは6.35固定データの事実索引です。Yearning、Artifact race、Booster chain、Carrier riskは[Artifact・Unique Item攻略](../../items/artifacts.md)を参照してください。",
             "",
@@ -67,29 +81,65 @@ def artifact_page(items: list[dict[str, object]]) -> str:
     )
 
 
-def index_block(artifact_count: int, unforgeable_count: int) -> str:
+def unforgeable_page(items: list[dict[str, object]]) -> str:
+    selected = [normalized_unforgeable_item(item) for item in unforgeable_items(items)]
+    groups = {
+        level: [item for item in selected if int(item["const"]) == level]
+        for level in UNFORGEABLE_LEVELS
+    }
+    lines = [
+        "---",
+        'title: "Unforgeable Item一覧"',
+        "status: generated",
+        'verified_version: "6.35"',
+        f'generated_from: "dom6inspector {core.COMMIT}"',
+        "---",
+        "",
+        "# Unforgeable Item一覧",
+        "",
+        f"通常のForge Item orderでは作成できないItemを**{len(selected)}**件抽出しています。",
+        "",
+        "- `constlevel 11`: unforgeable item",
+        "- `constlevel 13`: unforgeable unique artifact",
+        "- `constlevel 15`: unforgeable unique per-nation artifact",
+        "",
+        "入手法はEvent、Arena、国家固有、特殊生成などItemごとに異なります。Construction 9のforgeable Artifactとは取得経路を分けて考えてください。",
+        "",
+        "[Magic Itemデータ索引へ戻る](index.md) · [Artifact・Unique Item攻略](../../items/artifacts.md)",
+        "",
+    ]
+    for level, label in UNFORGEABLE_LEVELS.items():
+        group = groups[level]
+        lines += [f"## {label} — constlevel {level}", "", core.item_table(group)]
+    return "\n".join(lines)
+
+
+def index_block(artifact_count: int, unforgeable_counts: dict[int, int]) -> str:
+    unforgeable_total = sum(unforgeable_counts.values())
+    subtype = " / ".join(
+        f"{level}: {unforgeable_counts[level]}" for level in UNFORGEABLE_LEVELS
+    )
     return "\n".join(
         [
             START,
             "## Artifact / Unforgeable",
             "",
-            f"- [Artifact — Construction 9](artifacts.md) — {artifact_count} items / unique",
-            f"- [Unforgeable Item](unforgeable.md) — {unforgeable_count} items / 通常Forge不可",
+            f"- [Forgeable Artifact — Construction 9](artifacts.md) — {artifact_count} items / unique",
+            f"- [Unforgeable Item](unforgeable.md) — {unforgeable_total} items (`constlevel` {subtype})",
             "- [Artifact・Unique Item攻略](../../items/artifacts.md)",
             "",
-            "Artifactと通常Forge不可Itemは別カテゴリとして扱います。",
+            "Construction 9 Artifactと、constlevel 11 / 13 / 15の通常Forge不可Itemは取得経路を分けて扱います。",
             END,
             "",
         ]
     )
 
 
-def patch_index(artifact_count: int, unforgeable_count: int) -> None:
+def patch_index(artifact_count: int, unforgeable_counts: dict[int, int]) -> None:
     path = core.ITEM_OUT / "index.md"
     text = path.read_text(encoding="utf-8")
-    # Remove the old combined terminology emitted by the core generator.
     text = text.replace("- [Unforgeable / Artifact](unforgeable.md)\n", "")
-    block = index_block(artifact_count, unforgeable_count)
+    block = index_block(artifact_count, unforgeable_counts)
     if START in text and END in text:
         before, rest = text.split(START, 1)
         _old, after = rest.split(END, 1)
@@ -102,39 +152,49 @@ def patch_index(artifact_count: int, unforgeable_count: int) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def normalize_unforgeable_page() -> None:
-    path = core.ITEM_OUT / "unforgeable.md"
-    text = path.read_text(encoding="utf-8")
-    text = text.replace('title: "Unforgeable・Artifact一覧"', 'title: "Unforgeable Item一覧"')
-    text = text.replace("# Unforgeable・Artifact一覧", "# Unforgeable Item一覧")
-    text = text.replace(
-        "通常のConstruction研究とForge Itemでは作成できないItemです。入手法はArtifact、Event、Arena、国家固有などItemごとに異なります。",
-        "通常のConstruction研究とForge Itemでは作成できないItemです。入手法はEvent、Arena、国家固有、特殊生成などItemごとに異なります。",
-    )
-    path.write_text(text, encoding="utf-8")
-
-
 def normalize_generated_item_labels() -> int:
+    """Normalize legacy labels/costs in every generated Item table.
+
+    The core generator predates the explicit 11/13/15 unforgeable split. Rows
+    in all supplemental indexes have the common sequence
+    `Construction N | Req | Gem`, so normalize that sequence after all Item
+    generators have run.
+    """
+
     changed = 0
+    row_pattern = re.compile(
+        r"\| Construction (11|13|15) \| ([^|\n]+?) \| ([^|\n]+?) \|"
+    )
+
+    def row_replacement(match: re.Match[str]) -> str:
+        level = int(match.group(1))
+        req = match.group(2).strip()
+        return f"| {UNFORGEABLE_LEVELS[level]} | {req} | — |"
+
     for path in core.ITEM_OUT.rglob("*.md"):
         text = path.read_text(encoding="utf-8")
-        new = text.replace("Unforgeable / Artifact", "Unforgeable")
-        # BaseI's `crown` flag means crown; it is not the Artifact marker.
-        new = new.replace("Artifact / Crown", "Crown")
+        new = text.replace("Artifact / Crown", "Crown")
+        new = new.replace("Unforgeable / Artifact", "Unforgeable")
+        for level, label in UNFORGEABLE_LEVELS.items():
+            new = new.replace(f"## Construction {level}", f"## {label} — constlevel {level}")
+        new = row_pattern.sub(row_replacement, new)
         if new != text:
             path.write_text(new, encoding="utf-8")
             changed += 1
     return changed
 
 
-def write_pages(items: list[dict[str, object]]) -> tuple[int, int, int]:
+def write_pages(items: list[dict[str, object]]) -> tuple[int, dict[int, int], int]:
     artifacts = artifact_items(items)
-    unforgeable = unforgeable_items(items)
+    unforgeable_counts = {
+        level: sum(int(item["const"]) == level for item in items)
+        for level in UNFORGEABLE_LEVELS
+    }
     (core.ITEM_OUT / "artifacts.md").write_text(artifact_page(items), encoding="utf-8")
-    normalize_unforgeable_page()
-    patch_index(len(artifacts), len(unforgeable))
+    (core.ITEM_OUT / "unforgeable.md").write_text(unforgeable_page(items), encoding="utf-8")
+    patch_index(len(artifacts), unforgeable_counts)
     normalized = normalize_generated_item_labels()
-    return len(artifacts), len(unforgeable), normalized
+    return len(artifacts), unforgeable_counts, normalized
 
 
 def main() -> None:
@@ -142,9 +202,12 @@ def main() -> None:
     names = ("BaseI.csv", "weapons.csv", "armors.csv")
     paths = {name: core.source(name, args.refresh, args.offline) for name in names}
     items = core.item_rows(paths)
-    artifacts, unforgeable, normalized = write_pages(items)
+    artifacts, unforgeable_counts, normalized = write_pages(items)
     print(f"generated forgeable artifacts (Construction 9): {artifacts}")
-    print(f"indexed unforgeable items: {unforgeable}")
+    print(
+        "indexed unforgeable items: "
+        + ", ".join(f"const{level}={unforgeable_counts[level]}" for level in UNFORGEABLE_LEVELS)
+    )
     print(f"normalized generated Item pages: {normalized}")
 
 
