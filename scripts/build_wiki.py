@@ -53,7 +53,7 @@ STEPS: tuple[Step, ...] = (
     ),
     Step(
         "Magic Item目的別・Construction索引",
-        ("scripts/generate_item_purpose_data.py",),
+        ("-m", "scripts.generate_item_purpose_data"),
         supports_offline=True,
     ),
     Step(
