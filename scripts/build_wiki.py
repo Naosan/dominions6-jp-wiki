@@ -62,6 +62,11 @@ STEPS: tuple[Step, ...] = (
         supports_offline=True,
     ),
     Step(
+        "Magic Item Weapon・Armor・固有効果",
+        ("-m", "scripts.generate_item_effect_data"),
+        supports_offline=True,
+    ),
+    Step(
         "Unit総合索引",
         ("scripts/generate_unit_catalog.py",),
         supports_offline=True,
