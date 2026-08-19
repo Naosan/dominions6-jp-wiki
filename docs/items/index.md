@@ -2,7 +2,7 @@
 title: Magic Item
 status: expanding
 verified_version: "6.35"
-last_verified: "2026-08-19"
+last_verified: "2026-08-20"
 ---
 
 # Magic Item
@@ -29,13 +29,18 @@ Itemを評価するときは、効果だけでなく次を見ます。
 # 目的別ページ
 
 - [用途別Magic Item辞典](purpose-dictionary.md)
+- [任務別Magic Item Loadout](mission-loadouts.md)
 - [Forge計画とConstruction Breakpoint](forge-planning.md)
+- [Item固有効果・Weapon proc・副作用](effects-and-procs.md)
 - [Magic Path Booster](boosters.md)
 - [Research Item](research-items.md)
 - [Resistance・Utility Item](resistance-items.md)
 - [Thug / Supercombatant装備](thug-equipment.md)
+- [Artifact・Unique Item攻略](artifacts.md)
 
-「Item名は分からないが、Shock対策・Reinvigoration・Magic Weapon・Mobilityなど**欲しい機能は分かる**」場合は、まず[用途別Magic Item辞典](purpose-dictionary.md)から逆引きします。
+「Item名は分からないが、Shock対策・Reinvigoration・Magic Weapon・Mobilityなど**欲しい機能は分かる**」場合は[用途別Magic Item辞典](purpose-dictionary.md)から逆引きします。
+
+「PD Raider、Anti-Thug、Caster保護、水中侵入など**Commanderへさせたい任務が決まっている**」場合は[任務別Magic Item Loadout](mission-loadouts.md)から組み立てます。
 
 ---
 
@@ -201,6 +206,8 @@ Enemy Shock、Poison、Soul Slay、Ethereal、Regeneration等へ必要なItemを
 
 へ変えます。
 
+任務が決まっている場合は[任務別Magic Item Loadout](mission-loadouts.md)で、最小成立条件から装備を組みます。
+
 ---
 
 # Itemを大量生産する前の質問
@@ -322,6 +329,8 @@ Construction 9のArtifactはUnique Itemです。
 
 「作れるから作る」のではなく、そのArtifactがゲーム終了までに何を生むかを評価します。
 
+Yearning、forgeable C9 ArtifactとUnforgeable classの違い、Carrier計画は[Artifact・Unique Item攻略](artifacts.md)を参照してください。
+
 ---
 
 # 国家攻略でのItem記述形式
@@ -371,11 +380,14 @@ Dom6ではConstruction level、Path、Glamour移行、Item名等が旧作と異�
 ## 関連ページ
 
 - [用途別Magic Item辞典](purpose-dictionary.md)
+- [任務別Magic Item Loadout](mission-loadouts.md)
 - [Forge計画とConstruction Breakpoint](forge-planning.md)
+- [Item固有効果・Weapon proc・副作用](effects-and-procs.md)
 - [Magic Path Booster](boosters.md)
 - [Research Item](research-items.md)
 - [Resistance・Utility Item](resistance-items.md)
 - [Thug / SC装備](thug-equipment.md)
+- [Artifact・Unique Item攻略](artifacts.md)
 - [Magic Itemデータ索引](../data/items/index.md)
 - [Magic Path Boosting](../magic/boosting.md)
 - [Gem](../magic/gems.md)
