@@ -2,7 +2,7 @@
 title: Magic Path Booster
 status: expanding
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-19"
 ---
 
 # Magic Path Booster
@@ -56,7 +56,7 @@ N1 independent Mage
 # Path別の代表的な考え方
 
 !!! note
-    Item名、Construction level、要求Path、Gem costはPatchで変わり得ます。下記はBooster chainを理解するための代表例です。Forge前にゲーム内またはMod Inspectorで確認してください。
+    Item名、Construction level、要求Path、Gem costはPatchで変わり得ます。下記はBooster chainを理解するための代表例です。Forge前にゲーム内または[Dom6 Mod Inspector](https://larzm42.github.io/dom6inspector/)と[自動生成Booster一覧](../data/items/boosters.md)で確認してください。
 
 ## Fire
 
@@ -73,7 +73,7 @@ Fire MageはBattlefield spellのFatigueが重いため、要求Pathへ届いた�
 
 ## Air
 
-Winged Helmet、Bag / Wind系Booster等から、
+Winged Helmetなどの実際にAir Magicを上げるItemから、
 
 - Storm
 - Arrow Fend
@@ -82,6 +82,8 @@ Winged Helmet、Bag / Wind系Booster等から、
 - Air Queen / high summon
 
 へ進みます。
+
+`Bag of Winds`は名前にWindを含みますが、現行6.35ではAir Path Boosterではありません。Item名の印象ではなく、装備時の`Air Magic +N`を確認してください。
 
 Storm Powerは戦闘中だけなので、Forge / RitualのA要求には使えません。
 
@@ -108,7 +110,9 @@ E2 MageをE3へし、Forge discount、上位Armor、Earth summon、Globalへ進�
 
 ## Astral
 
-Crystal Coin、Starshine Skullcap等から高Astralへ進みます。
+Coin of Meteoritic Iron、Starshine Skullcap等から高Astralへ進みます。
+
+古い攻略に出てくる`Crystal Coin`という名前をそのまま使わず、現行6.35のItem名とPath要求をInspectorで確認します。
 
 AstralはItemだけでなくCommunionによって大幅に上げられるため、
 
@@ -146,7 +150,7 @@ Thistle Mace等でN1 independentを実用化できます。
 
 GlamourはDom6で追加されたため、古いAir / Illusion Item表を使わず現行データを確認します。
 
-Luck、Dream、Illusion、Stealth系Boosterから高級Glamour Spellへ進みます。
+Luck、Dream、Illusion、Stealth系Itemの中から、**実際にGlamour Magicを上げるもの**と、Glamour関連能力だけを付与するものを分けて考えます。
 
 ## Blood
 
@@ -309,19 +313,25 @@ Boots、Helmet、Miscを使うと、Strength、Flying、MR、Resistance等を装
 
 国家のMagic accessと戦闘装備を同時に失います。
 
-## Old guideのConstruction levelを使う
+## Item名だけでBooster判定する
 
-Dom6ではItemのSchool / level / Glamour分類が変わっています。
+`Bag of Winds`のようにPathを連想させる名前でも、Path上昇を持たないItemがあります。逆に複合Path Boosterもあります。必ず`+Path`欄を確認します。
+
+## Old guideのConstruction levelやItem名を使う
+
+Dom6ではItemのConstruction level、要求Path、Glamour分類、名称がDom5以前と異なる場合があります。
 
 ---
 
 ## 関連ページ
 
 - [Magic Item](index.md)
+- [Forge計画とConstruction breakpoint](forge-planning.md)
 - [Magic Path Boosting](../magic/boosting.md)
 - [Research](../magic/research.md)
 - [Gem](../magic/gems.md)
 - [Communion](../magic/communions.md)
+- [自動生成Booster一覧](../data/items/boosters.md)
 
 ## 参照先
 
