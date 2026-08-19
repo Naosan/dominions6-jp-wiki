@@ -2,7 +2,7 @@
 title: Thug・Supercombatant装備
 status: expanding
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-19"
 ---
 
 # Thug・Supercombatant装備
@@ -16,6 +16,8 @@ Supercombatant（SC）はさらに多くのArmyを単独または少数で相手
 > **任務を決める → その任務に必要な防御と攻撃だけを買う**
 
 のが基本です。
+
+正確なItemの要求Path・Construction・効果は[Magic Itemデータ索引](../data/items/index.md)と[Dom6 Mod Inspector](https://larzm42.github.io/dom6inspector/)で確認し、このページではLoadoutの考え方とCounterを扱います。
 
 ---
 
@@ -92,7 +94,7 @@ Itemを作る前にCommanderの素能力を見ます。
 
 ## HP
 
-Regeneration、Affliction、一撃死耐性の土台です。
+Regeneration、一撃死耐性、継続Damageへの余裕の土台です。
 
 ## Protection / Natural Protection
 
@@ -108,7 +110,7 @@ Shield、Weapon、Quickness、Encumbranceとの相性を決めます。
 
 ## Strength
 
-両手武器、Multiple attack、Throw weaponのDamageへ影響します。
+武器Damageへ影響します。高Strength Chassisは高Damage Weaponを活かしやすくなります。
 
 ## MR
 
@@ -170,8 +172,8 @@ Enemy defenceを見て選びます。
 - Fire / Cold / Shock / Poison Resistance
 - MR
 - Antimagic
-- Spirit Sight / True Sight
-- Returning
+- 視認妨害が問題ならSpirit Sight / True Sight
+- Returning等の生存・離脱手段
 
 ## 5. 戦い続ける
 
@@ -207,8 +209,8 @@ Thugは一個か二個の安価Itemだけで任務を達成できる場合があ
 
 ```text
 高HP Regeneration Chassis
-+ Shock Resistance
-= Lightningを使わない通常PDへ投入
++ 敵の主DamageへのResistance
+= 通常PD / 小部隊へ低投資で投入
 ```
 
 すでに持つ能力へItemを重複させないことが重要です。
@@ -219,9 +221,9 @@ Thugは一個か二個の安価Itemだけで任務を達成できる場合があ
 
 ## Magic Weapon
 
-Ethereal、Invulnerability、一部Summonへ対応します。
+Ethereal、Invulnerability等、通常の非Magic Weaponでは効率が落ちる相手への基本Counterです。
 
-通常兵だけを相手にするPD Raiderでも、Enemy Province DefenceにEthereal summonが混ざる可能性を考えます。
+Etherealは「見えない」ことが本質ではないので、True Sight / Spirit Sightだけでは代用できません。
 
 ## 高Damage両手武器
 
@@ -239,15 +241,25 @@ Shieldを失うため、射撃・多段攻撃への防御をSpellや素Statsで�
 
 DamageとHP / Fatigue回復を同時に行います。
 
-Undead、Lifeless、Drain immunityへは効き方が変わります。
+対象のUnit classificationやDrain immunity等によって有効性が変わるため、戦う相手を確認します。
 
 ## Armor破壊
 
-高Protection ThugへStar of Heroes型のArmor damage weapon等を使い、後続攻撃を通します。
+高Protection ThugへArmor damage weapon等を使い、後続攻撃を通します。
 
-## Anti-regeneration
+## Regenerationを越える
 
-高Burst、Poison、Disease、Decay、Affliction、即死を使います。
+Regenerationは毎RoundのHP回復なので、Counterの基本は**回復量より速く勝つ**ことです。
+
+- 大きなBurst Damage
+- AP / AN等で継続的に高Damageを通す
+- 多数攻撃で回復を上回る
+- Fatigueで行動不能へする
+- Soul Slay、Charm、Paralyze等、HP回復とは別軸で倒す
+
+Poisonは長期的なDamage源にはなりますが、Regeneration側もPoison Damageで失ったHPを回復できます。Poisonを「Regenerationを止める効果」として扱わず、実際に蓄積Damageが回復量を上回るかを見ます。
+
+DiseaseもRegenerationを直接停止する万能Counterではありません。戦略Map上の長期消耗と、一戦でのThug撃破を分けて考えます。
 
 ---
 
@@ -271,9 +283,14 @@ AN、MR attack、Poisonには別防御が必要です。
 
 ## Mistform / Ethereal / Luck
 
-Protectionとは別の防御層です。
+Protectionとは別の防御層です。ただしCounterは同じではありません。
 
-敵Magic Weapon、AoE、多段、True Sight等を確認します。
+- Ethereal → Magic Weapon / Magic Damage
+- 視認妨害・Blur・Displacement等 → True Sight / Spirit Sightが有効な場合
+- Mistform → 個別の解除条件・Damage interactionを確認
+- Luck → 一撃の生存率を上げるが、Fatigue / Control /継続Damageは別問題
+
+「True SightがあるからEtherealやMistformまで無効」という扱いはしません。
 
 ## Elemental Resistance
 
@@ -289,9 +306,9 @@ Enemy MageがいるProvinceへ固定装備でRaidしないでください。Scou
 
 ## Regeneration
 
-高HPほど強力です。
+最大HPに対する割合回復なので、高HPほど一回の回復量が大きくなります。
 
-Poison、Bleeding、小Damageを回復しますが、Burst / Soul / Fatigueへは別対策が必要です。
+継続的な小DamageやPoison Damageを受ける戦闘でも生存時間を延ばしますが、一撃死、回復を上回るDamage、Fatigue lock、MR attack等には別対策が必要です。
 
 ## Reinvigoration
 
@@ -299,11 +316,11 @@ Quickness、Berserk、Heavy armor、Self Buff、長期戦へ必要です。
 
 ## Life Drain
 
-敵が生者で接近戦を行う場合に強力です。
+対象に有効な場合、DamageとSustainを同時に確保できます。
 
 ## Recuperation
 
-戦闘後のAfflictionを回復し、長期Raidの交換効率を上げます。
+戦闘後に回復可能なAfflictionを治し、長期Raidの交換効率を上げます。
 
 ---
 
@@ -327,7 +344,7 @@ Mage-Thugの基本：
 - Interrupt
 - Script対象なしで飛ばされる
 
-初期配置を後ろへし、Chaffを前へ置きます。
+初期配置を後ろへし、必要ならChaffを前へ置きます。
 
 ---
 
@@ -370,9 +387,10 @@ Enemy Thugの防御を分解します。
 |---|---|
 | 高Protection | AP / AN、Armor破壊、MR attack |
 | 高Defence | 高Attack、多段、拘束 |
-| Ethereal | Magic Weapon |
-| Mistform | Magic damage、十分な一撃、Shock等 |
-| Regeneration | Burst、Poison、Disease、Soul attack |
+| Ethereal | Magic Weapon / Magic Damage |
+| 視認妨害・Blur等 | True Sight / Spirit Sightが有効か確認 |
+| Mistform | Magic Damage、十分なDamage、解除条件を確認 |
+| Regeneration | Burst、継続高Damage、Fatigue、Soul / Control attack |
 | Fire Shield | Fire Resistance、射撃、MR attack |
 | High MR | Physical / Elemental |
 | Invulnerability | Magic Weapon、Elemental |
@@ -390,8 +408,8 @@ SCは複数のCounterへ同時に耐える必要があります。
 最低限考えるもの：
 
 - 通常兵
-- 高Damage AP
-- AN Shock
+- 高Damage AP / AN
+- Shock等のElemental Damage
 - Soul Slay / Charm
 - Fatigue
 - Poison
@@ -416,7 +434,7 @@ Total cost
 + Forge turn
 + Booster / Construction研究
 + 戦闘Gem
-+ 失った場合のEnemy loot
++ 失った場合のEnemy loot / Carrier価値
 ```
 
 同じGemで、
@@ -441,7 +459,7 @@ Thugが勝てない場合に逃げられるか確認します。
 - Returning
 - Rout時の退路
 
-Thugが生きてもItemを失う特殊効果がある場合があります。
+**RoutしただけでItemを失うわけではありません。** Commanderが生還して退却できれば装備は残ります。問題は退路がなく死亡すること、Assassination等でCarrier自体を失うことです。
 
 ---
 
@@ -457,7 +475,7 @@ HPとMRの低さは高価なArmorだけで解決しません。
 
 ## MRを無視
 
-Soul Slay一発で全Itemを失います。
+Soul Slay等のMR attackで高投資を失う可能性があります。
 
 ## Elemental Resistanceを固定
 
@@ -465,7 +483,15 @@ Soul Slay一発で全Itemを失います。
 
 ## Regenerationで無敵と思う
 
-Burst、Poison、Disease、Fatigue、Soul attackがあります。
+Burst、回復を上回る継続Damage、Fatigue、Soul / Control attackがあります。
+
+## Poison / DiseaseをAnti-Regenと一括りにする
+
+PoisonはDamage源、Diseaseは別の長期消耗mechanicです。Regenerationを直接OFFにする能力として扱わないでください。
+
+## True SightをEthereal Counterにする
+
+EtherealにはMagic Weapon / Magic Damageを用意します。
 
 ## Retreat先なし
 
@@ -499,8 +525,10 @@ Total Gem：
 ## 関連ページ
 
 - [Magic Item](index.md)
+- [Forge計画とConstruction Breakpoint](forge-planning.md)
 - [Resistance Item](resistance-items.md)
 - [Booster](boosters.md)
+- [Magic Itemデータ索引](../data/items/index.md)
 - [両手武器・片手武器・盾](../basics/weapons-and-shields.md)
 - [命令とBattle Script](../basics/orders.md)
 
