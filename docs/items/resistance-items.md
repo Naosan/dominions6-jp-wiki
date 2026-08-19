@@ -2,7 +2,7 @@
 title: Resistance・Utility Item
 status: expanding
 verified_version: "6.35"
-last_verified: "2026-08-14"
+last_verified: "2026-08-19"
 ---
 
 # Resistance・Utility Item
@@ -10,6 +10,8 @@ last_verified: "2026-08-14"
 Resistance Itemは、Commanderの弱点を埋め、特定のEnemy Spell・Battlefield effect・Terrainへ対応する装備です。
 
 「万能に硬くする」のではなく、**次の戦闘で受けるDamage typeを予測して必要なResistanceだけを付ける**のが基本です。
+
+正確な現行Itemは[Resistance・MR Item一覧](../data/items/resistance.md)と[Utility Item一覧](../data/items/utility.md)、個々の効果は[Dom6 Mod Inspector](https://larzm42.github.io/dom6inspector/)で確認してください。
 
 ---
 
@@ -31,7 +33,9 @@ Resistance Itemは、Commanderの弱点を埋め、特定のEnemy Spell・Battle
 - Fire battlefieldのCaster
 - Fire Shield持ちへ接近するThug
 - Phoenix Pyre等を使うMage
-- Fire vulnerableなPlant / Undead / Cold unit
+- 素のFire Resistanceが低い、またはFire Vulnerabilityを持つ重要Commander
+
+種族名だけで「Plant / UndeadだからFireに弱い」と決めず、Unit詳細のResistanceとVulnerabilityを確認します。
 
 ## Cold Resistance
 
@@ -43,7 +47,7 @@ Resistance Itemは、Commanderの弱点を埋め、特定のEnemy Spell・Battle
 - Cold Aura
 - Water / Ice Elemental
 
-Quickness Armyや重装ArmyはFatigue対策としてもCold Resistanceが重要になります。
+Quickness Armyや重装ArmyはFatigue対策としてもCold Resistanceが重要になる場合があります。
 
 ## Shock Resistance
 
@@ -65,16 +69,19 @@ ProtectionはArmor Negating Shockを止めません。高Protection Commanderほ
 - Foul Vapors
 - Poison cloud
 - Poison weapon
-- Snake / Spider / Plant unit
-- Disease・venom系効果
+- Snake / Spider / Plant unitのPoison attack
+- その他Poison Damage
 
-高HP・高ProtectionのLiving CommanderはPoisonを長く蓄積するため、対Nature戦で必須になる場合があります。
+高HP・高ProtectionのLiving CommanderはPoisonを長く蓄積するため、対Nature戦で重要になる場合があります。
+
+!!! warning "DiseaseはPoisonと別"
+    Poison ResistanceはPoison DamageへのResistanceです。Disease / Plague / Disease Cloud等を自動的に防ぐものとして扱わないでください。Disease対策はDisease Resistance、Healer、戦闘時間、発生源除去など別の仕組みを確認します。
 
 ## Acid Resistance
 
-Acid DamageとArmor damageを軽減します。
+Acid Damageを軽減します。
 
-AcidはResistanceだけでなくArmor破壊へつながる場合があるため、長期戦を避けます。
+Acid系攻撃はArmorへ影響する効果を伴う場合もあるため、Item名だけでなく個々の攻撃効果をInspectorやBattle Replayで確認します。
 
 ## Magic Resistance
 
@@ -103,6 +110,8 @@ Resistanceは一個のItemで十分とは限りません。
 - Unit classification
 
 を合計します。
+
+Dom6ではElemental Resistanceは単純な固定値軽減だけではなく、Incoming Damageに対する割合軽減も含む仕組みへ変更されています。したがって「Damage 20ならResistance 20で完全無効」という単純な引き算として扱わず、ゲーム内表示と実戦結果を確認します。
 
 ## Itemだけで全員を守らない
 
@@ -140,13 +149,15 @@ Arrow、Bolt等の射撃命中を減らします。
 
 ## Ethereal
 
-非Magic attackを空振りさせます。
+非Magic attackを通しにくくします。
 
-Magic Weapon、Spell、Trample、AoE等に弱くなります。
+**True Sight / Spirit Sightを持つだけではEtherealを無効化しません。** Etherealへの基本CounterはMagic Weapon、Spell、Magic Damage等です。
 
 ## Mistform / Damage reduction
 
 大Damageを小さくしますが、特定Damage・Magic attack・一定条件で解除されます。
+
+True Sight / Spirit SightはBlurやDisplacement等、一部のGlamour系視認妨害をCounterしますが、すべてのGlamour効果やMistformそのものを一括無効化する能力として扱わないでください。
 
 ## Invulnerability
 
@@ -174,9 +185,9 @@ Reinvigorationがあっても、Spell一発のFatigueが大きすぎれば気絶
 
 Armorを軽くする、Armorを交換する、Natural Protectionへ移すなど、Fatigue発生源自体を減らす方法があります。
 
-## Fatigue reset
+## Fatigue回復手段
 
-Life Drain、Reinvigoration Spell、Blood Reinvigoration等とItemを組み合わせます。
+Life Drain、Reinvigoration Spell、Blood系のFatigue回復などとItemを組み合わせます。
 
 ---
 
@@ -186,17 +197,17 @@ Life Drain、Reinvigoration Spell、Blood Reinvigoration等とItemを組み合�
 
 毎RoundHPを回復します。
 
-高HP Commanderほど価値が高く、Poison・Bleeding・小Damageへ強くなります。
+高HP Commanderほど一回の回復量が大きくなり、継続的な小DamageやPoison Damageを受ける長期戦でも生存時間を延ばせます。
 
-一撃死、AN Burst、Soul Slay、Decay、Diseaseは別対策が必要です。
+ただしPoison Resistanceの代替ではありません。Poison蓄積がRegenerationの回復を上回れば死亡します。一撃死、AN Burst、Soul Slay、Decay、Disease等にも別対策が必要です。
 
 ## HP増加
 
 - Burst耐性
 - Regeneration回復量
-- Affliction閾値
+- Affliction発生Risk
 
-を改善します。
+へ影響します。
 
 しかしHPだけ増やしてDefence・Protection・ResistanceがないとDamageを受け続けます。
 
@@ -209,7 +220,7 @@ Life Drain、Reinvigoration Spell、Blood Reinvigoration等とItemを組み合�
 - Mountain / River等のStrategic movement
 - Attack Rear
 - Battlefield obstacle回避
-- Retreat / Raid
+- Raid
 
 を助けます。
 
@@ -240,15 +251,21 @@ ArmyとCommanderのMap Moveを揃えます。一人だけ速くてもArmy全体�
 
 ## Darkvision
 
-Darkness、Cave、Night environmentでAttack・Defence・Precisionを維持します。
+Darkness、Cave、Night environmentで視界Penaltyを減らします。
 
-## Spirit Sight / True Sight
+## True Sight / Spirit Sight
 
-Ethereal、Invisible、Glamour、Illusionへ対処します。
+Invisibility、Unseen、Blur、Displacement等の**視認・Glamour由来のPenalty**へ対処します。
+
+Spirit SightはDarknessへの視界も強力ですが、True SightとSpirit Sightの対象範囲を「Illusionなら全部」「Etherealにも有効」と一般化しないでください。Spell / Abilityごとの説明を確認します。
+
+## Etherealは別問題
+
+Etherealは視認できるかではなく、非Magic Weaponが有効に当たりにくい防御です。Magic WeaponやMagic Damageを用意します。
 
 ## Blindness prevention
 
-Solar / Light / Dust等の視覚攻撃がある戦場で重要です。
+BlindnessやEye Lossへの耐性・無効化はSight能力と同一ではありません。個々のItem / Abilityの説明を確認します。
 
 ---
 
@@ -305,7 +322,8 @@ Commanderを戦闘以外の情報役へ変えます。
 | Crossbow | Shield、Air Shield、Mist、Flying圧力 |
 | Darkness | Darkvision、Spirit Sight、Light spell |
 | Skeleton spam | Reinvigoration、AoE、Holy、Undead counter |
-| Glamour / Illusion | True Sight、Magic Weapon、多段 / AoE |
+| Invisibility / Unseen / Blur | True Sight / Spirit Sight、AoE、視認不要の攻撃 |
+| Ethereal | Magic Weapon、Magic Damage |
 | Cold / Grip | Cold Resistance、Reinvigoration |
 | Fire Shield Thug | Fire Resistance、射撃、MR attack |
 
@@ -336,6 +354,14 @@ AN、Poison、MR attack、Fatigueで死にます。
 
 主力Damageへ十分な値がなく、すべてに中途半端です。
 
+## Poison ResistanceでDiseaseまで防げると思う
+
+PoisonとDiseaseは別の仕組みです。相手の能力欄とBattle effectを分けて確認します。
+
+## True Sight / Spirit Sightを万能Counterと思う
+
+視認系Glamour効果には有効でも、Ethereal、Mistform、False Damage、すべてのIllusionを自動的に消す能力ではありません。
+
 ## Casterへ重装Armor
 
 Resistanceは増えてもSpellcasting Encumbranceで気絶します。
@@ -353,8 +379,11 @@ Thug装備は相手ごとに組み替えます。
 ## 関連ページ
 
 - [Magic Item](index.md)
+- [Forge計画とConstruction Breakpoint](forge-planning.md)
 - [Thug / SC装備](thug-equipment.md)
 - [Magic Path Booster](boosters.md)
+- [Resistance・MR Item一覧](../data/items/resistance.md)
+- [Utility Item一覧](../data/items/utility.md)
 - [戦闘ルール](../basics/combat-rules.md)
 - [Magic Path総論](../magic/paths/index.md)
 
