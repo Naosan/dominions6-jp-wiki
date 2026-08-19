@@ -28,11 +28,14 @@ Itemを評価するときは、効果だけでなく次を見ます。
 
 # 目的別ページ
 
+- [用途別Magic Item辞典](purpose-dictionary.md)
 - [Forge計画とConstruction Breakpoint](forge-planning.md)
 - [Magic Path Booster](boosters.md)
 - [Research Item](research-items.md)
 - [Resistance・Utility Item](resistance-items.md)
 - [Thug / Supercombatant装備](thug-equipment.md)
+
+「Item名は分からないが、Shock対策・Reinvigoration・Magic Weapon・Mobilityなど**欲しい機能は分かる**」場合は、まず[用途別Magic Item辞典](purpose-dictionary.md)から逆引きします。
 
 ---
 
@@ -367,6 +370,7 @@ Dom6ではConstruction level、Path、Glamour移行、Item名等が旧作と異�
 
 ## 関連ページ
 
+- [用途別Magic Item辞典](purpose-dictionary.md)
 - [Forge計画とConstruction Breakpoint](forge-planning.md)
 - [Magic Path Booster](boosters.md)
 - [Research Item](research-items.md)
