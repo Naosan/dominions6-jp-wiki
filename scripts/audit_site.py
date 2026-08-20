@@ -22,10 +22,13 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_WARNING_BYTES = 800_000_000
 DEFAULT_FAILURE_BYTES = 950_000_000
-DATA_RECORD_PATTERNS = (
-    "data/units/by-id/*/index.html",
-    "data/sites/by-id/*/index.html",
+DATA_RECORD_ROOTS = (
+    "data/units/by-id",
+    "data/sites/by-id",
+    "data/items/by-id",
 )
+DATA_RECORD_PATTERNS = tuple(f"{root}/*/index.html" for root in DATA_RECORD_ROOTS)
+DATA_RECORD_PREFIXES = tuple(f"{root}/" for root in DATA_RECORD_ROOTS)
 CANONICAL_RE = re.compile(
     rb"<link\b(?=[^>]*\brel=[\"']canonical[\"'])"
     rb"(?=[^>]*\bhref=[\"']([^\"']+)[\"'])[^>]*>",
@@ -99,7 +102,7 @@ def search_metrics(path: Path, issues: list[Issue]) -> dict[str, Any]:
         if not isinstance(item, dict):
             continue
         location = str(item.get("location") or "").lstrip("/")
-        if location.startswith(("data/units/by-id/", "data/sites/by-id/")):
+        if location.startswith(DATA_RECORD_PREFIXES):
             record_items += 1
 
     metrics["items"] = len(items)
@@ -191,7 +194,7 @@ def audit(
                 "error",
                 "data-records-missing",
                 site_dir.name,
-                "no rendered Unit or Magic Site by-id pages were found",
+                "no rendered by-id data-record pages were found",
             )
         )
 
