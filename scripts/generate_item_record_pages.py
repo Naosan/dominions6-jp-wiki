@@ -56,6 +56,13 @@ def acquisition_label(item: dict[str, object]) -> str:
     return str(item["construction"])
 
 
+def display_cost(item: dict[str, object]) -> str:
+    """Never present an unforgeable class as having a normal Forge cost."""
+    if int(item["const"]) in UNFORGEABLE_CLASSES:
+        return "—"
+    return str(item["cost"])
+
+
 def special_features(raw: dict[str, str]) -> list[str]:
     features: list[str] = []
     for specs in (
@@ -124,7 +131,7 @@ def record_page(item: dict[str, object], raw: dict[str, str]) -> str:
         f"| Slot / Type | {core.esc(item['type_title'])} |",
         f"| Research / Acquisition | {core.esc(acquisition_label(item))} |",
         f"| Forge requirement | {core.esc(item['path'])} |",
-        f"| Base Gem cost | {core.esc(item['cost'])} |",
+        f"| Base Gem cost | {core.esc(display_cost(item))} |",
         f"| Magic Path Booster | {core.esc(item['boosters'])} |",
         f"| Base equipment | {core.esc(item['base'])} |",
         f"| 主要Effects | {core.esc(normalized_traits(item))} |",
@@ -194,7 +201,7 @@ def records_index_page(items: list[dict[str, object]]) -> str:
         lines.append(
             f"| [{core.esc(item['name'])}](by-id/{item['id']}.md) | {item['id']} | "
             f"{core.esc(item['type_title'])} | {core.esc(acquisition_label(item))} | "
-            f"{core.esc(item['path'])} | {core.esc(item['cost'])} | {core.esc(normalized_traits(item))} |"
+            f"{core.esc(item['path'])} | {core.esc(display_cost(item))} | {core.esc(normalized_traits(item))} |"
         )
     lines += ["", ""]
     return "\n".join(lines)
