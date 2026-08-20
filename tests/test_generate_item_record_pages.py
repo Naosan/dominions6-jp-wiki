@@ -7,6 +7,7 @@ from pathlib import Path
 from scripts.apply_data_record_templates import RECORD_SETS
 from scripts.generate_item_record_pages import (
     acquisition_label,
+    display_cost,
     index_block,
     item_record_link,
     link_generated_item_tables,
@@ -79,6 +80,14 @@ class ItemRecordPageTests(unittest.TestCase):
                 label = acquisition_label(sample_item(const=const, construction=f"Construction {const}"))
                 self.assertIn("Unforgeable", label)
                 self.assertNotIn(f"Construction {const}", label)
+
+    def test_unforgeable_classes_never_show_a_normal_forge_cost(self):
+        for const in (11, 13, 15):
+            with self.subTest(const=const):
+                item = sample_item(const=const, cost="5S")
+                self.assertEqual(display_cost(item), "—")
+                page = record_page(item, sample_raw())
+                self.assertIn("| Base Gem cost | — |", page)
 
     def test_record_page_links_specialized_indexes_only_when_relevant(self):
         page = record_page(
