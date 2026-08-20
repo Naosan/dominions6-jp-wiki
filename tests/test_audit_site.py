@@ -58,6 +58,7 @@ class RenderedSiteAuditTests(unittest.TestCase):
                         {"location": ""},
                         {"location": "data/units/by-id/0001/"},
                         {"location": "data/sites/by-id/0002/#effects"},
+                        {"location": "data/items/by-id/0369/#related-data"},
                     ],
                 }
             ),
@@ -77,6 +78,7 @@ class RenderedSiteAuditTests(unittest.TestCase):
         self.write_page(site, "index.html")
         self.write_page(site, "data/units/by-id/0001/index.html")
         self.write_page(site, "data/sites/by-id/0002/index.html")
+        self.write_page(site, "data/items/by-id/0369/index.html")
         self.write_indexes(site)
         return temp, site, config
 
@@ -87,16 +89,25 @@ class RenderedSiteAuditTests(unittest.TestCase):
         result = audit(site, config, warning_bytes=1_000_000, failure_bytes=2_000_000)
 
         self.assertEqual(result["errors"], 0)
-        self.assertEqual(result["metrics"]["data_record_files"], 2)
+        self.assertEqual(result["metrics"]["data_record_files"], 3)
         self.assertEqual(result["metrics"]["data_record_primary_navigation_pages"], 0)
-        self.assertEqual(result["metrics"]["search"]["items"], 3)
-        self.assertEqual(result["metrics"]["search"]["data_record_items"], 2)
+        self.assertEqual(result["metrics"]["search"]["items"], 4)
+        self.assertEqual(result["metrics"]["search"]["data_record_items"], 3)
         self.assertEqual(result["metrics"]["sitemap"]["urls"], 1)
 
     def test_global_navigation_on_data_record_is_an_error(self) -> None:
         temp, site, config = self.clean_site()
         self.addCleanup(temp.cleanup)
         self.write_page(site, "data/units/by-id/0001/index.html", navigation=True)
+
+        result = audit(site, config, warning_bytes=1_000_000, failure_bytes=2_000_000)
+
+        self.assertTrue(any(issue.code == "data-record-primary-nav" for issue in result["issues"]))
+
+    def test_global_navigation_on_magic_item_record_is_an_error(self) -> None:
+        temp, site, config = self.clean_site()
+        self.addCleanup(temp.cleanup)
+        self.write_page(site, "data/items/by-id/0369/index.html", navigation=True)
 
         result = audit(site, config, warning_bytes=1_000_000, failure_bytes=2_000_000)
 
