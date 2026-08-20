@@ -26,6 +26,7 @@ class RecordSet:
 RECORD_SETS: tuple[RecordSet, ...] = (
     RecordSet("Unit", "data/units/by-id", 4_000),
     RecordSet("Magic Site", "data/sites/by-id", 1_200),
+    RecordSet("Magic Item", "data/items/by-id", 500),
 )
 
 
@@ -100,7 +101,7 @@ def apply_templates(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="生成済みUnit・Magic Site個別ページへ軽量Templateを設定します。"
+        description="生成済みUnit・Magic Site・Magic Item個別ページへ軽量Templateを設定します。"
     )
     parser.add_argument("--docs-dir", type=Path, default=ROOT / "docs")
     return parser.parse_args()
