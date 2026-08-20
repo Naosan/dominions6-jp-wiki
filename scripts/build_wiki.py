@@ -77,6 +77,11 @@ STEPS: tuple[Step, ...] = (
         supports_offline=True,
     ),
     Step(
+        "Magic Item個別record",
+        ("-m", "scripts.generate_item_record_pages"),
+        supports_offline=True,
+    ),
+    Step(
         "Magic Site総合索引",
         ("scripts/generate_magic_site_data.py",),
         supports_offline=True,
