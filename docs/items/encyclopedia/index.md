@@ -94,11 +94,15 @@ Magic Itemの価値は、
 | 地形接続 / Aquatic | Amulet of the Fish | Aquatic Commanderを陸上へ出し、海中Magic accessを接続する | [攻略](amulet-of-the-fish.md) | [Item 363](../../data/items/by-id/363.md) |
 | Path Booster / Fire | Flame Helmet | Fire +1とReinvigoration -3を交換し、高Fire閾値を越える | [攻略](flame-helmet.md) | [Item 192](../../data/items/by-id/192.md) |
 | Path Booster / Air | Winged Helmet | Air +1を与えるがFlyingは付与しない | [攻略](winged-helmet.md) | [Item 195](../../data/items/by-id/195.md) |
-| Path Booster / Water | Water Bracelet | C7・W1からWater +1を与え、低Water Mageを一段伸ばす | [攻略](water-bracelet.md) | [Item 403](../../data/items/by-id/403.md) |
+| Path Booster / Water / Misc | Water Bracelet | C7・W1からWater +1を与え、低Water Mageを一段伸ばす | [攻略](water-bracelet.md) | [Item 403](../../data/items/by-id/403.md) |
+| Path Booster / Water / Armor | Robe of the Sea | Water +1と装備者本人の海陸呼吸をArmor Slotへまとめる | [攻略](robe-of-the-sea.md) | [Item 251](../../data/items/by-id/251.md) |
 | Path Booster / Earth | Earth Boots | Earth +1をBattle spell・Ritual・Forgeの閾値へ変える | [攻略](earth-boots.md) | [Item 295](../../data/items/by-id/295.md) |
-| Path Booster / Astral | Coin of Meteoritic Iron | Astral +1とMR +1をS2E2 Crosspathから得る | [攻略](coin-of-meteoritic-iron.md) | [Item 372](../../data/items/by-id/372.md) |
+| Path Booster / Astral / Misc | Coin of Meteoritic Iron | Astral +1とMR +1をS2E2 Crosspathから得る | [攻略](coin-of-meteoritic-iron.md) | [Item 372](../../data/items/by-id/372.md) |
+| Path Booster / Astral / Helmet | Starshine Skullcap | Astral +1とMR +2を軽いHelmet Slotから得る | [攻略](starshine-skullcap.md) | [Item 207](../../data/items/by-id/207.md) |
 | Path Booster / Death | Skull Staff | Death +1をSpell / Ritual / Summonの新しい閾値へ変える | [攻略](skull-staff.md) | [Item 62](../../data/items/by-id/62.md) |
 | Path Booster / Nature | Thistle Mace | Nature +1を片手Slotで組み込み、Nature accessを一段伸ばす | [攻略](thistle-mace.md) | [Item 65](../../data/items/by-id/65.md) |
+| Path Booster / Blood / Weapon | Blood Thorn | Blood +1とHit依存の生命吸収を片手武器へまとめる | [攻略](blood-thorn.md) | [Item 94](../../data/items/by-id/94.md) |
+| Path Booster / Blood / Misc | Brazen Vessel | C5・B5からBlood +1を後方Ritualistへ与える | [攻略](brazen-vessel.md) | [Item 394](../../data/items/by-id/394.md) |
 | Bless転用 | Shroud of the Battle Saint | 非Sacred Carrierへ自国Blessを常時適用する | [攻略](shroud-of-the-battle-saint.md) | [Item 252](../../data/items/by-id/252.md) |
 | 属性耐性 / Armor | Elemental Armor | Fire・Cold・Shock Resistance +10をArmor Slotへまとめる | [攻略](elemental-armor.md) | [Item 249](../../data/items/by-id/249.md) |
 | Luck / Shield | Lucky Coin | 軽いShield性能とLuckを一つの手Slotへまとめる | [攻略](lucky-coin.md) | [Item 168](../../data/items/by-id/168.md) |
