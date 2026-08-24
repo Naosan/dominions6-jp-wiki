@@ -218,7 +218,7 @@ Communityの現行攻略資料では、**Lampを再作成すると既存のAl Kh
 
 ---
 
-# 谁にForgeさせるか
+# 誰にForgeさせるか
 
 Lampは使用後に消えるため、Forge MageとAl Khazimは別の資産です。
 
