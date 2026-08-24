@@ -3,7 +3,7 @@ title: "Winged Shoes"
 status: reviewed
 verified_version: "6.35"
 last_verified: "2026-08-24"
-item_id: 160
+item_id: 294
 ---
 
 # Winged Shoes
@@ -12,7 +12,7 @@ item_id: 160
 
 Winged Shoesの価値はDamageやProtectionではなく、**行けなかった場所へ行ける／届かなかった相手へ届く**ことにあります。
 
-- [Dominions 6.35固定データ — Item 160](../../data/items/by-id/160.md)
+- [Dominions 6.35固定データ — Item 294](../../data/items/by-id/294.md)
 - [Flying・Storm・Air機動戦](../../systems/flying-storm.md)
 - [任務別Magic Item Loadout](../mission-loadouts.md)
 
@@ -155,7 +155,7 @@ Flyingを使うBuildではStormを必ず意識します。
 
 場合は、**靴を履いたから常に飛べる**と考えません。
 
-Storm Immunity等の例外を含め、実際の戦闘条件は[ Flying・Storm・Air機動戦](../../systems/flying-storm.md)とTest gameで確認します。
+Storm Immunity等の例外を含め、実際の戦闘条件は[Flying・Storm・Air機動戦](../../systems/flying-storm.md)とTest gameで確認します。
 
 ---
 
@@ -279,7 +279,7 @@ Reinvigoration等を失い、戦闘Buildが崩れます。
 # 関連
 
 - [Magic Item攻略辞典](index.md)
-- [Dominions 6.35固定データ — Item 160](../../data/items/by-id/160.md)
+- [Dominions 6.35固定データ — Item 294](../../data/items/by-id/294.md)
 - [Flying・Storm・Air機動戦](../../systems/flying-storm.md)
 - [任務別Magic Item Loadout](../mission-loadouts.md)
 - [Thug / Supercombatant装備](../thug-equipment.md)
