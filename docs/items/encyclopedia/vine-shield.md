@@ -10,7 +10,7 @@ item_id: 176
 
 **近接してきた相手を生きた蔓で拘束しようとし、Carrierが囲まれた時の「敵の行動量」を削るConstruction 5のControl系Shield。**
 
-Vine ShieldはProtectionを積むだけのShieldではありません。攻略上は、**Carrierへ接触した敵を止めることで、受ける近接攻撃のTempoを崩す装備**として評価します。
+Vine ShieldはShield Protectionを積むだけの装備ではありません。攻略上は、**Carrierへ接触した敵を止めることで、受ける近接攻撃のTempoを崩す装備**として評価します。
 
 - [Dominions 6.35固定データ — Item 176](../../data/items/by-id/176.md)
 - [任務別Magic Item Loadout](../mission-loadouts.md)
@@ -22,11 +22,11 @@ Vine ShieldはProtectionを積むだけのShieldではありません。攻略�
 
 6.35固定データでは、Vine ShieldはConstruction 5、Forge要求**N2**のShieldです。参照するShield / Armor record 63は、
 
-- Protection 18
-- Defence -1
-- Encumbrance 2
+- Shield Protection 13
+- Defence 5
+- Encumbrance 0
 
-を持ちます。
+です。
 
 さらにItem descriptionでは、**bearerとclose combatに入った相手へ蔓が伸び、相手をその場へ拘束しようとする**性質が明記されています。
 
@@ -106,19 +106,19 @@ Vine Shieldだけで耐久が完成するわけではありません。
 
 ---
 
-# Shield StatsにもCostがある
+# Shield StatsとSlotを分けて見る
 
-Vine ShieldのShield recordはProtection 18ですが、Defence -1、Encumbrance 2も持っています。
+6.35のShield record自体は**Defence 5 / Encumbrance 0**で、重いShieldのようなEncumbrance負担を持ちません。
 
-したがって、
+一方で機会費用は、数値Penaltyより**手SlotをShieldへ固定すること**にあります。
 
-- 高Defenseを維持したいCarrier
-- Fatigueが苦しいCarrier
-- Shieldなしの二刀・両手Build
+- 両手武器を使えない
+- 別のShieldを使えない
+- 手SlotをBoosterや特殊Utilityへ回せない
 
-では機会費用があります。
+というBuild上の選択が発生します。
 
-「Vine拘束が強いから採用」ではなく、**Shieldを持つことでCarrier全体のStatsがどう変わるか**をUnit画面で確認します。
+「Vine拘束が強いから採用」ではなく、**Shield recordのStatsと、手Slotを使う機会費用を別々に確認**します。
 
 ---
 
@@ -161,8 +161,8 @@ Damageを出す片手Weapon
 - 敵の主力Damageが遠距離 / Magic
 - CarrierがMR-based Controlで先に止まる
 - Armor Negating等で短時間に落ちる
-- ShieldによるDefence / Encumbrance変化がBuildへ重い
 - 両手武器がDamage planの中心
+- Hand slotを別のBooster / Shield / 特殊Counterへ使いたい
 - 近接敵をControlするよりResistanceを足す方が重要
 
 Vine Shieldは**近接戦のTempoを変えるItem**なので、戦場に近接接触が少ないと価値も下がります。
@@ -197,9 +197,9 @@ Counterは、
 
 敵を止めても倒せなければ、長期戦でFatigueや援軍に負けます。
 
-## Shield Statsを見ない
+## Shieldの固定値と特殊効果を混同する
 
-Defence -1やEncumbrance 2を含めた最終Statsを確認します。
+Shield Protection 13 / Defence 5 / Encumbrance 0というrecordと、close combat相手を拘束しようとする特殊効果は別レイヤーです。
 
 ## 遠距離国家へ同じBuildを持ち込む
 
@@ -216,7 +216,8 @@ Carrierが勝てない相手に当たった時、Itemごと失うRiskが高く�
 ```text
 [ ] C5・N2でVine ShieldがForge可能か確認
 [ ] Item 176 / Shield record 63であることを確認
-[ ] Shield装備後のDefence・Encumbrance等をUnit画面で確認
+[ ] Shield Protection 13 / Defence 5 / Encumbrance 0を確認
+[ ] 装備後の最終StatsをUnit画面で確認
 [ ] close combat相手へvineの拘束が発生することをBattle Replayで確認
 [ ] 少数精鋭と多数Chaffの両方で挙動を比較
 [ ] ShieldなしBuildと生存Roundを比較
@@ -236,6 +237,6 @@ Carrierが勝てない相手に当たった時、Itemごと失うRiskが高く�
 
 ## Source note
 
-- pin済み`larzm42/dom6inspector` Dominions 6.35 BaseI / armors / Item description
+- pin済み`larzm42/dom6inspector` Dominions 6.35 BaseI / armors / protections_by_armor / Item description
 - Dominions 6 Main Manual — Shield / Encumbrance / Forge Item
 - Vine拘束の実際の発生・抵抗・対象条件はゲーム内Battle Replayを最終確認
