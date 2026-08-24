@@ -78,7 +78,7 @@ Magic Itemの価値は、
 
 # 掲載Item
 
-現在は、Itemの価値軸が偏らないように、Forge経済・Research・防御・機動・Artifactの代表例から個別攻略を整備しています。
+現在は、Itemの価値軸が偏らないように、Forge経済・Research・防御・機動・Magic Path Booster・Thug装備・Artifactの代表例から個別攻略を整備しています。
 
 | 分類 | Item | 一言 | 個別攻略 | 6.35 data |
 |---|---|---|---|---|
@@ -86,10 +86,14 @@ Magic Itemの価値は、
 | Research | Owl Quill | 5AとForge turnをResearch +6の継続収入へ変換する | [攻略](owl-quill.md) | [Item 322](../../data/items/by-id/322.md) |
 | MR防御 | Amulet of Antimagic | 重要CarrierのMRを補い、MR依存Counterへ備える | [攻略](amulet-of-antimagic.md) | [Item 369](../../data/items/by-id/369.md) |
 | 機動 | Winged Shoes | CommanderへFlyingを与え、到達可能性とRaid routeを変える | [攻略](winged-shoes.md) | [Item 294](../../data/items/by-id/294.md) |
+| Path Booster / Death | Skull Staff | Death +1をSpell / Ritual / Summonの新しい閾値へ変える | [攻略](skull-staff.md) | [Item 62](../../data/items/by-id/62.md) |
+| Path Booster / Nature | Thistle Mace | Nature +1を片手Slotで組み込み、Nature accessを一段伸ばす | [攻略](thistle-mace.md) | [Item 65](../../data/items/by-id/65.md) |
+| Thug / Damage | Frost Brand | 一回の命中へAP Cold副次ダメージを重ね、近接火力を増やす | [攻略](frost-brand.md) | [Item 54](../../data/items/by-id/54.md) |
+| Thug / Control | Vine Shield | close combatの敵を拘束し、Carrierへ集中する近接行動を乱す | [攻略](vine-shield.md) | [Item 176](../../data/items/by-id/176.md) |
 | Artifact / maintenance | Igor Könhelm's Tome | Corporeal Undeadの維持とStorm戦を一つのArtifactへまとめる | [攻略](igor-konhelms-tome.md) | [Item 431](../../data/items/by-id/431.md) |
 | Artifact / Magic access | The Magic Lamp | 高いA/F accessをAl Khazimという高Path Mageへ変換する | [攻略](the-magic-lamp.md) | [Item 433](../../data/items/by-id/433.md) |
 
-この一覧は固定Tier表ではありません。今後はMagic Path Booster、Thug装備、Resistance、Reinvigoration、特殊作戦Item、召喚・変身Itemなどへ順次広げます。
+この一覧は固定Tier表ではありません。今後はResistance、Reinvigoration、特殊作戦Item、召喚・変身Item、さらに別PathのBoosterや装備Buildへ順次広げます。
 
 ---
 
