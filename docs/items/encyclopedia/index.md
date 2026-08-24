@@ -78,22 +78,26 @@ Magic Itemの価値は、
 
 # 掲載Item
 
-現在は、Itemの価値軸が偏らないように、Forge経済・Research・MR攻防・機動・地形接続・Magic Path Booster・Bless転用・属性耐性・HP / Fatigue継戦・行動Tempo・Battle summon・Thug装備・Artifactの代表例から個別攻略を整備しています。
+現在は、Itemの価値軸が偏らないように、Forge経済・Research・MR攻防・機動・地形接続・Magic Path Booster・Bless転用・属性耐性・Luck・HP / Fatigue継戦・行動Tempo・Battle summon・Thug装備・Artifactの代表例から個別攻略を整備しています。
 
 | 分類 | Item | 一言 | 個別攻略 | 6.35 data |
 |---|---|---|---|---|
 | Forge経済 | Dwarven Hammer | Forge Bonusを繰り返し使い、将来の総Gem支出を圧縮する | [攻略](dwarven-hammer.md) | [Item 29](../../data/items/by-id/29.md) |
 | Research / early | Owl Quill | 5AとForge turnをResearch +6の継続収入へ変換する | [攻略](owl-quill.md) | [Item 322](../../data/items/by-id/322.md) |
+| Research / Death | Skull Mentor | C5以降にResearch +14の継続出力を得る | [攻略](skull-mentor.md) | [Item 374](../../data/items/by-id/374.md) |
 | Research / high output | Lightless Lantern | Research +12とHorror-related riskを交換する | [攻略](lightless-lantern.md) | [Item 399](../../data/items/by-id/399.md) |
 | MR防御 | Amulet of Antimagic | 重要CarrierのMRを補い、MR依存Counterへ備える | [攻略](amulet-of-antimagic.md) | [Item 369](../../data/items/by-id/369.md) |
 | MR攻撃 | Spell Focus | MR-negates Spellを高MR Targetへ通しやすくする | [攻略](spell-focus.md) | [Item 370](../../data/items/by-id/370.md) |
+| MR攻撃 / high risk | Eye of the Void | Penetration +2とMR -2、眼の置換を交換する | [攻略](eye-of-the-void.md) | [Item 371](../../data/items/by-id/371.md) |
 | 機動 / Flying | Winged Shoes | CommanderへFlyingを与え、到達可能性とRaid routeを変える | [攻略](winged-shoes.md) | [Item 294](../../data/items/by-id/294.md) |
 | 機動 / Map Move | Boots of the Messenger | Map Move +9とReinvigoration +3で急行と継戦を両立する | [攻略](boots-of-the-messenger.md) | [Item 297](../../data/items/by-id/297.md) |
 | 地形接続 / Aquatic | Amulet of the Fish | Aquatic Commanderを陸上へ出し、海中Magic accessを接続する | [攻略](amulet-of-the-fish.md) | [Item 363](../../data/items/by-id/363.md) |
 | Path Booster / Death | Skull Staff | Death +1をSpell / Ritual / Summonの新しい閾値へ変える | [攻略](skull-staff.md) | [Item 62](../../data/items/by-id/62.md) |
+| Path Booster / Earth | Earth Boots | Earth +1をBattle spell・Ritual・Forgeの閾値へ変える | [攻略](earth-boots.md) | [Item 295](../../data/items/by-id/295.md) |
 | Path Booster / Nature | Thistle Mace | Nature +1を片手Slotで組み込み、Nature accessを一段伸ばす | [攻略](thistle-mace.md) | [Item 65](../../data/items/by-id/65.md) |
 | Bless転用 | Shroud of the Battle Saint | 非Sacred Carrierへ自国Blessを常時適用する | [攻略](shroud-of-the-battle-saint.md) | [Item 252](../../data/items/by-id/252.md) |
 | 属性耐性 / Armor | Elemental Armor | Fire・Cold・Shock Resistance +10をArmor Slotへまとめる | [攻略](elemental-armor.md) | [Item 249](../../data/items/by-id/249.md) |
+| Luck / Shield | Lucky Coin | 軽いShield性能とLuckを一つの手Slotへまとめる | [攻略](lucky-coin.md) | [Item 168](../../data/items/by-id/168.md) |
 | 継戦 / HP | Ring of Regeneration | Regeneration 10で生物Carrierの生存時間を伸ばす | [攻略](ring-of-regeneration.md) | [Item 382](../../data/items/by-id/382.md) |
 | 継戦 / Damage + Fatigue | Girdle of Might | Strength +3とReinvigoration +3を一枠で足す | [攻略](girdle-of-might.md) | [Item 366](../../data/items/by-id/366.md) |
 | 継戦 / Fatigue専用 | Amulet of Resilience | Reinvigoration +5で有効行動Roundを伸ばす | [攻略](amulet-of-resilience.md) | [Item 383](../../data/items/by-id/383.md) |
