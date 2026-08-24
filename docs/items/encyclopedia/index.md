@@ -92,8 +92,12 @@ Magic Itemの価値は、
 | 機動 / Flying | Winged Shoes | CommanderへFlyingを与え、到達可能性とRaid routeを変える | [攻略](winged-shoes.md) | [Item 294](../../data/items/by-id/294.md) |
 | 機動 / Map Move | Boots of the Messenger | Map Move +9とReinvigoration +3で急行と継戦を両立する | [攻略](boots-of-the-messenger.md) | [Item 297](../../data/items/by-id/297.md) |
 | 地形接続 / Aquatic | Amulet of the Fish | Aquatic Commanderを陸上へ出し、海中Magic accessを接続する | [攻略](amulet-of-the-fish.md) | [Item 363](../../data/items/by-id/363.md) |
-| Path Booster / Death | Skull Staff | Death +1をSpell / Ritual / Summonの新しい閾値へ変える | [攻略](skull-staff.md) | [Item 62](../../data/items/by-id/62.md) |
+| Path Booster / Fire | Flame Helmet | Fire +1とReinvigoration -3を交換し、高Fire閾値を越える | [攻略](flame-helmet.md) | [Item 192](../../data/items/by-id/192.md) |
+| Path Booster / Air | Winged Helmet | Air +1を与えるがFlyingは付与しない | [攻略](winged-helmet.md) | [Item 195](../../data/items/by-id/195.md) |
+| Path Booster / Water | Water Bracelet | C7・W1からWater +1を与え、低Water Mageを一段伸ばす | [攻略](water-bracelet.md) | [Item 403](../../data/items/by-id/403.md) |
 | Path Booster / Earth | Earth Boots | Earth +1をBattle spell・Ritual・Forgeの閾値へ変える | [攻略](earth-boots.md) | [Item 295](../../data/items/by-id/295.md) |
+| Path Booster / Astral | Coin of Meteoritic Iron | Astral +1とMR +1をS2E2 Crosspathから得る | [攻略](coin-of-meteoritic-iron.md) | [Item 372](../../data/items/by-id/372.md) |
+| Path Booster / Death | Skull Staff | Death +1をSpell / Ritual / Summonの新しい閾値へ変える | [攻略](skull-staff.md) | [Item 62](../../data/items/by-id/62.md) |
 | Path Booster / Nature | Thistle Mace | Nature +1を片手Slotで組み込み、Nature accessを一段伸ばす | [攻略](thistle-mace.md) | [Item 65](../../data/items/by-id/65.md) |
 | Bless転用 | Shroud of the Battle Saint | 非Sacred Carrierへ自国Blessを常時適用する | [攻略](shroud-of-the-battle-saint.md) | [Item 252](../../data/items/by-id/252.md) |
 | 属性耐性 / Armor | Elemental Armor | Fire・Cold・Shock Resistance +10をArmor Slotへまとめる | [攻略](elemental-armor.md) | [Item 249](../../data/items/by-id/249.md) |
