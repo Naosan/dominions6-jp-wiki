@@ -2,6 +2,7 @@
 title: Magic Item攻略辞典
 status: reviewed
 verified_version: "6.35"
+last_verified: "2026-08-24"
 ---
 
 # Magic Item攻略辞典
