@@ -3,16 +3,16 @@ title: "Owl Quill"
 status: reviewed
 verified_version: "6.35"
 last_verified: "2026-08-24"
-item_id: 56
+item_id: 322
 ---
 
 # Owl Quill
 
-**5 Air Gemと一回のForge turnを、Research +2の継続収入へ変えるConstruction 1の早期研究投資。**
+**5 Air Gemと一回のForge turnを、Research +6の継続収入へ変えるConstruction 3の研究投資。**
 
 Owl Quillは戦場で勝つItemではありません。早く作り、長く研究させるほどResearch breakpointを前倒しする**時間変換Item**です。
 
-- [Dominions 6.35固定データ — Item 56](../../data/items/by-id/56.md)
+- [Dominions 6.35固定データ — Item 322](../../data/items/by-id/322.md)
 - [Research Item攻略](../research-items.md)
 - [Researchと研究ルート](../../magic/research.md)
 
@@ -20,14 +20,14 @@ Owl Quillは戦場で勝つItemではありません。早く作り、長く研�
 
 # まず何ができるか
 
-6.35固定データでは、Owl QuillはConstruction 1のMiscellaneous Itemで、Forge要求は**A1**、基礎Costは**5A**、Research Bonusは**+2**です。
+6.35固定データでは、Owl QuillはConstruction 3のMiscellaneous Itemで、Forge要求は**A1**、基礎Costは**5A**、Research Bonusは**+6**です。
 
 Research中のMageへ持たせることで、通常の研究量へ毎Turn追加のResearchを積みます。
 
 ```text
 A1 MageがForge
 → Researcherへ装備
-→ 毎Turn Research +2
+→ 毎Turn Research +6
 → 将来のResearch breakpointを前倒し
 ```
 
@@ -41,7 +41,7 @@ Research Itemは残りTurnが多いほど回収期間が長くなります。
 
 同じOwl Quillでも、
 
-- 序盤に作って20 Turn研究する
+- 中盤前から作って20 Turn研究する
 - 終盤に作って3 Turn研究する
 
 では意味が大きく違います。
@@ -49,14 +49,29 @@ Research Itemは残りTurnが多いほど回収期間が長くなります。
 そのため評価は、
 
 ```text
-Research +2 × 実際に研究する残りTurn
+Research +6 × 実際に研究する残りTurn
 vs
-5A + Forge担当Mageの1 Turn
+5A + Forge担当Mageの1 Turn + Construction 3到達
 ```
 
 という形で考えます。
 
 単純なResearch点だけでなく、重要Spellへ一Turn早く届くことで戦争開始Timingが変わるなら、その一Turnには表以上の価値があります。
+
+---
+
+# Construction 3へ進む理由と一緒に考える
+
+Owl QuillはConstruction 3なので、「研究Itemを作るためだけにC3へ寄るか」と「C3で他に何を作るか」を同時に見ます。
+
+- Dwarven Hammer
+- Booster
+- Resistance / Utility Item
+- 国家固有のForge計画
+
+など、同じBreakpointで複数の価値を回収できるほどResearch routeへ組み込みやすくなります。
+
+逆に、Battle magicの重要Breakpointを遅らせてC3へ寄るなら、QuillのResearch +6だけでなく**Constructionへ払ったResearch cost**も投資に含めます。
 
 ---
 
@@ -80,7 +95,7 @@ Mageです。
 - Battleへ頻繁に出る
 - Forge専任になる
 
-Mageへ持たせると、Research +2が働かないTurnが増えます。
+Mageへ持たせると、Research +6が働かないTurnが増えます。
 
 ---
 
@@ -126,27 +141,28 @@ Research Itemは複数量産することがあるため、Shift + Oのmonthly fo
 次が多いほど価値が上がります。
 
 - A1へ簡単に届く
-- Construction 1を早く通る
+- Construction 3へ進む理由が他にもある
 - まだResearchするTurnが長く残る
 - 安全なResearcherが複数いる
 - Air Gemに余裕がある
 - 重要Breakpointを早めたい
 - Forge担当Mageの一Turnを捻出できる
 
-特に序盤から中盤へ向けて、研究予定が明確な国家では計算しやすい投資です。
+特に中盤へ向けて研究予定が明確な国家では、将来Researchへ変換できる量を計算しやすい投資です。
 
 ---
 
 # Forgeしない・後回しにする条件
 
 - Air Gemを直近の戦闘・Ritualへ使いたい
+- Construction 3への寄り道がBattle magicを遅らせる
 - Forge Mageの一Turnが重要Researchを逆に遅らせる
 - Researcherが前線へ出る予定
 - ゲーム終了までの残りTurnが短い
 - 既に必要なResearch breakpointへ十分早く届く
 - Misc slotを別の重要Itemへ使う必要がある
 
-Research +2は常に有用でも、**Researchを増やすことが今の勝ち筋とは限りません**。
+Research +6は強力でも、**Researchを増やすことが今の勝ち筋とは限りません**。
 
 ---
 
@@ -200,7 +216,11 @@ Researcher数、残りTurn、Air Gem予算を見ずにmonthly forgeを続けま�
 
 Quillを作ったMage自身は、そのTurn研究していません。
 
-## 終盤でも序盤と同じ評価をする
+## Construction 3への研究Costを無視する
+
+Quillだけの価値ではなく、C3で他に何を得るかまで見ます。
+
+## 終盤でも中盤と同じ評価をする
 
 残りResearch Turnが少ないほど回収できる総Researchは減ります。
 
@@ -213,10 +233,10 @@ Quillを作ったMage自身は、そのTurn研究していません。
 # Test game checklist
 
 ```text
-[ ] C1・A1でOwl QuillがForge可能か確認
+[ ] C3・A1でOwl QuillがForge可能か確認
 [ ] 実際の支払CostをForge画面で確認
 [ ] 装備前のResearch値を記録
-[ ] 装備後にResearch +2されることを確認
+[ ] 装備後にResearch +6されることを確認
 [ ] ResearchしていないTurnの扱いを確認
 [ ] 別Mageへ受け渡した後もBonusを確認
 [ ] Monthly Forge開始・停止操作を確認
@@ -228,7 +248,7 @@ Quillを作ったMage自身は、そのTurn研究していません。
 # 関連
 
 - [Magic Item攻略辞典](index.md)
-- [Dominions 6.35固定データ — Item 56](../../data/items/by-id/56.md)
+- [Dominions 6.35固定データ — Item 322](../../data/items/by-id/322.md)
 - [Research Item攻略](../research-items.md)
 - [Forge計画とConstruction Breakpoint](../forge-planning.md)
 - [Researchと研究ルート](../../magic/research.md)
@@ -238,4 +258,4 @@ Quillを作ったMage自身は、そのTurn研究していません。
 
 - pin済み`larzm42/dom6inspector` Dominions 6.35 BaseI
 - Dominions 6 Main Manual — Research / Forge Item
-- Researchの実効価値は残りTurnと戦争Timingを含めて評価
+- Researchの実効価値は残りTurn、Construction 3への研究Cost、戦争Timingを含めて評価
