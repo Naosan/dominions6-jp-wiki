@@ -13,6 +13,8 @@ from scripts.generate_item_record_pages import (
     link_generated_item_tables,
     record_page,
     records_index_page,
+    strategy_pages,
+    write_records,
 )
 
 
@@ -105,6 +107,19 @@ class ItemRecordPageTests(unittest.TestCase):
         self.assertIn("副作用・装備制限", page)
         self.assertNotIn("Artifact一覧", page)
 
+    def test_record_page_links_matching_handwritten_strategy(self):
+        page = record_page(
+            sample_item(),
+            sample_raw(),
+            strategy_href="../../../items/encyclopedia/amulet-of-antimagic.md",
+        )
+        self.assertIn("## 個別攻略", page)
+        self.assertIn(
+            "[このItemの手書き攻略](../../../items/encyclopedia/amulet-of-antimagic.md)",
+            page,
+        )
+        self.assertIn("[Magic Item攻略辞典]", page)
+
     def test_core_crown_label_is_normalized_on_record_page(self):
         page = record_page(
             sample_item(traits_text="Artifact / Crown, MR +2"),
@@ -116,11 +131,59 @@ class ItemRecordPageTests(unittest.TestCase):
     def test_records_index_links_each_item(self):
         page = records_index_page([sample_item()])
         self.assertIn("[Amulet of Antimagic](by-id/369.md)", page)
+        self.assertIn("[Magic Item攻略辞典]", page)
 
-    def test_index_block_exposes_record_count(self):
+    def test_index_block_exposes_record_count_and_strategy_dictionary(self):
         block = index_block(529)
         self.assertIn("529 records", block)
         self.assertIn("records.md", block)
+        self.assertIn("Magic Item攻略辞典", block)
+
+    def test_strategy_pages_require_stable_item_ids(self):
+        with tempfile.TemporaryDirectory() as temp:
+            strategy_dir = Path(temp)
+            (strategy_dir / "index.md").write_text("# index\n", encoding="utf-8")
+            (strategy_dir / "item.md").write_text(
+                "---\nitem_id: 369\n---\n# Item\n",
+                encoding="utf-8",
+            )
+            pages = strategy_pages(strategy_dir)
+            self.assertEqual(pages[369], strategy_dir / "item.md")
+
+    def test_strategy_pages_reject_duplicate_item_ids(self):
+        with tempfile.TemporaryDirectory() as temp:
+            strategy_dir = Path(temp)
+            for name in ("one.md", "two.md"):
+                (strategy_dir / name).write_text(
+                    "---\nitem_id: 369\n---\n",
+                    encoding="utf-8",
+                )
+            with self.assertRaisesRegex(ValueError, "duplicate Magic Item strategy item_id 369"):
+                strategy_pages(strategy_dir)
+
+    def test_write_records_links_matching_strategy_page(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            item_out = root / "docs" / "data" / "items"
+            strategy_dir = root / "docs" / "items" / "encyclopedia"
+            strategy_dir.mkdir(parents=True)
+            strategy = strategy_dir / "amulet-of-antimagic.md"
+            strategy.write_text(
+                "---\nitem_id: 369\n---\n# Amulet of Antimagic\n",
+                encoding="utf-8",
+            )
+
+            written, removed = write_records(
+                [sample_item()],
+                {369: sample_raw()},
+                item_out=item_out,
+                strategy_dir=strategy_dir,
+            )
+
+            self.assertEqual((written, removed), (1, 0))
+            page = (item_out / "by-id" / "369.md").read_text(encoding="utf-8")
+            self.assertIn("## 個別攻略", page)
+            self.assertIn("amulet-of-antimagic.md", page)
 
     def test_nested_table_rows_link_to_by_id_and_are_idempotent(self):
         with tempfile.TemporaryDirectory() as temp:

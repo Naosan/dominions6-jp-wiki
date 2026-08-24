@@ -210,6 +210,11 @@ nav = [
   ] },
   { "アイテム" = [
     "items/index.md",
+    { "Magic Item攻略辞典" = [
+      "items/encyclopedia/index.md",
+      "items/encyclopedia/igor-konhelms-tome.md",
+      "items/encyclopedia/the-magic-lamp.md",
+    ] },
     "items/forge-planning.md",
     "items/boosters.md",
     "items/research-items.md",
@@ -257,6 +262,7 @@ nav = [
     "reference/editing-policy.md",
     "reference/sources.md",
     "templates/nation-template.md",
+    "templates/magic-item-template.md",
   ] },
 ]
 

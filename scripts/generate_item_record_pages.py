@@ -24,8 +24,10 @@ import generate_spell_item_data as core
 
 ITEM_OUT = core.ITEM_OUT
 BY_ID = ITEM_OUT / "by-id"
+STRATEGY_DIR = core.ROOT / "docs" / "items" / "encyclopedia"
 START = "<!-- item-record-index:start -->"
 END = "<!-- item-record-index:end -->"
+ITEM_ID_RE = re.compile(r"(?m)^item_id:\s*([0-9]+)\s*$")
 UNFORGEABLE_CLASSES = {
     11: "Unforgeable item",
     13: "Unforgeable unique artifact",
@@ -61,6 +63,31 @@ def display_cost(item: dict[str, object]) -> str:
     if int(item["const"]) in UNFORGEABLE_CLASSES:
         return "—"
     return str(item["cost"])
+
+
+def strategy_pages(strategy_dir: Path = STRATEGY_DIR) -> dict[int, Path]:
+    """Map hand-written per-Item strategy pages to their stable Item IDs."""
+    pages: dict[int, Path] = {}
+    if not strategy_dir.exists():
+        return pages
+    for path in sorted(strategy_dir.glob("*.md")):
+        if path.name == "index.md":
+            continue
+        text = path.read_text(encoding="utf-8")
+        match = ITEM_ID_RE.search(text)
+        if match is None:
+            raise ValueError(f"Magic Item strategy page is missing item_id: {path}")
+        item_id = int(match.group(1))
+        if item_id in pages:
+            raise ValueError(
+                f"duplicate Magic Item strategy item_id {item_id}: {pages[item_id]} and {path}"
+            )
+        pages[item_id] = path
+    return pages
+
+
+def relative_link(target: Path, from_path: Path) -> str:
+    return os.path.relpath(target, start=from_path.parent).replace(os.sep, "/")
 
 
 def special_features(raw: dict[str, str]) -> list[str]:
@@ -108,7 +135,11 @@ def related_links(item: dict[str, object], raw: dict[str, str]) -> list[str]:
     return links
 
 
-def record_page(item: dict[str, object], raw: dict[str, str]) -> str:
+def record_page(
+    item: dict[str, object],
+    raw: dict[str, str],
+    strategy_href: str | None = None,
+) -> str:
     name = core.esc(item["name"])
     features = special_features(raw)
     links = related_links(item, raw)
@@ -123,7 +154,7 @@ def record_page(item: dict[str, object], raw: dict[str, str]) -> str:
         "",
         f"# {name}",
         "",
-        "Dominions 6.35固定データから生成したMagic Item個別recordです。攻略判断は用途別・任務別記事、特殊効果の詳細は各専門索引へ分離しています。",
+        "Dominions 6.35固定データから生成したMagic Item個別recordです。攻略判断は用途別・任務別・個別攻略記事、特殊効果の詳細は各専門索引へ分離しています。",
         "",
         "| 項目 | 値 |",
         "|---|---|",
@@ -160,6 +191,15 @@ def record_page(item: dict[str, object], raw: dict[str, str]) -> str:
             "    発動Timing、対象、回数、召喚Unit等はゲーム内Item詳細とDom6 Mod Inspectorを最終確認してください。",
             "",
         ]
+    if strategy_href:
+        lines += [
+            "## 個別攻略",
+            "",
+            f"- [このItemの手書き攻略]({strategy_href})",
+            "",
+            "generated recordは固定値、手書き攻略は用途・Carrier・組み合わせ・Counterを担当します。",
+            "",
+        ]
     lines += [
         "## 関連データ",
         "",
@@ -167,6 +207,7 @@ def record_page(item: dict[str, object], raw: dict[str, str]) -> str:
         "",
         "## 攻略へ戻る",
         "",
+        "- [Magic Item攻略辞典](../../../items/encyclopedia/index.md)",
         "- [用途別Magic Item辞典](../../../items/purpose-dictionary.md)",
         "- [任務別Magic Item Loadout](../../../items/mission-loadouts.md)",
         "- [Item固有効果・Weapon proc・副作用](../../../items/effects-and-procs.md)",
@@ -192,7 +233,7 @@ def records_index_page(items: list[dict[str, object]]) -> str:
         "",
         f"Magic Item **{len(items)}**件を、Item IDごとの軽量recordへまとめています。",
         "",
-        "[Magic Itemデータ索引へ戻る](index.md)",
+        "[Magic Itemデータ索引へ戻る](index.md) · [Magic Item攻略辞典](../../items/encyclopedia/index.md)",
         "",
         "| Item | ID | Slot | Research / Acquisition | Req | Gem | 主要Effects |",
         "|---|---:|---|---|---|---|---|",
@@ -214,8 +255,9 @@ def index_block(count: int) -> str:
             "## 個別Item record",
             "",
             f"- [Magic Item個別record一覧](records.md) — {count} records",
+            "- [Magic Item攻略辞典](../../items/encyclopedia/index.md) — Item名から用途・Carrier・Counterを読む手書き層",
             "",
-            "Item名からForge条件、Slot、主要効果、Restrictionを一ページで確認し、Weapon / Armor / Spell / Summon / 副作用などの専門索引へ移動できます。",
+            "Item名からForge条件、Slot、主要効果、Restrictionを一ページで確認し、個別攻略、Weapon / Armor / Spell / Summon / 副作用などの専門索引へ移動できます。",
             END,
             "",
         ]
@@ -240,7 +282,7 @@ def patch_item_index(count: int, item_out: Path = ITEM_OUT) -> None:
 
 def item_record_link(item_id: int, from_path: Path, item_out: Path = ITEM_OUT) -> str:
     target = item_out / "by-id" / f"{item_id}.md"
-    return os.path.relpath(target, start=from_path.parent).replace(os.sep, "/")
+    return relative_link(target, from_path)
 
 
 def link_generated_item_tables(
@@ -290,10 +332,20 @@ def write_records(
     items: list[dict[str, object]],
     raw_by_id: dict[int, dict[str, str]],
     item_out: Path = ITEM_OUT,
+    strategy_dir: Path = STRATEGY_DIR,
 ) -> tuple[int, int]:
     by_id = item_out / "by-id"
     by_id.mkdir(parents=True, exist_ok=True)
     valid_names = {f"{int(item['id'])}.md" for item in items}
+    item_ids = {int(item["id"]) for item in items}
+    strategies = strategy_pages(strategy_dir)
+    unknown_strategy_ids = sorted(set(strategies) - item_ids)
+    if unknown_strategy_ids:
+        raise ValueError(
+            "Magic Item strategy pages reference unknown Item IDs: "
+            + ", ".join(str(item_id) for item_id in unknown_strategy_ids)
+        )
+
     removed = 0
     for path in by_id.glob("*.md"):
         if path.name not in valid_names:
@@ -306,7 +358,16 @@ def write_records(
         raw = raw_by_id.get(item_id)
         if raw is None:
             raise ValueError(f"missing BaseI record for Item {item_id}: {item['name']}")
-        (by_id / f"{item_id}.md").write_text(record_page(item, raw), encoding="utf-8")
+        target = by_id / f"{item_id}.md"
+        strategy_href = (
+            relative_link(strategies[item_id], target)
+            if item_id in strategies
+            else None
+        )
+        target.write_text(
+            record_page(item, raw, strategy_href=strategy_href),
+            encoding="utf-8",
+        )
         written += 1
     (item_out / "records.md").write_text(records_index_page(items), encoding="utf-8")
     return written, removed

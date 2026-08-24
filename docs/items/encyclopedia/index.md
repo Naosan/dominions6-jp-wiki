@@ -1,0 +1,122 @@
+---
+title: Magic Item攻略辞典
+status: reviewed
+verified_version: "6.35"
+last_verified: "2026-08-24"
+---
+
+# Magic Item攻略辞典
+
+Magic Itemを**Item名から引くための手書き攻略辞典**です。
+
+このWikiにはすでに、全Itemを機械的に扱う[Magic Item個別record一覧](../../data/items/records.md)、欲しい機能から探す[用途別Magic Item辞典](../purpose-dictionary.md)、Commanderへさせたい仕事から組む[任務別Magic Item Loadout](../mission-loadouts.md)があります。
+
+このページ群はそれらとは別に、
+
+> 「このItemを拾った／Forgeできるようになった。結局、何に使うのか？」
+
+という**名前起点の検索**へ答えます。
+
+旧Dominions 4 Wikiの個別Itemページにあった「一覧で一言の用途が分かり、個別ページで実戦上の意味まで読める」情報配置を参考にします。ただし旧作の文章・数値は移植せず、Dominions 6の現行仕様を固定データ、公式Manual、Patch notes、ゲーム内表示から確認して書き直します。
+
+---
+
+# この辞典で扱うこと
+
+個別Itemページは、可能な限り次の順で読み切れるようにします。
+
+1. **一言で何をするItemか**
+2. **正確な事実データへのLink**
+3. **効果が実戦で何を変えるか**
+4. **誰に持たせるか**
+5. **どんな戦略・Spell・Unitと組み合わせるか**
+6. **Forgeする条件／しない条件**
+7. **失敗例**
+8. **Counter・敵が使った場合の崩し方**
+9. **Test gameで確認する項目**
+
+単なる効果一覧ではなく、**仕様 → 攻略上の意味 → Counter**までを一つの見出し語にまとめます。
+
+---
+
+# 数値は個別攻略へ複製しすぎない
+
+要求Path、Construction、Gem cost、Slot、特殊fieldなどの固定値は、原則としてgenerated recordを正本にします。
+
+手書き記事では必要な値だけを文脈として引用し、Patchで変わりやすい表を529ページへ複製しません。
+
+```text
+Item名を検索
+→ 手書き攻略：何に使うかを理解
+→ generated record：現在の固定値を確認
+→ 関連する用途別・任務別記事：Build全体へ広げる
+```
+
+という役割分担です。
+
+---
+
+# 固定Tier表にはしない
+
+Magic Itemの価値は、
+
+- Nationのnative Magic access
+- Forge Bonus
+- Research timing
+- Gem income
+- Mapと地形
+- CarrierのStats・Slot
+- EnemyのDamage type・MR・Resistance
+- Artifactの先着状況
+- Multiplayerの外交と戦争Timing
+
+で大きく変わります。
+
+そのため「S Tierだから必ずForge」のような唯一解ではなく、**価値が発生する条件と、価値が消える条件**を書きます。
+
+---
+
+# まず読む二つの例
+
+| Item | 一言 | 個別攻略 | 6.35 data |
+|---|---|---|---|
+| Igor Könhelm's Tome | Corporeal Undeadの維持とStorm戦を一つのArtifactへまとめる | [攻略](igor-konhelms-tome.md) | [Item 431](../../data/items/by-id/431.md) |
+| The Magic Lamp | 高いA/F accessをAl Khazimという高Path Mageへ変換する | [攻略](the-magic-lamp.md) | [Item 433](../../data/items/by-id/433.md) |
+
+今後は通常Item、Booster、Research Item、Thug装備、特殊作戦Item、Artifactへ順次広げます。
+
+---
+
+# 探し方
+
+## Item名が分かっている
+
+この攻略辞典、または[Magic Item個別record一覧](../../data/items/records.md)から探します。
+
+## Item名が分からない
+
+「Shock Resistanceが欲しい」「Magic Weaponが欲しい」「Reinvigorationが欲しい」なら[用途別Magic Item辞典](../purpose-dictionary.md)から逆引きします。
+
+## 任務が決まっている
+
+「PD Raiderを作る」「Casterを守る」「水中へ侵入する」なら[任務別Magic Item Loadout](../mission-loadouts.md)から必要機能を組みます。
+
+## Artifactを選びたい
+
+先着、Yearning、Carrier Risk、C9 Research投資は[Artifact・Unique Item攻略](../artifacts.md)で判断します。
+
+---
+
+# 執筆時の確認順
+
+個別Itemを追加するときは、少なくとも次を確認します。
+
+1. ゲーム内Item表示・実挙動
+2. Illwinter公式Manual / Patch notes
+3. pin済みDominions 6.35 Inspector data
+4. Community Wiki・実戦知見
+5. Test game
+
+古いDom4 / Dom5記事は**論点を発見する資料**として使えますが、Dom6の仕様根拠にはしません。
+
+新しい個別記事は[Magic Item個別攻略Template](../../templates/magic-item-template.md)を起点にできます。
