@@ -14,7 +14,7 @@ Lucky Coinは「Luckだけを付けるMisc Item」ではありません。攻略
 
 - [Dominions 6.35固定データ — Item 168](../../data/items/by-id/168.md)
 - [Magic Item攻略辞典](index.md)
-- [武器と盾](../../systems/weapons-and-shields.md)
+- [武器と盾](../../basics/weapons-and-shields.md)
 - [Thug・SC装備](../thug-equipment.md)
 
 ---
@@ -402,7 +402,7 @@ Carrier、Glamour Gem、任務がなければ在庫になります。
 - [Vine Shield](vine-shield.md)
 - [Charcoal Shield](charcoal-shield.md)
 - [Amulet of Antimagic](amulet-of-antimagic.md)
-- [武器と盾](../../systems/weapons-and-shields.md)
+- [武器と盾](../../basics/weapons-and-shields.md)
 - [Thug・SC装備](../thug-equipment.md)
 
 ## Source note
