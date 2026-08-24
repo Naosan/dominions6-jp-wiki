@@ -2,6 +2,7 @@
 title: "Igor Könhelm's Tome"
 status: reviewed
 verified_version: "6.35"
+last_verified: "2026-08-24"
 item_id: 431
 ---
 
