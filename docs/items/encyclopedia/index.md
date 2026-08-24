@@ -2,7 +2,7 @@
 title: Magic Item攻略辞典
 status: reviewed
 verified_version: "6.35"
-last_verified: "2026-08-24"
+last_verified: "2026-08-25"
 ---
 
 # Magic Item攻略辞典
@@ -78,7 +78,7 @@ Magic Itemの価値は、
 
 # 掲載Item
 
-現在は、Itemの価値軸が偏らないように、Forge経済・Research・MR攻防・機動・地形接続・Magic Path Booster・Bless転用・属性耐性・Luck・HP / Fatigue継戦・行動Tempo・Battle summon・Thug装備・Artifactの代表例から個別攻略を整備しています。
+現在は、Itemの価値軸が偏らないように、Forge経済・Research・MR攻防・機動・地形接続・Magic Path Booster・Bless転用・単一／複合属性耐性・Luck・HP / Fatigue継戦・行動Tempo・Battle summon・Thug装備・Artifactの代表例から個別攻略を整備しています。
 
 | 分類 | Item | 一言 | 個別攻略 | 6.35 data |
 |---|---|---|---|---|
@@ -104,6 +104,10 @@ Magic Itemの価値は、
 | Path Booster / Blood / Weapon | Blood Thorn | Blood +1とHit依存の生命吸収を片手武器へまとめる | [攻略](blood-thorn.md) | [Item 94](../../data/items/by-id/94.md) |
 | Path Booster / Blood / Misc | Brazen Vessel | C5・B5からBlood +1を後方Ritualistへ与える | [攻略](brazen-vessel.md) | [Item 394](../../data/items/by-id/394.md) |
 | Bless転用 | Shroud of the Battle Saint | 非Sacred Carrierへ自国Blessを常時適用する | [攻略](shroud-of-the-battle-saint.md) | [Item 252](../../data/items/by-id/252.md) |
+| 属性耐性 / Fire / Misc | Ring of Fire | C1・F1からFire Resistance +15を重要Carrier一体へ与える | [攻略](ring-of-fire.md) | [Item 309](../../data/items/by-id/309.md) |
+| 属性耐性 / Shock / Misc | Ring of Tamed Lightning | C1・A1からShock Resistance +15を重要Carrier一体へ与える | [攻略](ring-of-tamed-lightning.md) | [Item 310](../../data/items/by-id/310.md) |
+| 属性耐性 / Cold / Misc | Ring of Frost | C1・W1からCold Resistance +15を重要Carrier一体へ与える | [攻略](ring-of-frost.md) | [Item 311](../../data/items/by-id/311.md) |
+| 属性耐性 / Poison / Misc | Snake Ring | Poison Resistance +30と命中判定を要するPoison Touchを持つ | [攻略](snake-ring.md) | [Item 315](../../data/items/by-id/315.md) |
 | 属性耐性 / Armor | Elemental Armor | Fire・Cold・Shock Resistance +10をArmor Slotへまとめる | [攻略](elemental-armor.md) | [Item 249](../../data/items/by-id/249.md) |
 | Luck / Shield | Lucky Coin | 軽いShield性能とLuckを一つの手Slotへまとめる | [攻略](lucky-coin.md) | [Item 168](../../data/items/by-id/168.md) |
 | 継戦 / HP | Ring of Regeneration | Regeneration 10で生物Carrierの生存時間を伸ばす | [攻略](ring-of-regeneration.md) | [Item 382](../../data/items/by-id/382.md) |
