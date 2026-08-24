@@ -2,6 +2,7 @@
 title: "The Magic Lamp"
 status: reviewed
 verified_version: "6.35"
+last_verified: "2026-08-24"
 item_id: 433
 ---
 
@@ -12,7 +13,7 @@ item_id: 433
 The Magic Lampは「強いMiscellaneousを装備し続ける」Itemではありません。Item spell `Summon Jinn`を使ってLampを消費し、**Al Khazimを戦略資産として得る**ことが本体です。
 
 - [Dominions 6.35固定データ — Item 433](../../data/items/by-id/433.md)
-- [Al Khazim — Unit 490](../../data/units/by-id/490.md)
+- [Al Khazim — Unit 490](../../data/units/by-id/0490.md)
 - [Magic Access Route](../../magic/magic-access-routes.md)
 - [Artifact・Unique Item攻略](../artifacts.md)
 
@@ -369,7 +370,7 @@ Al Khazim固有の再召喚・Lamp再作成Riskを通常Commanderと同じに扱
 
 - [Magic Item攻略辞典](index.md)
 - [Dominions 6.35固定データ — Item 433](../../data/items/by-id/433.md)
-- [Al Khazim — Unit 490](../../data/units/by-id/490.md)
+- [Al Khazim — Unit 490](../../data/units/by-id/0490.md)
 - [Artifact・Unique Item攻略](../artifacts.md)
 - [Magic Path Boosting](../../magic/boosting.md)
 - [Magic Access Route](../../magic/magic-access-routes.md)
