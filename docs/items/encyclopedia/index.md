@@ -76,14 +76,20 @@ Magic Itemの価値は、
 
 ---
 
-# まず読む二つの例
+# 掲載Item
 
-| Item | 一言 | 個別攻略 | 6.35 data |
-|---|---|---|---|
-| Igor Könhelm's Tome | Corporeal Undeadの維持とStorm戦を一つのArtifactへまとめる | [攻略](igor-konhelms-tome.md) | [Item 431](../../data/items/by-id/431.md) |
-| The Magic Lamp | 高いA/F accessをAl Khazimという高Path Mageへ変換する | [攻略](the-magic-lamp.md) | [Item 433](../../data/items/by-id/433.md) |
+現在は、Itemの価値軸が偏らないように、Forge経済・Research・防御・機動・Artifactの代表例から個別攻略を整備しています。
 
-今後は通常Item、Booster、Research Item、Thug装備、特殊作戦Item、Artifactへ順次広げます。
+| 分類 | Item | 一言 | 個別攻略 | 6.35 data |
+|---|---|---|---|---|
+| Forge経済 | Dwarven Hammer | Forge Bonusを繰り返し使い、将来の総Gem支出を圧縮する | [攻略](dwarven-hammer.md) | [Item 29](../../data/items/by-id/29.md) |
+| Research | Owl Quill | 5AとForge turnをResearch +6の継続収入へ変換する | [攻略](owl-quill.md) | [Item 322](../../data/items/by-id/322.md) |
+| MR防御 | Amulet of Antimagic | 重要CarrierのMRを補い、MR依存Counterへ備える | [攻略](amulet-of-antimagic.md) | [Item 369](../../data/items/by-id/369.md) |
+| 機動 | Winged Shoes | CommanderへFlyingを与え、到達可能性とRaid routeを変える | [攻略](winged-shoes.md) | [Item 294](../../data/items/by-id/294.md) |
+| Artifact / maintenance | Igor Könhelm's Tome | Corporeal Undeadの維持とStorm戦を一つのArtifactへまとめる | [攻略](igor-konhelms-tome.md) | [Item 431](../../data/items/by-id/431.md) |
+| Artifact / Magic access | The Magic Lamp | 高いA/F accessをAl Khazimという高Path Mageへ変換する | [攻略](the-magic-lamp.md) | [Item 433](../../data/items/by-id/433.md) |
+
+この一覧は固定Tier表ではありません。今後はMagic Path Booster、Thug装備、Resistance、Reinvigoration、特殊作戦Item、召喚・変身Itemなどへ順次広げます。
 
 ---
 
