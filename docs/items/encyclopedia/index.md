@@ -78,7 +78,7 @@ Magic Itemの価値は、
 
 # 掲載Item
 
-現在は、Itemの価値軸が偏らないように、Forge経済・Research・防御・機動・Magic Path Booster・Thug装備・Artifactの代表例から個別攻略を整備しています。
+現在は、Itemの価値軸が偏らないように、Forge経済・Research・防御・機動・Magic Path Booster・継戦・Fatigue・行動Tempo・Thug装備・Artifactの代表例から個別攻略を整備しています。
 
 | 分類 | Item | 一言 | 個別攻略 | 6.35 data |
 |---|---|---|---|---|
@@ -88,12 +88,16 @@ Magic Itemの価値は、
 | 機動 | Winged Shoes | CommanderへFlyingを与え、到達可能性とRaid routeを変える | [攻略](winged-shoes.md) | [Item 294](../../data/items/by-id/294.md) |
 | Path Booster / Death | Skull Staff | Death +1をSpell / Ritual / Summonの新しい閾値へ変える | [攻略](skull-staff.md) | [Item 62](../../data/items/by-id/62.md) |
 | Path Booster / Nature | Thistle Mace | Nature +1を片手Slotで組み込み、Nature accessを一段伸ばす | [攻略](thistle-mace.md) | [Item 65](../../data/items/by-id/65.md) |
+| 継戦 / HP | Ring of Regeneration | Regeneration 10で生物Carrierの生存時間を伸ばす | [攻略](ring-of-regeneration.md) | [Item 382](../../data/items/by-id/382.md) |
+| 継戦 / Fatigue | Girdle of Might | Strength +3とReinvigoration +3を一枠で足す | [攻略](girdle-of-might.md) | [Item 366](../../data/items/by-id/366.md) |
+| 行動Tempo | Boots of Quickness | 近接移動と攻撃を速めるが、Spell詠唱は速めない | [攻略](boots-of-quickness.md) | [Item 299](../../data/items/by-id/299.md) |
 | Thug / Damage | Frost Brand | 一回の命中へAP Cold副次ダメージを重ね、近接火力を増やす | [攻略](frost-brand.md) | [Item 54](../../data/items/by-id/54.md) |
 | Thug / Control | Vine Shield | close combatの敵を拘束し、Carrierへ集中する近接行動を乱す | [攻略](vine-shield.md) | [Item 176](../../data/items/by-id/176.md) |
+| Thug / Contact punish | Charcoal Shield | Shield防御とFire Resistanceを足し、近接攻撃へ熱反撃を返す | [攻略](charcoal-shield.md) | [Item 173](../../data/items/by-id/173.md) |
 | Artifact / maintenance | Igor Könhelm's Tome | Corporeal Undeadの維持とStorm戦を一つのArtifactへまとめる | [攻略](igor-konhelms-tome.md) | [Item 431](../../data/items/by-id/431.md) |
 | Artifact / Magic access | The Magic Lamp | 高いA/F accessをAl Khazimという高Path Mageへ変換する | [攻略](the-magic-lamp.md) | [Item 433](../../data/items/by-id/433.md) |
 
-この一覧は固定Tier表ではありません。今後はResistance、Reinvigoration、特殊作戦Item、召喚・変身Item、さらに別PathのBoosterや装備Buildへ順次広げます。
+この一覧は固定Tier表ではありません。今後は特殊作戦Item、召喚・変身Item、別PathのBooster、Resistanceの代表例、さらに別の装備Buildへ順次広げます。
 
 ---
 
