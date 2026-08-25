@@ -78,7 +78,7 @@ Magic Itemの価値は、
 
 # 掲載Item
 
-現在は、Itemの価値軸が偏らないように、Forge経済・Research・MR攻防・機動・地形接続・Magic Path Booster・Bless転用・単一／複合属性耐性・Luck・HP / Fatigue継戦・行動Tempo・Battle summon・Thug装備・Artifactの代表例から個別攻略を整備しています。
+現在は、Itemの価値軸が偏らないように、Forge経済・Research・MR攻防・機動・地形接続・Army補給・遠隔偵察・特殊作戦・Magic Path Booster・Bless転用・単一／複合属性耐性・Luck・HP / Fatigue継戦・行動Tempo・Battle summon・Thug装備・Artifactの代表例から個別攻略を整備しています。
 
 | 分類 | Item | 一言 | 個別攻略 | 6.35 data |
 |---|---|---|---|---|
@@ -92,6 +92,10 @@ Magic Itemの価値は、
 | 機動 / Flying | Winged Shoes | CommanderへFlyingを与え、到達可能性とRaid routeを変える | [攻略](winged-shoes.md) | [Item 294](../../data/items/by-id/294.md) |
 | 機動 / Map Move | Boots of the Messenger | Map Move +9とReinvigoration +3で急行と継戦を両立する | [攻略](boots-of-the-messenger.md) | [Item 297](../../data/items/by-id/297.md) |
 | 地形接続 / Aquatic | Amulet of the Fish | Aquatic Commanderを陸上へ出し、海中Magic accessを接続する | [攻略](amulet-of-the-fish.md) | [Item 363](../../data/items/by-id/363.md) |
+| Army支援 / Supply / high capacity | Enormous Cauldron of Broth | C3・N3からSupply +150を一つの大型Armyへ集中する | [攻略](enormous-cauldron-of-broth.md) | [Item 341](../../data/items/by-id/341.md) |
+| Army支援 / Supply / efficient | Endless Bag of Wine | C5・N1からSupply +75を補給不足の軍団へ持ち運ぶ | [攻略](endless-bag-of-wine.md) | [Item 379](../../data/items/by-id/379.md) |
+| Intelligence / Scrying | Stone Sphere | Astral Windowによる選択的な遠隔偵察とTaint 3を交換する | [攻略](stone-sphere.md) | [Item 391](../../data/items/by-id/391.md) |
+| 特殊作戦 / Province sabotage | Bane Venom Charm | Carrierごと敵Provinceへ病害Riskを持ち込み、長期滞在を罰する | [攻略](bane-venom-charm.md) | [Item 375](../../data/items/by-id/375.md) |
 | Path Booster / Fire | Flame Helmet | Fire +1とReinvigoration -3を交換し、高Fire閾値を越える | [攻略](flame-helmet.md) | [Item 192](../../data/items/by-id/192.md) |
 | Path Booster / Air | Winged Helmet | Air +1を与えるがFlyingは付与しない | [攻略](winged-helmet.md) | [Item 195](../../data/items/by-id/195.md) |
 | Path Booster / Water / Misc | Water Bracelet | C7・W1からWater +1を与え、低Water Mageを一段伸ばす | [攻略](water-bracelet.md) | [Item 403](../../data/items/by-id/403.md) |
